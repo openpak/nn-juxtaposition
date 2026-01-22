@@ -34,6 +34,6 @@ export function DELETE(url: string, callback: XHRCallback): void {
 			callback(this);
 		}
 	};
-	xhttp.open('GET', url, true);
+	xhttp.open('DELETE', url, true);
 	xhttp.send();
 }
