@@ -1,18 +1,9 @@
 import { utils } from '@/services/juxt-web/views/utils';
 import { CtrIcon } from '@/services/juxt-web/views/ctr/components/icon';
 import type { ReactNode } from 'react';
-import type { RenderContext } from '@/services/juxt-web/views/context';
+import type { MiiIconProps } from '@/services/juxt-web/views/web/components/mii-icon';
 
-export type CtrMiiIconProps = {
-	ctx: RenderContext;
-
-	pid: number;
-	face_url?: string;
-	big?: boolean; // Use .icon (CtrIcon) instead of .mii-icon
-	className?: string; // extra classes
-};
-
-export function CtrMiiIcon(props: CtrMiiIconProps): ReactNode {
+export function CtrMiiIcon(props: MiiIconProps): ReactNode {
 	const url = props.face_url ?? utils.cdn(props.ctx, `/mii/${props.pid}/normal_face.png`);
 	const href = `/users/${props.pid}`;
 	const baseClass = !props.big ? 'mii-icon' : undefined;

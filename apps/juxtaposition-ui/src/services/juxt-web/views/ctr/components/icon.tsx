@@ -1,17 +1,8 @@
 import cx from 'classnames';
 import type { ReactNode } from 'react';
-import type { RenderContext } from '@/services/juxt-web/views/context';
+import type { IconProps } from '@/services/juxt-web/views/web/components/icon';
 
-export type CtrIconProps = {
-	ctx: RenderContext;
-
-	src: string;
-	href?: string;
-	baseClass?: string; // default ".icon"
-	className?: string; // extra classes
-};
-
-export function CtrIcon(props: CtrIconProps): ReactNode {
+export function CtrIcon(props: IconProps): ReactNode {
 	const baseClass = props.baseClass ?? 'icon';
 	return (
 		<a href={props.href} className={cx(`${baseClass}-container`, props.className)} data-pjax="#body">
