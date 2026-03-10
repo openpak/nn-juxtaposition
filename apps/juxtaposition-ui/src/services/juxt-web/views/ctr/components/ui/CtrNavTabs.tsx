@@ -1,14 +1,8 @@
 import cx from 'classnames';
 import type { ReactNode } from 'react';
+import type { NavTabProps, NavTabsProps, NavTabsRowProps } from '@/services/juxt-web/views/web/components/ui/WebNavTabs';
 
-export type CtrNavTabProps = {
-	href: string;
-	selected?: boolean;
-
-	children: ReactNode[] | ReactNode;
-};
-
-export function CtrNavTab(props: CtrNavTabProps): ReactNode {
+export function CtrNavTab(props: NavTabProps): ReactNode {
 	const { selected, href } = props;
 	return (
 		<a className={cx('nav-tab', { selected })} href={href} data-nav-tab>
@@ -17,11 +11,7 @@ export function CtrNavTab(props: CtrNavTabProps): ReactNode {
 	);
 }
 
-export type CtrNavTabsRowProps = {
-	children: ReactNode[] | ReactNode;
-};
-
-export function CtrNavTabsRow(props: CtrNavTabsRowProps): ReactNode {
+export function CtrNavTabsRow(props: NavTabsRowProps): ReactNode {
 	return (
 		<div className="nav-tabs-row">
 			{props.children}
@@ -29,13 +19,7 @@ export function CtrNavTabsRow(props: CtrNavTabsRowProps): ReactNode {
 	);
 }
 
-export type CtrNavTabsProps = {
-	children: ReactNode[] | ReactNode;
-
-	target: string; // Selector
-};
-
-export function CtrNavTabs(props: CtrNavTabsProps): ReactNode {
+export function CtrNavTabs(props: NavTabsProps): ReactNode {
 	return (
 		<div className="nav-tabs" data-nav-tabs={props.target}>
 			{props.children}
