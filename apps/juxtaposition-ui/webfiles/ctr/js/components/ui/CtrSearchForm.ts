@@ -1,6 +1,7 @@
 function prepSearchTerm(term: string): string {
 	var removeChars = /\W/g;
-	return term.toLowerCase().replace(removeChars, '');
+	// é for Pokémon
+	return term.toLowerCase().replace('é', 'e').replace(removeChars, '');
 }
 
 function searchChanged(el: HTMLInputElement): void {

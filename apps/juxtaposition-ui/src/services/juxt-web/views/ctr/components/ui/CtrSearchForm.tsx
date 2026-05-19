@@ -1,13 +1,9 @@
 import { useDatasetProps } from '@/services/juxt-web/views/common/hooks/useDataset';
 import { T } from '@/services/juxt-web/views/common/components/T';
 import type { ReactNode } from 'react';
-import type { DatasetProps } from '@/services/juxt-web/views/common/hooks/useDataset';
+import type { SearchFormProps } from '@/services/juxt-web/views/web/components/ui/WebSearchForm';
 
-export type CtrSearchFormProps = DatasetProps & {
-
-};
-
-export function CtrSearchForm(props: CtrSearchFormProps): ReactNode {
+export function CtrSearchForm(props: SearchFormProps): ReactNode {
 	const dataset = useDatasetProps(props);
 	return (
 		<form className="search-form">
