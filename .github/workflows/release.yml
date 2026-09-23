@@ -5,7 +5,7 @@ name: release
 # (juxtaposition-ui). Deployed hosts run podman-auto-update against :latest.
 on:
   push:
-    tags: ['v*']
+    tags: ['v*.*.*']
   workflow_dispatch:
 
 permissions:
