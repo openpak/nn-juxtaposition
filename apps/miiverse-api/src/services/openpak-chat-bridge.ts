@@ -8,7 +8,7 @@
 // message stays console-local", never to a broken feed.
 import { config } from '@/config';
 import { LOG_ERROR, LOG_WARN } from '@/logger';
-import { Post } from '@/models/post';
+import type { Post } from '@/models/post';
 
 interface ResolvedPid {
 	found: boolean;
