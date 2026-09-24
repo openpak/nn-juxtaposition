@@ -1,11 +1,11 @@
 # Next session — nn-juxtaposition
 
-Updated 2026-09-15.
+Updated 2026-09-24.
 
 Miiverse for Wii U and 3DS: Pretendo's Juxtaposition (AGPL) forked onto the
 OpenPak core. Deployed 2026-09-10 behind Traefik TLS (`*.olv.nintendo.net`,
 OpenPak CA leaf), tagged `v0.1.0`, never console-verified. The working tree
-carries the WU-4 outbound chat bridge, written and wired but uncommitted.
+carried the WU-4 outbound chat bridge; committed and tagged v0.2.0 on 2026-09-24 (bridge off on prod until its env is set).
 
 ## Where things stand
 

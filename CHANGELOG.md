@@ -6,6 +6,13 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.2.0 — 2026-09-24
+
+- OpenPak chat bridge (WU-4, outbound): a friend message a console posts is forwarded
+  to the neutral chat store, resolved through nn-account. Off unless
+  `PN_MIIVERSE_API_OPENPAK_CHAT_URL` and `..._OPENPAK_NNAS_URL` are set [31d78675]
+- ci: build only on v*.*.* tags [aacab1ab]
+
 ## v0.1.0 — 2026-09-10
 
 - OpenPak fork: tag-driven ghcr release of both images [05127506]
