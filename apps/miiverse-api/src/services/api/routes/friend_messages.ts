@@ -11,6 +11,7 @@ import {
 	getInvalidPostRegex
 } from '@/util';
 import { getConversationByUsers, getFriendMessages } from '@/database';
+import { forwardMessageToOpenPakChat } from '@/services/openpak-chat-bridge';
 import { Post } from '@/models/post';
 import { Conversation } from '@/models/conversation';
 import { config } from '@/config';
@@ -227,6 +228,11 @@ router.post('/', upload.none(), async function (request: express.Request, respon
 	}
 
 	await conversation.newMessage(postPreviewText, recipientPID);
+
+	// OpenPak: the same message now exists in the neutral chat store, so the
+	// website and the phone see what this console sent. Never awaited on the
+	// console's path; a failure here keeps the message console-local.
+	forwardMessageToOpenPakChat(post, request.pid, recipientPID).catch(() => {});
 
 	response.sendStatus(200);
 });
