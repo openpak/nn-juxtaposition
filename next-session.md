@@ -49,3 +49,12 @@ carried the WU-4 outbound chat bridge; committed and tagged v0.2.0 on 2026-09-24
 - `../../prds/platform-wiiu-prd.md` — §3 gap 3 (chat), WU-4 milestone.
 - `../../prds/platform-3ds-prd.md` — DS3-6 (Miiverse on the neutral store).
 - `../../ports.md` — rows 20090/20100, the Traefik TLS row.
+
+## Scratch (research and throwaway work)
+
+Decompiles, Ghidra projects, dumps, exefs/romfs extracts, packet captures,
+strace and emulator logs, probe harnesses: put them in
+`~/REPOS/Openpak/scratch/<topic>`. That folder is a local mount of the media pool,
+outside every repository, so nothing in it is committed. Never use `/tmp` (a
+shared 15 GB RAM disk) or elsewhere on `/home` for this. Keys and signing
+material never go there. Rule: `docs/playbooks/conventions.md` in the workspace.
