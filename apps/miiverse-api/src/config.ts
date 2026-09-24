@@ -55,6 +55,15 @@ const schema = z.object({
 			apiKey: z.string()
 		})
 	}),
+	// OpenPak additions: the neutral chat store and the console identity
+	// resolver behind it. Unset URL = the bridge is off and Miiverse behaves
+	// exactly as upstream, which keeps this fork deployable everywhere.
+	openpak: z.object({
+		chatUrl: z.string().default(''),
+		chatKey: z.string().default(''),
+		nnasUrl: z.string().default(''),
+		nnasKey: z.string().default('')
+	}),
 	domains: z.object({
 		api: z.hostname().default('api.olv.pretendo.cc'),
 		discovery: z.hostname().default('discovery.olv.pretendo.cc')
@@ -95,6 +104,12 @@ export const presets: Record<string, any> = {
 				port: 8125,
 				apiKey: '12345678123456781234567812345678'
 			}
+		},
+		openpak: {
+			chatUrl: '',
+			chatKey: '',
+			nnasUrl: '',
+			nnasKey: ''
 		}
 	},
 	dummy: {
