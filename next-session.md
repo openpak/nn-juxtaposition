@@ -5,7 +5,7 @@ Updated 2026-09-24.
 Miiverse for Wii U and 3DS: Pretendo's Juxtaposition (AGPL) forked onto the
 OpenPak core. Deployed 2026-09-10 behind Traefik TLS (`*.olv.nintendo.net`,
 OpenPak CA leaf), tagged `v0.1.0`, never console-verified. The working tree
-carried the WU-4 outbound chat bridge; committed and tagged v0.2.0 on 2026-09-24 (bridge off on prod until its env is set).
+carried the WU-4 outbound chat bridge; committed and tagged v0.2.0 on 2026-09-24 — **bridge ON in prod since 2026-09-24 20:32 UTC**: the four `PN_MIIVERSE_API_OPENPAK_{CHAT,NNAS}_{URL,KEY}` values are in the shared `.env` (chat at `openpak-chat:20130`, nn-account resolve at `openpak-nn-account:20050`); from inside the api container chat answers, the chat key is accepted, and both linked Wii U PIDs resolve. Not yet exercised by a console post.
 
 ## Where things stand
 
@@ -33,8 +33,8 @@ carried the WU-4 outbound chat bridge; committed and tagged v0.2.0 on 2026-09-24
 
 ## Next steps
 
-1. Commit the outbound bridge, add the four env values to the deploy env
-   (upstream `PN_MIIVERSE_API_*` schema), tag, let the release flow run.
+1. ~~Commit the outbound bridge, add the four env values, tag~~ — done (v0.2.1, env set
+   2026-09-24). Watch the api log on the first console friend message.
 2. Inbound ingestion in the `friend_messages.ts` GET once a console can
    exercise it — until then it stays specified-only.
 3. First console sign-in against Miiverse at all: Wii U via `nn-inkay` or the
