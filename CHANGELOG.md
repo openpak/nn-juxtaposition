@@ -6,6 +6,11 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.2.1 — 2026-09-24
+
+- config: the `openpak` block defaults to off when no `PN_MIIVERSE_API_OPENPAK_*` env is set;
+  v0.2.0 refused to start without it (rolled back on prod within minutes)
+
 ## v0.2.0 — 2026-09-24
 
 - OpenPak chat bridge (WU-4, outbound): a friend message a console posts is forwarded

@@ -63,7 +63,7 @@ const schema = z.object({
 		chatKey: z.string().default(''),
 		nnasUrl: z.string().default(''),
 		nnasKey: z.string().default('')
-	}),
+	}).default({ chatUrl: '', chatKey: '', nnasUrl: '', nnasKey: '' }),
 	domains: z.object({
 		api: z.hostname().default('api.olv.pretendo.cc'),
 		discovery: z.hostname().default('discovery.olv.pretendo.cc')
