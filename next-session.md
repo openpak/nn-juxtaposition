@@ -52,7 +52,7 @@ Current status 2026-09-24: latest tag v0.2.1 (67da0b64); `dev` clean except a
   the policy comments.
 - `../../../../prds/platform-wiiu-prd.md` — §3 gap 3 (chat), WU-4 milestone.
 - `../../../../prds/platform-3ds-prd.md` — DS3-6 (Miiverse on the neutral store).
-- `../../../../docs/ports.md` — rows 20090/20100, the Traefik TLS row.
+- https://docs.openpak.org/contributors/ports/ — rows 20090/20100, the Traefik TLS row.
 
 ## Scratch (research and throwaway work)
 
@@ -61,4 +61,4 @@ strace and emulator logs, probe harnesses: put them in
 `~/REPOS/Openpak/scratch/<topic>`. That folder is a local mount of the media pool,
 outside every repository, so nothing in it is committed. Never use `/tmp` (a
 shared 15 GB RAM disk) or elsewhere on `/home` for this. Keys and signing
-material never go there. Rule: `docs/playbooks/conventions.md` in the workspace.
+material never go there. Rule: <https://docs.openpak.org/contributors/conventions/>.
