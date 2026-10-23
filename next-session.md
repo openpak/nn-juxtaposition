@@ -50,9 +50,9 @@ Current status 2026-09-24: latest tag v0.2.1 (67da0b64); `dev` clean except a
 - `README.md` — images, env schema, upstream docs link.
 - `apps/miiverse-api/src/services/openpak-chat-bridge.ts` — the bridge, with
   the policy comments.
-- `../../prds/platform-wiiu-prd.md` — §3 gap 3 (chat), WU-4 milestone.
-- `../../prds/platform-3ds-prd.md` — DS3-6 (Miiverse on the neutral store).
-- `../../ports.md` — rows 20090/20100, the Traefik TLS row.
+- `../../../../prds/platform-wiiu-prd.md` — §3 gap 3 (chat), WU-4 milestone.
+- `../../../../prds/platform-3ds-prd.md` — DS3-6 (Miiverse on the neutral store).
+- `../../../../docs/ports.md` — rows 20090/20100, the Traefik TLS row.
 
 ## Scratch (research and throwaway work)
 
