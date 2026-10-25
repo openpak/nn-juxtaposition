@@ -1,33 +1,47 @@
-# OpenPak nn-juxtaposition — Miiverse for Wii U and 3DS
+# Wii U/3DS Miiverse Server
 
-Fork of Pretendo's Juxtaposition (AGPL-3.0) run against OpenPak's Wii U/3DS adapter
-([`nn-account`](../nn-account), `account.v2` gRPC) and [`nn-friends`](../nn-friends).
-Two images on tag: `ghcr.io/openpak/nn-juxtaposition-api` (miiverse-api: Postgres, MongoDB,
-S3) and `ghcr.io/openpak/nn-juxtaposition-ui` (juxtaposition-ui: Redis, the API's gRPC).
-Settings are the upstream env schema under `PN_MIIVERSE_API_*` / `PN_JUXTAPOSITION_UI_*`
-(`apps/*/src/config.ts`).
+OpenPak's Wii U/3DS Miiverse Server.
 
----
+| | |
+| --- | --- |
+| Network | Wii U, 3DS |
+| Role | Miiverse API (`miiverse-api`) and the Juxtaposition UI (`juxtaposition-ui`) that serves the frontend for Wii U, 3DS and web |
+| Depends on | [`nn-account`](https://github.com/openpak/nn-account), [`nn-friends`](https://github.com/openpak/nn-friends), PostgreSQL, MongoDB, S3, Redis |
+| Image | `ghcr.io/openpak/nn-juxtaposition-api`, `ghcr.io/openpak/nn-juxtaposition-ui` |
+| Based on | [Pretendo `juxtaposition`](https://github.com/PretendoNetwork/juxtaposition) (AGPL-3.0) |
+| Licence | AGPL-3.0-only |
 
-# Juxtaposition
+## What it serves
 
-Juxtaposition is the Pretendo made Miiverse replacement and successor.
+| Component | What |
+| --- | --- |
+| `miiverse-api` | The Miiverse API, backed by Postgres, MongoDB and S3 |
+| `juxtaposition-ui` | The frontend for all platforms, backed by Redis and the API's gRPC |
 
-## Philosophy
+## Run
 
-This project is not meant to be just a simple clone of Miiverse. We aim to evolve it and bring the platform into the modern era.
+Local development (dependencies in Docker, then the two apps):
 
-This means we both want to bring all features originally found in Miiverse into Juxtaposition, but go even further with even more features.
+```sh
+cd .docker && docker compose up -d
+cd apps/miiverse-api && npm i && npm run migration:deploy && npm run dev
+cd apps/juxtaposition-ui && npm i && npm run dev
+```
 
-## Limitations
+Each app needs a `.env` with its `*_USE_PRESETS=docker` line first. The full setup
+is in [docs/development.md](docs/development.md); settings and images are in
+[docs/deploy.md](docs/deploy.md).
 
-- The web platforms on the 3DS and Wii U are old, thus we need to use old web methodologies like AJAX. 
-- The XML API of the Miiverse platform cannot be modified or extended, it needs to stay exactly as the consoles expect it.
+## Docs
 
-# Development
+- [Protocol](docs/protocol.md)
+- [Evidence](docs/evidence.md)
+- [Deploy](docs/deploy.md)
+- [Notes](docs/notes.md)
+- [Upstream README](docs/upstream.md)
+- [Development setup](docs/development.md)
+- [Extra topics](docs/extra-topics.md)
 
-Follow [this guide](./docs/development.md) on how to get set up for local development.
+## Licence
 
-# Translation
-
-If you'd like to help localize Pretendo Network, you can contribute to the translations on our project on [Weblate](https://hosted.weblate.org/engage/pretendonetwork/).
+AGPL-3.0-only. See [LICENSE](LICENSE).
