@@ -1,9 +1,8 @@
 # OpenVerse web sign-in (openpak.org SSO)
 
 The web UI has no sign-in form. `GET /login` on the canonical host (`PN_JUXTAPOSITION_UI_HTTP_BASE_URL`,
-`openverse.openpak.org`) redirects to openpak.org's `/account/sso/authorize` (client `openverse`, state, PKCE S256).
-Any other web host (`juxt.openpak.org`) answers `/login` with a 301 to the canonical host, so sign-in only
-happens there. The contract is the website's `docs/sso.md`.
+`verse.openpak.org`) redirects to openpak.org's `/account/sso/authorize` (client `openverse`, state, PKCE S256).
+`verse.openpak.org` is the only web address (juxt.openpak.org and openverse.openpak.org do not exist). The contract is the website's `docs/sso.md`.
 
 - `GET /login/callback`: checks `state` against the session, then POSTs the code to
   `http://openpak-website:20010/internal/sso/token` (HTTP Basic `openverse:<secret>`,

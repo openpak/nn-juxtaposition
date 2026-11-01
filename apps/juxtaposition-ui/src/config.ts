@@ -14,7 +14,7 @@ const schema = z.object({
 		port: z.coerce.number().default(8080),
 		cookieDomain: z.string().default('.openpak.org'),
 		/** "Safe" base origin for login-redirect validation */
-		baseUrl: z.string().default('https://openverse.openpak.org'),
+		baseUrl: z.string().default('https://verse.openpak.org'),
 		/** Configures proxy trust (X-Forwarded-For etc.). Can be `true` to unconditionally trust, or
 		 *  provide a numeric hop count, or comma-seperated CIDR ranges.
 		 *  See https://expressjs.com/en/guide/behind-proxies.html
@@ -71,7 +71,7 @@ const schema = z.object({
 	}).prefault({}),
 	domains: z.object({
 		/** Comma-separated list of hostnames that serve the web UI. */
-		web: z.string().default('openverse.openpak.org,juxt.openpak.org'),
+		web: z.string().default('verse.openpak.org'),
 		ctr: z.hostname().default('ctr.olv.openpak.org'),
 		portal: z.hostname().default('portal.olv.openpak.org')
 	}).prefault({})

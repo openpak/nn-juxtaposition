@@ -142,7 +142,7 @@ export function WebUserPageMeta(props: { profile: UserProfile; withImage?: boole
 			{/* Open Graph Meta Tags */}
 			<meta property="og:title" content={pageTitle} />
 			{profile.profileInfo.comment ? <meta property="og:description" content={profile.profileInfo.comment} /> : null}
-			<meta property="og:url" content={`https://openverse.openpak.org/users/${profile.pid}`} />
+			<meta property="og:url" content={`https://verse.openpak.org/users/${profile.pid}`} />
 			{ props.withImage ? <meta property="og:image" content={pageImage} /> : null }
 			<meta property="og:site_name" content="Juxtaposition" />
 

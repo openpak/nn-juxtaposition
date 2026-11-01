@@ -6,13 +6,17 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.3 — 2026-11-01
+
+- ui: the web host is `verse.openpak.org` (config defaults, SSO redirect and logout target, OpenGraph and manifest URLs)
+- ui: footer line "Part of the OpenPak network" linking to openpak.org
+
 ## v0.3.2 — 2026-11-01
 
 - ui: web sign-in is openpak.org single sign-on only; the login form and the PNID password login are gone
   (`docs/web-sso.md`). No Wii U linked gets its own page; `/logout` ends both sessions
 - ui: shared Open-site header (mark and name only) and footer (OpenPak / OpenVerse / Project / Legal columns),
   Sign in button and signed-in chip as on openpak.org; the AGPL credit sits in the footer and on `/about`
-- ui: `/login` on juxt.openpak.org 301s to the canonical host
 - api: `x-trusted-pid` internal auth header (only reachable over the API-keyed gRPC channel)
 - ui: vitest added (SSO flow tests: state mismatch, failed exchange, happy path; render checks)
 
@@ -23,7 +27,7 @@ OpenPak work starts at the port/fork commit.
   to Juxtaposition by Pretendo Network. Register and forgot-password link to openpak.org
 - ui: no Pretendo names, logos, OpenGraph images, Discord or forum links in user-visible output;
   locales updated (all 44); console (portal/ctr) layouts untouched
-- ui: `DOMAINS_WEB` takes a comma-separated list (`openverse.openpak.org,juxt.openpak.org`)
+- ui: `DOMAINS_WEB` takes a comma-separated list (prod: `verse.openpak.org`)
 
 ## v0.3.0 — 2026-11-01
 

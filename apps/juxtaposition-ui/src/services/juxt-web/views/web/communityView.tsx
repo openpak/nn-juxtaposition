@@ -27,7 +27,7 @@ export function WebCommunityHead(props: CommunityViewProps): ReactNode {
 	const title = `Juxt - ${name}`;
 	const description = props.community.description;
 	const image = props.community.iconImagePaths['128'];
-	const communityUrl = `https://openverse.openpak.org/communities/${props.community.olive_community_id}/new`;
+	const communityUrl = `https://verse.openpak.org/communities/${props.community.olive_community_id}/new`;
 
 	return (
 		<>

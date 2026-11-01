@@ -248,6 +248,7 @@
     "shell": {
         "skip": "Saltar al contenido",
         "tagline": "OpenVerse es la red social de OpenPak para Wii U y 3DS: comunidades, publicaciones y dibujos desde tu consola.",
+        "part_of": "Parte de la red OpenPak",
         "openpak": "OpenPak",
         "home": "Inicio",
         "titles": "Títulos",

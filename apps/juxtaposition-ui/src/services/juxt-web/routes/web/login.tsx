@@ -20,21 +20,12 @@ function settings(): SsoSettings {
 	};
 }
 
-/** Sign-in only ever starts on the canonical host, so the callback matches the registered redirect. */
 loginRouter.get('/', (req, res) => {
 	const { query } = parseReq(req, {
 		query: z.object({
 			redirect: z.string().optional()
 		})
 	});
-	const canonical = new URL(config.http.baseUrl);
-	if (req.hostname !== canonical.hostname) {
-		const target = new URL('/login', canonical);
-		if (query.redirect) {
-			target.searchParams.set('redirect', query.redirect);
-		}
-		return res.redirect(301, target.toString());
-	}
 
 	const { url, pending } = startSso(settings(), safeRedirect(query.redirect));
 	req.session.ssoPending = pending;

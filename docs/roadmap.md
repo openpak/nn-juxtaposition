@@ -18,7 +18,7 @@ and no Wii U or 3DS has signed in. Every row's last step is a console test.
 | 9 | [All] Sub communities | upstream | upstream: `parent` communities, `subCommunityView` for ctr/portal/web (#548 styling fixed) | A game community lists its sub communities on all three clients | S (needs seeded communities) |
 | 10 | [3DS] UI refactor | upstream, ongoing | upstream: islands, redesigned post embed (#583), lists (#580). Remaining pjax work is open PR #604 | 3DS pages use the new components | tracks upstream; take #604 when merged |
 | 11 | [3DS] User page | upstream | upstream: `ctr/userPageView`, following list, settings | Profile, follows and settings usable on 3DS | S (console test) |
-| 12 | [All] Guest mode | upstream | upstream: internal API `guards.guest`, endpoint `guest_access` flag, web guest browsing. Ours: seed sets `guest_access` on prod only | Logged-out web visitor browses communities and posts read-only | S (check on a live web host; juxt.openpak.org is not publicly resolvable today) |
+| 12 | [All] Guest mode | upstream | upstream: internal API `guards.guest`, endpoint `guest_access` flag, web guest browsing. Ours: seed sets `guest_access` on prod only | Logged-out web visitor browses communities and posts read-only | S (check on a live web host; the web host is verse.openpak.org) |
 | 13 | Set-Up page rewrite | upstream | upstream: `firstRunView` for ctr and portal, internal `onboarding` route | First launch walks a new account through setup | S (console test) |
 
 ## Open prerequisites outside this repo

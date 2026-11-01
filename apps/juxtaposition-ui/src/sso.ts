@@ -12,7 +12,7 @@ export type SsoSettings = {
 	authorizeUrl: string;
 	/** http://openpak-website:20010/internal/sso/token (private network only) */
 	tokenUrl: string;
-	/** https://openverse.openpak.org/login/callback */
+	/** https://verse.openpak.org/login/callback */
 	redirectUri: string;
 };
 

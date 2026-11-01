@@ -54,8 +54,8 @@ function PostHead(props: PostPageViewProps): ReactNode {
 			<meta property="og:type" content="article" />
 			<meta property="og:title" content={title} />
 			<meta property="og:description" content={description} />
-			<meta property="og:url" content={`https://openverse.openpak.org/posts/${post.id}`} />
-			<meta property="og:image" content={image ?? 'https://openverse.openpak.org/assets/web/images/opengraph.png'} />
+			<meta property="og:url" content={`https://verse.openpak.org/posts/${post.id}`} />
+			<meta property="og:image" content={image ?? 'https://verse.openpak.org/assets/web/images/opengraph.png'} />
 			<meta property="og:site_name" content="OpenVerse - OpenPak" />
 
 			{/* Twitter Meta Tags */}

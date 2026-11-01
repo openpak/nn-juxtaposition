@@ -8,7 +8,7 @@ const settings: SsoSettings = {
 	clientSecret: 'secret',
 	authorizeUrl: 'https://openpak.org/account/sso/authorize',
 	tokenUrl: 'http://openpak-website:20010/internal/sso/token',
-	redirectUri: 'https://openverse.openpak.org/login/callback'
+	redirectUri: 'https://verse.openpak.org/login/callback'
 };
 
 function jsonResponse(status: number, body: unknown): Response {

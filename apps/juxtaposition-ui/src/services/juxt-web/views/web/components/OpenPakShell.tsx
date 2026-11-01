@@ -46,6 +46,7 @@ export function OpenPakFooter(): ReactNode {
 				<div>
 					<a href="/" className="brand"><Mark size={28} />OpenVerse</a>
 					<p className="muted"><T k="shell.tagline" /></p>
+					<p className="muted"><a href={`${OPENPAK}/`}><T k="shell.part_of" /></a></p>
 				</div>
 				<nav aria-labelledby="foot-net">
 					<h2 id="foot-net"><T k="shell.openpak" /></h2>
