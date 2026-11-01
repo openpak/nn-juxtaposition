@@ -61,9 +61,14 @@ describe('web shell', () => {
 		const html = await render(<WebWelcomeView redirect="/titles" />);
 		expect(html).toContain('<title>Welcome · OpenVerse</title>');
 		expect(html).toContain('Welcome to OpenVerse');
+		// heading, intro, rules and actions all live in the one card
+		expect(html).toMatch(/<div class="card welcome-card"><h1>Welcome to OpenVerse<\/h1>/);
 		expect(html).toContain('<form action="/welcome/accept" method="post">');
 		expect(html).toContain('value="/titles"');
 		expect(html).toContain('Accept and continue');
+		// one action row: two real buttons and a quiet terms button, no stray link above them
+		expect(html).toContain('<div class="btn-row"><button type="submit" class="btn primary">Accept and continue</button><a class="btn" href="/logout">Not now</a><a class="btn ghost terms" href="https://openpak.org/terms" rel="noopener">Read the full terms</a></div>');
+		expect(html).not.toContain('class="terms"');
 		expect(html.match(/<ul class="rules">(.*?)<\/ul>/)![1]!.match(/<li>/g)).toHaveLength(5);
 		expect(html).not.toMatch(/no_wiiu|welcome\.|new_post\./);
 		expect(html).not.toMatch(/first.run|Account Creation|Wii U linked|finish setup/i);

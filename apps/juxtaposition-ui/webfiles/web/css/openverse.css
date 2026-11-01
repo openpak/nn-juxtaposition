@@ -156,11 +156,15 @@ html, body, .main-body, .wrapper { background-image: none; background-color: var
 .page-head p { color: var(--muted); max-width: 44rem; margin: 0; line-height: 1.55; }
 .card { background: var(--raised); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-sm); padding: 1.5rem; }
 @media (prefers-color-scheme: dark) { .card { border-color: transparent; } }
+.welcome-card h1 { font-family: var(--font-ui); color: var(--ink); font-size: clamp(1.7rem, 5vw, 2.1rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.005em; margin: 0 0 .5rem; }
+.welcome-card .lead { color: var(--ink-2); margin: 0 0 1.1rem; line-height: 1.55; }
+.card.welcome-card { padding: 1.75rem; }
 .welcome-card .rules { margin: 0 0 1rem; padding-left: 1.25rem; color: var(--ink); line-height: 1.6; }
 .welcome-card .rules li { margin: .35rem 0; }
-.welcome-card .terms { margin: 0 0 1.5rem; }
+.welcome-card form { margin: 1.25rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+.btn-row .btn.terms { margin-left: auto; }
 .btn-row { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; }
-.btn-row .btn { margin: 0; cursor: pointer; }
+.btn-row .btn { margin: 0; cursor: pointer; box-sizing: border-box; }
 @media (max-width: 36rem) { .btn-row { flex-direction: column; align-items: stretch; } .btn-row .btn { width: 100%; } }
 
 /* ---- Linked devices ---------------------------------------------------------------------------- */

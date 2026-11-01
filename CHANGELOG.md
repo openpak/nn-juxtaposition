@@ -6,6 +6,10 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.20 — 2026-11-01
+
+- web: welcome page is one card (heading, intro, rules, action row). Actions are real buttons of the same height: primary "Accept and continue", secondary "Not now" (signs out, lands on /about) and a quiet "Read the full terms" button; they stack full width on phones with the primary on top
+
 ## v0.3.19 — 2026-11-02
 
 - privacy: deleting a post now deletes its screenshot and drawing (full, thumbnail and big renders, PNG and TGA keys) from the `miiverse` bucket, so `/cdn/...` answers 404 at once. Covers a player removing their own post or reply, a moderator removal (`DELETE /posts/:id` and the report action), the console XML API delete, Pakka's official post removal, and the account deletion call from core (`deleteAccountData`, which now also removes the big and thumb renders it used to miss)

@@ -21,20 +21,18 @@ export function WebWelcomeView(props: WelcomeViewProps): ReactNode {
 	return (
 		<WebLoginRoot head={extraHead}>
 			<div className="page-narrow">
-				<div className="page-head">
-					<h1><T k="welcome.heading" /></h1>
-					<p><T k="welcome.intro" /></p>
-				</div>
 				<div className="card welcome-card">
+					<h1><T k="welcome.heading" /></h1>
+					<p className="lead"><T k="welcome.intro" /></p>
 					<ul className="rules">
 						{rules.map(rule => <li key={rule.key}>{rule}</li>)}
 					</ul>
-					<p className="terms"><a href="https://openpak.org/terms" rel="noopener"><T k="welcome.terms" /></a></p>
 					<form method="post" action="/welcome/accept">
 						<input type="hidden" name="redirect" value={props.redirect} />
 						<div className="btn-row">
 							<button type="submit" className="btn primary"><T k="welcome.accept" /></button>
 							<a className="btn" href="/logout"><T k="welcome.decline" /></a>
+							<a className="btn ghost terms" href="https://openpak.org/terms" rel="noopener"><T k="welcome.terms" /></a>
 						</div>
 					</form>
 				</div>
