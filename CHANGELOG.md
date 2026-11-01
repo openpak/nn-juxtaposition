@@ -6,6 +6,10 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.14 — 2026-11-02
+
+- The official Pakka account: a verified service identity (no sign-in) that Pakka, OpenPak's assistant, posts through `/internal/v1/official` (key `PN_MIIVERSE_API_OFFICIAL_KEY`, private network only, 404 without a key). Idempotent posts, communities with generated art, removal of its own posts, weekly top posts. See docs/official-account.md
+
 ## v0.3.13 — 2026-11-01
 
 - api: a post no longer needs author Mii data, so a web-only player can post (the 500 on the first web-only post)
