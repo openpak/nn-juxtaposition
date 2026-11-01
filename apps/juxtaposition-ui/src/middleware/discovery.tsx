@@ -32,7 +32,8 @@ export const checkDiscovery: RequestHandler = async (request, response, next) =>
 
 	request.guest_access = discovery.guestAccess;
 	request.new_users = discovery.newUsers;
-	response.locals.cdnURL = config.cdnDomain;
+	// Browsers cannot resolve the console-only API host, so the web UI serves pictures itself (cdnProxy.ts)
+	response.locals.cdnURL = request.directory === 'web' ? `${config.http.baseUrl.replace(/\/$/, '')}/cdn` : config.cdnDomain;
 
 	next();
 };

@@ -10,6 +10,7 @@ import { router } from '@/services/juxt-web';
 import { healthzRouter } from '@/services/healthz';
 import { config } from '@/config';
 import { jsxRenderer } from '@/middleware/jsx';
+import { cdnProxy } from '@/cdnProxy';
 import { loginWall } from '@/middleware/webAuth';
 import { listenMetrics, registerMetrics } from '@/metrics';
 import { i18nMiddleware } from '@/middleware/i18n';
@@ -43,6 +44,7 @@ app.use(jsxRenderer);
 app.use(loggerHttp);
 app.use(express.json());
 app.use(healthzRouter);
+app.use(cdnProxy);
 
 app.use(express.urlencoded({
 	extended: true,

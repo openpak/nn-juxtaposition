@@ -6,6 +6,11 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.12 — 2026-11-01
+
+- web: pictures (community icons, drawings, Miis) are served from https://verse.openpak.org/cdn (a read-only proxy to the API's /cdn route).
+  They used the console-only host api.olv.openpak.org, which a browser cannot resolve, so every image on the web was broken. Consoles keep the old host
+
 ## v0.3.11 — 2026-11-02
 
 - activity: opt-in automatic activity posts ("Tobi earned the Kart Racer: Wii Era badge") with a web feed (Game activity in the navigation),
