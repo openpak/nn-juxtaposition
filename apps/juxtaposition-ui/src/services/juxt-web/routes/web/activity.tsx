@@ -19,9 +19,12 @@ activityRouter.get('/', async (req, res) => {
 		return res.redirect('/login');
 	}
 	const { data } = await req.api.activity.list({ scope: query.scope, limit: config.postLimit, offset: query.offset });
+	const hasMore = data.items.length >= config.postLimit;
 	const next = `/activity?scope=${query.scope}&offset=${query.offset + data.items.length}`;
 	const props = {
 		items: data.items,
+		hasMore,
+		back: query.scope === 'following' ? '/activity?scope=following' : '/activity',
 		nextLink: next + '&pjax=true',
 		prevPageLink: query.offset > 0 ? `/activity?scope=${query.scope}&offset=${Math.max(query.offset - data.items.length, 0)}` : null,
 		nextPageLink: next
@@ -58,4 +61,15 @@ activityRouter.post('/settings', express.urlencoded({ extended: false }), async 
 	const categories = (Array.isArray(raw) ? raw : raw ? [raw] : []).filter((v): v is string => typeof v === 'string');
 	await req.api.activity.settings.update({ enabled: req.body?.enabled === '1', categories });
 	return res.redirect('/activity/settings?saved=1');
+});
+
+// Remove one of your own activity posts, then go back to the page it was on.
+activityRouter.post('/:id/delete', express.urlencoded({ extended: false }), async (req, res) => {
+	const { params, hasAuth } = parseReq(req, { params: z.object({ id: z.coerce.number().int() }) });
+	if (!hasAuth()) {
+		return res.redirect('/login');
+	}
+	await req.api.activity.delete({ id: params.id });
+	const back = typeof req.body?.back === 'string' && /^\/(activity|users\/(me|\d+)\/activity)(\?[\w=&]*)?$/.test(req.body.back) ? req.body.back : '/activity';
+	return res.redirect(back);
 });

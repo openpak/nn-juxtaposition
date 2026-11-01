@@ -175,3 +175,34 @@ html, body, .main-body, .wrapper { background-image: none; background-color: var
 .devices-card .device-list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; padding: .75rem 0; border-top: 1px solid var(--line); color: var(--ink); }
 .devices-card .device-list .meta { color: var(--muted); font-size: .9rem; }
 .devices-card form.inline { margin: 0; }
+
+/* Game activity: automatic opt-in posts (badges earned and so on) */
+.activity-list { display: flex; flex-direction: column; gap: 10px; }
+.activity-item { display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: var(--raised); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-sm); }
+.activity-item.digest { background: var(--paper-2); }
+.activity-item .mii-icon { flex: none; width: 48px; height: 48px; border-radius: 50%; }
+.activity-body { flex: 1; min-width: 0; }
+.activity-text { margin: 0; color: var(--ink); overflow-wrap: anywhere; }
+.activity-who { font-weight: 800; text-decoration: none; }
+.activity-what { color: var(--ink-2); }
+a.activity-what { color: var(--accent); }
+.activity-body .extra-info { margin: 2px 0 0; color: var(--muted); font-size: .85em; }
+.activity-art, .activity-icon { flex: none; width: 56px; height: 56px; border-radius: 12px; object-fit: contain; background: var(--sunk); }
+.activity-icon { display: flex; align-items: center; justify-content: center; color: var(--ink-2); }
+.activity-icon .ui-icon svg { width: 28px; height: 28px; fill: currentColor; }
+.activity-settings { max-width: 40rem; margin: 0 auto; }
+.activity-settings fieldset { border: 1px solid var(--line); border-radius: 14px; margin: 1rem 0; padding: .5rem 1rem 1rem; }
+.activity-settings legend { font-weight: 800; padding: 0 .4rem; }
+.activity-switch { display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--ink); cursor: pointer; }
+.activity-switch input { width: 1.2rem; height: 1.2rem; accent-color: var(--accent); }
+.activity-note, .activity-readonly { color: var(--muted); }
+.activity-saved { color: var(--accent); font-weight: 800; }
+.activity-remove { margin: 0; flex: none; }
+.activity-remove button { width: 32px; height: 32px; padding: 0; border-radius: 50%; line-height: 1; font-size: 1.2rem; color: var(--muted); background: transparent; border: 1px solid transparent; box-shadow: none; cursor: pointer; }
+.activity-remove button:hover, .activity-remove button:focus-visible { color: var(--bad); border-color: var(--line-2); box-shadow: none; }
+.activity-settings p { margin: .9rem 0; }
+.activity-settings .actions { display: flex; align-items: center; gap: 14px; margin-top: 1.2rem; }
+@media (max-width: 600px) {
+  .activity-item { padding: 10px 12px; gap: 10px; }
+  .activity-art, .activity-icon { width: 44px; height: 44px; }
+}

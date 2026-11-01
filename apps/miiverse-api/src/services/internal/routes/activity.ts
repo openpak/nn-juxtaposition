@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { config } from '@/config';
+import { errors } from '@/services/internal/errors';
 import { guards } from '@/services/internal/middleware/guards';
 import { createInternalApiRouter } from '@/services/internal/builder/router';
 import { mapResult, resultSchema } from '@/services/internal/contract/result';
@@ -131,5 +132,29 @@ activityRouter.get({
 			take: query.limit
 		});
 		return mapFeedPage(await mapRows(db, rows));
+	}
+});
+
+// A player may remove their own activity post (a moderator any). The read-only gate refuses supervised accounts.
+activityRouter.delete({
+	path: '/activity/:id',
+	name: 'activity.delete',
+	description: 'Remove an activity post',
+	guard: guards.user,
+	schema: {
+		params: z.object({ id: z.coerce.number().int() }),
+		response: resultSchema
+	},
+	async handler({ params, auth, db }) {
+		const account = auth!;
+		const row = await db.activityPost.findUnique({ where: { id: params.id } });
+		if (!row || row.folded) {
+			throw errors.for('not_found');
+		}
+		if (!account.moderator && row.accountId !== await accountIdOf(db, account.pnid.pid)) {
+			throw errors.for('forbidden');
+		}
+		await db.activityPost.delete({ where: { id: row.id } });
+		return mapResult('success');
 	}
 });

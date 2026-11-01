@@ -341,7 +341,8 @@
       "trophy": "unlocked {{subject}}",
       "trade": "completed a Pokémon trade: {{subject}}",
       "digest": "{{count}} more moments today"
-    }
+    },
+    "remove": "Remove this post"
   },
   "devices": {
     "title": "Linked devices",

@@ -6,6 +6,11 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.18 — 2026-11-02
+
+- activity: a player can remove their own activity post (the x on the post; moderators any), `DELETE /api/v1/activity/:id`; "Show more" only when a full page came back; the Game activity styles were dropped from `openverse.css` by the v0.3.16 welcome change and are back, with settings spacing
+- activity: verified live on verse.openpak.org with the test account (opt in, badge post from the rewards service and from the internal endpoint, feed and profile, removed)
+
 ## v0.3.17 — 2026-11-02
 
 - lite: OpenVerse Lite, plain-HTTP pages for the PS3, Wii (Internet Channel) and DSi browsers on their own host (`lite.verse.openpak.org`, `PN_JUXTAPOSITION_UI_LITE_HOSTS`),

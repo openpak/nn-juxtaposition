@@ -2,6 +2,7 @@ import cx from 'classnames';
 import moment from 'moment';
 import { WebNavBar } from '@/services/juxt-web/views/web/navbar';
 import { WebRoot, WebWrapper } from '@/services/juxt-web/views/web/root';
+import { useUser } from '@/services/juxt-web/views/common/hooks/useUser';
 import { T } from '@/services/juxt-web/views/common/components/T';
 import { WebUIIcon } from '@/services/juxt-web/views/web/components/ui/WebUIIcon';
 import { WebMiiIcon } from '@/services/juxt-web/views/web/components/ui/WebMiiIcon';
@@ -32,6 +33,10 @@ const icons = {
 
 export type ActivityListProps = ListViewLinks & {
 	items: ActivityItem[];
+	/** A full page came back, so there may be more. */
+	hasMore?: boolean;
+	/** Where "Remove" returns to. */
+	back?: string;
 	/** Hide the name and avatar (a profile already says whose it is). */
 	onProfile?: boolean;
 };
@@ -40,8 +45,10 @@ function iconName(category: string): (typeof icons)[keyof typeof icons] {
 	return category in icons ? icons[category as keyof typeof icons] : icons.digest;
 }
 
-export function WebActivityItem(props: { item: ActivityItem; onProfile?: boolean }): ReactNode {
+export function WebActivityItem(props: { item: ActivityItem; onProfile?: boolean; back?: string }): ReactNode {
 	const item = props.item;
+	const user = useUser();
+	const removable = item.pid === user.pid || user.perms.moderator;
 	const known = item.category in textKeys;
 	// A moment of a category this build does not know is left out rather than shown half-rendered.
 	if (!item.digest && !known) {
@@ -64,6 +71,14 @@ export function WebActivityItem(props: { item: ActivityItem; onProfile?: boolean
 				</p>
 				<p className="extra-info">{moment(item.createdAt).fromNow()}</p>
 			</div>
+			{removable
+				? (
+						<form className="activity-remove" method="post" action={`/activity/${item.id}/delete`}>
+							<input type="hidden" name="back" value={props.back ?? '/activity'} />
+							<button type="submit" title={T.str('activity.remove')} aria-label={T.str('activity.remove')}>&times;</button>
+						</form>
+					)
+				: null}
 			{item.image
 				? <img className="activity-art" src={item.image} alt="" loading="lazy" />
 				: <span className="activity-icon"><WebUIIcon name={iconName(item.digest ? 'digest' : item.category)} /></span>}
@@ -73,7 +88,7 @@ export function WebActivityItem(props: { item: ActivityItem; onProfile?: boolean
 
 export function WebActivityList(props: ActivityListProps & { fragment?: boolean }): ReactNode {
 	const shown = props.items.filter(i => i.digest || i.category in textKeys);
-	const more = props.items.length > 0
+	const more = props.hasMore
 		? (
 				<div id="wrapper" className="bottom">
 					<button id="load-more" data-href={props.nextLink}><T k="activity.more" /></button>
@@ -82,14 +97,14 @@ export function WebActivityList(props: ActivityListProps & { fragment?: boolean 
 		: null;
 	// "Show more" swaps its own wrapper for the next page, so that page is a bare fragment.
 	if (props.fragment) {
-		return <>{shown.map(item => <WebActivityItem key={item.id} item={item} onProfile={props.onProfile} />)}{more}</>;
+		return <>{shown.map(item => <WebActivityItem key={item.id} item={item} onProfile={props.onProfile} back={props.back} />)}{more}</>;
 	}
 	if (shown.length === 0) {
 		return <p className="no-posts-text"><T k="activity.empty" /></p>;
 	}
 	return (
 		<div className="activity-list">
-			{shown.map(item => <WebActivityItem key={item.id} item={item} onProfile={props.onProfile} />)}
+			{shown.map(item => <WebActivityItem key={item.id} item={item} onProfile={props.onProfile} back={props.back} />)}
 			{more}
 		</div>
 	);

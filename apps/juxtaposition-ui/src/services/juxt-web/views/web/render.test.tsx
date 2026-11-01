@@ -137,6 +137,16 @@ describe('game activity', () => {
 		expect(html).not.toMatch(/activity\.(text|empty)/);
 	});
 
+	it('offers Remove on your own post and on nobody else\'s', async () => {
+		const { WebActivityList } = await import('@/services/juxt-web/views/web/activityView');
+		const mine = await render(<WebActivityList {...links} hasMore items={[item()]} />, 1800000001, 'Tobi');
+		expect(mine).toContain('action="/activity/1/delete"');
+		expect(mine).toContain('Show more');
+		const other = await render(<WebActivityList {...links} items={[item()]} />, 1800000002, 'Ada');
+		expect(other).not.toContain('/delete');
+		expect(other).not.toContain('Show more');
+	});
+
 	it('renders a digest and an empty state without raw keys', async () => {
 		const { WebActivityList } = await import('@/services/juxt-web/views/web/activityView');
 		expect(await render(<WebActivityList {...links} items={[item({ digest: true, category: 'digest', count: 3, subject: '', link: '', image: '' })]} />)).toContain('3 more moments today');

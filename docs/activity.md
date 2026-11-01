@@ -11,6 +11,7 @@ They live in their own table and feed, not in the console post database, so Wii 
   OFF until the player turns it on. Only categories that have a working source are listed.
 - A supervised account (parental controls core configured and the account supervised) cannot change the settings and nothing
   is posted for it (the same read-only rule as posting; if the core is unreachable the account counts as supervised).
+- A player can remove their own activity posts with the x on each post (a moderator can remove any). Removing a post does not turn the setting off.
 - Posts are one line, an icon or OpenPak artwork, and an optional link. Never a game screenshot.
 
 ## Categories

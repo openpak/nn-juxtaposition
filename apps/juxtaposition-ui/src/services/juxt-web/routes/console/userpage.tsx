@@ -355,6 +355,8 @@ async function userRelations(req: Request, res: Response, userID: number): Promi
 		const activityProps = {
 			...buildListLinks(link + 'activity', offset, activity.items.length),
 			items: activity.items,
+			hasMore: activity.items.length >= 10,
+			back: link + 'activity',
 			onProfile: true
 		};
 		if (query.pjax) {
