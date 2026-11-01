@@ -6,6 +6,13 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.15 — 2026-11-02
+
+- Switch Album shares: `POST /api/v1/console-share/posts` (internal API) creates a screenshot post for a console user that nx-share
+  proved, in the game's community (matched by the Switch title id) or the Switch room, with the game's name as the topic tag.
+  Bans, read-only accounts, community permissions, automod and the duplicate check apply. `sso/resolve` takes `keepName`, so a
+  console share never renames a person. The web post view shows a screenshot's game name.
+
 ## v0.3.14 — 2026-11-02
 
 - The official Pakka account: a verified service identity (no sign-in) that Pakka, OpenPak's assistant, posts through `/internal/v1/official` (key `PN_MIIVERSE_API_OFFICIAL_KEY`, private network only, 404 without a key). Idempotent posts, communities with generated art, removal of its own posts, weekly top posts. See docs/official-account.md
