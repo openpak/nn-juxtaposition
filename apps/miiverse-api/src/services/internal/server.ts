@@ -60,6 +60,20 @@ const allowedMethods = ['get', 'post', 'put', 'delete', 'patch'] as const;
 const methodsWithBody = ['post', 'put', 'patch'] as const;
 type AllowedMethods = typeof allowedMethods[number];
 
+/** Runs one request against the internal API app (what gRPC `sendPacket` and the web bridge both do). */
+export async function dispatchInternal(method: string, path: string, headers: Record<string, string>, payload?: unknown): Promise<{ status: number; body: unknown }> {
+	const m = method.toLowerCase() as AllowedMethods;
+	if (!allowedMethods.includes(m)) {
+		return { status: 405, body: { message: 'Method not allowed' } };
+	}
+	let req = superRequest(app)[m](path).set(headers);
+	if (methodsWithBody.includes(m as never) && payload !== undefined) {
+		req = req.send(payload as object);
+	}
+	const result = await req;
+	return { status: result.status, body: result.body };
+}
+
 export async function setupGrpc(): Promise<void> {
 	const server = createServer();
 

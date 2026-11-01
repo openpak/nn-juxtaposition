@@ -84,6 +84,11 @@ const schema = z.object({
 	official: z.object({
 		key: z.string().default('')
 	}).default({ key: '' }),
+	// The web bridge (services/web-bridge): lets the OpenVerse web app (common/openverse) call the internal
+	// API over private HTTP, as a signed-in person it has already verified. Empty key = routes answer 404.
+	web: z.object({
+		key: z.string().default('')
+	}).default({ key: '' }),
 	domains: z.object({
 		api: z.hostname().default('api.olv.pretendo.cc'),
 		discovery: z.hostname().default('discovery.olv.pretendo.cc'),
@@ -144,6 +149,9 @@ export const presets: Record<string, any> = {
 			imageHosts: 'rewards.openpak.org,openpak.org'
 		},
 		official: {
+			key: ''
+		},
+		web: {
 			key: ''
 		}
 	},
