@@ -6,6 +6,11 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.4 — 2026-11-01
+
+- ui: every web page title is "<page> · OpenVerse" (default "OpenVerse"); last "Juxt"/"Juxtaposition" strings
+  in titles, OpenGraph site names, discovery messages and the admin alert replaced
+
 ## v0.3.3 — 2026-11-01
 
 - ui: the web host is `verse.openpak.org` (config defaults, SSO redirect and logout target, OpenGraph and manifest URLs)

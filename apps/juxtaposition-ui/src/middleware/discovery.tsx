@@ -8,10 +8,10 @@ import type { DiscoveryStatus } from '@/api/generated';
 
 export function getDiscoveryStatusMessage(status: DiscoveryStatus): string {
 	const messageMap: Record<DiscoveryStatus, string> = {
-		closed: 'Juxtaposition is now closed. Thank you for your support!',
-		maintenance: 'Juxtaposition is currently under maintenance. Please try again later.',
-		open: 'Juxtaposition is open!', // unreachable
-		unavailable: 'Juxtaposition is currently unavailable. Please try again later.'
+		closed: 'OpenVerse is now closed. Thank you for your support!',
+		maintenance: 'OpenVerse is currently under maintenance. Please try again later.',
+		open: 'OpenVerse is open!', // unreachable
+		unavailable: 'OpenVerse is currently unavailable. Please try again later.'
 	};
 	return messageMap[status];
 }

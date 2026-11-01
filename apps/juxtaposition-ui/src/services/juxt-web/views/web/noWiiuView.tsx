@@ -7,7 +7,7 @@ export type NoWiiuViewProps = {
 };
 
 export function WebNoWiiuView(props: NoWiiuViewProps): ReactNode {
-	const extraHead = <title>{T.str('no_wiiu.title')}</title>;
+	const extraHead = <title>{T.str('no_wiiu.title') + ' · OpenVerse'}</title>;
 
 	return (
 		<WebLoginRoot head={extraHead}>

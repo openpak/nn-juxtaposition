@@ -24,14 +24,14 @@ export type CommunityViewProps = {
 
 export function WebCommunityHead(props: CommunityViewProps): ReactNode {
 	const name = props.community.name;
-	const title = `Juxt - ${name}`;
+	const title = name;
 	const description = props.community.description;
 	const image = props.community.iconImagePaths['128'];
 	const communityUrl = `https://verse.openpak.org/communities/${props.community.olive_community_id}/new`;
 
 	return (
 		<>
-			<title>{title}</title>
+			<title>{title + ' · OpenVerse'}</title>
 			{/* Google / Search Engine Tags */}
 			<meta itemProp="name" content={title} />
 			<meta itemProp="description" content={description} />
@@ -42,7 +42,7 @@ export function WebCommunityHead(props: CommunityViewProps): ReactNode {
 			<meta property="og:description" content={description} />
 			<meta property="og:url" content={communityUrl} />
 			<meta property="og:image" content={image} />
-			<meta property="og:site_name" content="Juxtaposition" />
+			<meta property="og:site_name" content="OpenVerse" />
 
 			{/* Twitter Meta Tags */}
 			<meta name="twitter:card" content="summary_large_image" />

@@ -27,7 +27,7 @@ function PostHead(props: PostPageViewProps): ReactNode {
 
 	if (post.moderation?.removed) {
 		return (
-			<title>{pageTitle}</title>
+			<title>{pageTitle + ' · OpenVerse'}</title>
 		);
 	}
 
@@ -43,7 +43,7 @@ function PostHead(props: PostPageViewProps): ReactNode {
 
 	return (
 		<>
-			<title>{pageTitle}</title>
+			<title>{pageTitle + ' · OpenVerse'}</title>
 
 			{/* Google / Search Engine Tags */}
 			<meta itemProp="name" content={title} />

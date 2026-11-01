@@ -17,7 +17,7 @@ export type FatalErrorViewProps = {
 export function WebErrorView(props: ErrorViewProps): ReactNode {
 	const extraHead = (
 		<title>
-			{'OpenVerse - ' + T.str('error.title', { code: props.code })}
+			{T.str('error.title', { code: props.code }) + ' · OpenVerse'}
 		</title>
 	);
 

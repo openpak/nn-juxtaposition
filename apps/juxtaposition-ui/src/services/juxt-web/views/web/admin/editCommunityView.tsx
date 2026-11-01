@@ -14,10 +14,7 @@ export function WebEditCommunityView(props: EditCommunityViewProps): ReactNode {
 	const community = props.community;
 	const head = (
 		<>
-			<title>
-				Juxt -
-				{community.name}
-			</title>
+			<title>{community.name + ' · OpenVerse'}</title>
 		</>
 	);
 

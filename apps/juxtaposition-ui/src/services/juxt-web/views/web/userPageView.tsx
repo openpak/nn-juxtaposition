@@ -128,11 +128,11 @@ export function WebUserPageMeta(props: { profile: UserProfile; withImage?: boole
 	const url = useUrl();
 	const profile = props.profile;
 	const pnidName = props.profile.miiName;
-	const pageTitle = `Juxt - ${pnidName}`;
+	const pageTitle = pnidName;
 	const pageImage = url.cdn(`/mii/${profile.pid}/smile_open_mouth.png`);
 	return (
 		<>
-			<title>{pageTitle}</title>
+			<title>{pageTitle + ' · OpenVerse'}</title>
 
 			{/* Google / Search Engine Tags */}
 			<meta itemProp="name" content={pageTitle} />
@@ -144,7 +144,7 @@ export function WebUserPageMeta(props: { profile: UserProfile; withImage?: boole
 			{profile.profileInfo.comment ? <meta property="og:description" content={profile.profileInfo.comment} /> : null}
 			<meta property="og:url" content={`https://verse.openpak.org/users/${profile.pid}`} />
 			{ props.withImage ? <meta property="og:image" content={pageImage} /> : null }
-			<meta property="og:site_name" content="Juxtaposition" />
+			<meta property="og:site_name" content="OpenVerse" />
 
 			{/* Twitter Meta Tags */}
 			<meta name="twitter:card" content="summary_large_image" />

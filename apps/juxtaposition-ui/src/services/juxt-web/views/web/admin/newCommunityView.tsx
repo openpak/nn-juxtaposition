@@ -9,7 +9,7 @@ export type NewCommunityViewProps = {
 export function WebNewCommunityView(_props: NewCommunityViewProps): ReactNode {
 	const head = (
 		<>
-			<title>Juxt - New Community</title>
+			<title>New Community · OpenVerse</title>
 		</>
 	);
 

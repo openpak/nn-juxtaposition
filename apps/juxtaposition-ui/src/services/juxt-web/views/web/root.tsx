@@ -1,6 +1,7 @@
 import cx from 'classnames';
+import { isValidElement } from 'react';
 import { OpenPakFooter, OpenPakTopBar } from '@/services/juxt-web/views/web/components/OpenPakShell';
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
 export function DefaultHead(): ReactNode {
 	return (
@@ -10,6 +11,18 @@ export function DefaultHead(): ReactNode {
 			<link rel="manifest" href="/manifest.json" />
 		</>
 	);
+}
+
+/** True when a head fragment already carries a <title>. */
+function hasTitle(node: ReactNode): boolean {
+	if (Array.isArray(node)) {
+		return node.some(hasTitle);
+	}
+	if (!isValidElement(node)) {
+		return false;
+	}
+	const el = node as ReactElement<{ children?: ReactNode }>;
+	return el.type === 'title' || hasTitle(el.props.children);
 }
 
 export function OpenVerseStyling(): ReactNode {
@@ -55,6 +68,7 @@ export function WebRoot(props: HtmlProps): ReactNode {
 			<head>
 				<DefaultHead />
 				<DefaultStyling type={stylingType} />
+				{hasTitle(props.head) ? null : <title>OpenVerse</title>}
 				{props.head}
 				<OpenVerseStyling />
 			</head>

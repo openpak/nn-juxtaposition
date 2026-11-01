@@ -8,7 +8,7 @@ export type NoticeViewProps = {
 
 /** A plain page for messages that stop a visitor (maintenance, bans). No forms. */
 export function WebNoticeView(props: NoticeViewProps): ReactNode {
-	const extraHead = <title>{T.str('notice.title')}</title>;
+	const extraHead = <title>{T.str('notice.title') + ' · OpenVerse'}</title>;
 
 	return (
 		<WebLoginRoot head={extraHead}>

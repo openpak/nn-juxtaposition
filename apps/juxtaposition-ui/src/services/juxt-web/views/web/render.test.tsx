@@ -8,6 +8,7 @@ import { WebNoticeView } from '@/services/juxt-web/views/web/noticeView';
 import { WebNoWiiuView } from '@/services/juxt-web/views/web/noWiiuView';
 import { WebAboutView } from '@/services/juxt-web/views/web/aboutView';
 import { WebErrorView } from '@/services/juxt-web/views/web/errorView';
+import { WebRoot } from '@/services/juxt-web/views/web/root';
 import type { ReactElement } from 'react';
 
 async function render(el: ReactElement, pid = 1000000000, displayName?: string): Promise<string> {
@@ -27,7 +28,7 @@ async function render(el: ReactElement, pid = 1000000000, displayName?: string):
 describe('web shell', () => {
 	it('has the shared Open-site header and footer and no forms', async () => {
 		const html = await render(<WebNoticeView message="Maintenance" />);
-		expect(html).toContain('<title>Notice</title>');
+		expect(html).toContain('<title>Notice · OpenVerse</title>');
 		expect(html).toContain('class="brand"');
 		expect(html).not.toContain('<form');
 		expect(html).toContain('href="/login"');
@@ -59,6 +60,14 @@ describe('web shell', () => {
 
 	it('error page renders under the OpenVerse title', async () => {
 		const html = await render(<WebErrorView requestId="r1" code={404} message="nope" />);
-		expect(html).toContain('OpenVerse - Error 404');
+		expect(html).toContain('Error 404 · OpenVerse');
+	});
+
+	it('pages without their own title get the site title, never a duplicate', async () => {
+		const plain = await render(<WebRoot>x</WebRoot>);
+		expect(plain.match(/<title>/g)).toHaveLength(1);
+		expect(plain).toContain('<title>OpenVerse</title>');
+		const own = await render(<WebRoot head={<title>Feed · OpenVerse</title>}>x</WebRoot>);
+		expect(own.match(/<title>/g)).toHaveLength(1);
 	});
 });

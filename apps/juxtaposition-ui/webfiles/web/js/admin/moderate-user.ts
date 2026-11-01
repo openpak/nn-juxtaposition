@@ -92,7 +92,7 @@ function savePNID(form: HTMLFormElement): void {
 		.then(response => response.json())
 		.then(({ error }) => {
 			if (!error) {
-				alert('Juxt user data saved');
+				alert('OpenVerse user data saved');
 			}
 		})
 		.catch(console.log);
