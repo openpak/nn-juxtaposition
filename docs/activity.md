@@ -30,12 +30,21 @@ event in any other category is answered `not_opted_in`. Add a category to the li
 
 ### Adding a source
 
-The rewards service already receives game events (`POST /internal/v1/events`, shared client `rewards-emit`) and resolves the
-console identity to the core account id. The hook for `maker` and `trade` is there: after an event with metric
-`maker_courses_uploaded` or `trades_completed` is `counted`, rewards calls the endpoint below with category `maker`/`trade`,
-`event_id` = the event's id, `subject` = course name or Pokémon, `link` = the OpenMaker course page. For `splatfest`, `kart`
-and `trophy` the game server or `np-trophy`/`x360-progress` needs a new emit at the point it learns the win, record or unlock
-(a win is not an existing metric). Then add the category to `PN_MIIVERSE_API_ACTIVITY_CATEGORIES`.
+Game servers already report to the rewards service (`rewards-emit`, `POST /internal/v1/events`), which resolves the console
+identity to the core account id. That is the hook for the two categories whose signal exists, so they need no new emitter code in
+the game servers, only a fan-out in rewards: after an event is `counted`, rewards calls this endpoint (as it does for badges in
+`internal/api/verse.go`) with the course or trade as `subject` and a link to the OpenMaker course page.
+
+| Category | Signal to fan out | Emit point (already there) |
+| --- | --- | --- |
+| `maker` | `maker_courses_uploaded` | SMM1 `titles/super-mario-maker/nex/datastore/super-mario-maker/complete_attach_file.go`; SMM2 `switch-nex/protocols/smm2_courses.go` (`CompleteCourse`). The event carries the course id only: the course name needs a lookup |
+| `trade` | `trades_completed` | `common/pokemon-global-link/rewards.go`, `common/pokemon-home` |
+| `splatfest` | none: `splatfests_joined` is a join, not a win | `titles/splatoon/nex/competition.go` sees the Splatfest match upload but not the result. Needs a "won" signal there |
+| `kart` | none: tournaments entered is not a win or a record | `titles/mario-kart-8/ranking.go` sees the score upload. Needs a rank/record comparison there |
+| `trophy` | none | `np-trophy` (PS3) and `x360-progress` (Xbox 360) hold unlocks but have no emitter; each needs a call to this endpoint (or a rewards event) at unlock time |
+
+Then add the category to `PN_MIIVERSE_API_ACTIVITY_CATEGORIES` in the same deploy. None of these is live today: the ladder
+events are new in rewards and the game-server emitters are not yet confirmed running in production.
 
 ## Endpoint: `POST /internal/v1/activity`
 
