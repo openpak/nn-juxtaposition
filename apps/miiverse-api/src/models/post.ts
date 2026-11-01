@@ -73,7 +73,8 @@ const PostSchema = new Schema<IPost, PostModel, IPostMethods>({
 		default: 1
 	},
 
-	mii: { type: String, required: true },
+	// Empty for a web-only player: they have no Mii (consoles show mii_face_url instead)
+	mii: { type: String, default: '' },
 	mii_face_url: { type: String, required: true },
 
 	pid: { type: Number, required: true },
