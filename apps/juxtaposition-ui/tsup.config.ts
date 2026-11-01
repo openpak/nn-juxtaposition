@@ -155,7 +155,8 @@ export default defineConfig([
 			'webfiles/web/css/web.scss',
 			'webfiles/web/css/admin.css',
 			'webfiles/web/css/first_run.css',
-			'webfiles/web/css/login.css'
+			'webfiles/web/css/login.css',
+			'webfiles/web/css/openverse.css'
 		],
 		bundle: true,
 		sourcemap: true,
@@ -168,7 +169,7 @@ export default defineConfig([
 		format: 'iife',
 
 		esbuildOptions(options): void {
-			options.external = ['/images/*'];
+			options.external = ['/images/*', '/assets/web/fonts/*'];
 			options.tsconfig = './webfiles/web/tsconfig.json';
 		},
 		esbuildPlugins: [
@@ -180,6 +181,10 @@ export default defineConfig([
 					{
 						from: ['./webfiles/web/partials/assets/**'],
 						to: ['./dist/webfiles/web/partials/assets']
+					},
+					{
+						from: ['./webfiles/web/fonts/**'],
+						to: ['./dist/webfiles/web/fonts']
 					},
 					{
 						from: ['./webfiles/web/images/**'],

@@ -1,5 +1,5 @@
 import { WebLoginRoot } from '@/services/juxt-web/views/web/login';
-import { PretendoLogo } from '@/services/juxt-web/views/web/components/ui/WebUIIcon';
+import { OpenVerseMark } from '@/services/juxt-web/views/web/components/ui/WebUIIcon';
 import { T } from '@/services/juxt-web/views/common/components/T';
 import type { ReactNode } from 'react';
 import type { ReqId } from 'pino-http';
@@ -18,7 +18,7 @@ export type FatalErrorViewProps = {
 export function WebErrorView(props: ErrorViewProps): ReactNode {
 	const extraHead = (
 		<title>
-			{'Juxt - ' + T.str('error.title', { code: props.code })}
+			{'OpenVerse - ' + T.str('error.title', { code: props.code })}
 		</title>
 	);
 
@@ -27,7 +27,7 @@ export function WebErrorView(props: ErrorViewProps): ReactNode {
 			<div className="wrapper">
 				<div className="account-form-wrapper">
 					<a className="logotype" href="/">
-						<PretendoLogo />
+						<OpenVerseMark />OpenVerse
 					</a>
 					<h2>
 						<T k="error.heading" values={{ code: props.code, message: props.message }} />

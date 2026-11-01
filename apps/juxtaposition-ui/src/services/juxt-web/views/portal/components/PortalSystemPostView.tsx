@@ -32,7 +32,7 @@ export function PortalSystemPostView(props: SystemPostViewProps): ReactNode {
 						? (
 								<div className="community-banner" data-pjax="#body">
 									<span className="title-icon-container" data-pjax="#body">
-										<img src="/assets/portal/images/pretendo-logo-48.png" className="title-icon" />
+										<img src="/assets/portal/images/openverse-logo-48.png" className="title-icon" />
 									</span>
 									{community}
 								</div>

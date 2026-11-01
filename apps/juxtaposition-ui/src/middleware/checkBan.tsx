@@ -60,7 +60,7 @@ export const checkBan: RequestHandler = async (request, response, next) => {
 			banCode = 5980011;
 		} else if (banState.code === 'network_ban') {
 			banMessage = `${request.user.username} has been permanently banned.${endDateMessage}`;
-			banMessage += `\n\nThis ban restricts all parts of Pretendo Network.`;
+			banMessage += `\n\nThis ban restricts all parts of OpenPak.`;
 			banCode = 5980020;
 		}
 
@@ -68,7 +68,7 @@ export const checkBan: RequestHandler = async (request, response, next) => {
 			banMessage += `\n\nReason: ${banState.reason}.`;
 		}
 
-		banMessage += `\n\nIf you have any questions, please contact the moderators on the Pretendo Network Forum (https://preten.do/ban-appeal/).`;
+		banMessage += `\n\nIf you have any questions, please contact the moderators through OpenPak Help (https://openpak.org/help).`;
 
 		return response.jsxForDirectory({
 			web: <WebLoginView toast={banMessage} redirect={request.originalUrl} />,

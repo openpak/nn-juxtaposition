@@ -21,7 +21,7 @@ router.use(routes.ENTRYPOINT);
 router.use(checkDiscovery);
 
 // Create subdomains
-router.use(restrictHostnames([config.domains.web], webRouter));
+router.use(restrictHostnames(config.domains.web.split(',').map(h => h.trim()), webRouter));
 router.use(restrictHostnames([config.domains.portal, config.domains.ctr], consoleRouter));
 
 // Setup routes for console
@@ -50,4 +50,5 @@ webRouter.use('/posts', routes.PORTAL_POST);
 webRouter.use('/feed', routes.PORTAL_FEED);
 webRouter.use('/news', routes.PORTAL_NEWS);
 webRouter.use('/login', routes.WEB_LOGIN);
+webRouter.use('/about', routes.WEB_ABOUT);
 webRouter.use('/admin', routes.ADMIN);

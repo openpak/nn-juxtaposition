@@ -46,46 +46,46 @@
         "notify_reply": "Tampilkan Notifikasi Balasan/Komentar"
     },
     "setup": {
-        "welcome_text": "Juxt adalah komunitas game yang menghubungan orang-orang dari seluruh dunia menggunakan karakter Mii. Gunakan Juxt untuk berbagi pengalaman bermain game anda dan bertemu orang-orang dari seluruh dunia.",
+        "welcome_text": "OpenVerse adalah komunitas game yang menghubungan orang-orang dari seluruh dunia menggunakan karakter Mii. Gunakan OpenVerse untuk berbagi pengalaman bermain game anda dan bertemu orang-orang dari seluruh dunia.",
         "beta_text": {
-            "first": "Anda akan mencoba versi beta publik pertama Juxt. Artinya, masih banyak hal yang belum terealisasi, dan banyak hal yang bisa berubah kapan saja.",
+            "first": "Anda akan mencoba versi beta publik pertama OpenVerse. Artinya, masih banyak hal yang belum terealisasi, dan banyak hal yang bisa berubah kapan saja.",
             "second": "Hal ini dapat dan mungkin mencakup penghapusan total basis data para akhir atau selama periode beta.",
-            "third": "Situs web, perangkat lunaknya, dan semua konten yang terdapat di dalamnya disediakan atas dasar \"apa adanya\" dan \"sebagaimana tersedia\". Pretendo Network tidak memberikan jaminan apa pun, baik tersurat maupun tersirat, mengenai kesesuaian atau kegunaan situs web, perangkat lunaknya, atau konten apa pun di dalamnya."
+            "third": "Situs web, perangkat lunaknya, dan semua konten yang terdapat di dalamnya disediakan atas dasar \"apa adanya\" dan \"sebagaimana tersedia\". OpenPak tidak memberikan jaminan apa pun, baik tersurat maupun tersirat, mengenai kesesuaian atau kegunaan situs web, perangkat lunaknya, atau konten apa pun di dalamnya."
         },
-        "welcome": "Selamat datang ke Juxtaposition (Juxt)!",
+        "welcome": "Selamat datang ke OpenVerse (OpenVerse)!",
         "beta": "Pembertitahuan Beta",
         "done_button": "Ayo!",
         "experience": "Pengalaman Permainan",
         "rules_text": {
-            "first": "Berikut ini adalah beberapa aturan penting untuk menjadikan Juxt sebagai pengalaman yang menyenangkan dan mengasyikkan bagi semua orang. Kode Etik Juxt memuat informasi terperinci, jadi harap baca dengan saksama.",
-            "third": "Juxt berisi banyak komunitas game tempat orang-orang dari seluruh dunia dapat berbagi pemikiran mereka. Saat anda memposting di suatu komunitas, ingatlah bahwa semua orang dapat melihatnya, jadi harap ekspresikan diri anda dengan cara yang dapat dinikmati semua orang. Gunakan akal sehat, dan pikirkan sebelum anda memposting. Juxt adalah layanan yang juga dapat diakses dari Internet, jadi perlu diingat bahwa orang yang tidak menggunakan Juxt juga dapat melihat postingan Anda. Selain itu, komentar apa pun yang anda buat pada postingan teman-teman anda tidak hanya akan dilihat oleh teman-teman anda, tetapi juga oleh orang-orang di seluruh dunia. Harap diingat hal ini.",
+            "first": "Berikut ini adalah beberapa aturan penting untuk menjadikan OpenVerse sebagai pengalaman yang menyenangkan dan mengasyikkan bagi semua orang. Kode Etik OpenVerse memuat informasi terperinci, jadi harap baca dengan saksama.",
+            "third": "OpenVerse berisi banyak komunitas game tempat orang-orang dari seluruh dunia dapat berbagi pemikiran mereka. Saat anda memposting di suatu komunitas, ingatlah bahwa semua orang dapat melihatnya, jadi harap ekspresikan diri anda dengan cara yang dapat dinikmati semua orang. Gunakan akal sehat, dan pikirkan sebelum anda memposting. OpenVerse adalah layanan yang juga dapat diakses dari Internet, jadi perlu diingat bahwa orang yang tidak menggunakan OpenVerse juga dapat melihat postingan Anda. Selain itu, komentar apa pun yang anda buat pada postingan teman-teman anda tidak hanya akan dilihat oleh teman-teman anda, tetapi juga oleh orang-orang di seluruh dunia. Harap diingat hal ini.",
             "sixth": "Jangan Memposting Informasi Pribadi—Informasi Anda atau Informasi Orang Lain",
             "eighth": "Jangan Postingan Spoiler",
-            "eleventh": "Tujuan kami adalah menjaga Juxt tetap menyenangkan dan menghibur bagi semua orang. Jika ada yang melanggar Kode Etik Juxt, kami akan mengambil tindakan yang sesuai, termasuk memblokir pengguna atau konsol yang melanggar.",
+            "eleventh": "Tujuan kami adalah menjaga OpenVerse tetap menyenangkan dan menghibur bagi semua orang. Jika ada yang melanggar Kode Etik OpenVerse, kami akan mengambil tindakan yang sesuai, termasuk memblokir pengguna atau konsol yang melanggar.",
             "thirteenth": "Jika Anda mengepos di komunitas tentang permainan yang pernah Anda mainkan, pos Anda akan memiliki ikon yang menunjukkan bahwa Anda telah memainkannya.",
             "fourth": "Bersikap Baik Terhadap Satu Sama Lain",
-            "seventh": "Ingat, mengenal seseorang di Juxt tidak sama dengan mengenalnya di dunia nyata. Jangan pernah membagikan alamat email, alamat rumah, nama kantor atau sekolah, atau informasi pengenal pribadi lainnya dengan siapa pun di Juxt, dan jangan pernah membagikan informasi orang lain juga. Selain itu, jika seseorang yang anda temui di Juxt mengundang Anda untuk bertemu dengannya di dunia nyata, jangan terima. Juxt adalah komunitas daring dan tidak boleh digunakan untuk mengatur pertemuan di dunia nyata.",
+            "seventh": "Ingat, mengenal seseorang di OpenVerse tidak sama dengan mengenalnya di dunia nyata. Jangan pernah membagikan alamat email, alamat rumah, nama kantor atau sekolah, atau informasi pengenal pribadi lainnya dengan siapa pun di OpenVerse, dan jangan pernah membagikan informasi orang lain juga. Selain itu, jika seseorang yang anda temui di OpenVerse mengundang Anda untuk bertemu dengannya di dunia nyata, jangan terima. OpenVerse adalah komunitas daring dan tidak boleh digunakan untuk mengatur pertemuan di dunia nyata.",
             "second": "Postingan Dapat Dilihat di Seluruh Dunia",
-            "fifth": "Agar Juxt tetap menjadi tempat yang menyenangkan bagi semua orang, kami meminta anda untuk bersikap baik kepada pengguna lain. Bantu kami agar Juxt tetap menjadi pengalaman yang menyenangkan dengan tidak mengunggah sesuatu yang tidak pantas atau menyinggung.",
+            "fifth": "Agar OpenVerse tetap menjadi tempat yang menyenangkan bagi semua orang, kami meminta anda untuk bersikap baik kepada pengguna lain. Bantu kami agar OpenVerse tetap menjadi pengalaman yang menyenangkan dengan tidak mengunggah sesuatu yang tidak pantas atau menyinggung.",
             "tenth": "Pelanggaran Kode Etik",
-            "ninth": "Beberapa orang datang ke Juxt untuk mencari tips dan trik permainan, tetapi yang lain ingin menemukan sendiri rahasia permainan. Postingan yang mengungkap rahasia permainan atau ceritanya disebut \"spoiler.\" Jika anda memposting sesuatu tentang permainan yang mungkin merupakan spoiler, pastikan untuk mencentang kotak \"Spoiler\" sebelum mengirim postingan anda. Dengan cara ini, orang yang tidak ingin mengetahui spoiler tidak akan melihat postingan anda.",
+            "ninth": "Beberapa orang datang ke OpenVerse untuk mencari tips dan trik permainan, tetapi yang lain ingin menemukan sendiri rahasia permainan. Postingan yang mengungkap rahasia permainan atau ceritanya disebut \"spoiler.\" Jika anda memposting sesuatu tentang permainan yang mungkin merupakan spoiler, pastikan untuk mencentang kotak \"Spoiler\" sebelum mengirim postingan anda. Dengan cara ini, orang yang tidak ingin mengetahui spoiler tidak akan melihat postingan anda.",
             "twelfth": "Pernahkah Anda Memainkan Game Itu?"
         },
-        "rules": "Aturan Juxt",
+        "rules": "Aturan OpenVerse",
         "experience_text": {
             "info": "Harap beri tahu kami bagaimana Anda menggambarkan tingkat pengalaman Anda dengan gim. Anda dapat mengubah pengaturan ini nanti.",
             "intermediate": "Intermediat",
             "expert": "Pakar",
             "beginner": "Pemula"
         },
-        "ready_text": "Pertama, kunjungi beberapa komunitas dan lihat apa yang diposting orang-orang dari seluruh dunia. Manfaatkan kesempatan ini untuk mengenal Juxt lebih jauh. Anda mungkin akan menemukan beberapa hal baru di sepanjang perjalanan!",
-        "done": "Bersenang-senanglah di Juxt!",
+        "ready_text": "Pertama, kunjungi beberapa komunitas dan lihat apa yang diposting orang-orang dari seluruh dunia. Manfaatkan kesempatan ini untuk mengenal OpenVerse lebih jauh. Anda mungkin akan menemukan beberapa hal baru di sepanjang perjalanan!",
+        "done": "Bersenang-senanglah di OpenVerse!",
         "analytics": "Analytics",
-        "ready": "Siap untuk Mulai Menggunakan Juxt",
-        "info_text": "Juxt adalah komunitas game yang digerakkan oleh pengguna tempat anda dapat berinteraksi dengan orang-orang\n                di seluruh dunia. Anda dapat menulis atau menggambar postingan di komunitas game atau mengirim pesan langsung ke teman-teman anda.",
-        "analytics_text": "Juxt menggunakan Cloudflare Web Analytics untuk melacak bagaimana pengguna menggunakan layanan kami. Data yang dikumpulkan termasuk tetapi tidak terbatas pada waktu kunjungan, halaman yang dikunjungi, dan waktu yang dihabiskan di situs. Data ini tidak dikaitkan dengan Anda dengan cara apa pun, dan tidak digunakan untuk iklan oleh kami atau Cloudflare.",
-        "info": "Apa itu Juxtaposition?",
-        "title": "Penyiapan Juxtaposition"
+        "ready": "Siap untuk Mulai Menggunakan OpenVerse",
+        "info_text": "OpenVerse adalah komunitas game yang digerakkan oleh pengguna tempat anda dapat berinteraksi dengan orang-orang\n                di seluruh dunia. Anda dapat menulis atau menggambar postingan di komunitas game atau mengirim pesan langsung ke teman-teman anda.",
+        "analytics_text": "OpenVerse menggunakan Cloudflare Web Analytics untuk melacak bagaimana pengguna menggunakan layanan kami. Data yang dikumpulkan termasuk tetapi tidak terbatas pada waktu kunjungan, halaman yang dikunjungi, dan waktu yang dihabiskan di situs. Data ini tidak dikaitkan dengan Anda dengan cara apa pun, dan tidak digunakan untuk iklan oleh kami atau Cloudflare.",
+        "info": "Apa itu OpenVerse?",
+        "title": "Penyiapan OpenVerse"
     },
     "community": {
         "followers": "Pengikutas",
@@ -145,20 +145,20 @@
             "post_removed_for_reason": "Postingan Anda \"{{postId}}\" telah dihapus dengan alasan berikut: \"{{reason}}\".",
             "comment_removed": "Komentar Anda \"{{postId}}\" telah dihapus.",
             "comment_removed_for_reason": "Komentar Anda \"{{postId}}\" telah dihapus dengan alasan berikut: \"{{reason}}\".",
-            "footer": "Klik pesan ini untuk melihat Kode Etik Juxtaposition. Jika Anda memiliki pertanyaan, silakan hubungi moderator di Forum Pretendo Network ({{contactModsUrl}})."
+            "footer": "Klik pesan ini untuk melihat Kode Etik OpenVerse. Jika Anda memiliki pertanyaan, silakan hubungi moderator di Forum OpenPak ({{contactModsUrl}})."
         },
         "limited_from_posting": {
             "message": "Anda Dibatasi untuk Membuat Postingan.",
             "message_with_reason": "Anda Dibatasi untuk Membuat Postingan. Alasan: \"{{reason}}\".",
             "temporary": "Anda Dibatasi untuk Membuat Postingan hingga {{until}}.",
             "temporary_with_reason": "Anda Dibatasi untuk Membuat Postingan hingga {{until}}. Alasan: \"{{reason}}\".",
-            "footer": "Klik pesan ini untuk melihat Kode Etik Juxtaposition. Jika Anda memiliki pertanyaan, silakan hubungi moderator di Forum Pretendo Network ({{banAppealUrl}})."
+            "footer": "Klik pesan ini untuk melihat Kode Etik OpenVerse. Jika Anda memiliki pertanyaan, silakan hubungi moderator di Forum OpenPak ({{banAppealUrl}})."
         }
     },
     "new_post": {
         "post_to": "Posting ke {{user}}",
         "swearing": "Postingan tidak boleh mengandung bahasa eksplisit.",
-        "automod_error": "Postingan Anda berisi teks yang tidak diizinkan di Juxtaposition. Untuk informasi lebih lanjut, silakan kunjungi [https://preten.do/juxt-rules](https://preten.do/juxt-rules)",
+        "automod_error": "Postingan Anda berisi teks yang tidak diizinkan di OpenVerse. Untuk informasi lebih lanjut, silakan kunjungi [https://openpak.org/terms](https://openpak.org/terms)",
         "new_post_short": "Posting",
         "content_placeholder": "Bagikan pikiran Anda dalam sebuah posting ke komunitas atau kepada pengikut Anda.",
         "screenshots_coming_soon": "Tangkapan layar belum siap. Periksa lagi nanti!",
@@ -168,8 +168,8 @@
         "painting_submit": "OK"
     },
     "login": {
-        "title": "Masuk ke Juxtaposition",
-        "heading": "Masuk ke Juxtaposition",
+        "title": "Masuk ke OpenVerse",
+        "heading": "Masuk ke OpenVerse",
         "sub_title": "Masukkan detail akun Anda di bawah ini",
         "username": "Nama Pengguna",
         "password": "Kata Sandi",
@@ -210,7 +210,7 @@
     "reporting": {
         "title": "Laporkan Posting",
         "submit": "Kirim Laporan",
-        "description": "Anda akan melaporkan postingan yang melanggar Kode Etik Juxtaposition. Laporan ini hanya akan dikirim kepada Moderator Juxtaposition dan tidak kepada pembuat postingan.",
+        "description": "Anda akan melaporkan postingan yang melanggar Kode Etik OpenVerse. Laporan ini hanya akan dikirim kepada Moderator OpenVerse dan tidak kepada pembuat postingan.",
         "label": "Alasan:",
         "additional_info_placeholder": "Masukkan komentar atau informasi tambahan",
         "reason_spoiler": "Spoiler",
@@ -244,5 +244,29 @@
         "moderate_user": "Moderasi Pengguna",
         "mark_as_spoiler": "Tandai sebagai spoiler",
         "mark_as_not_spoiler": "Hapus tanda spoiler"
+    },
+    "shell": {
+        "skip": "Skip to content",
+        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "network": "Network",
+        "titles": "Titles",
+        "status": "Status",
+        "help": "Help",
+        "project": "Project",
+        "about": "About and credits",
+        "source": "Source code",
+        "community": "Community",
+        "legal_heading": "Legal",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "legal": "Legal notices"
+    },
+    "about": {
+        "title": "About OpenVerse",
+        "heading": "About OpenVerse",
+        "text": "OpenVerse is the social network of OpenPak for Wii U and 3DS. It is run by the OpenPak project and has no connection to any other network.",
+        "credits_heading": "Credits",
+        "credit": "Based on Juxtaposition by Pretendo Network (AGPL-3.0). OpenVerse is free software under the same licence.",
+        "back": "Back to sign in"
     }
 }

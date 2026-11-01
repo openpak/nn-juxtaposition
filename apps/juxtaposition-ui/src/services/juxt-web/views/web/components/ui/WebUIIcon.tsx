@@ -9,8 +9,7 @@ import devBadgeIcon from '../../assets/dev_badge.svg?raw';
 import modBadgeIcon from '../../assets/mod_badge.svg?raw';
 import starBadgeIcon from '../../assets/star_badge.svg?raw';
 import testerBadgeIcon from '../../assets/tester_badge.svg?raw';
-import juxtLogoSvg from '../../assets/juxt_logo.svg?raw';
-import pretendoLogoSvg from '../../assets/pretendo_logo.svg?raw';
+import openverseMarkSvg from '../../assets/openverse_mark.svg?raw';
 import mailIcon from '../../assets/mail.svg?raw';
 import bellIcon from '../../assets/bell.svg?raw';
 import usersIcon from '../../assets/users.svg?raw';
@@ -65,14 +64,8 @@ export function WebUIIcon(props: WebUIIconProps): ReactNode {
 	);
 }
 
-export function PretendoLogo(): ReactNode {
+export function OpenVerseMark(): ReactNode {
 	return (
-		<span dangerouslySetInnerHTML={{ __html: pretendoLogoSvg }} />
-	);
-}
-
-export function JuxtLogo(): ReactNode {
-	return (
-		<span dangerouslySetInnerHTML={{ __html: juxtLogoSvg }} />
+		<span dangerouslySetInnerHTML={{ __html: openverseMarkSvg }} />
 	);
 }

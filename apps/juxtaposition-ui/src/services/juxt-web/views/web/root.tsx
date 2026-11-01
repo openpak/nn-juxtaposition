@@ -1,4 +1,5 @@
 import cx from 'classnames';
+import { OpenPakFooter, OpenPakTopBar } from '@/services/juxt-web/views/web/components/OpenPakShell';
 import type { ReactNode } from 'react';
 
 export function DefaultHead(): ReactNode {
@@ -7,13 +8,12 @@ export function DefaultHead(): ReactNode {
 			<meta charSet="UTF-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			<link rel="manifest" href="/manifest.json" />
-			<link rel="preconnect" href="https://fonts.gstatic.com" />
-			<link
-				href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&amp;display=swap"
-				rel="stylesheet"
-			/>
 		</>
 	);
+}
+
+export function OpenVerseStyling(): ReactNode {
+	return <link rel="stylesheet" type="text/css" href="/assets/web/css/openverse.css" />;
 }
 
 type DefaultStylingType = 'normal' | 'admin';
@@ -56,9 +56,12 @@ export function WebRoot(props: HtmlProps): ReactNode {
 				<DefaultHead />
 				<DefaultStyling type={stylingType} />
 				{props.head}
+				<OpenVerseStyling />
 			</head>
 			<body>
+				<OpenPakTopBar />
 				<div id="main">{props.children}</div>
+				<OpenPakFooter />
 			</body>
 		</html>
 	);

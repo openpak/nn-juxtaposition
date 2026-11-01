@@ -56,34 +56,34 @@
         "post_to": "Įkelti į {{user}}"
     },
     "setup": {
-        "welcome": "Sveiki atvykę į Juxtaposition!",
+        "welcome": "Sveiki atvykę į OpenVerse!",
         "beta": "Įspėjimas dėl Beta versijos",
         "beta_text": {
-            "first": "Tu tuoj išbandysi pirmają Juxt beta versiją. Tai reiškia kad, dalykai gali pasikeisti betkuriuo metu.",
+            "first": "Tu tuoj išbandysi pirmają OpenVerse beta versiją. Tai reiškia kad, dalykai gali pasikeisti betkuriuo metu.",
             "second": "Tai gali apimti visišką duomenų bazės išvalymą Betos stafijos pabaigoje arba periodo metu.",
-            "third": "Svetainė, jos programinis turinys, ir visas čia rastas turinys yra paduota \"kaip yra\" ir \"kaip pasiekiama\". Pretendo tinklas nesuteikia jokių tiesioginių ar numanomų garantijų dėl svetainės, jos programinės įrangos ar bet kokio turinio tinkamumo ar tinkamumo naudoti."
+            "third": "Svetainė, jos programinis turinys, ir visas čia rastas turinys yra paduota \"kaip yra\" ir \"kaip pasiekiama\". OpenPak tinklas nesuteikia jokių tiesioginių ar numanomų garantijų dėl svetainės, jos programinės įrangos ar bet kokio turinio tinkamumo ar tinkamumo naudoti."
         },
-        "info": "Kas yra Juxtaposition?",
+        "info": "Kas yra OpenVerse?",
         "rules_text": {
-            "first": "Toliau pateikiamos kelios svarbios gairės, kaip padaryti Juxt smagia ir malonia patirtimi visiems. Juxt elgesio kodekse pateikiama išsami informacija, todėl atidžiai perskaitykite jį.",
+            "first": "Toliau pateikiamos kelios svarbios gairės, kaip padaryti OpenVerse smagia ir malonia patirtimi visiems. OpenVerse elgesio kodekse pateikiama išsami informacija, todėl atidžiai perskaitykite jį.",
             "second": "Įrašus galima matyti iš viso pasaulio",
             "fourth": "Būk malonus vienas kitam",
-            "fifth": "Kad palaikytumėm Juxt faina vieta visiems, mes prašom kad būtumėte dėmesingi vienas kitam. Padėkite mums palaikyti Juxt Faina vieta nekeldama/s kažko nepadoraus arba įžulingo.",
+            "fifth": "Kad palaikytumėm OpenVerse faina vieta visiems, mes prašom kad būtumėte dėmesingi vienas kitam. Padėkite mums palaikyti OpenVerse Faina vieta nekeldama/s kažko nepadoraus arba įžulingo.",
             "sixth": "Nekelkite asmeniškos informacijos. Nei savo nei kitų",
             "eighth": "Nekelk atkskleidžiančio turinio",
             "tenth": "Elgesio taisyklių pažeidimas",
-            "third": "Juxt turi daug žaidimo bendruomenių kur žmonės gali iš viso pasaulio pasidalinti savo mintis. Kai tu įkeli į bendruomėnę, prisimink kad visi gali tai matyti, tai prašome atsiduok save tokiu būtu, kad visi galėtų džiaugtis. Naudok logiką, ir pagalvok prieš įkeldamas. Juxt yra servisas kuris yra pasiekiamas su internetu, tai įsimink kad žmonės kurie nenaudoja Juxt gali irgi pamatyti tavo įrašus. Pridėsiu, bet kiokie komentarai palikti ant draugų įrašų bus matyti netik tavo draugų bet draugų iš viso pasaulio irgi. Prašome prisimint tai.",
-            "seventh": "Prisimink, žinodamas kažką Juxt'e nėra tas pats kas žinodamas kažką realybėje. Niekada nesidalink savo e-pašto adresu, namų adresu, darbo arba mokyklos pavadinimo,ar kitos asmeninės tapatybės atskleidimo informacijos su betkuo ant Juxt, ir niekada nesidalink kitų žmonių informacijos, Ir jei kažkas su kuriuo susitikai per Juxt pakviečia tave susitikti su tavim realybėje, nepriimk. Juxt yra internetinė bendruomenė ir jinai negali būti naudojama surengti susitikimus realybėje.",
-            "ninth": "Kai kurie žmonės ateina į Juxt kad surastų visokių patarimų ir triukų žaidimams, bet kiti nori patys atrasti žaidimo paslaptis. Įrašai kurie atskleidžia žaidimo paslaptis vadinasi \"atskleidžantis turinys.\" Jei tu keli kažką apie žaidmą kur gali kažką atskleisti, prašome užpilyti \"atskleidžiantis turinys'' dėžutę prieš įkeliant savo įrašą. Tokiu būdu, žmonės kurie nenori kad būtų atskleista kažkokia paslaptis nematytų tavo įrašo.",
+            "third": "OpenVerse turi daug žaidimo bendruomenių kur žmonės gali iš viso pasaulio pasidalinti savo mintis. Kai tu įkeli į bendruomėnę, prisimink kad visi gali tai matyti, tai prašome atsiduok save tokiu būtu, kad visi galėtų džiaugtis. Naudok logiką, ir pagalvok prieš įkeldamas. OpenVerse yra servisas kuris yra pasiekiamas su internetu, tai įsimink kad žmonės kurie nenaudoja OpenVerse gali irgi pamatyti tavo įrašus. Pridėsiu, bet kiokie komentarai palikti ant draugų įrašų bus matyti netik tavo draugų bet draugų iš viso pasaulio irgi. Prašome prisimint tai.",
+            "seventh": "Prisimink, žinodamas kažką OpenVerse'e nėra tas pats kas žinodamas kažką realybėje. Niekada nesidalink savo e-pašto adresu, namų adresu, darbo arba mokyklos pavadinimo,ar kitos asmeninės tapatybės atskleidimo informacijos su betkuo ant OpenVerse, ir niekada nesidalink kitų žmonių informacijos, Ir jei kažkas su kuriuo susitikai per OpenVerse pakviečia tave susitikti su tavim realybėje, nepriimk. OpenVerse yra internetinė bendruomenė ir jinai negali būti naudojama surengti susitikimus realybėje.",
+            "ninth": "Kai kurie žmonės ateina į OpenVerse kad surastų visokių patarimų ir triukų žaidimams, bet kiti nori patys atrasti žaidimo paslaptis. Įrašai kurie atskleidžia žaidimo paslaptis vadinasi \"atskleidžantis turinys.\" Jei tu keli kažką apie žaidmą kur gali kažką atskleisti, prašome užpilyti \"atskleidžiantis turinys'' dėžutę prieš įkeliant savo įrašą. Tokiu būdu, žmonės kurie nenori kad būtų atskleista kažkokia paslaptis nematytų tavo įrašo.",
             "thirteenth": "Jei tu keli apie žaidimą kurį žaidei į bendruomenę, tai tavo įrašai turės ženklelį indikuojantį kad tu jį žaidei.",
             "twelfth": "Ar tu žaidėi šį žaidimą?",
-            "eleventh": "Mūsų tikslas yra palaikyti Juxt faina ir malonią vietą visiems. Jeigu kažkas pažeidžia Juxt elgesio taisykles, mes imsimės atitinkamų veiksmų, ir kai kuriais atvėjais, užblokuojant vartotoją arba konsolę."
+            "eleventh": "Mūsų tikslas yra palaikyti OpenVerse faina ir malonią vietą visiems. Jeigu kažkas pažeidžia OpenVerse elgesio taisykles, mes imsimės atitinkamų veiksmų, ir kai kuriais atvėjais, užblokuojant vartotoją arba konsolę."
         },
         "analytics": "Analitika",
-        "welcome_text": "Juxt yra žaidimų bendruomenė kuri sujungia žmones iš viso pasaulio naudodamasi Mii veikėjus. Naudok Juxt kad galėtum pasidalinti savo žaidimo patirtį ir susipažinti su žmonėms iš viso pasaulio.",
-        "rules": "Juxt Taisyklės",
-        "info_text": "Juxt yra naudotojų vedama žaidimo bendruomenė kur tu gali bendrauti su žmonėmis \n                po visą pasaulį. Tu gali rašyti arba nupiešti įrašus žaidimų bendruomėnėse arba nusiūsti žinutes tiesogiai savo draugams.",
-        "ready": "Pasiruošęs pradėti naudoti Juxt",
+        "welcome_text": "OpenVerse yra žaidimų bendruomenė kuri sujungia žmones iš viso pasaulio naudodamasi Mii veikėjus. Naudok OpenVerse kad galėtum pasidalinti savo žaidimo patirtį ir susipažinti su žmonėms iš viso pasaulio.",
+        "rules": "OpenVerse Taisyklės",
+        "info_text": "OpenVerse yra naudotojų vedama žaidimo bendruomenė kur tu gali bendrauti su žmonėmis \n                po visą pasaulį. Tu gali rašyti arba nupiešti įrašus žaidimų bendruomėnėse arba nusiūsti žinutes tiesogiai savo draugams.",
+        "ready": "Pasiruošęs pradėti naudoti OpenVerse",
         "experience": "Žaidimo patirtis",
         "experience_text": {
             "info": "Prašome pasakyti kaip tu paaiškintum savo patirties lygį žaidimuose. Tu galėsi pakeisti šį nustatymą vėliau.",
@@ -91,9 +91,33 @@
             "intermediate": "Pažengęs",
             "expert": "Ekspertas"
         },
-        "analytics_text": "Juxtaposition naudoja Cloudflare analitikas kad stebėtų kaip vartotojai naudojasi mūsų servisu. Duomenys kurie yra surinkti apima bet neriboja: kada apsilankei, kokius puslapius lankei, ir laiko kiek praleidai svetainėje. Šita informacija jokais būdais nėra suasocijuojama su jumis, ir nei mes nei Cloudflare naudoja to reklaminiais tiklsais.",
-        "done": "Pasilinksmink Juxt'e!",
-        "done_button": "Eiti į Juxt!",
-        "ready_text": "Pirma peržvelk bendruomenes ir pažurėk apie ką žmonės iš viso pasaulio kelia. Pasinaudok šia galimybe kad susipažintum su Juxt. Tu gal būt atrasi kažką naujo pakelui!"
+        "analytics_text": "OpenVerse naudoja Cloudflare analitikas kad stebėtų kaip vartotojai naudojasi mūsų servisu. Duomenys kurie yra surinkti apima bet neriboja: kada apsilankei, kokius puslapius lankei, ir laiko kiek praleidai svetainėje. Šita informacija jokais būdais nėra suasocijuojama su jumis, ir nei mes nei Cloudflare naudoja to reklaminiais tiklsais.",
+        "done": "Pasilinksmink OpenVerse'e!",
+        "done_button": "Eiti į OpenVerse!",
+        "ready_text": "Pirma peržvelk bendruomenes ir pažurėk apie ką žmonės iš viso pasaulio kelia. Pasinaudok šia galimybe kad susipažintum su OpenVerse. Tu gal būt atrasi kažką naujo pakelui!"
+    },
+    "shell": {
+        "skip": "Skip to content",
+        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "network": "Network",
+        "titles": "Titles",
+        "status": "Status",
+        "help": "Help",
+        "project": "Project",
+        "about": "About and credits",
+        "source": "Source code",
+        "community": "Community",
+        "legal_heading": "Legal",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "legal": "Legal notices"
+    },
+    "about": {
+        "title": "About OpenVerse",
+        "heading": "About OpenVerse",
+        "text": "OpenVerse is the social network of OpenPak for Wii U and 3DS. It is run by the OpenPak project and has no connection to any other network.",
+        "credits_heading": "Credits",
+        "credit": "Based on Juxtaposition by Pretendo Network (AGPL-3.0). OpenVerse is free software under the same licence.",
+        "back": "Back to sign in"
     }
 }

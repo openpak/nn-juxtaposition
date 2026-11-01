@@ -12,9 +12,9 @@ const schema = z.object({
 	}).prefault({}),
 	http: z.object({
 		port: z.coerce.number().default(8080),
-		cookieDomain: z.string().default('.pretendo.network'),
+		cookieDomain: z.string().default('.openpak.org'),
 		/** "Safe" base origin for login-redirect validation */
-		baseUrl: z.string().default('https://juxt.pretendo.network'),
+		baseUrl: z.string().default('https://openverse.openpak.org'),
 		/** Configures proxy trust (X-Forwarded-For etc.). Can be `true` to unconditionally trust, or
 		 *  provide a numeric hop count, or comma-seperated CIDR ranges.
 		 *  See https://expressjs.com/en/guide/behind-proxies.html
@@ -59,9 +59,10 @@ const schema = z.object({
 		port: z.coerce.number().default(6379)
 	}),
 	domains: z.object({
-		web: z.hostname().default('juxt.pretendo.network'),
-		ctr: z.hostname().default('ctr.olv.pretendo.cc'),
-		portal: z.hostname().default('portal.olv.pretendo.cc')
+		/** Comma-separated list of hostnames that serve the web UI. */
+		web: z.string().default('openverse.openpak.org,juxt.openpak.org'),
+		ctr: z.hostname().default('ctr.olv.openpak.org'),
+		portal: z.hostname().default('portal.olv.openpak.org')
 	}).prefault({})
 });
 
@@ -71,7 +72,7 @@ export const presets = {
 			port: 5173,
 			trustProxy: 'loopback'
 		},
-		cdnDomain: 'https://cdn.pretendo.cc',
+		cdnDomain: 'https://api.olv.openpak.org/cdn',
 		whitelist: '',
 		serverEnvironment: 'prod',
 		disableConsoleChecks: true,

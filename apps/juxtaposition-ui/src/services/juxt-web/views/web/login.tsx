@@ -1,4 +1,5 @@
-import { DefaultHead } from '@/services/juxt-web/views/web/root';
+import { OpenPakFooter, OpenPakTopBar } from '@/services/juxt-web/views/web/components/OpenPakShell';
+import { DefaultHead, OpenVerseStyling } from '@/services/juxt-web/views/web/root';
 import type { ReactNode } from 'react';
 import type { HtmlProps } from '@/services/juxt-web/views/web/root';
 
@@ -7,36 +8,36 @@ export function LoginHead(): ReactNode {
 		<>
 			{/* windows/ios/chrome */}
 			<meta httpEquiv="X-UA-Compatible" content="ie=edge" />
-			<meta name="apple-mobile-web-app-title" content="Juxtaposition" />
-			<meta name="application-name" content="Juxtaposition" />
-			<meta name="msapplication-TileColor" content="#1b1f3b" />
-			<meta name="theme-color" content="#1b1f3b" />
+			<meta name="apple-mobile-web-app-title" content="OpenVerse" />
+			<meta name="application-name" content="OpenVerse" />
+			<meta name="msapplication-TileColor" content="#4f46e5" />
+			<meta name="theme-color" content="#e9ecf0" media="(prefers-color-scheme: light)" />
+			<meta name="theme-color" content="#24272d" media="(prefers-color-scheme: dark)" />
 
 			{/* open graph/embeds */}
-			<meta property="og:title" content="Juxtaposition" />
-			<meta property="og:description" content="An open source Nintendo Network replacement that aims to build custom servers for the WiiU and 3DS family of consoles" />
+			<meta property="og:title" content="OpenVerse" />
+			<meta property="og:description" content="OpenVerse is OpenPak's social network for Wii U and 3DS: communities, posts and drawings from your console." />
 			<meta property="og:type" content="website" />
-			<meta property="og:url" content="https://juxt.pretendo.network/" />
-			<meta property="og:image" content="https://pretendo.network/assets/images/opengraph/opengraph-image.png" />
-			<meta property="og:image:alt" content="Juxtaposition" />
-			<meta property="og:site_name" content="Juxtaposition" />
+			<meta property="og:url" content="https://openverse.openpak.org/" />
+			<meta property="og:image" content="https://openverse.openpak.org/assets/web/images/opengraph.png" />
+			<meta property="og:image:alt" content="OpenVerse" />
+			<meta property="og:site_name" content="OpenVerse" />
 
 			{/* twitter embeds */}
-			<meta name="twitter:url" content="https://juxt.pretendo.network/" />
+			<meta name="twitter:url" content="https://openverse.openpak.org/" />
 			<meta name="twitter:card" content="summary_large_image" />
-			<meta name="twitter:site" content="@PretendoNetwork" />
-			<meta name="twitter:title" content="Pretendo Network" />
-			<meta name="twitter:description" content="An open source Nintendo Network replacement that aims to build custom servers for the WiiU and 3DS family of consoles" />
-			<meta name="twitter:image" content="https://pretendo.network/assets/images/opengraph/opengraph-image.png" />
+			<meta name="twitter:title" content="OpenVerse" />
+			<meta name="twitter:description" content="OpenVerse is OpenPak's social network for Wii U and 3DS: communities, posts and drawings from your console." />
+			<meta name="twitter:image" content="https://openverse.openpak.org/assets/web/images/opengraph.png" />
 
 			{/* google seo */}
-			<meta name="description" content="An open source Nintendo Network replacement that aims to build custom servers for the WiiU and 3DS family of consoles" />
+			<meta name="description" content="OpenVerse is OpenPak's social network for Wii U and 3DS: communities, posts and drawings from your console." />
 			<meta name="robots" content="index, follow" />
 
 			{/* favicon */}
-			<link rel="apple-touch-icon" href="/assets/web/images/icons/icon-144x144.png" />
-			<link rel="icon" type="image/png" href="/assets/web/images/icons/icon-144x144.png" />
-			<link rel="shortcut icon" href="/assets/web/images/icons/icon-72x72.png" />
+			<link rel="apple-touch-icon" href="/assets/web/images/icons/icon-180x180.png" />
+			<link rel="icon" type="image/svg+xml" href="/assets/web/images/icons/openverse.svg" />
+			<link rel="icon" type="image/png" href="/assets/web/images/icons/icon-192x192.png" />
 
 			<link rel="stylesheet" href="/assets/web/css/login.css" />
 			<script src="/assets/web/js/login.global.js" />
@@ -51,11 +52,14 @@ export function WebLoginRoot(props: HtmlProps): ReactNode {
 				<DefaultHead />
 				<LoginHead />
 				{props.head}
+				<OpenVerseStyling />
 			</head>
 			<body>
-				<div className="main-body">
+				<OpenPakTopBar />
+				<div className="main-body" id="main">
 					{props.children}
 				</div>
+				<OpenPakFooter />
 			</body>
 		</html>
 	);

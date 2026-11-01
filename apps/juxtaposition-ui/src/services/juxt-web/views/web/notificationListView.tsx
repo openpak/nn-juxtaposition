@@ -184,7 +184,7 @@ function PostDeletedNotificationView(props: NotificationItemTypeProps<PostDelete
 					<T
 						k="notifications.post_deleted.footer"
 						values={{
-							contactModsUrl: 'https://preten.do/juxt-mods/'
+							contactModsUrl: 'https://openpak.org/help'
 						}}
 					/>
 					<span className="timestamp">
@@ -227,7 +227,7 @@ function LimitedFromPostingNotificationView(props: NotificationItemTypeProps<Lim
 					<T
 						k="notifications.limited_from_posting.footer"
 						values={{
-							banAppealUrl: 'https://preten.do/ban-appeal/'
+							banAppealUrl: 'https://openpak.org/help'
 						}}
 					/>
 					<span className="timestamp">

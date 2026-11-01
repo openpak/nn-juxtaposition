@@ -27,7 +27,7 @@ export function WebCommunityHead(props: CommunityViewProps): ReactNode {
 	const title = `Juxt - ${name}`;
 	const description = props.community.description;
 	const image = props.community.iconImagePaths['128'];
-	const communityUrl = `https://juxt.pretendo.cc/communities/${props.community.olive_community_id}/new`;
+	const communityUrl = `https://openverse.openpak.org/communities/${props.community.olive_community_id}/new`;
 
 	return (
 		<>
@@ -48,9 +48,7 @@ export function WebCommunityHead(props: CommunityViewProps): ReactNode {
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:title" content={title} />
 			<meta name="twitter:description" content={description} />
-			<meta name="twitter:site" content="@PretendoNetwork" />
 			<meta name="twitter:image" content={image} />
-			<meta name="twitter:creator" content="@PretendoNetwork" />
 		</>
 	);
 }

@@ -54,17 +54,15 @@ function PostHead(props: PostPageViewProps): ReactNode {
 			<meta property="og:type" content="article" />
 			<meta property="og:title" content={title} />
 			<meta property="og:description" content={description} />
-			<meta property="og:url" content={`https://juxt.pretendo.cc/posts/${post.id}`} />
-			<meta property="og:image" content={image ?? 'https://pretendo.network/assets/images/opengraph/opengraph-image.png'} />
-			<meta property="og:site_name" content="Juxtaposition - Pretendo Network" />
+			<meta property="og:url" content={`https://openverse.openpak.org/posts/${post.id}`} />
+			<meta property="og:image" content={image ?? 'https://openverse.openpak.org/assets/web/images/opengraph.png'} />
+			<meta property="og:site_name" content="OpenVerse - OpenPak" />
 
 			{/* Twitter Meta Tags */}
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:title" content={title} />
 			<meta name="twitter:description" content={description} />
-			<meta name="twitter:site" content="@PretendoNetwork" />
 			{image ? <meta name="twitter:image" content={image} /> : null }
-			<meta name="twitter:creator" content="@PretendoNetwork" />
 		</>
 	);
 }

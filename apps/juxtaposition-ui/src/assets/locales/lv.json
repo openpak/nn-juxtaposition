@@ -55,22 +55,22 @@
         "swearing": "Ziņojums nedrīkst saturēt necenzētu valodu."
     },
     "setup": {
-        "welcome": "Laipni lūgts Juxtaposition!",
+        "welcome": "Laipni lūgts OpenVerse!",
         "beta": "Beta brīdinājums",
-        "info": "Kas ir Juxtaposition?",
-        "rules": "Juxt noteikumi",
+        "info": "Kas ir OpenVerse?",
+        "rules": "OpenVerse noteikumi",
         "rules_text": {
             "second": "Ziņas var tikt skatītas visā pasaulē",
             "fourth": "Esi jauks pret citiem",
             "sixth": "Neraksti neviena cilvēka personīgo informāciju",
             "eighth": "Neraksti spoilerus",
             "tenth": "Uzvedības kodeksa pārkāpumi",
-            "first": "Turpmāk minētās ir svarīgas vadlīnijas, kas ir ieviestas ar mērķi padarīt Juxt par aizraujošu un baudāmu pieredzi visiem. Juxt uzvedības kodekss satur detalizētu informāciju, tādēļ lūdzu izlasiet to uzmanīgi.",
-            "third": "Juxt satur daudzas spēlētāju kopienas, kurās cilvēki no visas pasaules var dalīties ar savām domām. Kad tu raksti kopienai, atceries, ka visi var to redzēt, tādēļ, lūdzu, izpaud sevi veidā, kas visiem ir patīkams. Izmanto vispārējo saprātu, un padomā pirms raksti. Juxt ir serviss, kas ir pieejams caur internetu, tādēļ paturi prātā, ka arī cilvēki, kas neizmanto Juxt var redzēt tavas ziņas. Papildus tam, visi komentāri, ko tu raksti pie savu draugu ziņām būs redzami arī visiem citiem. Lūdzu atceries šo.",
-            "fifth": "Lai paturētu Juxt par foršu vietu visiem, mēs prasām, lai tu esi saudzīgs pret citiem lietotājiem. Palīdzi mums saglabāt Juxt patīkamu, nerakstot neko neatbilstošu vai aizvainošu.",
-            "seventh": "Atcerieties, ka zināt kādu Juxt nav tas pats, kas viņu personīgi pazīt reālajā dzīvē. Nekad nevienam neraksti savu e-pasta adresi, dzīvesvietas adresi, darba vai skolas nosaukumu vai citu personisku informāciju caur Juxt, un nekad nedalieties arī ar citu personu personīgo informāciju. Turklāt, ja kāds, ar ko esat iepazinies Juxt, aicina tevi tikties reālajā pasaulē, nepieņem to. Juxt ir tiešsaistes kopiena, un to nevajadzētu izmantot, lai organizētu reālas tikšanās.",
-            "ninth": "Daži cilvēki ierodas Juxt meklējot padomus un trikus priekš spēlēm, bet citi grib paši atklāt spēles noslēpumus. Ziņas, kas atklāj šos noslēpumus par spēli vai tās scenāriju sauc par \"spoileriem\". Ja tu raksti kaut ko, kas varētu būt spoileris, pārliecinies, ka atzīmējiet spoilera izvēles rūtiņu. Tādā veidā, cilvēki, kas nevēlas tikt spoiloti neredzēs šo ziņu.",
-            "eleventh": "Mūsu mērķis ir saglabāt Juxt par draudzīgu un patīkamu visiem. Ja kāds pārkāps Juxt rīcības kodeksu, mēs veiksim atbilstošus pasākumus, tostarp bloķēsim pārkāpēju lietotāju un/vai konsoli.",
+            "first": "Turpmāk minētās ir svarīgas vadlīnijas, kas ir ieviestas ar mērķi padarīt OpenVerse par aizraujošu un baudāmu pieredzi visiem. OpenVerse uzvedības kodekss satur detalizētu informāciju, tādēļ lūdzu izlasiet to uzmanīgi.",
+            "third": "OpenVerse satur daudzas spēlētāju kopienas, kurās cilvēki no visas pasaules var dalīties ar savām domām. Kad tu raksti kopienai, atceries, ka visi var to redzēt, tādēļ, lūdzu, izpaud sevi veidā, kas visiem ir patīkams. Izmanto vispārējo saprātu, un padomā pirms raksti. OpenVerse ir serviss, kas ir pieejams caur internetu, tādēļ paturi prātā, ka arī cilvēki, kas neizmanto OpenVerse var redzēt tavas ziņas. Papildus tam, visi komentāri, ko tu raksti pie savu draugu ziņām būs redzami arī visiem citiem. Lūdzu atceries šo.",
+            "fifth": "Lai paturētu OpenVerse par foršu vietu visiem, mēs prasām, lai tu esi saudzīgs pret citiem lietotājiem. Palīdzi mums saglabāt OpenVerse patīkamu, nerakstot neko neatbilstošu vai aizvainošu.",
+            "seventh": "Atcerieties, ka zināt kādu OpenVerse nav tas pats, kas viņu personīgi pazīt reālajā dzīvē. Nekad nevienam neraksti savu e-pasta adresi, dzīvesvietas adresi, darba vai skolas nosaukumu vai citu personisku informāciju caur OpenVerse, un nekad nedalieties arī ar citu personu personīgo informāciju. Turklāt, ja kāds, ar ko esat iepazinies OpenVerse, aicina tevi tikties reālajā pasaulē, nepieņem to. OpenVerse ir tiešsaistes kopiena, un to nevajadzētu izmantot, lai organizētu reālas tikšanās.",
+            "ninth": "Daži cilvēki ierodas OpenVerse meklējot padomus un trikus priekš spēlēm, bet citi grib paši atklāt spēles noslēpumus. Ziņas, kas atklāj šos noslēpumus par spēli vai tās scenāriju sauc par \"spoileriem\". Ja tu raksti kaut ko, kas varētu būt spoileris, pārliecinies, ka atzīmējiet spoilera izvēles rūtiņu. Tādā veidā, cilvēki, kas nevēlas tikt spoiloti neredzēs šo ziņu.",
+            "eleventh": "Mūsu mērķis ir saglabāt OpenVerse par draudzīgu un patīkamu visiem. Ja kāds pārkāps OpenVerse rīcības kodeksu, mēs veiksim atbilstošus pasākumus, tostarp bloķēsim pārkāpēju lietotāju un/vai konsoli.",
             "twelfth": "Vai tu esi spēlējis šo spēli?",
             "thirteenth": "Ja tu raksti kopienā par spēli, kuru tu esi spēlējis, tavām ziņām būs ikona, kas norāda, ka tu esi to spēlēji."
         },
@@ -81,19 +81,43 @@
             "intermediate": "Piepratējs",
             "expert": "Eksperts"
         },
-        "ready": "Gatavs sākt izmantot Juxt",
-        "ready_text": "Vispirms apskati dažas kopienas un noskaidro par ko citi cilvēki raksta. Izmanto šo iespēju, lai iepazīstinātu sevi ar Juxt. Tu pa ceļam varētu veikt jaunus atklājumus!",
-        "done": "Priecājies izmantojot Juxt servisu!",
+        "ready": "Gatavs sākt izmantot OpenVerse",
+        "ready_text": "Vispirms apskati dažas kopienas un noskaidro par ko citi cilvēki raksta. Izmanto šo iespēju, lai iepazīstinātu sevi ar OpenVerse. Tu pa ceļam varētu veikt jaunus atklājumus!",
+        "done": "Priecājies izmantojot OpenVerse servisu!",
         "done_button": "Aiziet!",
         "beta_text": {
-            "first": "Tu izmēģināsi pirmo Juxt publisko beta versiju. Tas nozīmē, ka daudz lietas vēl nav pabeigtas, un daudz, kas vēl tiks mainīts.",
-            "third": "Mājaslapa, tās programmatūra un viss tajā atrodamais saturs tiek nodrošināts pēc \"tā, kā ir\" un \"kā pieejams\" principa. Pretendo Network nesniedz nekādas garantijas - ne tiešas, ne netiešas - par tīmekļa vietnes, tās programmatūras vai jebkāda tās satura piemērotību vai lietojamību.",
+            "first": "Tu izmēģināsi pirmo OpenVerse publisko beta versiju. Tas nozīmē, ka daudz lietas vēl nav pabeigtas, un daudz, kas vēl tiks mainīts.",
+            "third": "Mājaslapa, tās programmatūra un viss tajā atrodamais saturs tiek nodrošināts pēc \"tā, kā ir\" un \"kā pieejams\" principa. OpenPak nesniedz nekādas garantijas - ne tiešas, ne netiešas - par tīmekļa vietnes, tās programmatūras vai jebkāda tās satura piemērotību vai lietojamību.",
             "second": "Tas var saturēt absolūtu datubāžu izdzēšanu beta testēšanas perioda laikā vai pēc tā."
         },
-        "info_text": "Juxt ir lietotāju vadīta spēlētāju kopiena, kurā tu vari mijiedarboties ar cilvēkiem\n                no visas pasaules. Tu vari rakstīt vai uzzīmēt ziņas spēļu kopienām vai arī sūtīt ziņas tieši draugiem.",
+        "info_text": "OpenVerse ir lietotāju vadīta spēlētāju kopiena, kurā tu vari mijiedarboties ar cilvēkiem\n                no visas pasaules. Tu vari rakstīt vai uzzīmēt ziņas spēļu kopienām vai arī sūtīt ziņas tieši draugiem.",
         "analytics": "Analītika",
-        "analytics_text": "Juxtaposition izmanto \"Cloudflare Web Analytics\", lai izsekotu, kā lietotāji izmanto mūsu pakalpojumus. Savāktie dati ietver, bet neaprobežojas ar apmeklējuma laiku, apmeklētajām lapām un vietnē pavadīto laiku. Šie dati nav nekādā veidā saistīti ar jums, un mēs vai Cloudflare tos neizmanto reklāmām.",
-        "welcome_text": "Juxt ir spēlētāju kopiena, kas savieno cilvēkus no visas pasaules, izmantojot Mii varoņus. Izmanto Juxt, lai dalītos savā spēlēšanas pieredzē un satiktu cilvēkus no visas pasaules."
+        "analytics_text": "OpenVerse izmanto \"Cloudflare Web Analytics\", lai izsekotu, kā lietotāji izmanto mūsu pakalpojumus. Savāktie dati ietver, bet neaprobežojas ar apmeklējuma laiku, apmeklētajām lapām un vietnē pavadīto laiku. Šie dati nav nekādā veidā saistīti ar jums, un mēs vai Cloudflare tos neizmanto reklāmām.",
+        "welcome_text": "OpenVerse ir spēlētāju kopiena, kas savieno cilvēkus no visas pasaules, izmantojot Mii varoņus. Izmanto OpenVerse, lai dalītos savā spēlēšanas pieredzē un satiktu cilvēkus no visas pasaules."
     },
-    "language": "Latviešu valoda"
+    "language": "Latviešu valoda",
+    "shell": {
+        "skip": "Skip to content",
+        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "network": "Network",
+        "titles": "Titles",
+        "status": "Status",
+        "help": "Help",
+        "project": "Project",
+        "about": "About and credits",
+        "source": "Source code",
+        "community": "Community",
+        "legal_heading": "Legal",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "legal": "Legal notices"
+    },
+    "about": {
+        "title": "About OpenVerse",
+        "heading": "About OpenVerse",
+        "text": "OpenVerse is the social network of OpenPak for Wii U and 3DS. It is run by the OpenPak project and has no connection to any other network.",
+        "credits_heading": "Credits",
+        "credit": "Based on Juxtaposition by Pretendo Network (AGPL-3.0). OpenVerse is free software under the same licence.",
+        "back": "Back to sign in"
+    }
 }

@@ -96,7 +96,7 @@
             "post_removed_for_reason": "Dein Beitrag „{{postId}}“ wurde aus folgendem Grund entfernt: „{{reason}}“.",
             "comment_removed": "Ihr Kommentar \"{{postId}}\" wurde entfernt.",
             "comment_removed_for_reason": "Ihr Kommentar \"{{postId}}\" wurde aus folgendem Grund entfernt: \"{{reason}}\".",
-            "footer": "Klicken Sie auf diese Nachricht, um den Verhaltenskodex von Juxtaposition anzuzeigen. Wenn Sie Fragen haben, wenden Sie sich bitte an die Moderatoren im Pretendo Network Forum ({{contactModsUrl}})."
+            "footer": "Klicken Sie auf diese Nachricht, um den Verhaltenskodex von OpenVerse anzuzeigen. Wenn Sie Fragen haben, wenden Sie sich bitte an die Moderatoren im OpenPak ({{contactModsUrl}})."
         },
         "new_empathy": {
             "message/one": "<empathy_one /> Ich habe deinen Beitrag ein Yeah gegeben!",
@@ -110,7 +110,7 @@
             "message_with_reason": "Deine Beitragsrechte wurden eingeschränkt. Grund: \"{{reason}}\".",
             "temporary": "Deine Beitragsrechte wurden bis {{until}} eingeschränkt.",
             "temporary_with_reason": "Deine Beitragsrechte wurden bis {{until}} eingeschränkt. Grund: \"{{reason}}\".",
-            "footer": "Klicken Sie auf diese Nachricht, um den Juxtaposition Verhaltenskodex anzuzeigen. Wenn Sie Fragen haben, wenden Sie sich bitte an die Moderatoren im Pretendo Network Forum ({{banAppealUrl}})."
+            "footer": "Klicken Sie auf diese Nachricht, um den OpenVerse Verhaltenskodex anzuzeigen. Wenn Sie Fragen haben, wenden Sie sich bitte an die Moderatoren im OpenPak ({{banAppealUrl}})."
         }
     },
     "new_post": {
@@ -123,32 +123,32 @@
         "spoiler_label": "Spoiler",
         "painting_close": "Abbrechen",
         "painting_submit": "OK",
-        "automod_error": "Dein Beitrag beinhaltet Text, welcher nicht auf Juxtaposition erlaubt ist. Für mehr Informationen besuche bitte https://preten.do/juxt-rules"
+        "automod_error": "Dein Beitrag beinhaltet Text, welcher nicht auf OpenVerse erlaubt ist. Für mehr Informationen besuche bitte https://openpak.org/terms"
     },
     "setup": {
-        "welcome": "Willkommen bei Juxtaposition!",
-        "welcome_text": "Juxt ist eine Gaming-Community, die Menschen aus der ganzen Welt mit Mii-Charakteren verbindet. Nutze Juxt, um deine Spielerlebnisse zu teilen und Leute aus der ganzen Welt zu treffen.",
+        "welcome": "Willkommen bei OpenVerse!",
+        "welcome_text": "OpenVerse ist eine Gaming-Community, die Menschen aus der ganzen Welt mit Mii-Charakteren verbindet. Nutze OpenVerse, um deine Spielerlebnisse zu teilen und Leute aus der ganzen Welt zu treffen.",
         "beta": "Beta-Haftungsausschluss",
         "beta_text": {
-            "first": "Willkommen zur öffentlichen Beta von Pretendo Network! Seit der ersten öffentlichen Beta hat sich einiges geändert, Juxt ist immer noch in aktiver Entwicklung und es kann sich einiges in kurzer Zeit ändern.",
+            "first": "Willkommen zur öffentlichen Beta von OpenPak! Seit der ersten öffentlichen Beta hat sich einiges geändert, OpenVerse ist immer noch in aktiver Entwicklung und es kann sich einiges in kurzer Zeit ändern.",
             "second": "Dies kann und wird eine vollständige Löschung der Datenbank am Ende oder während des Beta-Zeitraums beinhalten.",
-            "third": "Die Website, ihre Software und alle darauf enthaltenen Inhalte werden „wie besehen“ und „wie verfügbar“ bereitgestellt. Das Pretendo Network gibt keine ausdrücklichen oder stillschweigenden Garantien hinsichtlich der Eignung oder Nutzbarkeit der Website, ihrer Software oder ihres Inhalts."
+            "third": "Die Website, ihre Software und alle darauf enthaltenen Inhalte werden „wie besehen“ und „wie verfügbar“ bereitgestellt. Das OpenPak gibt keine ausdrücklichen oder stillschweigenden Garantien hinsichtlich der Eignung oder Nutzbarkeit der Website, ihrer Software oder ihres Inhalts."
         },
-        "info": "Was ist Juxtaposition?",
-        "info_text": "Juxt ist eine benutzerorientierte Gaming-Community, in der du mit Menschen\n                auf der ganzen Welt interagieren kannst. Du kannst Beiträge in Spiele-Communitys schreiben oder zeichnen oder Nachrichten direkt an deine Freunde senden.",
-        "rules": "Juxt-Regeln",
+        "info": "Was ist OpenVerse?",
+        "info_text": "OpenVerse ist eine benutzerorientierte Gaming-Community, in der du mit Menschen\n                auf der ganzen Welt interagieren kannst. Du kannst Beiträge in Spiele-Communitys schreiben oder zeichnen oder Nachrichten direkt an deine Freunde senden.",
+        "rules": "OpenVerse-Regeln",
         "rules_text": {
-            "first": "Es folgen einige wichtige Regeln, damit Juxt ein angenehmer Ort für jeden bleibt. Die Juxt-Regeln enthalten detaillierte Informationen, also lies sie bitte sorgfältig durch.",
+            "first": "Es folgen einige wichtige Regeln, damit OpenVerse ein angenehmer Ort für jeden bleibt. Die OpenVerse-Regeln enthalten detaillierte Informationen, also lies sie bitte sorgfältig durch.",
             "second": "Beiträge können auf der gesamten Welt angesehen werden",
-            "third": "Juxt enthält viele Gaming-Communitys, in denen Menschen aus aller Welt ihre Gedanken und Erfahrungen austauschen können. Denke daran, dass wenn du einen Beitrag in einer Community erstellst, dass jeder ihn sehen kann, daher drück dich bitte so aus, dass es jeder verstehen kann. Verwende deinen Verstand und denke, bevor du Beiträge postest. Juxt ist ein Dienst, auf den auch über das Internet zugegriffen werden kann. Denke also daran, dass auch Personen, die Juxt nicht verwenden, deine Beiträge sehen können. Zusätzlich, jeder Kommentar, den du unter den Beitrag deines Freundes schreibst, kann auch von anderen Personen gelesen werden.",
+            "third": "OpenVerse enthält viele Gaming-Communitys, in denen Menschen aus aller Welt ihre Gedanken und Erfahrungen austauschen können. Denke daran, dass wenn du einen Beitrag in einer Community erstellst, dass jeder ihn sehen kann, daher drück dich bitte so aus, dass es jeder verstehen kann. Verwende deinen Verstand und denke, bevor du Beiträge postest. OpenVerse ist ein Dienst, auf den auch über das Internet zugegriffen werden kann. Denke also daran, dass auch Personen, die OpenVerse nicht verwenden, deine Beiträge sehen können. Zusätzlich, jeder Kommentar, den du unter den Beitrag deines Freundes schreibst, kann auch von anderen Personen gelesen werden.",
             "fourth": "Sei nett zu anderen",
-            "fifth": "Damit Juxt ein schöner Ort für jeden bleibt, bitten wir dich, auf andere Rücksicht zu nehmen. Hilf uns, Juxt zu einem tollen Erlebnis zu machen, indem du keine unangemessenen oder anstößigen Inhalte postest.",
+            "fifth": "Damit OpenVerse ein schöner Ort für jeden bleibt, bitten wir dich, auf andere Rücksicht zu nehmen. Hilf uns, OpenVerse zu einem tollen Erlebnis zu machen, indem du keine unangemessenen oder anstößigen Inhalte postest.",
             "sixth": "Veröffentliche keine personenbezogenen Daten — deine oder andere",
-            "seventh": "Denke daran, jemanden in Juxt zu kennen, ist nicht dasselbe wie ihn im wirklichen Leben zu kennen. Gebe niemals deine E-Mail-Adresse, Privatadresse, deinen Arbeits- oder Schulnamen oder andere persönlich identifizierende Informationen an andere Personen auf Juxt weiter, und gebe auch niemals die Informationen anderer Personen weiter. Wenn dich außerdem jemand, den du in Juxt triffst, einlädt, ihn oder sie in der realen Welt zu treffen, stimme nicht zu. Juxt ist eine Online-Community und sollte nicht verwendet werden, um Treffen in der realen Welt zu arrangieren.",
+            "seventh": "Denke daran, jemanden in OpenVerse zu kennen, ist nicht dasselbe wie ihn im wirklichen Leben zu kennen. Gebe niemals deine E-Mail-Adresse, Privatadresse, deinen Arbeits- oder Schulnamen oder andere persönlich identifizierende Informationen an andere Personen auf OpenVerse weiter, und gebe auch niemals die Informationen anderer Personen weiter. Wenn dich außerdem jemand, den du in OpenVerse triffst, einlädt, ihn oder sie in der realen Welt zu treffen, stimme nicht zu. OpenVerse ist eine Online-Community und sollte nicht verwendet werden, um Treffen in der realen Welt zu arrangieren.",
             "eighth": "Poste keine Spoiler",
-            "ninth": "Manche Leute kommen zu Juxt, um Tipps und Tricks für Spiele zu finden, andere möchten die Geheimnisse eines Spiels ganz alleine entdecken. Beiträge, die Geheimnisse eines Spiels oder seiner Geschichte preisgeben, werden als \"Spoiler\" bezeichnet. Wenn du etwas über ein Spiel postest, was möglicherweise ein Spoiler ist, aktiviere das Kontrollkästchen Spoiler, bevor du deinen Beitrag sendest. Auf diese Weise werden Personen, die nicht gespoilert werden möchten, deinen Beitrag nicht sehen.",
+            "ninth": "Manche Leute kommen zu OpenVerse, um Tipps und Tricks für Spiele zu finden, andere möchten die Geheimnisse eines Spiels ganz alleine entdecken. Beiträge, die Geheimnisse eines Spiels oder seiner Geschichte preisgeben, werden als \"Spoiler\" bezeichnet. Wenn du etwas über ein Spiel postest, was möglicherweise ein Spoiler ist, aktiviere das Kontrollkästchen Spoiler, bevor du deinen Beitrag sendest. Auf diese Weise werden Personen, die nicht gespoilert werden möchten, deinen Beitrag nicht sehen.",
             "tenth": "Verstöße gegen den Verhaltenskodex",
-            "eleventh": "Unser Ziel ist es, dass Juxt allen Spaß macht. Für den Fall, dass jemand gegen den Juxt-Verhaltenskodex verstößt, werden wir geeignete Maßnahmen ergreifen, bis hin zur Sperrung des beleidigenden Benutzers oder dessen Konsole.",
+            "eleventh": "Unser Ziel ist es, dass OpenVerse allen Spaß macht. Für den Fall, dass jemand gegen den OpenVerse-Verhaltenskodex verstößt, werden wir geeignete Maßnahmen ergreifen, bis hin zur Sperrung des beleidigenden Benutzers oder dessen Konsole.",
             "twelfth": "Hast du dieses Spiel gespielt?",
             "thirteenth": "Wenn du in der Community für ein Spiel postest, das du gespielt hast, werden deine Beiträge mit einem Symbol angezeigt, das zeigt, dass du es gespielt hast."
         },
@@ -160,16 +160,16 @@
             "expert": "Experte"
         },
         "analytics": "Analytics",
-        "analytics_text": "Juxtaposition verwendet Cloudflare Web Analytics, um herauszufinden, wie unser Service verwendet wird. Die gesammelten Daten enthalten unter anderem: Besuchszeit, besuchte Seiten und Zeit, die auf der Webseite verbracht wurde. Diese Daten werden nicht mit dir in Verbindung gebracht und auch nicht für Werbezwecke von Juxt oder Cloudflare verwendet.",
-        "ready": "Bereit zur Nutzung von Juxt",
-        "ready_text": "Schaue dir zuerst einige Communitys an und sehe, worüber Menschen aus der ganzen Welt posten. Nutze diese Gelegenheit, um dich mit Juxt vertraut zu machen. Vielleicht machst du unterwegs neue Entdeckungen!",
-        "done": "Viel Spaß mit Juxt!",
+        "analytics_text": "OpenVerse verwendet Cloudflare Web Analytics, um herauszufinden, wie unser Service verwendet wird. Die gesammelten Daten enthalten unter anderem: Besuchszeit, besuchte Seiten und Zeit, die auf der Webseite verbracht wurde. Diese Daten werden nicht mit dir in Verbindung gebracht und auch nicht für Werbezwecke von OpenVerse oder Cloudflare verwendet.",
+        "ready": "Bereit zur Nutzung von OpenVerse",
+        "ready_text": "Schaue dir zuerst einige Communitys an und sehe, worüber Menschen aus der ganzen Welt posten. Nutze diese Gelegenheit, um dich mit OpenVerse vertraut zu machen. Vielleicht machst du unterwegs neue Entdeckungen!",
+        "done": "Viel Spaß mit OpenVerse!",
         "done_button": "Los geht's!",
-        "title": "Juxtaposition einrichten"
+        "title": "OpenVerse einrichten"
     },
     "login": {
-        "title": "Juxtaposition Einloggen",
-        "heading": "Juxtaposition Anmelden",
+        "title": "OpenVerse Einloggen",
+        "heading": "OpenVerse Anmelden",
         "sub_title": "Geben Sie unten Ihre Kontodaten ein",
         "username": "Benutzername",
         "password": "Passwort",
@@ -210,7 +210,7 @@
     "reporting": {
         "title": "Beitrag melden",
         "submit": "Meldung senden",
-        "description": "Du bist dabei, einen Beitrag zu melden, dessen Inhalt gegen den Juxtaposition-Verhaltenskodex verstößt. Dieser Bericht wird nur an die Moderatoren von Juxtaposition gesendet und nicht an den Ersteller des Beitrags.",
+        "description": "Du bist dabei, einen Beitrag zu melden, dessen Inhalt gegen den OpenVerse-Verhaltenskodex verstößt. Dieser Bericht wird nur an die Moderatoren von OpenVerse gesendet und nicht an den Ersteller des Beitrags.",
         "label": "Grund:",
         "additional_info_placeholder": "Zusätzliche Kommentare oder Informationen eingeben",
         "reason_spoiler": "Spoiler",
@@ -244,5 +244,29 @@
         "moderate_user": "Nutzer moderieren",
         "mark_as_spoiler": "Als Spoiler markieren",
         "mark_as_not_spoiler": "Spoiler entfernen"
+    },
+    "shell": {
+        "skip": "Zum Inhalt springen",
+        "tagline": "OpenVerse ist das soziale Netzwerk von OpenPak für Wii U und 3DS: Communities, Beiträge und Zeichnungen von deiner Konsole.",
+        "network": "Netzwerk",
+        "titles": "Titel",
+        "status": "Status",
+        "help": "Hilfe",
+        "project": "Projekt",
+        "about": "Über und Danksagungen",
+        "source": "Quellcode",
+        "community": "Community",
+        "legal_heading": "Rechtliches",
+        "terms": "Nutzungsbedingungen",
+        "privacy": "Datenschutz",
+        "legal": "Rechtliche Hinweise"
+    },
+    "about": {
+        "title": "Über OpenVerse",
+        "heading": "Über OpenVerse",
+        "text": "OpenVerse ist das soziale Netzwerk von OpenPak für Wii U und 3DS. Es wird vom OpenPak-Projekt betrieben und hat keine Verbindung zu einem anderen Netzwerk.",
+        "credits_heading": "Danksagungen",
+        "credit": "Basierend auf Juxtaposition von Pretendo Network (AGPL-3.0). OpenVerse ist freie Software unter derselben Lizenz.",
+        "back": "Zurück zur Anmeldung"
     }
 }

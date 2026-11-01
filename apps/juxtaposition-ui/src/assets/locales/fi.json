@@ -1,13 +1,13 @@
 {
     "setup": {
         "beta_text": {
-            "first": "Olet aloittamassa Juxtin julkisen betaversion kokeilemisen. Tämä tarkoittaa sitä, että toiminnallisuudesta puuttuu yhä osia ja kerralla voi tapahtua suuriakin muutoksia.",
+            "first": "Olet aloittamassa OpenVersein julkisen betaversion kokeilemisen. Tämä tarkoittaa sitä, että toiminnallisuudesta puuttuu yhä osia ja kerralla voi tapahtua suuriakin muutoksia.",
             "second": "Tämä voi hyvin mahdollisesti sisältää tietokannan täyden tyhjentämisen betavaiheen aikana tai sen päätyttyä.",
-            "third": "Tämä sivusto, sen ohjelmistot ja kaikki sisältö tarjotaan \"sellaisenaan\" ja \"kulloisenkin saatavuuden\" perusteella. Pretendo Network ei myönnä minkäänlaisia takuita sivuston, ohjelmistojen tai sisällön sopivuudesta tai käyttökelpoisuudesta."
+            "third": "Tämä sivusto, sen ohjelmistot ja kaikki sisältö tarjotaan \"sellaisenaan\" ja \"kulloisenkin saatavuuden\" perusteella. OpenPak ei myönnä minkäänlaisia takuita sivuston, ohjelmistojen tai sisällön sopivuudesta tai käyttökelpoisuudesta."
         },
-        "info": "Mikä on Juxtaposition?",
-        "rules": "Juxtin säännöt",
-        "welcome": "Tervetuloa Juxtapositioniin!",
+        "info": "Mikä on OpenVerse?",
+        "rules": "OpenVersein säännöt",
+        "welcome": "Tervetuloa OpenVerseiin!",
         "beta": "Betatestin vastuuvapauslauseke",
         "rules_text": {
             "second": "Kirjoituksia voidaan lukea kaikkialta maailmasta",
@@ -16,13 +16,13 @@
             "eighth": "Älä spoilaa",
             "twelfth": "Oletko pelannut tätä peliä?",
             "thirteenth": "Kun kirjoitat sellaisen pelin yhteisöön, jota olet pelannut, viesteissäsi on kuvake ilmaisemassa että olet pelannut kyseistä peliä.",
-            "third": "Juxtissa on monia peliyhteisöjä, joissa ihmiset ympäri maapallon voivat jakaa ajatuksiaan. Kirjoittaessasi yhteisöön, muista että kuka tahansa voi nähdä sen, joten ilmaise itseäsi siten, että kukaan ei pahastu. Käytä maalaisjärkeä ja ajattele ennen viestisi lähettämistä. Juxtin sisältö on myös julkisesti nähtävillä Internetissä, joten pidä mielessä, että viestisi ovat myös niiden nähtävillä, jotka eivät käytä Juxtia. Lisäksi kommenttisi ystäviesi kirjoituksiin ovat kaikkien nähtävissä, ei ainoastaan ystäviesi. Pidä tämä mielessä.",
-            "fifth": "Pitääksesi Juxtin mukavana paikka kaikille, pyydämme sinua huomioimaan toisten käyttäjien tunteet. Auta pitämään Juxt nautittavana välttämällä sopimattomia tai loukkaavia kirjoituksia.",
-            "seventh": "Muista, että Juxt-tuttavuus ei tarkoita tuttavuutta reaalielämässä. Älä jaa omaa tai kenenkään muun sähköposti- tai kotiosoitetta, työpaikan tai oppilaitoksen nimeä tai muuta tunnistetietoa kenellekään Juxtissa. Lisäksi jos joku Juxtissa tapaamasi pyytää tapaamista reaalielämässä, älä hyväksy pyyntöä. Juxt on verkkoyhteisö ja sitä ei pidä käyttää tapaamisten reaalielämässä sopimiseen.",
+            "third": "OpenVerseissa on monia peliyhteisöjä, joissa ihmiset ympäri maapallon voivat jakaa ajatuksiaan. Kirjoittaessasi yhteisöön, muista että kuka tahansa voi nähdä sen, joten ilmaise itseäsi siten, että kukaan ei pahastu. Käytä maalaisjärkeä ja ajattele ennen viestisi lähettämistä. OpenVersein sisältö on myös julkisesti nähtävillä Internetissä, joten pidä mielessä, että viestisi ovat myös niiden nähtävillä, jotka eivät käytä OpenVerseia. Lisäksi kommenttisi ystäviesi kirjoituksiin ovat kaikkien nähtävissä, ei ainoastaan ystäviesi. Pidä tämä mielessä.",
+            "fifth": "Pitääksesi OpenVersein mukavana paikka kaikille, pyydämme sinua huomioimaan toisten käyttäjien tunteet. Auta pitämään OpenVerse nautittavana välttämällä sopimattomia tai loukkaavia kirjoituksia.",
+            "seventh": "Muista, että OpenVerse-tuttavuus ei tarkoita tuttavuutta reaalielämässä. Älä jaa omaa tai kenenkään muun sähköposti- tai kotiosoitetta, työpaikan tai oppilaitoksen nimeä tai muuta tunnistetietoa kenellekään OpenVerseissa. Lisäksi jos joku OpenVerseissa tapaamasi pyytää tapaamista reaalielämässä, älä hyväksy pyyntöä. OpenVerse on verkkoyhteisö ja sitä ei pidä käyttää tapaamisten reaalielämässä sopimiseen.",
             "tenth": "Käytössääntörikkomukset",
-            "ninth": "Jotkut tulevat Juxtiin etsien vihjeitä ja vinkkejä peleihin, mutta toiset haluavat löytää pelien salaisuudet itsenäisesti. Viestejä, jotka paljastavat pelin tai sen tarinan salaisuuksia kutsutaan \"spoilereiksi\". Jos olet kirjoittamassa pelistä jotain, joka voidaan kokea spoilerina, muista rastittaa \"Spoileri\" ruutu ennen viestin lähettämistä. Täten varmistat ettei spoilereita välttävät näe viestiäsi.",
-            "first": "Seuraavana tulee joitain tärkeitä sääntöjä, joilla Juxt pysyy hauskana ja nautinnollisena kokemuksena käyttäjilleen. Juxtin käytössäännöt (CoC) sisältää yksityiskohtaista informaatiota, joten luethan sen tarkasti.",
-            "eleventh": "Haluamme pitää Juxtin hauskana ja nautinnollisena kaikille. Jonkun rikkoessa Juxtin käytössääntöjä, puutumme asiaan, aina käyttäjätilin ja konsolin estämiseen palvelusta saakka."
+            "ninth": "Jotkut tulevat OpenVerseiin etsien vihjeitä ja vinkkejä peleihin, mutta toiset haluavat löytää pelien salaisuudet itsenäisesti. Viestejä, jotka paljastavat pelin tai sen tarinan salaisuuksia kutsutaan \"spoilereiksi\". Jos olet kirjoittamassa pelistä jotain, joka voidaan kokea spoilerina, muista rastittaa \"Spoileri\" ruutu ennen viestin lähettämistä. Täten varmistat ettei spoilereita välttävät näe viestiäsi.",
+            "first": "Seuraavana tulee joitain tärkeitä sääntöjä, joilla OpenVerse pysyy hauskana ja nautinnollisena kokemuksena käyttäjilleen. OpenVersein käytössäännöt (CoC) sisältää yksityiskohtaista informaatiota, joten luethan sen tarkasti.",
+            "eleventh": "Haluamme pitää OpenVersein hauskana ja nautinnollisena kaikille. Jonkun rikkoessa OpenVersein käytössääntöjä, puutumme asiaan, aina käyttäjätilin ja konsolin estämiseen palvelusta saakka."
         },
         "experience": "Kokeneisuus pelaajana",
         "experience_text": {
@@ -32,13 +32,13 @@
             "beginner": "Aloittelija"
         },
         "analytics": "analytiikka",
-        "done": "Pidä hauskaa Juxtissa!",
-        "welcome_text": "Juxt on maailmanlaajuinen pelaajayhteisö joka käyttää Mii -hahmoja. Jaa pelikokemuksesi ja tapaa ihmisiä ympäri maapalloa Juxtin kautta.",
-        "ready": "Valmiina Juxtin käyttöön",
-        "analytics_text": "Juxtaposition käyttää Cloudflare analytiikkaa seuratakseen miten käyttäjät käyttävät palveluamme. Kerätty tieto sisältää, mutta ei ole rajoitettu seuraaviin: käyntiaika, vieraillut sivut ja sivustolla vietetty aika. Cloudflare mukaan tietoa ei ole kytketty mitenkään sinuun ja sitä ei käytetä palvelumme tai Cloudflare tarjoamiin mainoksiin.",
-        "ready_text": "Aluksi tutustu joihinkin yhteisöihin katsoaksesi mitä ihmiset ympäri maailman keskustelevat. Käytä tätä hyväksesi tutustuaksesi Juxtiin paremmin. Saatat jopa löytää uusia asioita tätä kautta!",
+        "done": "Pidä hauskaa OpenVerseissa!",
+        "welcome_text": "OpenVerse on maailmanlaajuinen pelaajayhteisö joka käyttää Mii -hahmoja. Jaa pelikokemuksesi ja tapaa ihmisiä ympäri maapalloa OpenVersein kautta.",
+        "ready": "Valmiina OpenVersein käyttöön",
+        "analytics_text": "OpenVerse käyttää Cloudflare analytiikkaa seuratakseen miten käyttäjät käyttävät palveluamme. Kerätty tieto sisältää, mutta ei ole rajoitettu seuraaviin: käyntiaika, vieraillut sivut ja sivustolla vietetty aika. Cloudflare mukaan tietoa ei ole kytketty mitenkään sinuun ja sitä ei käytetä palvelumme tai Cloudflare tarjoamiin mainoksiin.",
+        "ready_text": "Aluksi tutustu joihinkin yhteisöihin katsoaksesi mitä ihmiset ympäri maailman keskustelevat. Käytä tätä hyväksesi tutustuaksesi OpenVerseiin paremmin. Saatat jopa löytää uusia asioita tätä kautta!",
         "done_button": "Aloitetaan!",
-        "info_text": "Juxt on käyttäjälähtöinen pelaajayhteisö, jossa voit olla vuorovaikutuksessa ihmisten kanssa ympäri maailman.\nVoit kirjoittaa tai piirtää viestejä peliyhteisöihin tai lähettää viestejä suoraan ystävillesi."
+        "info_text": "OpenVerse on käyttäjälähtöinen pelaajayhteisö, jossa voit olla vuorovaikutuksessa ihmisten kanssa ympäri maailman.\nVoit kirjoittaa tai piirtää viestejä peliyhteisöihin tai lähettää viestejä suoraan ystävillesi."
     },
     "global": {
         "activity_feed": "Aktiviteetit",
@@ -95,5 +95,29 @@
     "new_post": {
         "post_to": "Vastaa {{user}}",
         "swearing": "Kirjoitus ei saa sisältää rivoa kielenkäyttöä."
+    },
+    "shell": {
+        "skip": "Skip to content",
+        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "network": "Network",
+        "titles": "Titles",
+        "status": "Status",
+        "help": "Help",
+        "project": "Project",
+        "about": "About and credits",
+        "source": "Source code",
+        "community": "Community",
+        "legal_heading": "Legal",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "legal": "Legal notices"
+    },
+    "about": {
+        "title": "About OpenVerse",
+        "heading": "About OpenVerse",
+        "text": "OpenVerse is the social network of OpenPak for Wii U and 3DS. It is run by the OpenPak project and has no connection to any other network.",
+        "credits_heading": "Credits",
+        "credit": "Based on Juxtaposition by Pretendo Network (AGPL-3.0). OpenVerse is free software under the same licence.",
+        "back": "Back to sign in"
     }
 }

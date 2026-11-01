@@ -1,5 +1,5 @@
 import { WebLoginRoot } from '@/services/juxt-web/views/web/login';
-import { PretendoLogo } from '@/services/juxt-web/views/web/components/ui/WebUIIcon';
+import { OpenVerseMark } from '@/services/juxt-web/views/web/components/ui/WebUIIcon';
 import { T } from '@/services/juxt-web/views/common/components/T';
 import type { ReactNode } from 'react';
 
@@ -18,8 +18,8 @@ export function WebLoginView(props: LoginViewProps): ReactNode {
 			</div>
 			<div className="wrapper">
 				<div className="account-form-wrapper">
-					<a className="logotype" href="https://pretendo.network">
-						<PretendoLogo />
+					<a className="logotype" href="/">
+						<OpenVerseMark />OpenVerse
 					</a>
 					<form action="/login" method="post" className="account">
 						<h2><T k="login.heading" /></h2>
@@ -31,12 +31,12 @@ export function WebLoginView(props: LoginViewProps): ReactNode {
 						<div>
 							<label htmlFor="password"><T k="login.password" /></label>
 							<input name="password" id="password" type="password" required />
-							<a href="https://pretendo.network/account/forgot-password" className="pwdreset"><T k="login.forgot_password" /></a>
+							<a href="https://openpak.org/forgot-password" className="pwdreset"><T k="login.forgot_password" /></a>
 						</div>
 						<input name="grant_type" id="grant_type" type="hidden" value="password" />
 						<div className="buttons">
 							<button type="submit"><T k="login.login_action" /></button>
-							<a href="https://pretendo.network/account/register" className="register"><T k="login.no_account" /></a>
+							<a href="https://openpak.org/register" className="register"><T k="login.no_account" /></a>
 						</div>
 						<input type="hidden" name="redirect" value={props.redirect ?? '/'} />
 					</form>

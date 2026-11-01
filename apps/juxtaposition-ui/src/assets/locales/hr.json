@@ -86,30 +86,30 @@
         "content_placeholder": "Dijeli svoje misli u objavi sa zajednicom ili sa svojim pratiteljima.",
         "screenshots_coming_soon": "Snimke ekrana još nisu spremne. Navrati kasnije!",
         "spoiler_label": "Spoiler",
-        "automod_error": "Tvoja objava sadrži tekst koji nije dopušten na Juxtapositionu. Za više informacija posjeti https://preten.do/juxt-rules"
+        "automod_error": "Tvoja objava sadrži tekst koji nije dopušten na OpenVerseu. Za više informacija posjeti https://openpak.org/terms"
     },
     "setup": {
-        "welcome": "Dobro došli u Juxtaposition!",
+        "welcome": "Dobro došli u OpenVerse!",
         "beta": "Odricanje odgovornosti za beta izdanje",
         "beta_text": {
-            "first": "Isprobavaš prvu javnu Juxt beta verziju. To znači da će vjerojatno biti još puno promjena.",
+            "first": "Isprobavaš prvu javnu OpenVerse beta verziju. To znači da će vjerojatno biti još puno promjena.",
             "second": "To može uključivati potpuno brisanje baze podataka na kraju ili tijekom razvoja beta verzije.",
-            "third": "Web stranica, softver i sav sadržaj pružaju se na osnovi „kao što je” i „kao što je dostupno”. Mreža Pretendo ne jamči, bilo izričito ili implicirano, prikladnost ili upotrebljivost web stranice, softvera ili bilo kojeg njenog sadržaja."
+            "third": "Web stranica, softver i sav sadržaj pružaju se na osnovi „kao što je” i „kao što je dostupno”. Mreža OpenPak ne jamči, bilo izričito ili implicirano, prikladnost ili upotrebljivost web stranice, softvera ili bilo kojeg njenog sadržaja."
         },
-        "info": "Što je Juxtaposition?",
-        "welcome_text": "Juxt je zajednica za igranje koja povezuje ljude iz cijelog svijeta koristeći Mii likove. Koristi Juxt za dijeljenje tvojih iskustva igranja i upoznaj ljude iz cijelog svijeta.",
-        "info_text": "Juxt je korisnički vođena zajednica za igranje u kojoj možeš komunicirati s ljudima\n                diljem svijeta. U zajednicama igara možeš pisati i crtati objave ili slati poruke izravno svojim prijateljima.",
+        "info": "Što je OpenVerse?",
+        "welcome_text": "OpenVerse je zajednica za igranje koja povezuje ljude iz cijelog svijeta koristeći Mii likove. Koristi OpenVerse za dijeljenje tvojih iskustva igranja i upoznaj ljude iz cijelog svijeta.",
+        "info_text": "OpenVerse je korisnički vođena zajednica za igranje u kojoj možeš komunicirati s ljudima\n                diljem svijeta. U zajednicama igara možeš pisati i crtati objave ili slati poruke izravno svojim prijateljima.",
         "rules_text": {
             "sixth": "Nemoj objavljivati osobne podatke – vlastite ili drugih osoba",
-            "third": "Juxt sadrži mnoge zajednice za igranje u kojima ljudi iz cijelog svijeta mogu podijeliti svoja razmišljanja. Kada šalješ obavijesti, imaj na umu da to svi mogu vidjeti, stoga se izrazi na pristojan način. Koristi zdrav razum i razmisli prije slanja objave. Juxt je usluga kojoj se također može pristupiti s interneta, stoga imaj na umu da osobe koje ne koriste Juxt također mogu vidjeti tvoje objave. Osim toga, svu tvoji komentari na objave tvojih prijatelja vidjet će ne samo tvoji prijatelji, već i ljudi diljem svijeta.",
-            "seventh": "Poznavati nekoga u Juxtu nije isto kao poznati osobu u stvarnom životu. Nikada nemoj dijeliti tvoju e-mail adresu, kućnu adresu, naziv posla ili škole ili druge osobne podatke s bilo kim na Juxtu. Također nemoj dijeliti tuđe podatke. Osim toga, ako te netko koga upoznaš u Juxtu pozove da ga upoznaš u stvarnom svijetu, nemoj prihvatiti poziv. Juxt je internetska zajednica i ne bi se trebala koristiti za organiziranje susreta u stvarnom svijetu.",
+            "third": "OpenVerse sadrži mnoge zajednice za igranje u kojima ljudi iz cijelog svijeta mogu podijeliti svoja razmišljanja. Kada šalješ obavijesti, imaj na umu da to svi mogu vidjeti, stoga se izrazi na pristojan način. Koristi zdrav razum i razmisli prije slanja objave. OpenVerse je usluga kojoj se također može pristupiti s interneta, stoga imaj na umu da osobe koje ne koriste OpenVerse također mogu vidjeti tvoje objave. Osim toga, svu tvoji komentari na objave tvojih prijatelja vidjet će ne samo tvoji prijatelji, već i ljudi diljem svijeta.",
+            "seventh": "Poznavati nekoga u OpenVerse nije isto kao poznati osobu u stvarnom životu. Nikada nemoj dijeliti tvoju e-mail adresu, kućnu adresu, naziv posla ili škole ili druge osobne podatke s bilo kim na OpenVerse. Također nemoj dijeliti tuđe podatke. Osim toga, ako te netko koga upoznaš u OpenVerse pozove da ga upoznaš u stvarnom svijetu, nemoj prihvatiti poziv. OpenVerse je internetska zajednica i ne bi se trebala koristiti za organiziranje susreta u stvarnom svijetu.",
             "eighth": "Nemoj objavljivati tajne igre",
             "ninth": "Neki ljudi traže savjete i trikove za igre, drugi žele otkriti tajne igre samostalno. Objave koje otkrivaju tajne igre ili njezinu priču nazivaju se „spojleri”. Ako objavljuješ nešto o igri koja bi mogla biti spojler, prije slanja označi kvadratić spojlera. Na taj način, ljudi koji ne žele spojlere neće vidjeti tvoju objavu.",
             "tenth": "Kršenja kodeksa ponašanja",
-            "eleventh": "Želimo da Juxt bude zabavan i ugodan za sve. U slučaju da netko prekrši kodeks ponašanja Juxta, poduzet ćemo odgovarajuće mjere, sve do blokiranja korisnika ili njegove konzole.",
+            "eleventh": "Želimo da OpenVerse bude zabavan i ugodan za sve. U slučaju da netko prekrši kodeks ponašanja OpenVersea, poduzet ćemo odgovarajuće mjere, sve do blokiranja korisnika ili njegove konzole.",
             "twelfth": "Jesi li igrao/la tu igru?",
             "thirteenth": "Ako u zajednici objavljuješ igru koju si igrao/la, tvoje će objave dobiti ikonu koja ukazuje na to da si je igralo/la.",
-            "first": "Slijede neke važne smjernice za stvaranje zabavnog i ugodnog iskustva za sve. Kodeks ponašanja Juxta sadrži detaljne informacije, pa ih pažljivo pročitaj.",
+            "first": "Slijede neke važne smjernice za stvaranje zabavnog i ugodnog iskustva za sve. Kodeks ponašanja OpenVersea sadrži detaljne informacije, pa ih pažljivo pročitaj.",
             "second": "Objave se mogu prikazati širom svijeta",
             "fourth": "Budite uljudni jedni prema drugima",
             "fifth": "Kako bismo održali zabavno mjesto za sve, budite uljudni jedni prema drugima. Pomognite nam zadržati ugodno iskustvo ne objavljujući ništa što je neprimjereno ili uvredljivo."
@@ -122,21 +122,21 @@
             "expert": "Profesionalac"
         },
         "analytics": "Analitika",
-        "analytics_text": "Juxtaposition koristi Cloudflare Web Analytics kako bi pratio način na koji korisnici koriste našu uslugu. Prikupljeni podaci uključuju, ali nisu ograničeni na vrijeme posjete, posjećene stranice i provedeno vrijeme na web stranici. Ovi podaci nisu na nikoji način s tobom povezani i mi niti Cloudflare ih ne koristimo za oglase.",
-        "ready": "Sve je spremno za početak korištenja Juxta",
-        "ready_text": "Najprije pogledaj neke zajednice i vidi što ljudi iz cijelog svijeta objavljuju. Iskoristi ovu priliku da upoznaš Juxt. Možda ćeš otkriti nešto novo!",
-        "done": "Uživaj u Juxtu!",
+        "analytics_text": "OpenVerse koristi Cloudflare Web Analytics kako bi pratio način na koji korisnici koriste našu uslugu. Prikupljeni podaci uključuju, ali nisu ograničeni na vrijeme posjete, posjećene stranice i provedeno vrijeme na web stranici. Ovi podaci nisu na nikoji način s tobom povezani i mi niti Cloudflare ih ne koristimo za oglase.",
+        "ready": "Sve je spremno za početak korištenja OpenVersea",
+        "ready_text": "Najprije pogledaj neke zajednice i vidi što ljudi iz cijelog svijeta objavljuju. Iskoristi ovu priliku da upoznaš OpenVerse. Možda ćeš otkriti nešto novo!",
+        "done": "Uživaj u OpenVerse!",
         "done_button": "Krenimo!",
-        "rules": "Juxt pravila",
-        "title": "Postavljanje Juxtapositiona"
+        "rules": "OpenVerse pravila",
+        "title": "Postavljanje OpenVersea"
     },
     "language": "Hrvatski",
     "activity_feed": {
         "empty": "Ovdje je prazno. Pokušaj nekoga pratiti!"
     },
     "login": {
-        "title": "Juxtaposition prijava",
-        "heading": "Juxtaposition prijava",
+        "title": "OpenVerse prijava",
+        "heading": "OpenVerse prijava",
         "sub_title": "Dolje unesi podatke o svom računu",
         "username": "Korisničko ime",
         "password": "Lozinka",
@@ -171,7 +171,7 @@
     "reporting": {
         "title": "Prijavi objavu",
         "submit": "Pošalji prijavu",
-        "description": "Prijavit ćeš objavu sa sadržajem koji krši kodeks ponašanja za Juxtaposition. Ova prijava će se poslati administratorima Juxtapositiona, a ne autoru objave.",
+        "description": "Prijavit ćeš objavu sa sadržajem koji krši kodeks ponašanja za OpenVerse. Ova prijava će se poslati administratorima OpenVersea, a ne autoru objave.",
         "label": "Razlog:",
         "additional_info_placeholder": "Unesi dodatne komentare ili informacije",
         "reason_personal_info": "Osobne informacije",
@@ -190,5 +190,29 @@
         "title": "Moderacija",
         "silently_delete_post": "Tiho brisanje",
         "moderate_user": "Moderiraj korisnika"
+    },
+    "shell": {
+        "skip": "Skip to content",
+        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "network": "Network",
+        "titles": "Titles",
+        "status": "Status",
+        "help": "Help",
+        "project": "Project",
+        "about": "About and credits",
+        "source": "Source code",
+        "community": "Community",
+        "legal_heading": "Legal",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "legal": "Legal notices"
+    },
+    "about": {
+        "title": "About OpenVerse",
+        "heading": "About OpenVerse",
+        "text": "OpenVerse is the social network of OpenPak for Wii U and 3DS. It is run by the OpenPak project and has no connection to any other network.",
+        "credits_heading": "Credits",
+        "credit": "Based on Juxtaposition by Pretendo Network (AGPL-3.0). OpenVerse is free software under the same licence.",
+        "back": "Back to sign in"
     }
 }

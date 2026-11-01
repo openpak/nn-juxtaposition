@@ -1,0 +1,106 @@
+/* OpenVerse web theme. Loaded after web.css / login.css / admin.css and maps the
+ * old palette variables onto openpak.org's "console system UI" tokens (grey shell,
+ * indigo links, cyan only for focus, no gradients), light and dark.
+ * Web pages only: the console (portal/ctr) views have their own stylesheets. */
+@font-face { font-family: "M PLUS Rounded 1c"; font-weight: 500; font-display: swap; src: url(/assets/web/fonts/mplus-rounded-500.woff2) format("woff2"); }
+@font-face { font-family: "M PLUS Rounded 1c"; font-weight: 700; font-display: swap; src: url(/assets/web/fonts/mplus-rounded-700.woff2) format("woff2"); }
+@font-face { font-family: "M PLUS Rounded 1c"; font-weight: 800; font-display: swap; src: url(/assets/web/fonts/mplus-rounded-800.woff2) format("woff2"); }
+
+:root {
+  color-scheme: light dark;
+  --paper: #e9ecf0; --paper-2: #f2f4f7; --raised: #ffffff; --sunk: #dde1e7;
+  --ink: #20262f; --ink-2: #48505c; --muted: #6b7380; --faint: #9aa1ab;
+  --line: #d9dde3; --line-2: #c3c9d1;
+  --cursor: #0094be; --cursor-2: #39c9ea;
+  --accent: #4f46e5; --accent-2: #6366f1; --accent-weak: #eceeff; --accent-line: #c5cafb;
+  --bad: #c42b2b;
+  --shadow-sm: 0 1px 0 rgb(32 38 47 / .06);
+  --font-ui: "M PLUS Rounded 1c", ui-rounded, ui-sans-serif, system-ui, sans-serif;
+
+  --background: var(--paper);
+  --background-alt: var(--raised);
+  --background-dark: var(--sunk);
+  --background-alt-alt: var(--paper-2);
+  --text: var(--ink);
+  --text-secondary: var(--ink-2);
+  --text-secondary-2: var(--muted);
+  --text-light: var(--muted);
+  --btn: var(--accent);
+  --btn-secondary: var(--paper-2);
+  --theme: var(--accent);
+  --theme-light: var(--accent-2);
+  --border: var(--line);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #24272d; --paper-2: #2b2f36; --raised: #31353d; --sunk: #1d2025;
+    --ink: #eef1f5; --ink-2: #c4c9d1; --muted: #949ba6; --faint: #6c737e;
+    --line: #3b4048; --line-2: #4a505a;
+    --cursor: #3ad7f2; --cursor-2: #a2efff;
+    --accent: #9198ff; --accent-2: #a5abff; --accent-weak: #2e3156; --accent-line: #4a4f8c;
+    --bad: #ff7676;
+    --shadow-sm: 0 1px 0 rgb(0 0 0 / .25);
+  }
+}
+
+html, body, .main-body, button, input, textarea, select { font-family: var(--font-ui); }
+body { background: var(--paper); color: var(--ink); }
+:focus-visible { outline: 3px solid var(--cursor); outline-offset: 3px; border-radius: 6px; }
+a { color: inherit; }
+#main a:not(.btn):not([class]) { color: var(--accent); }
+
+/* Flat controls: no gradients, accent fill, white label. */
+button, input[type="button"], input[type="submit"] { background: var(--raised); color: var(--ink); border: 1px solid var(--line-2); box-shadow: var(--shadow-sm); }
+button:hover, input[type="button"]:hover, input[type="submit"]:hover { border-color: var(--cursor); box-shadow: 0 0 0 1px var(--cursor); }
+button[type="submit"], input[type="submit"], #add-post-page input[type="submit"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+input[type="text"], input[type="password"], input:not([type]), textarea, select { color: var(--ink); background: var(--paper-2); border: 1px solid var(--line-2); border-radius: 12px; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--cursor); box-shadow: 0 0 0 3px color-mix(in srgb, var(--cursor) 30%, transparent); }
+.textarea-menu-text>input:checked~.textarea-menu-memo,
+.textarea-menu>li>input:checked~.textarea-menu-text { background: var(--accent); }
+.posts-wrapper, #report-form { border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+.mii-icon { background: var(--sunk); }
+.account-status-editor { background: var(--paper-2); }
+#nav-menu a { color: var(--ink-2); }
+#nav-menu a:hover, #nav-menu .selected { background: var(--raised); color: var(--ink); box-shadow: inset 0 -3px 0 var(--cursor); }
+#nav-menu .logo-link, #nav-menu .logo-link:hover { box-shadow: none; background: none; }
+#nav-menu { top: 64px; margin-top: 18px; z-index: 5; }
+
+/* Login / error pages */
+.main-body { background: var(--paper); }
+.wrapper { min-height: calc(100vh - 64px); }
+form.account { background-color: var(--raised); color: var(--ink-2); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-sm); }
+form.account h2 { color: var(--ink); font-weight: 800; }
+form.account input { background-color: var(--paper-2); border: 1px solid var(--line-2); color: var(--ink); }
+form.account input:focus { background-color: var(--raised); }
+form.account button { background: var(--paper-2); color: var(--ink); border: 1px solid var(--line-2); border-radius: 12px; }
+form.account button[type="submit"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+form.account a { color: var(--accent); }
+form.account a:hover { color: var(--ink); text-decoration: underline; }
+.account-form-wrapper .logotype { left: 0; display: flex; align-items: center; gap: 12px; color: var(--ink); font-weight: 800; font-size: 1.6rem; text-decoration: none; }
+.account-form-wrapper .logotype svg { width: 48px; height: 48px; }
+.account-form-wrapper h2, .account-form-wrapper h3, .account-form-wrapper p { color: var(--ink); }
+.account-form-wrapper a { color: var(--accent); }
+#toast { background-color: var(--bad); color: #fff; }
+
+/* openpak.org top bar and footer */
+.op-wrap { width: 100%; max-width: 74rem; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
+.op-top { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--paper) 94%, transparent); border-bottom: 1px solid var(--line); backdrop-filter: blur(8px); }
+.op-top .op-wrap { display: flex; align-items: center; gap: 12px; height: 64px; }
+.op-top a, .op-foot a { text-decoration: none; }
+.op-brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-ui); font-weight: 800; font-size: 1.15rem; color: var(--ink) !important; border-radius: 999px; }
+.op-brand img { display: block; }
+.op-crumb { color: var(--faint); }
+.op-top .op-site { margin-left: auto; font-size: .93rem; font-weight: 700; color: var(--ink-2); }
+.op-skip { position: absolute; left: -999px; }
+.op-skip:focus { left: 12px; top: 12px; z-index: 60; background: var(--raised); padding: 8px 12px; border-radius: 8px; }
+.op-foot { position: relative; z-index: 6; background: var(--paper); border-top: 1px solid var(--line); margin-top: 48px; color: var(--ink-2); }
+.op-foot .op-wrap { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; padding-top: 44px; padding-bottom: 36px; }
+.op-foot .op-wrap > :first-child { grid-column: 1 / -1; }
+@media (min-width: 48rem) { .op-foot .op-wrap { grid-template-columns: 1.6fr repeat(3, minmax(0, 1fr)); } .op-foot .op-wrap > :first-child { grid-column: auto; } }
+.op-foot h2 { margin: 0 0 12px; font-family: var(--font-ui); font-size: .9rem; font-weight: 800; color: var(--ink); }
+.op-foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.op-foot a { color: var(--ink-2); font-size: .93rem; }
+.op-foot a:hover { color: var(--ink); text-decoration: underline; }
+.op-foot p { color: var(--muted); font-size: .9rem; max-width: 26rem; margin-top: .75rem; line-height: 1.5; }
+.op-foot .op-bottom { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 18px; font-size: .88rem; color: var(--muted); line-height: 1.5; }
+.op-foot .op-bottom a { color: var(--accent); }

@@ -6,6 +6,15 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.1 — 2026-11-01
+
+- ui: web pages rebranded as OpenVerse: openpak.org tokens, M PLUS Rounded 1c (self-hosted, no Google Fonts),
+  light and dark, OpenPak header and footer, OpenVerse mark and favicon, new `/about` page with the AGPL credit
+  to Juxtaposition by Pretendo Network. Register and forgot-password link to openpak.org
+- ui: no Pretendo names, logos, OpenGraph images, Discord or forum links in user-visible output;
+  locales updated (all 44); console (portal/ctr) layouts untouched
+- ui: `DOMAINS_WEB` takes a comma-separated list (`openverse.openpak.org,juxt.openpak.org`)
+
 ## v0.3.0 — 2026-11-01
 
 - upstream: merged PretendoNetwork/juxtaposition `dev` b4963d0e (150 commits: markdown and mentions,

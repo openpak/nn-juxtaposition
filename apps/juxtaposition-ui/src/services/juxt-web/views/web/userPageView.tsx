@@ -142,7 +142,7 @@ export function WebUserPageMeta(props: { profile: UserProfile; withImage?: boole
 			{/* Open Graph Meta Tags */}
 			<meta property="og:title" content={pageTitle} />
 			{profile.profileInfo.comment ? <meta property="og:description" content={profile.profileInfo.comment} /> : null}
-			<meta property="og:url" content={`https://juxt.pretendo.network/users/${profile.pid}`} />
+			<meta property="og:url" content={`https://openverse.openpak.org/users/${profile.pid}`} />
 			{ props.withImage ? <meta property="og:image" content={pageImage} /> : null }
 			<meta property="og:site_name" content="Juxtaposition" />
 
@@ -150,9 +150,7 @@ export function WebUserPageMeta(props: { profile: UserProfile; withImage?: boole
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:title" content={pageTitle} />
 			{profile.profileInfo.comment ? <meta name="twitter:description" content={profile.profileInfo.comment} /> : null}
-			<meta name="twitter:site" content="@PretendoNetwork" />
 			{ props.withImage ? <meta name="twitter:image" content={pageImage} /> : null }
-			<meta name="twitter:creator" content="@PretendoNetwork" />
 
 		</>
 	);

@@ -73,7 +73,7 @@ function requestOkForGuest(req: Request): boolean {
 		(isStartOfPath(req.path, '/titles/') && req.path !== '/titles/show') ||
 		(isStartOfPath(req.path, '/posts/') && !req.path.includes('/empathy'));
 
-	const loginPage = req.path === '/login';
+	const loginPage = req.path === '/login' || req.path === '/about';
 
 	// login page is always ok
 	// guest access pages must not be writes and the instance must have guest enabled

@@ -87,21 +87,21 @@
         "spoiler_label": "Spojler"
     },
     "setup": {
-        "welcome": "Vitajte v Juxtaposition!",
-        "info": "Čo je Juxtaposition?",
-        "rules": "Pravidlá Juxta",
+        "welcome": "Vitajte v OpenVerse!",
+        "info": "Čo je OpenVerse?",
+        "rules": "Pravidlá OpenVersea",
         "rules_text": {
             "eighth": "Neposielajte Spojlery",
-            "third": "Juxt obsahuje mnoho herných komunít, kde môžu ľudia z celého sveta zdieľať svoje myšlienky. Keď uverejňujete príspevok v komunite, pamätajte na to, že ho môže vidieť každý, preto sa prosím vyjadrite spôsobom, ktorý bude baviť každého. Použite zdravý rozum a premýšľajte skôr, ako uverejníte príspevok. Juxt je služba, ktorá je dostupná aj z internetu, takže majte na pamäti, že vaše príspevky môžu vidieť aj ľudia, ktorí nepoužívajú Juxt. Navyše, všetky komentáre, ktoré pridáte k príspevkom svojich priateľov, uvidia nielen vaši priatelia, ale aj ľudia na celom svete. Majte to prosím na pamäti.",
-            "seventh": "Pamätajte, že poznať niekoho v Juxte nie je to isté ako poznať ho v skutočnom živote. Nikdy nezdieľajte svoju e-mailovú adresu, domácu adresu, meno do práce alebo školy ani iné osobné identifikačné údaje s nikým na Juxt a nikdy nezdieľajte informácie nikoho iného. Navyše, ak vás niekto, koho stretnete v Juxte, pozve, aby ste sa s ním stretli v skutočnom svete, neprijmite ho. Juxt je online komunita a nemala by sa používať na organizovanie stretnutí v reálnom svete.",
-            "ninth": "Niektorí ľudia prichádzajú do Juxtu hľadať tipy a triky pre hry, no iní chcú objaviť tajomstvá hry úplne sami. Príspevky, ktoré odhaľujú tajomstvá hry alebo jej príbeh, sa nazývajú „spojlery“. Ak uverejňujete niečo o hre, ktorá by mohla byť spojlerom, pred odoslaním príspevku nezabudnite zaškrtnúť políčko Spojlery. Týmto spôsobom ľudia, ktorí nechcú byť rozmaznaní, neuvidia váš príspevok.",
-            "first": "Nasleduje niekoľko dôležitých pokynov na to, aby bol Juxt zábavný a príjemný pre každého. Etický kódex Juxt obsahuje podrobné informácie, preto si ho pozorne prečítajte.",
+            "third": "OpenVerse obsahuje mnoho herných komunít, kde môžu ľudia z celého sveta zdieľať svoje myšlienky. Keď uverejňujete príspevok v komunite, pamätajte na to, že ho môže vidieť každý, preto sa prosím vyjadrite spôsobom, ktorý bude baviť každého. Použite zdravý rozum a premýšľajte skôr, ako uverejníte príspevok. OpenVerse je služba, ktorá je dostupná aj z internetu, takže majte na pamäti, že vaše príspevky môžu vidieť aj ľudia, ktorí nepoužívajú OpenVerse. Navyše, všetky komentáre, ktoré pridáte k príspevkom svojich priateľov, uvidia nielen vaši priatelia, ale aj ľudia na celom svete. Majte to prosím na pamäti.",
+            "seventh": "Pamätajte, že poznať niekoho v OpenVersee nie je to isté ako poznať ho v skutočnom živote. Nikdy nezdieľajte svoju e-mailovú adresu, domácu adresu, meno do práce alebo školy ani iné osobné identifikačné údaje s nikým na OpenVerse a nikdy nezdieľajte informácie nikoho iného. Navyše, ak vás niekto, koho stretnete v OpenVersee, pozve, aby ste sa s ním stretli v skutočnom svete, neprijmite ho. OpenVerse je online komunita a nemala by sa používať na organizovanie stretnutí v reálnom svete.",
+            "ninth": "Niektorí ľudia prichádzajú do OpenVerse hľadať tipy a triky pre hry, no iní chcú objaviť tajomstvá hry úplne sami. Príspevky, ktoré odhaľujú tajomstvá hry alebo jej príbeh, sa nazývajú „spojlery“. Ak uverejňujete niečo o hre, ktorá by mohla byť spojlerom, pred odoslaním príspevku nezabudnite zaškrtnúť políčko Spojlery. Týmto spôsobom ľudia, ktorí nechcú byť rozmaznaní, neuvidia váš príspevok.",
+            "first": "Nasleduje niekoľko dôležitých pokynov na to, aby bol OpenVerse zábavný a príjemný pre každého. Etický kódex OpenVerse obsahuje podrobné informácie, preto si ho pozorne prečítajte.",
             "second": "Príspevky je možné prezerať po celom svete",
             "fourth": "Buďte k sebe milí",
-            "fifth": "Aby bol Juxt zábavným miestom pre každého, žiadame vás, aby ste boli ohľaduplní k ostatným používateľom. Pomôžte nám udržať Juxt príjemný zážitok tým, že nebudete uverejňovať nič nevhodné alebo urážlivé.",
+            "fifth": "Aby bol OpenVerse zábavným miestom pre každého, žiadame vás, aby ste boli ohľaduplní k ostatným používateľom. Pomôžte nám udržať OpenVerse príjemný zážitok tým, že nebudete uverejňovať nič nevhodné alebo urážlivé.",
             "sixth": "Neuverejňujte osobné informácie – vaše alebo iných",
             "tenth": "Porušenie Pravidiel",
-            "eleventh": "Naším cieľom je, aby bol Juxt zábavný a príjemný pre každého. V prípade, že niekto poruší Pravidlá Juxt, podnikneme príslušné kroky, vrátane zablokovania porušujúceho používateľa alebo konzoly.",
+            "eleventh": "Naším cieľom je, aby bol OpenVerse zábavný a príjemný pre každého. V prípade, že niekto poruší Pravidlá OpenVerse, podnikneme príslušné kroky, vrátane zablokovania porušujúceho používateľa alebo konzoly.",
             "twelfth": "Hrali Ste Túto Hru?",
             "thirteenth": "Ak uverejňujete príspevok v komunite pre hru, ktorú ste hrali, vaše príspevky budú mať ikonu označujúcu, že ste ju hrali."
         },
@@ -111,30 +111,30 @@
             "info": "Povedzte nám, ako by ste opísali úroveň svojich skúseností s hrami. Toto nastavenie môžete neskôr zmeniť.",
             "intermediate": "Stredne pokročilý"
         },
-        "ready": "Pripavený Začať Používať Juxt",
+        "ready": "Pripavený Začať Používať OpenVerse",
         "done_button": "Poďme Do Toho!",
         "beta_text": {
-            "first": "Vytajte vo Verejnej Beta Sieti Pretendo! Napriek tomu ze sa veľa vecí zmenilo od prvej verejnej bety, Juxt je stále v procese vývoja a veľa sa môže kedykoľvek zmeniť.",
-            "third": "Webová lokalita, jej softvér a všetok obsah, ktorý sa na nej nachádza, sú poskytované „tak ako sú“ a „ako sú dostupné“. Sieť Pretendo neposkytuje žiadne záruky, či už výslovné alebo predpokladané, pokiaľ ide o vhodnosť alebo použiteľnosť webovej stránky, jej softvéru alebo akéhokoľvek obsahu.",
+            "first": "Vytajte vo Verejnej Beta Sieti OpenPak! Napriek tomu ze sa veľa vecí zmenilo od prvej verejnej bety, OpenVerse je stále v procese vývoja a veľa sa môže kedykoľvek zmeniť.",
+            "third": "Webová lokalita, jej softvér a všetok obsah, ktorý sa na nej nachádza, sú poskytované „tak ako sú“ a „ako sú dostupné“. Sieť OpenPak neposkytuje žiadne záruky, či už výslovné alebo predpokladané, pokiaľ ide o vhodnosť alebo použiteľnosť webovej stránky, jej softvéru alebo akéhokoľvek obsahu.",
             "second": "To môže zahŕňať úplné vymazanie databázy na konci alebo počas obdobia bety."
         },
-        "welcome_text": "Juxt je herná komunita, ktorá spája ľudí z celého sveta pomocou postavičiek Mii. Pomocou Juxt môžete zdieľať svoje herné zážitky a stretnúť sa s ľuďmi z celého sveta.",
+        "welcome_text": "OpenVerse je herná komunita, ktorá spája ľudí z celého sveta pomocou postavičiek Mii. Pomocou OpenVerse môžete zdieľať svoje herné zážitky a stretnúť sa s ľuďmi z celého sveta.",
         "beta": "Odmietnutie Zodpovednosti za Beta Verziu",
-        "info_text": "Juxt je herná komunita riadená používateľmi, kde môžete komunikovať s ľuďmi\n                po celom svete. Môžete písať alebo kresliť príspevky v herných komunitách alebo posielať správy priamo svojim priateľom.",
-        "ready_text": "Najprv si pozrite niektoré komunity a zistite, o čom píšu ľudia z celého sveta. Využite túto príležitosť a zoznámte sa s Juxtom. Na ceste môžete urobiť nejaké nové objavy!",
+        "info_text": "OpenVerse je herná komunita riadená používateľmi, kde môžete komunikovať s ľuďmi\n                po celom svete. Môžete písať alebo kresliť príspevky v herných komunitách alebo posielať správy priamo svojim priateľom.",
+        "ready_text": "Najprv si pozrite niektoré komunity a zistite, o čom píšu ľudia z celého sveta. Využite túto príležitosť a zoznámte sa s OpenVerseom. Na ceste môžete urobiť nejaké nové objavy!",
         "experience": "Skúsenosť s hrami",
         "analytics": "Analytické údaje",
-        "analytics_text": "Juxtaposition používa Cloudflare Web Analytics na sledovanie toho, ako používatelia používajú našu službu. Zhromaždené údaje zahŕňajú, ale nie sú obmedzené na čas návštevy, navštívené stránky a čas strávený na stránke. Tieto údaje sa k vám žiadnym spôsobom nepripájajú a nepoužívajú sa ani my, ani spoločnosť Cloudflare.",
-        "done": "Užite si Juxt!",
-        "title": "Nastavenie Juxtaposition"
+        "analytics_text": "OpenVerse používa Cloudflare Web Analytics na sledovanie toho, ako používatelia používajú našu službu. Zhromaždené údaje zahŕňajú, ale nie sú obmedzené na čas návštevy, navštívené stránky a čas strávený na stránke. Tieto údaje sa k vám žiadnym spôsobom nepripájajú a nepoužívajú sa ani my, ani spoločnosť Cloudflare.",
+        "done": "Užite si OpenVerse!",
+        "title": "Nastavenie OpenVerse"
     },
     "activity_feed": {
         "empty": "Je to tu prázdne. Skúste niekoho sledovať!"
     },
     "login": {
         "password": "Heslo",
-        "title": "Prihlásenie Juxtaposition",
-        "heading": "Registrovanie Juxtaposition",
+        "title": "Prihlásenie OpenVerse",
+        "heading": "Registrovanie OpenVerse",
         "sub_title": "Zadajte detaily Vášho účtu",
         "username": "Uživateľské meno",
         "forgot_password": "Zabudli ste heslo?",
@@ -168,7 +168,7 @@
         "reason_violence": "Násilný Obsah",
         "title": "Nahlásiť Príspevok",
         "submit": "Podať Správu",
-        "description": "Chystáte sa nahlásiť príspevok s obsahom, ktorý porušuje Kódex Správania Juxtaposition. Toto nahlásenie bude odoslané administrátorom Juxstaposition z Pretenda, nie autorovi príspevku.",
+        "description": "Chystáte sa nahlásiť príspevok s obsahom, ktorý porušuje Kódex Správania OpenVerse. Toto nahlásenie bude odoslané administrátorom Juxstaposition z Pretenda, nie autorovi príspevku.",
         "additional_info_placeholder": "Zadajte ďalšie komentáre alebo informácie",
         "reason_spoiler": "Spojler",
         "reason_inappropiate": "Nevhodné/Škodlivé Správanie",
@@ -186,5 +186,29 @@
         "title": "Moderovanie",
         "silently_delete_post": "Ticho vymazať",
         "moderate_user": "Moderovať Používateľa"
+    },
+    "shell": {
+        "skip": "Skip to content",
+        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "network": "Network",
+        "titles": "Titles",
+        "status": "Status",
+        "help": "Help",
+        "project": "Project",
+        "about": "About and credits",
+        "source": "Source code",
+        "community": "Community",
+        "legal_heading": "Legal",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "legal": "Legal notices"
+    },
+    "about": {
+        "title": "About OpenVerse",
+        "heading": "About OpenVerse",
+        "text": "OpenVerse is the social network of OpenPak for Wii U and 3DS. It is run by the OpenPak project and has no connection to any other network.",
+        "credits_heading": "Credits",
+        "credit": "Based on Juxtaposition by Pretendo Network (AGPL-3.0). OpenVerse is free software under the same licence.",
+        "back": "Back to sign in"
     }
 }

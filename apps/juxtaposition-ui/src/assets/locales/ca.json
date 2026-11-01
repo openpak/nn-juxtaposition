@@ -81,26 +81,26 @@
         "empty": "Aquí està buit. Pots provar de seguir algú!"
     },
     "setup": {
-        "welcome": "Benvingut a Juxtaposition!",
+        "welcome": "Benvingut a OpenVerse!",
         "rules_text": {
-            "eleventh": "El nostre objectiu és mantenir Juxt divertit i agradable per a tothom. En el cas que algú infringeixi el Codi de Conducta de Juxt, prendrem les mesures adequades, fins i tot bloquejant l'usuari o la consola infractors.",
+            "eleventh": "El nostre objectiu és mantenir OpenVerse divertit i agradable per a tothom. En el cas que algú infringeixi el Codi de Conducta de OpenVerse, prendrem les mesures adequades, fins i tot bloquejant l'usuari o la consola infractors.",
             "tenth": "Infraccions del codi de conducta",
-            "third": "Juxt conté moltes comunitats de jocs on persones de tot el món poden compartir els seus pensaments. Quan publiqueu en una comunitat, recordeu que tothom ho pot veure, així que si us plau, expresseu-vos d'una manera que tothom pugui gaudir. Fes servir el sentit comú i pensa abans de publicar. Juxt és un servei que també és accessible des d'Internet, així que tingueu en compte que les persones que no utilitzin Juxt també poden veure les vostres publicacions. A més, els comentaris que feu a les publicacions dels vostres amics no només els veuran els vostres amics, sinó també gent d'arreu del món. Si us plau, tingueu això en compte.",
+            "third": "OpenVerse conté moltes comunitats de jocs on persones de tot el món poden compartir els seus pensaments. Quan publiqueu en una comunitat, recordeu que tothom ho pot veure, així que si us plau, expresseu-vos d'una manera que tothom pugui gaudir. Fes servir el sentit comú i pensa abans de publicar. OpenVerse és un servei que també és accessible des d'Internet, així que tingueu en compte que les persones que no utilitzin OpenVerse també poden veure les vostres publicacions. A més, els comentaris que feu a les publicacions dels vostres amics no només els veuran els vostres amics, sinó també gent d'arreu del món. Si us plau, tingueu això en compte.",
             "thirteenth": "Si publiques a la comunitat un joc al qual has jugat, a les teves publicacions hi haurà una icona que indica que l'has jugat.",
-            "fifth": "Per tal de mantenir Juxt un lloc divertit per a tothom, us demanem que sigueu considerats amb els altres usuaris. Ajudeu-nos a mantenir Juxt una experiència agradable no publicant res inadequat o ofensiu.",
-            "ninth": "Algunes persones vénen a Juxt buscant consells i trucs per als jocs, però altres volen descobrir els secrets d'un joc pel seu compte. Les publicacions que revelen secrets d'un joc o la seva història s'anomenen \"spoilers\". Si publiqueu alguna cosa sobre un joc que podria ser un spoiler, assegureu-vos de marcar la casella Spoilers abans d'enviar la vostra publicació. D'aquesta manera, les persones que no vulguin ser espatllades no veuran la vostra publicació.",
+            "fifth": "Per tal de mantenir OpenVerse un lloc divertit per a tothom, us demanem que sigueu considerats amb els altres usuaris. Ajudeu-nos a mantenir OpenVerse una experiència agradable no publicant res inadequat o ofensiu.",
+            "ninth": "Algunes persones vénen a OpenVerse buscant consells i trucs per als jocs, però altres volen descobrir els secrets d'un joc pel seu compte. Les publicacions que revelen secrets d'un joc o la seva història s'anomenen \"spoilers\". Si publiqueu alguna cosa sobre un joc que podria ser un spoiler, assegureu-vos de marcar la casella Spoilers abans d'enviar la vostra publicació. D'aquesta manera, les persones que no vulguin ser espatllades no veuran la vostra publicació.",
             "fourth": "Sigueu amables els uns amb els altres",
             "second": "Les publicacions es poden veure a tot el món",
             "sixth": "No publiquis informació personal, teva o d'altres persones",
-            "first": "A continuació es detallen algunes pautes importants per fer de Juxt una experiència divertida i agradable per a tothom. El Codi de Conducta de Juxt conté informació detallada, així que llegiu-la atentament.",
+            "first": "A continuació es detallen algunes pautes importants per fer de OpenVerse una experiència divertida i agradable per a tothom. El Codi de Conducta de OpenVerse conté informació detallada, així que llegiu-la atentament.",
             "eighth": "No publiqueu revelacions",
-            "seventh": "Recordeu, no és el mateix conèixer algú a Juxt que conèixer-lo a la vida real. No compartiu mai la vostra adreça de correu electrònic, adreça de casa, nom de la feina o de l'escola, ni cap altra informació d'identificació personal amb ningú a Juxt, i mai compartiu la informació de ningú més. A més, si algú que coneixes a Juxt et convida a conèixer-lo al món real, no acceptis. Juxt és una comunitat en línia i no s'ha d'utilitzar per organitzar trobades del món real.",
+            "seventh": "Recordeu, no és el mateix conèixer algú a OpenVerse que conèixer-lo a la vida real. No compartiu mai la vostra adreça de correu electrònic, adreça de casa, nom de la feina o de l'escola, ni cap altra informació d'identificació personal amb ningú a OpenVerse, i mai compartiu la informació de ningú més. A més, si algú que coneixes a OpenVerse et convida a conèixer-lo al món real, no acceptis. OpenVerse és una comunitat en línia i no s'ha d'utilitzar per organitzar trobades del món real.",
             "twelfth": "Has jugat a aquest joc?"
         },
         "beta_text": {
-            "third": "El lloc web, el seu programari i tot el contingut que s'hi troba es proporcionen \"tal qual\" i \"segons estigui disponible\". La Xarxa de Pretendo no dóna cap garantia, ja sigui expressa o implícita, sobre la idoneïtat o usabilitat del lloc web, el seu programari o qualsevol dels seus continguts.",
+            "third": "El lloc web, el seu programari i tot el contingut que s'hi troba es proporcionen \"tal qual\" i \"segons estigui disponible\". La Xarxa de OpenPak no dóna cap garantia, ja sigui expressa o implícita, sobre la idoneïtat o usabilitat del lloc web, el seu programari o qualsevol dels seus continguts.",
             "second": "Això pot incloure una eliminació total de la base de dades al final o durant el període beta.",
-            "first": "Estàs a punt de provar la primera beta pública de Juxt. Això vol dir que encara hi ha moltes coses en l'aire, i moltes coses poden canviar en qualsevol moment."
+            "first": "Estàs a punt de provar la primera beta pública de OpenVerse. Això vol dir que encara hi ha moltes coses en l'aire, i moltes coses poden canviar en qualsevol moment."
         },
         "experience_text": {
             "expert": "Expert",
@@ -109,16 +109,16 @@
             "beginner": "Principiant"
         },
         "done_button": "Som-hi!",
-        "ready": "A punt per començar a utilitzar Juxt",
+        "ready": "A punt per començar a utilitzar OpenVerse",
         "experience": "Experiència de joc",
         "analytics": "Analytics",
-        "rules": "Regles de Juxt",
-        "welcome_text": "Juxt és una comunitat de jocs que connecta persones de tot el món mitjançant personatges Mii. Utilitzeu Juxt per compartir les vostres experiències de joc i conèixer gent de tot el món.",
+        "rules": "Regles de OpenVerse",
+        "welcome_text": "OpenVerse és una comunitat de jocs que connecta persones de tot el món mitjançant personatges Mii. Utilitzeu OpenVerse per compartir les vostres experiències de joc i conèixer gent de tot el món.",
         "analytics_text": "La juxtaposició utilitza Cloudflare Web Analytics per tal de fer un seguiment de com els usuaris utilitzen el nostre servei. Les dades recopilades inclouen, entre d'altres, el temps de visita, les pàgines visitades i el temps dedicat al lloc. Aquestes dades no se li adjunten de cap manera, i no s'utilitzen per a anuncis per nosaltres o Cloudflare.",
-        "info": "Què és Juxtaposition?",
-        "info_text": "Juxt és una comunitat de jocs impulsada per l'usuari on es pot interactuar amb la gent\n                a tot el món. Pots escriure o dibuixar publicacions en comunitats de jocs o enviar missatges directament als teus amics.",
-        "ready_text": "En primer lloc, fes un cop d'ull a algunes comunitats i descobreix què publiquen persones de tot el món. Aprofita aquesta oportunitat per familiaritzar-te amb Juxt. Podeu fer alguns descobriments nous al llarg del camí!",
-        "done": "Diverteix-te a Juxt!",
+        "info": "Què és OpenVerse?",
+        "info_text": "OpenVerse és una comunitat de jocs impulsada per l'usuari on es pot interactuar amb la gent\n                a tot el món. Pots escriure o dibuixar publicacions en comunitats de jocs o enviar missatges directament als teus amics.",
+        "ready_text": "En primer lloc, fes un cop d'ull a algunes comunitats i descobreix què publiquen persones de tot el món. Aprofita aquesta oportunitat per familiaritzar-te amb OpenVerse. Podeu fer alguns descobriments nous al llarg del camí!",
+        "done": "Diverteix-te a OpenVerse!",
         "beta": "Exempció de responsabilitat sobre la beta"
     },
     "login": {
@@ -139,5 +139,29 @@
         "no_access": "No estas autoritzat a accedir a aquesta aplicació ({{code}})",
         "message_web": "Veure l'<status>estat actual del servidor</status>.<newline/>O bé, <home>torna a la pàgina d'inici</home>",
         "error_details": "ID de sol·licitud: {{id}}"
+    },
+    "shell": {
+        "skip": "Skip to content",
+        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "network": "Network",
+        "titles": "Titles",
+        "status": "Status",
+        "help": "Help",
+        "project": "Project",
+        "about": "About and credits",
+        "source": "Source code",
+        "community": "Community",
+        "legal_heading": "Legal",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "legal": "Legal notices"
+    },
+    "about": {
+        "title": "About OpenVerse",
+        "heading": "About OpenVerse",
+        "text": "OpenVerse is the social network of OpenPak for Wii U and 3DS. It is run by the OpenPak project and has no connection to any other network.",
+        "credits_heading": "Credits",
+        "credit": "Based on Juxtaposition by Pretendo Network (AGPL-3.0). OpenVerse is free software under the same licence.",
+        "back": "Back to sign in"
     }
 }

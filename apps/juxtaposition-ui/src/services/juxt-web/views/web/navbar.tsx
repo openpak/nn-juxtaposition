@@ -1,7 +1,7 @@
 import { useUrl } from '@/services/juxt-web/views/common/hooks/useUrl';
 import { useUser } from '@/services/juxt-web/views/common/hooks/useUser';
 import { T } from '@/services/juxt-web/views/common/components/T';
-import { JuxtLogo, WebUIIcon } from '@/services/juxt-web/views/web/components/ui/WebUIIcon';
+import { OpenVerseMark, WebUIIcon } from '@/services/juxt-web/views/web/components/ui/WebUIIcon';
 import type { ReactNode } from 'react';
 
 export type NavBarProps = {
@@ -17,7 +17,7 @@ export function WebNavBar(props: NavBarProps): ReactNode {
 	return (
 		<header id="nav-menu">
 			<a href="/" className="logo-link">
-				<JuxtLogo />
+				<OpenVerseMark />
 			</a>
 			{user.pid !== 1000000000
 				? (

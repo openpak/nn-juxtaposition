@@ -21,7 +21,7 @@ import type { NextFunction, Request, Response } from 'express';
 	return this.toString();
 };
 
-process.title = 'Pretendo - Juxt-Web';
+process.title = 'OpenPak - OpenVerse';
 process.on('SIGTERM', () => {
 	process.exit(0);
 });

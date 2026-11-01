@@ -56,30 +56,30 @@
         "swearing": "Postările nu pot conține limbaj vulgar."
     },
     "setup": {
-        "welcome": "Bine ai venit la Juxtaposition!",
+        "welcome": "Bine ai venit la OpenVerse!",
         "beta": "Atenționare beta",
         "beta_text": {
-            "first": "Sunteți pe cale să testați prima versiune beta publică a Juxt. Asta înseamnă că multe lucruri încă sunt de-a valma și multe lucruri se pot schimba pe viitor.",
+            "first": "Sunteți pe cale să testați prima versiune beta publică a OpenVerse. Asta înseamnă că multe lucruri încă sunt de-a valma și multe lucruri se pot schimba pe viitor.",
             "second": "Asta include și/sau ștergerea totală a bazei de date la finalul perioadei beta.",
-            "third": "Site-ul web, software-ul său și tot conținutul găsit pe acesta sunt furnizate \"așa cum sunt\" și \"așa cum sunt disponibile\". Rețeaua Pretendo nu oferă nicio garanție, expresă sau implicită, cu privire la adecvarea sau utilizarea site-ului web, a software-ului său sau a oricărui conținut al acestuia."
+            "third": "Site-ul web, software-ul său și tot conținutul găsit pe acesta sunt furnizate \"așa cum sunt\" și \"așa cum sunt disponibile\". Rețeaua OpenPak nu oferă nicio garanție, expresă sau implicită, cu privire la adecvarea sau utilizarea site-ului web, a software-ului său sau a oricărui conținut al acestuia."
         },
-        "info": "Ce e Juxtaposition?",
-        "welcome_text": "Juxt este o comunitate de jocuri care conectează oamenii din jurul lumii folosind personaje Mii. Folosește Juxt pentru a-ți împărtăși experiențele tale din jocuri și a cunoaște oameni din toată lumea.",
-        "info_text": "Juxt este o comunitate de jocuri condusă de utilizatori, unde puteți interacționa cu oamenii\n                peste tot în lume. Puteți scrie sau desena postări în comunitățile de jocuri sau puteți trimite mesaje direct prietenilor.",
-        "rules": "Regurile Juxt",
+        "info": "Ce e OpenVerse?",
+        "welcome_text": "OpenVerse este o comunitate de jocuri care conectează oamenii din jurul lumii folosind personaje Mii. Folosește OpenVerse pentru a-ți împărtăși experiențele tale din jocuri și a cunoaște oameni din toată lumea.",
+        "info_text": "OpenVerse este o comunitate de jocuri condusă de utilizatori, unde puteți interacționa cu oamenii\n                peste tot în lume. Puteți scrie sau desena postări în comunitățile de jocuri sau puteți trimite mesaje direct prietenilor.",
+        "rules": "Regurile OpenVerse",
         "rules_text": {
-            "first": "Următoarele sunt câteva orientări importante pentru a face din Juxt o experiență plăcută și distractivă pentru toată lumea. Codul de conduită Juxt conține informații detaliate, așa că vă rugăm să îl citiți cu atenție.",
+            "first": "Următoarele sunt câteva orientări importante pentru a face din OpenVerse o experiență plăcută și distractivă pentru toată lumea. Codul de conduită OpenVerse conține informații detaliate, așa că vă rugăm să îl citiți cu atenție.",
             "second": "Posturile pot fi vizualizate în întreaga lume",
             "fourth": "Fiți drăguți unii cu alții",
             "sixth": "Nu publicați informații personale - ale dvs. sau ale altora",
             "eighth": "Nu posta spoilăre",
             "tenth": "Violați de Codul de conduită",
-            "eleventh": "Golul nostru e să facem Juxt distractiv și plăcut pentru toată lumea. Dacă cineva violează Juxt Codul de conduită, noi osă luăm măsurile , Măsurile pot fi doar să blocăm utilizatorul sau toată consola.",
+            "eleventh": "Golul nostru e să facem OpenVerse distractiv și plăcut pentru toată lumea. Dacă cineva violează OpenVerse Codul de conduită, noi osă luăm măsurile , Măsurile pot fi doar să blocăm utilizatorul sau toată consola.",
             "twelfth": "Ai jucat acest joc?",
-            "seventh": "Nu uitați că a cunoaște pe cineva în Juxt nu este același lucru cu a-l cunoaște în viața reală. Nu împărtășiți niciodată adresa dvs. de e-mail, adresa de acasă, numele de la locul de muncă sau de la școală sau alte informații de identificare personală cu nimeni din Juxt și nu împărtășiți niciodată informațiile altor persoane. În plus, dacă cineva pe care îl cunoașteți în Juxt vă invită să vă întâlniți cu el sau ea în lumea reală, nu acceptați. Juxt este o comunitate online și nu ar trebui să fie folosită pentru a organiza întâlniri în lumea reală.",
-            "third": "Juxt conține multe comunități de jocuri de noroc în care oameni din întreaga lume își pot împărtăși gândurile. Atunci când postați într-o comunitate, nu uitați că toată lumea o poate vedea, așa că vă rugăm să vă exprimați într-un mod care să placă tuturor. Folosiți bunul simț și gândiți-vă înainte de a posta. Juxt este un serviciu care este accesibil și de pe internet, așa că țineți cont de faptul că și persoanele care nu folosesc Juxt vă pot vedea postările. În plus, orice comentariu pe care îl faceți la postările prietenilor dvs. va fi văzut nu doar de prietenii dvs., ci și de oameni din întreaga lume. Vă rugăm să țineți cont de acest lucru.",
-            "fifth": "Pentru ca Juxt să rămână un loc distractiv pentru toată lumea, vă rugăm să fiți atent cu ceilalți utilizatori. Ajutați-ne să menținem Juxt o experiență plăcută, nu postați nimic nepotrivit sau ofensator.",
-            "ninth": "Unii oameni vin la Juxt în căutare de sfaturi și trucuri pentru jocuri, dar alții vor să descopere singuri secretele unui joc. Postările care dezvăluie secrete ale unui joc sau ale poveștii acestuia se numesc \"spoilere\". Dacă postați ceva despre un joc care ar putea fi un spoiler, asigurați-vă că verificați căsuța Spoilers înainte de a trimite postarea. În acest fel, persoanele care nu doresc să primească spoilere nu vă vor vedea mesajul.",
+            "seventh": "Nu uitați că a cunoaște pe cineva în OpenVerse nu este același lucru cu a-l cunoaște în viața reală. Nu împărtășiți niciodată adresa dvs. de e-mail, adresa de acasă, numele de la locul de muncă sau de la școală sau alte informații de identificare personală cu nimeni din OpenVerse și nu împărtășiți niciodată informațiile altor persoane. În plus, dacă cineva pe care îl cunoașteți în OpenVerse vă invită să vă întâlniți cu el sau ea în lumea reală, nu acceptați. OpenVerse este o comunitate online și nu ar trebui să fie folosită pentru a organiza întâlniri în lumea reală.",
+            "third": "OpenVerse conține multe comunități de jocuri de noroc în care oameni din întreaga lume își pot împărtăși gândurile. Atunci când postați într-o comunitate, nu uitați că toată lumea o poate vedea, așa că vă rugăm să vă exprimați într-un mod care să placă tuturor. Folosiți bunul simț și gândiți-vă înainte de a posta. OpenVerse este un serviciu care este accesibil și de pe internet, așa că țineți cont de faptul că și persoanele care nu folosesc OpenVerse vă pot vedea postările. În plus, orice comentariu pe care îl faceți la postările prietenilor dvs. va fi văzut nu doar de prietenii dvs., ci și de oameni din întreaga lume. Vă rugăm să țineți cont de acest lucru.",
+            "fifth": "Pentru ca OpenVerse să rămână un loc distractiv pentru toată lumea, vă rugăm să fiți atent cu ceilalți utilizatori. Ajutați-ne să menținem OpenVerse o experiență plăcută, nu postați nimic nepotrivit sau ofensator.",
+            "ninth": "Unii oameni vin la OpenVerse în căutare de sfaturi și trucuri pentru jocuri, dar alții vor să descopere singuri secretele unui joc. Postările care dezvăluie secrete ale unui joc sau ale poveștii acestuia se numesc \"spoilere\". Dacă postați ceva despre un joc care ar putea fi un spoiler, asigurați-vă că verificați căsuța Spoilers înainte de a trimite postarea. În acest fel, persoanele care nu doresc să primească spoilere nu vă vor vedea mesajul.",
             "thirteenth": "Dacă postezi în comunitate pentru un joc pe care l-ai jucat, mesajele tale vor avea o pictogramă care indică faptul că l-ai jucat."
         },
         "experience": "Experiența de joc",
@@ -90,10 +90,34 @@
             "expert": "Expertul"
         },
         "analytics": "Analytics",
-        "analytics_text": "Juxtaposition utilizează Cloudflare Web Analytics pentru a urmări modul în care utilizatorii utilizează serviciul nostru. Datele colectate includ, dar nu se limitează la ora vizitei, paginile vizitate și timpul petrecut pe site. Aceste date nu vă sunt atașate în niciun fel și nu sunt utilizate pentru reclame de către noi sau Cloudflare.",
-        "ready": "Gata să începeți să utilizați Juxt",
-        "ready_text": "În primul rând, verificați câteva comunități și vedeți ce postează oameni din toată lumea. Profitați de această ocazie pentru a vă familiariza cu Juxt. S-ar putea să faceți noi descoperiri pe parcurs!",
-        "done": "Distracție plăcută în Juxt!",
+        "analytics_text": "OpenVerse utilizează Cloudflare Web Analytics pentru a urmări modul în care utilizatorii utilizează serviciul nostru. Datele colectate includ, dar nu se limitează la ora vizitei, paginile vizitate și timpul petrecut pe site. Aceste date nu vă sunt atașate în niciun fel și nu sunt utilizate pentru reclame de către noi sau Cloudflare.",
+        "ready": "Gata să începeți să utilizați OpenVerse",
+        "ready_text": "În primul rând, verificați câteva comunități și vedeți ce postează oameni din toată lumea. Profitați de această ocazie pentru a vă familiariza cu OpenVerse. S-ar putea să faceți noi descoperiri pe parcurs!",
+        "done": "Distracție plăcută în OpenVerse!",
         "done_button": "Să mergem!"
+    },
+    "shell": {
+        "skip": "Skip to content",
+        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "network": "Network",
+        "titles": "Titles",
+        "status": "Status",
+        "help": "Help",
+        "project": "Project",
+        "about": "About and credits",
+        "source": "Source code",
+        "community": "Community",
+        "legal_heading": "Legal",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "legal": "Legal notices"
+    },
+    "about": {
+        "title": "About OpenVerse",
+        "heading": "About OpenVerse",
+        "text": "OpenVerse is the social network of OpenPak for Wii U and 3DS. It is run by the OpenPak project and has no connection to any other network.",
+        "credits_heading": "Credits",
+        "credit": "Based on Juxtaposition by Pretendo Network (AGPL-3.0). OpenVerse is free software under the same licence.",
+        "back": "Back to sign in"
     }
 }

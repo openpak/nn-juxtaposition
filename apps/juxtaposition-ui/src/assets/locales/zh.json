@@ -96,14 +96,14 @@
             "post_removed_for_reason": "您的帖子「{{postId}}」已被删除，原因如下：「{{reason}}」。",
             "comment_removed": "您的评论「{{postId}}」已被删除。",
             "comment_removed_for_reason": "您的评论「{{postId}}」已被删除，原因如下：「{{reason}}」。",
-            "footer": "点击此消息即可查看 Juxtaposition 行为准则。如有任何疑问，请联系 Pretendo Network 论坛的版主（{{contactModsUrl}}）。"
+            "footer": "点击此消息即可查看 OpenVerse 行为准则。如有任何疑问，请联系 OpenPak 论坛的版主（{{contactModsUrl}}）。"
         },
         "limited_from_posting": {
             "message": "您已被限制发帖。",
             "message_with_reason": "您已被限制发帖。原因：\"{{reason}}\"。",
             "temporary": "您已被限制发帖，直至 {{until}}。",
             "temporary_with_reason": "您已被限制发帖，直至 {{until}}。原因：\"{{reason}}\"。",
-            "footer": "点击此消息即可查看 Juxtaposition 行为准则。如有任何疑问，请联系 Pretendo Network 论坛的版主（{{banAppealUrl}}）。"
+            "footer": "点击此消息即可查看 OpenVerse 行为准则。如有任何疑问，请联系 OpenPak 论坛的版主（{{banAppealUrl}}）。"
         },
         "new_empathy": {
             "message/one": "<empathy_one /> 赞同了你的帖子！",
@@ -123,32 +123,32 @@
         "spoiler_label": "剧透",
         "painting_close": "取消",
         "painting_submit": "确定",
-        "automod_error": "您的帖子包含 Juxtaposition 不允许使用的文本。了解更多信息，请访问 https://preten.do/juxt-rules"
+        "automod_error": "您的帖子包含 OpenVerse 不允许使用的文本。了解更多信息，请访问 https://openpak.org/terms"
     },
     "setup": {
-        "welcome": "欢迎来到 Juxtaposition！",
-        "welcome_text": "Juxt 是一个游戏社区，它使用 Mii 将来自世界各地的人们联接起来。使用 Juxt 分享您的游戏体验并结识来自世界各地的人们。",
+        "welcome": "欢迎来到 OpenVerse！",
+        "welcome_text": "OpenVerse 是一个游戏社区，它使用 Mii 将来自世界各地的人们联接起来。使用 OpenVerse 分享您的游戏体验并结识来自世界各地的人们。",
         "beta": "测试版免责声明",
         "beta_text": {
-            "first": "您即将试用 Juxt 的第一个公开测试版。这意味着很多事情还在处理，很多事情随时可能发生变化。",
+            "first": "您即将试用 OpenVerse 的第一个公开测试版。这意味着很多事情还在处理，很多事情随时可能发生变化。",
             "second": "这可能包括在结束时或测试期间彻底擦除数据库。",
-            "third": "本网站、其软件及其上的所有内容均按“原样”和“可用”提供。 Pretendo Network 不就网站、其软件或其任何内容的适用性或可用性提供任何明示或暗示的保证。"
+            "third": "本网站、其软件及其上的所有内容均按“原样”和“可用”提供。 OpenPak 不就网站、其软件或其任何内容的适用性或可用性提供任何明示或暗示的保证。"
         },
-        "info": "什么是 Juxtaposition？",
-        "info_text": "Juxt 是一个用户驱动的游戏社区，您可以与其他来自世界各地的人互动。\n                您可以在游戏社区中撰写或绘制帖子，或直接向您的朋友发送消息。",
-        "rules": "Juxt 的规则",
+        "info": "什么是 OpenVerse？",
+        "info_text": "OpenVerse 是一个用户驱动的游戏社区，您可以与其他来自世界各地的人互动。\n                您可以在游戏社区中撰写或绘制帖子，或直接向您的朋友发送消息。",
+        "rules": "OpenVerse 的规则",
         "rules_text": {
-            "first": "以下是使 Juxt 成为每个人的有趣和愉快体验的指南。 Juxt 行为准则包含详细信息，因此请仔细阅读。",
+            "first": "以下是使 OpenVerse 成为每个人的有趣和愉快体验的指南。 OpenVerse 行为准则包含详细信息，因此请仔细阅读。",
             "second": "帖子可以在世界各地查看",
-            "third": "Juxt 包含许多游戏社区，来自世界各地的人们可以在这里分享他们的想法。当您在社区中发帖时，请记住每个人都可以看到它，因此请以每个人都喜欢的方式表达自己。使用常识，并在发帖前三思而后行。 Juxt 是一项也可以从网络访问的服务，因此请记住，不使用 Juxt 的人也可能会看到您的帖子。您对朋友的帖子发表的任何评论不仅会被您的朋友看到，也会被世界各地的人看到。",
+            "third": "OpenVerse 包含许多游戏社区，来自世界各地的人们可以在这里分享他们的想法。当您在社区中发帖时，请记住每个人都可以看到它，因此请以每个人都喜欢的方式表达自己。使用常识，并在发帖前三思而后行。 OpenVerse 是一项也可以从网络访问的服务，因此请记住，不使用 OpenVerse 的人也可能会看到您的帖子。您对朋友的帖子发表的任何评论不仅会被您的朋友看到，也会被世界各地的人看到。",
             "fourth": "尊重他人",
-            "fifth": "为了让 Juxt 成为每个人都喜欢的地方，我们要求您体谅其他用户。不要发布任何冒犯性的内容，帮助我们保持 Juxt 的愉快体验。",
+            "fifth": "为了让 OpenVerse 成为每个人都喜欢的地方，我们要求您体谅其他用户。不要发布任何冒犯性的内容，帮助我们保持 OpenVerse 的愉快体验。",
             "sixth": "不要发布您的或他人的个人信息",
-            "seventh": "在 Juxt 中认识某人与在现实生活中认识不同。永远不要与 Juxt 上的任何人分享您的电子邮件地址、家庭住址、工作或学校名称或其他个人信息，也不要分享任何其他人的信息。此外，如果您在 Juxt 遇到的某个人邀请您在现实世界中与他或她见面，不要接受。 Juxt 是一个在线社区，不应用于安排现实世界的聚会。",
+            "seventh": "在 OpenVerse 中认识某人与在现实生活中认识不同。永远不要与 OpenVerse 上的任何人分享您的电子邮件地址、家庭住址、工作或学校名称或其他个人信息，也不要分享任何其他人的信息。此外，如果您在 OpenVerse 遇到的某个人邀请您在现实世界中与他或她见面，不要接受。 OpenVerse 是一个在线社区，不应用于安排现实世界的聚会。",
             "eighth": "不要发布剧透内容",
-            "ninth": "有些人来到 Juxt 是为了寻找游戏的提示和技巧，而另一些人则想自己发现游戏的秘密。揭示游戏秘密或其故事的帖子都被称为“剧透”。如果发布的游戏内容可能会剧透，请务必在发送帖子前勾选“剧透”框。这样，不想被剧透的人就不会看到你的帖子。",
+            "ninth": "有些人来到 OpenVerse 是为了寻找游戏的提示和技巧，而另一些人则想自己发现游戏的秘密。揭示游戏秘密或其故事的帖子都被称为“剧透”。如果发布的游戏内容可能会剧透，请务必在发送帖子前勾选“剧透”框。这样，不想被剧透的人就不会看到你的帖子。",
             "tenth": "违反行为准则",
-            "eleventh": "我们的目标是让 Juxt 对每个人都充满乐趣。如果有人违反 Juxt 行为准则，我们将采取适当措施，包括封禁违规用户或游戏主机。",
+            "eleventh": "我们的目标是让 OpenVerse 对每个人都充满乐趣。如果有人违反 OpenVerse 行为准则，我们将采取适当措施，包括封禁违规用户或游戏主机。",
             "twelfth": "你玩过这个游戏吗？",
             "thirteenth": "如果您在社区中发布关于您玩过的游戏的帖子，您的帖子将带有一个图标，表明您已经玩过该游戏。"
         },
@@ -160,16 +160,16 @@
             "expert": "高级"
         },
         "analytics": "分析",
-        "analytics_text": "Juxtaposition 使用 Cloudflare Web Analytics 来跟踪用户如何使用我们的服务。收集的数据包括但不限于访问时间、访问的页面以及在网站上花费的时间。此数据不会以任何方式关联到您身上，也不会被我们或 Cloudflare 用于广告。",
-        "ready": "开始使用 Juxt",
-        "ready_text": "首先看看一些社区，了解世界各地的人们都在发布什么内容。借此机会熟悉 Juxt。说不定一路上你会有新发现！",
-        "done": "在 Juxt 玩得开心！",
+        "analytics_text": "OpenVerse 使用 Cloudflare Web Analytics 来跟踪用户如何使用我们的服务。收集的数据包括但不限于访问时间、访问的页面以及在网站上花费的时间。此数据不会以任何方式关联到您身上，也不会被我们或 Cloudflare 用于广告。",
+        "ready": "开始使用 OpenVerse",
+        "ready_text": "首先看看一些社区，了解世界各地的人们都在发布什么内容。借此机会熟悉 OpenVerse。说不定一路上你会有新发现！",
+        "done": "在 OpenVerse 玩得开心！",
         "done_button": "走吧！",
-        "title": "Juxtaposition 设置"
+        "title": "OpenVerse 设置"
     },
     "login": {
-        "title": "Juxtaposition 登录",
-        "heading": "Juxtaposition 登录",
+        "title": "OpenVerse 登录",
+        "heading": "OpenVerse 登录",
         "sub_title": "在下方输入您的账号信息",
         "username": "用户名",
         "password": "密码",
@@ -209,7 +209,7 @@
     "reporting": {
         "title": "举报帖子",
         "submit": "提交举报",
-        "description": "你即将举报一篇违反 Juxtaposition 行为准则的帖子。此举报将仅发送给 Juxtaposition 版主，而不会发送给此帖子的创建者。",
+        "description": "你即将举报一篇违反 OpenVerse 行为准则的帖子。此举报将仅发送给 OpenVerse 版主，而不会发送给此帖子的创建者。",
         "label": "原因：",
         "additional_info_placeholder": "输入其他评论或信息",
         "reason_spoiler": "剧透",
@@ -243,5 +243,29 @@
         "moderate_user": "审核用户",
         "mark_as_spoiler": "标记为剧透",
         "mark_as_not_spoiler": "移除剧透"
+    },
+    "shell": {
+        "skip": "Skip to content",
+        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "network": "Network",
+        "titles": "Titles",
+        "status": "Status",
+        "help": "Help",
+        "project": "Project",
+        "about": "About and credits",
+        "source": "Source code",
+        "community": "Community",
+        "legal_heading": "Legal",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "legal": "Legal notices"
+    },
+    "about": {
+        "title": "About OpenVerse",
+        "heading": "About OpenVerse",
+        "text": "OpenVerse is the social network of OpenPak for Wii U and 3DS. It is run by the OpenPak project and has no connection to any other network.",
+        "credits_heading": "Credits",
+        "credit": "Based on Juxtaposition by Pretendo Network (AGPL-3.0). OpenVerse is free software under the same licence.",
+        "back": "Back to sign in"
     }
 }

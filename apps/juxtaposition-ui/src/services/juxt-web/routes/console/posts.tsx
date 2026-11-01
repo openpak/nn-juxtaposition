@@ -82,7 +82,7 @@ postsRouter.get('/:post_id/oembed.json', async function (req, res) {
 		};
 	} else {
 		img = {
-			thumbnail_url: 'https://pretendo.network/assets/images/opengraph/opengraph-image.png',
+			thumbnail_url: 'https://openverse.openpak.org/assets/web/images/opengraph.png',
 			thumbnail_width: 727,
 			thumbnail_height: 298
 		};
@@ -94,9 +94,9 @@ postsRouter.get('/:post_id/oembed.json', async function (req, res) {
 		title: `${author.miiName} (@${author.username}) - ${community?.name}`,
 		description: post.body ?? '',
 		author_name: author.miiName,
-		author_url: 'https://juxt.pretendo.network/users/show?pid=' + author.pid,
-		provider_name: 'Juxtaposition - Pretendo Network',
-		provider_url: `https://juxt.pretendo.network`,
+		author_url: 'https://openverse.openpak.org/users/show?pid=' + author.pid,
+		provider_name: 'OpenVerse - OpenPak',
+		provider_url: `https://openverse.openpak.org`,
 		...img
 	};
 	res.send(doc);
