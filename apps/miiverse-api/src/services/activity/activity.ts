@@ -124,8 +124,8 @@ export type IngestStatus = 'posted' | 'digested' | 'duplicate' | 'not_opted_in' 
 export type IngestOptions = {
 	live: CategoryId[];
 	imageHosts: string;
-	/** True when the account is supervised (read-only on the web): nothing is posted for it. */
-	isReadOnly(accountId: string): Promise<boolean>;
+	/** True when the account is supervised below full access (read only, or OpenVerse off): nothing is posted for it. */
+	isRestricted(accountId: string): Promise<boolean>;
 	now?: Date;
 };
 
@@ -166,7 +166,7 @@ export async function ingestActivity(db: ActivityDb, input: ActivityInput, opts:
 	if (!setting?.enabled || !opts.live.includes(input.category) || !setting.categories.includes(input.category)) {
 		return { status: 'not_opted_in' };
 	}
-	if (await opts.isReadOnly(input.accountId)) {
+	if (await opts.isRestricted(input.accountId)) {
 		return { status: 'supervised' };
 	}
 

@@ -10,6 +10,11 @@ OpenPak work starts at the port/fork commit.
 
 - one OpenVerse community per game OpenPak serves: `tools/game-communities/build.py` builds a bundle from the website titles and their tiles, `npm run db:sync-games` creates and updates the communities (idempotent, never deletes). Wii U, 3DS and Switch title IDs go on the community so in-game posting lands in it
 
+## v0.3.24 — 2026-11-02
+
+- activity: nothing is posted for an account below full access (parental level read, or OpenVerse off), matching the new parental access levels
+  (v0.3.18 only skipped read-only accounts)
+
 ## v0.3.23 — 2026-11-02
 
 - web: Linked devices page rebuilt on the shared layout (wrap, page head, cards): a code field (one-time-code, monospace, inline errors), where-to-find-the-code help, device rows with an icon, linked and last-used dates and a confirmed Remove, a friendly empty state

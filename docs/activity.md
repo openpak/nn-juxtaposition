@@ -9,8 +9,7 @@ They live in their own table and feed, not in the console post database, so Wii 
 - **Activity** tab on every profile (`/users/<pid>/activity`, `/users/me/activity`).
 - **Settings** (`/activity/settings`): a master switch "Post my game activity" and one switch per category. Everything is
   OFF until the player turns it on. Only categories that have a working source are listed.
-- A supervised account (parental controls core configured and the account supervised) cannot change the settings and nothing
-  is posted for it (the same read-only rule as posting; if the core is unreachable the account counts as supervised).
+- A supervised account follows the parent's OpenVerse level (see web-sso.md): only "read + post" posts activity. With level "read" the settings are read-only and with "off" the account cannot use OpenVerse at all; in both cases nothing is posted for it (an unreachable parental core counts as off).
 - A player can remove their own activity posts with the x on each post (a moderator can remove any). Removing a post does not turn the setting off.
 - Posts are one line, an icon or OpenPak artwork, and an optional link. Never a game screenshot.
 
@@ -76,7 +75,7 @@ Answer `200 {"event_id","status"}`:
 | `duplicate` | `event_id` seen before |
 | `not_opted_in` | the player has it off (or the category has no source) |
 | `no_account` | the account never signed in to OpenVerse, so there is nothing to opt in with |
-| `supervised` | the account is supervised |
+| `supervised` | the account is supervised below read + post |
 
 `400` invalid request or `rejected`; `401` bad key. None of these statuses should be retried except a 5xx.
 

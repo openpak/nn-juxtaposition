@@ -44,7 +44,7 @@ function fakeDb(opts: { enabled?: boolean; categories?: string[]; identity?: boo
 const base = new Date('2026-11-02T12:00:00Z');
 const live = liveCategories('badge');
 function options(over: Partial<IngestOptions> = {}): IngestOptions {
-	return { live, imageHosts: 'rewards.openpak.org', isReadOnly: async () => false, now: base, ...over };
+	return { live, imageHosts: 'rewards.openpak.org', isRestricted: async () => false, now: base, ...over };
 }
 function event(n: number, over: Record<string, unknown> = {}): Parameters<typeof ingestActivity>[1] {
 	return { eventId: `e${n}`, accountId: 'acc', category: 'badge', subject: `Badge ${n}`, ...over } as never;
@@ -84,7 +84,7 @@ describe('activity posts', () => {
 
 	it('posts nothing for a supervised (read-only) account', async () => {
 		const db = fakeDb({ enabled: true });
-		expect((await ingestActivity(db, event(1), options({ isReadOnly: async () => true }))).status).toBe('supervised');
+		expect((await ingestActivity(db, event(1), options({ isRestricted: async () => true }))).status).toBe('supervised');
 		expect(db.rows).toHaveLength(0);
 	});
 
