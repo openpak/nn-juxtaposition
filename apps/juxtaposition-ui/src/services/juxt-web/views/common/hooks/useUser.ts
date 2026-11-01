@@ -8,12 +8,14 @@ export type UserPermissions = {
 export type UseUserValue = {
 	pid: number; // TODO make this `null` when not logged in
 	perms: UserPermissions;
+	displayName?: string;
 };
 
 export function useUser(): UseUserValue {
 	const ctx = useRenderContext();
 	return {
 		pid: ctx.pid,
+		displayName: ctx.displayName,
 		perms: {
 			moderator: ctx.moderator,
 			developer: ctx.developer

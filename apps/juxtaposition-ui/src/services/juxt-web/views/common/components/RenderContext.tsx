@@ -9,6 +9,7 @@ export type RenderContextContent = {
 	moderator: boolean;
 	developer: boolean;
 	pid: number;
+	displayName?: string; // openpak.org display name of the signed-in web user
 	uaIsConsole?: boolean; // user agent looks like a Nintendo console
 };
 
@@ -30,6 +31,7 @@ export function buildContext(res: Response): RenderContextContent {
 		developer: locals.developer,
 		uaIsConsole: locals.uaIsConsole,
 		pid: locals.pid,
+		displayName: locals.displayName,
 		i18n: res.i18n
 	};
 }

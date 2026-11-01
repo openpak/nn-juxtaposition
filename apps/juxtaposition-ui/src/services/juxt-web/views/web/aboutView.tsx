@@ -8,7 +8,7 @@ export function WebAboutView(): ReactNode {
 	return (
 		<WebLoginRoot head={extraHead}>
 			<div className="wrapper">
-				<div className="account-form-wrapper" style={{ maxWidth: '40rem', padding: '0 20px' }}>
+				<div className="account-form-wrapper notice">
 					<h2><T k="about.heading" /></h2>
 					<p><T k="about.text" /></p>
 					<h3><T k="about.credits_heading" /></h3>

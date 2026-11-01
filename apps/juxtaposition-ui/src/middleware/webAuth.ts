@@ -1,45 +1,39 @@
 import { createInternalApiClient } from '@/api/client';
-import { config } from '@/config';
 import { logger } from '@/logger';
-import { getUserAccountData, getUserDataFromToken } from '@/util';
+import { getUserAccountData } from '@/util';
 import type { RequestHandler, Request, Response } from 'express';
 
-const cookieDomain = config.http.cookieDomain;
-
 export const webAuth: RequestHandler = async (request, response, next) => {
-	// Get pid and fetch user data
-
-	if (request.session && request.session.user && request.session.pid && !request.isWrite && request.cookies.access_token) {
-		request.user = request.session.user;
-		request.pid = request.session.pid;
-	} else if (request.cookies.access_token) {
+	// The web UI signs in through openpak.org SSO only (see routes/web/login.tsx). The session holds the
+	// account and its Wii U PID; the miiverse-api is told who we are with the trusted `x-trusted-pid`
+	// header, which only this UI can set (the API's internal routes are reachable over gRPC with the API key only).
+	const sso = request.session?.sso;
+	if (sso?.wiiuPid) {
 		try {
-			request.pid = (await getUserDataFromToken(request.cookies.access_token)).pid;
-			request.user = await getUserAccountData(request.pid);
-
-			request.session.user = request.user;
-			request.session.pid = request.pid;
-		} catch (e) {
-			logger.error(e, 'Failed to authenticate user from access token');
-			response.clearCookie('access_token', { domain: cookieDomain, path: '/' });
-			response.clearCookie('refresh_token', { domain: cookieDomain, path: '/' });
-			response.clearCookie('token_type', { domain: cookieDomain, path: '/' });
-			if (request.path === '/login') {
-				response.changeLanguage(null);
-				request.tokens = {};
-				request.paramPackData = null;
-				return next();
+			request.pid = sso.wiiuPid;
+			if (!request.session.user || request.session.pid !== sso.wiiuPid) {
+				request.session.user = await getUserAccountData(sso.wiiuPid);
+				request.session.pid = sso.wiiuPid;
 			}
+			request.user = request.session.user;
+			response.locals.displayName = sso.displayName;
+		} catch (e) {
+			logger.error(e, 'Failed to load the account for the SSO session');
+			request.pid = null;
+			request.user = null;
+			request.session.sso = undefined;
+			request.session.user = null;
+			request.session.pid = null;
 		}
 	}
 
-	request.tokens = { oauthToken: request.cookies.access_token };
+	request.tokens = request.pid ? { trustedPid: request.pid } : {};
 
 	request.self = null;
 	if (request.user) {
 		const selfResult = await createInternalApiClient(request.tokens).self.get({ throwOnError: false });
 		if (selfResult.error) {
-			logger.error(selfResult.error, 'Failed to get self from access token');
+			logger.error(selfResult.error, 'Failed to get self from the session');
 		}
 		request.self = selfResult.error ? null : selfResult.data ?? null;
 	}
@@ -73,7 +67,7 @@ function requestOkForGuest(req: Request): boolean {
 		(isStartOfPath(req.path, '/titles/') && req.path !== '/titles/show') ||
 		(isStartOfPath(req.path, '/posts/') && !req.path.includes('/empathy'));
 
-	const loginPage = req.path === '/login' || req.path === '/about';
+	const loginPage = req.path === '/login' || req.path === '/login/callback' || req.path === '/about' || req.path === '/logout';
 
 	// login page is always ok
 	// guest access pages must not be writes and the instance must have guest enabled
@@ -90,5 +84,5 @@ export function loginWall(req: Request, res: Response): void {
 	}
 
 	req.session.user = null;
-	return res.redirect(`/login?redirect=${path}`);
+	return res.redirect(`/login?redirect=${encodeURIComponent(path)}`);
 }

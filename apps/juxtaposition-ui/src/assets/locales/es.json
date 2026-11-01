@@ -248,18 +248,24 @@
     "shell": {
         "skip": "Saltar al contenido",
         "tagline": "OpenVerse es la red social de OpenPak para Wii U y 3DS: comunidades, publicaciones y dibujos desde tu consola.",
-        "network": "Red",
+        "openpak": "OpenPak",
+        "home": "Inicio",
         "titles": "Títulos",
+        "features": "Funciones",
         "status": "Estado",
-        "help": "Ayuda",
+        "communities": "Comunidades",
+        "about": "Acerca de",
         "project": "Proyecto",
-        "about": "Acerca de y créditos",
         "source": "Código fuente",
-        "community": "Comunidad",
+        "help": "Ayuda",
         "legal_heading": "Legal",
         "terms": "Términos",
         "privacy": "Privacidad",
-        "legal": "Avisos legales"
+        "legal": "Marcas y retiradas",
+        "fine_print": "Basado en Juxtaposition de Pretendo Network. Miiverse es una marca de Nintendo.",
+        "signin": "Iniciar sesión",
+        "signout": "Cerrar sesión",
+        "feed": "Actividad"
     },
     "about": {
         "title": "Acerca de OpenVerse",
@@ -268,5 +274,13 @@
         "credits_heading": "Créditos",
         "credit": "Basado en Juxtaposition de Pretendo Network (AGPL-3.0). OpenVerse es software libre bajo la misma licencia.",
         "back": "Volver a iniciar sesión"
+    },
+    "notice": {
+        "title": "Aviso"
+    },
+    "no_wiiu": {
+        "title": "Ninguna Wii U vinculada",
+        "text": "Tu cuenta de OpenPak aún no tiene una Wii U ni una 3DS vinculada. Vincula una consola en openpak.org y vuelve a iniciar sesión.",
+        "action": "Vincular una consola en openpak.org"
     }
 }

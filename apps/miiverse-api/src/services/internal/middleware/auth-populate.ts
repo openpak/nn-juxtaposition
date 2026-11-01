@@ -14,7 +14,12 @@ export async function authPopulate(request: express.Request, response: express.R
 	// Used by web frontend
 	const oAuthToken = getValueFromHeaders(request.headers, 'x-oauth-token');
 
-	if (serviceToken && oAuthToken) {
+	// Used by the web frontend after openpak.org single sign-on: the UI already verified the person and
+	// vouches for their Wii U PID. This app is only reachable through the API-key-protected gRPC channel
+	// (see server.ts), so the header cannot come from a browser or a console.
+	const trustedPid = getValueFromHeaders(request.headers, 'x-trusted-pid');
+
+	if ([serviceToken, oAuthToken, trustedPid].filter(Boolean).length > 1) {
 		throw errors.for('bad_request', 'Multiple authentication tokens provided');
 	}
 
@@ -23,6 +28,8 @@ export async function authPopulate(request: express.Request, response: express.R
 		pnid = await consoleAuth(request, serviceToken);
 	} else if (oAuthToken) {
 		pnid = await webAuth(request, oAuthToken);
+	} else if (trustedPid) {
+		pnid = await trustedAuth(trustedPid);
 	}
 
 	if (pnid !== null) {
@@ -61,6 +68,15 @@ async function webAuth(request: express.Request, oAuthToken: string): Promise<Ge
 	const pnid = await getUserAccountData(pid);
 
 	return pnid;
+}
+
+async function trustedAuth(trustedPid: string): Promise<GetUserDataResponse> {
+	if (!/^[1-9][0-9]{0,15}$/.test(trustedPid)) {
+		throw errors.for('bad_request', 'Invalid trusted PID');
+	}
+	return await getUserAccountData(Number(trustedPid)).catch(() => {
+		throw errors.for('unauthorized', 'Unknown account!');
+	});
 }
 
 function accountIsModerator(pnid: GetUserDataResponse): boolean {

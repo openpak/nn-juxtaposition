@@ -1,5 +1,5 @@
 import { config } from '@/config';
-import { WebLoginView } from '@/services/juxt-web/views/web/loginView';
+import { WebNoticeView } from '@/services/juxt-web/views/web/noticeView';
 import { PortalFatalErrorView } from '@/services/juxt-web/views/portal/errorView';
 import { CtrFatalErrorView } from '@/services/juxt-web/views/ctr/errorView';
 import { createInternalApiClient } from '@/api/client';
@@ -24,7 +24,7 @@ export const checkDiscovery: RequestHandler = async (request, response, next) =>
 	if (status !== 'open') {
 		const message = getDiscoveryStatusMessage(status);
 		return response.jsxForDirectory({
-			web: <WebLoginView toast={message} redirect={request.originalUrl} />,
+			web: <WebNoticeView message={message} />,
 			portal: <PortalFatalErrorView code={5989999} message={message} />,
 			ctr: <CtrFatalErrorView code={5989999} message={message} />
 		});

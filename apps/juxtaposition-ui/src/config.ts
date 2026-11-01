@@ -58,6 +58,17 @@ const schema = z.object({
 		host: z.string(),
 		port: z.coerce.number().default(6379)
 	}),
+	/** openpak.org single sign-on (web sign-in only; consoles keep their own login). */
+	sso: z.object({
+		clientId: z.string().default('openverse'),
+		/** Shared .env already carries SSO_CLIENT_OPENVERSE_SECRET for the website. */
+		clientSecret: z.string().default(process.env.SSO_CLIENT_OPENVERSE_SECRET ?? ''),
+		authorizeUrl: z.string().default('https://openpak.org/account/sso/authorize'),
+		logoutUrl: z.string().default('https://openpak.org/account/sso/logout'),
+		/** Private-network address of the website's token endpoint. */
+		tokenUrl: z.string().default('http://openpak-website:20010/internal/sso/token'),
+		linkUrl: z.string().default('https://openpak.org/account')
+	}).prefault({}),
 	domains: z.object({
 		/** Comma-separated list of hostnames that serve the web UI. */
 		web: z.string().default('openverse.openpak.org,juxt.openpak.org'),

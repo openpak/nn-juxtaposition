@@ -74,5 +74,9 @@ declare module 'express-session' {
 		// legacy stuff
 		pid: number | null;
 		user: GetUserDataResponse | null;
+		/** openpak.org SSO sign-in in flight (state + PKCE verifier) */
+		ssoPending?: import('@/sso').SsoPending;
+		/** Signed-in openpak.org account for the web UI */
+		sso?: { accountId: string; displayName: string; wiiuPid: number | null };
 	}
 }

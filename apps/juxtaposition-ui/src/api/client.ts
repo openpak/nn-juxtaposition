@@ -52,7 +52,8 @@ export function createInternalApiClient(tokens: UserTokens): InternalApi {
 		baseUrl: 'https://example.com/api/v1', // Hostname is ignored by `customFetch`
 		headers: {
 			'x-service-token': tokens.serviceToken,
-			'x-oauth-token': tokens.oauthToken
+			'x-oauth-token': tokens.oauthToken,
+			'x-trusted-pid': tokens.trustedPid === undefined ? undefined : String(tokens.trustedPid)
 		},
 		throwOnError: true
 	});

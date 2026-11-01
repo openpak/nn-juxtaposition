@@ -1,5 +1,4 @@
 import { WebLoginRoot } from '@/services/juxt-web/views/web/login';
-import { OpenVerseMark } from '@/services/juxt-web/views/web/components/ui/WebUIIcon';
 import { T } from '@/services/juxt-web/views/common/components/T';
 import type { ReactNode } from 'react';
 import type { ReqId } from 'pino-http';
@@ -26,9 +25,6 @@ export function WebErrorView(props: ErrorViewProps): ReactNode {
 		<WebLoginRoot head={extraHead}>
 			<div className="wrapper">
 				<div className="account-form-wrapper">
-					<a className="logotype" href="/">
-						<OpenVerseMark />OpenVerse
-					</a>
 					<h2>
 						<T k="error.heading" values={{ code: props.code, message: props.message }} />
 					</h2>
