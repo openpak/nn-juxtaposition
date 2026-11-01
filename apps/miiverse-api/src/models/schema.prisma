@@ -128,3 +128,35 @@ model WebIdentity {
 
   @@map("web_identities")
 }
+
+/// Opt-in automatic activity posts (a badge earned, a course uploaded...). Off by default; keyed by the
+/// OpenPak account like web_identities. `categories` holds the switched-on category ids.
+model ActivitySetting {
+  accountId  String   @id @map("account_id")
+  enabled    Boolean  @default(false)
+  categories String[] @default([])
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@map("activity_settings")
+}
+
+/// One moment reported by a game server or the rewards service. `eventId` is the idempotency key.
+/// A moment past the daily limit or inside a burst is stored `folded` (so a retry stays a duplicate)
+/// and counted in that day's single digest row (`digest`, `count` = moments in it).
+model ActivityPost {
+  id        Int      @id @default(autoincrement())
+  eventId   String   @unique @map("event_id")
+  accountId String   @map("account_id")
+  category  String
+  subject   String   @default("")
+  link      String   @default("")
+  image     String   @default("")
+  digest    Boolean  @default(false)
+  folded    Boolean  @default(false)
+  count     Int      @default(1)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([accountId, createdAt])
+  @@index([createdAt])
+  @@map("activity_posts")
+}

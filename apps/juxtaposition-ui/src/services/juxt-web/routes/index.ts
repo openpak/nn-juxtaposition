@@ -11,6 +11,7 @@ import { welcomeRouter } from '@/services/juxt-web/routes/web/welcome';
 import { logoutRouter } from '@/services/juxt-web/routes/web/logout';
 import { staticRouter } from '@/services/juxt-web/routes/console/static';
 import { entrypointRouter } from '@/services/juxt-web/routes/console/entrypoint';
+import { activityRouter } from '@/services/juxt-web/routes/web/activity';
 import { baseAdminRouter } from '@/services/juxt-web/routes/admin';
 
 export const routes = {
@@ -25,6 +26,7 @@ export const routes = {
 	WEB_ABOUT: aboutRouter,
 	WEB_LOGOUT: logoutRouter,
 	WEB_WELCOME: welcomeRouter,
+	WEB_ACTIVITY: activityRouter,
 	ADMIN: baseAdminRouter,
 	STATIC: staticRouter,
 	ENTRYPOINT: entrypointRouter

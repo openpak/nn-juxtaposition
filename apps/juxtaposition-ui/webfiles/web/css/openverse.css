@@ -153,3 +153,29 @@ form.account a:hover { color: var(--ink); text-decoration: underline; }
 .account-form-wrapper.welcome .rules li { margin: .35rem 0; }
 .account-form-wrapper.welcome .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
 .account-form-wrapper.welcome button.btn.primary { cursor: pointer; }
+
+/* Game activity: automatic opt-in posts (badges earned and so on) */
+.activity-list { display: flex; flex-direction: column; gap: 10px; }
+.activity-item { display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: var(--raised); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-sm); }
+.activity-item.digest { background: var(--paper-2); }
+.activity-item .mii-icon { flex: none; width: 48px; height: 48px; border-radius: 50%; }
+.activity-body { flex: 1; min-width: 0; }
+.activity-text { margin: 0; color: var(--ink); overflow-wrap: anywhere; }
+.activity-who { font-weight: 800; text-decoration: none; }
+.activity-what { color: var(--ink-2); }
+a.activity-what { color: var(--accent); }
+.activity-body .extra-info { margin: 2px 0 0; color: var(--muted); font-size: .85em; }
+.activity-art, .activity-icon { flex: none; width: 56px; height: 56px; border-radius: 12px; object-fit: contain; background: var(--sunk); }
+.activity-icon { display: flex; align-items: center; justify-content: center; color: var(--ink-2); }
+.activity-icon .ui-icon svg { width: 28px; height: 28px; fill: currentColor; }
+.activity-settings { max-width: 40rem; margin: 0 auto; }
+.activity-settings fieldset { border: 1px solid var(--line); border-radius: 14px; margin: 1rem 0; padding: .5rem 1rem 1rem; }
+.activity-settings legend { font-weight: 800; padding: 0 .4rem; }
+.activity-switch { display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--ink); cursor: pointer; }
+.activity-switch input { width: 1.2rem; height: 1.2rem; accent-color: var(--accent); }
+.activity-note, .activity-readonly { color: var(--muted); }
+.activity-saved { color: var(--accent); font-weight: 800; }
+@media (max-width: 600px) {
+  .activity-item { padding: 10px 12px; gap: 10px; }
+  .activity-art, .activity-icon { width: 44px; height: 44px; }
+}

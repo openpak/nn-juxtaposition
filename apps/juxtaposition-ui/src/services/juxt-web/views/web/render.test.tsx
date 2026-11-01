@@ -116,3 +116,48 @@ describe('web shell', () => {
 		expect(own.match(/<title>/g)).toHaveLength(1);
 	});
 });
+
+describe('game activity', () => {
+	const item = (over: Record<string, unknown> = {}): never => ({
+		id: 1, pid: 1800000001, name: 'Tobi', category: 'badge', subject: 'Kart Racer: Wii Era', link: 'https://openpak.org/account/rewards',
+		image: 'https://rewards.openpak.org/v1/items/b/preview', count: 1, digest: false, createdAt: new Date().toISOString(), ...over
+	}) as never;
+	const links = { nextLink: '/activity?offset=1&pjax=true', prevPageLink: null, nextPageLink: '/activity?offset=1' };
+
+	it('renders a badge post with the name, art and link', async () => {
+		const { WebActivityList } = await import('@/services/juxt-web/views/web/activityView');
+		const html = await render(<WebActivityList {...links} items={[item()]} />, 1800000001, 'Tobi');
+		expect(html).toContain('Tobi');
+		expect(html).toContain('earned the Kart Racer: Wii Era badge');
+		expect(html).toContain('href="https://openpak.org/account/rewards"');
+		expect(html).toContain('class="activity-art"');
+		expect(html).not.toMatch(/activity\.(text|empty)/);
+	});
+
+	it('renders a digest and an empty state without raw keys', async () => {
+		const { WebActivityList } = await import('@/services/juxt-web/views/web/activityView');
+		expect(await render(<WebActivityList {...links} items={[item({ digest: true, category: 'digest', count: 3, subject: '', link: '', image: '' })]} />)).toContain('3 more moments today');
+		const empty = await render(<WebActivityList {...links} items={[]} />);
+		expect(empty).toContain('No game activity yet.');
+	});
+
+	it('leaves out a category it does not know', async () => {
+		const { WebActivityList } = await import('@/services/juxt-web/views/web/activityView');
+		const html = await render(<WebActivityList {...links} items={[item({ category: 'mystery' })]} />);
+		expect(html).not.toContain('mystery');
+	});
+
+	it('settings page: everything off by default, only live categories, no raw keys', async () => {
+		const { WebActivitySettingsPage } = await import('@/services/juxt-web/views/web/activityView');
+		const settings = { enabled: false, categories: [{ id: 'badge', enabled: false }] } as never;
+		const html = await render(<WebActivitySettingsPage settings={settings} readOnly={false} saved={false} />, 1800000001, 'Tobi');
+		expect(html).toContain('Post my game activity');
+		expect(html).toContain('Rewards badges I earn');
+		expect(html).not.toContain('checked');
+		expect(html).not.toContain('Splatfest');
+		expect(html).not.toMatch(/activity\.[a-z_]+/);
+		const ro = await render(<WebActivitySettingsPage settings={settings} readOnly saved={false} />, 1800000001, 'Tobi');
+		expect(ro).toContain('This account is supervised');
+		expect(ro).toContain('disabled');
+	});
+});

@@ -6,6 +6,15 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.11 — 2026-11-02
+
+- activity: opt-in automatic activity posts ("Tobi earned the Kart Racer: Wii Era badge") with a web feed (Game activity in the navigation),
+  an Activity tab on profiles and settings at `/activity/settings` (master switch plus one switch per category, everything OFF by default,
+  nothing for supervised accounts). Server-to-server `POST /internal/v1/activity` (`X-Internal-Key` =
+  `PN_MIIVERSE_API_ACTIVITY_KEY`, idempotent by `event_id`); at most 10 posts a day and 4 per 10 minutes per account, the rest folded
+  into one digest post. Only the `badge` category has a source (rewards 0.3.0) and is listed
+  (`PN_MIIVERSE_API_ACTIVITY_CATEGORIES`); see docs/activity.md. Migration `20261102100000_activity_posts`; run `npm run migration:deploy`
+
 ## v0.3.10 — 2026-11-01
 
 - web: signing in with openpak.org creates the OpenVerse user on the spot (internal `sso.resolve`); there is no first-run page on the web

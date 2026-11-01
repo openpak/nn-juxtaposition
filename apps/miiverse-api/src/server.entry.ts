@@ -8,6 +8,7 @@ import discovery from '@/services/discovery';
 import api from '@/services/api';
 import { healthzRouter } from '@/services/healthz';
 import { cdnRouter } from '@/services/cdn';
+import { activityIngestRouter } from '@/services/activity/http';
 import { config } from '@/config';
 import { setupGrpc } from '@/services/internal/server';
 import { initImageProcessing } from '@/images';
@@ -31,6 +32,7 @@ app.use(loggerHttp);
 app.use(express.json());
 app.use(healthzRouter);
 app.use(cdnRouter);
+app.use(activityIngestRouter);
 
 app.use(express.urlencoded({
 	extended: true,

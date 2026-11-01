@@ -305,5 +305,41 @@
     "terms": "Read the full terms",
     "accept": "Accept and continue",
     "decline": "Not now, sign out"
+  },
+  "activity": {
+    "nav": "Game activity",
+    "title": "Game activity",
+    "everyone": "Everyone",
+    "following": "Following",
+    "empty": "No game activity yet.",
+    "more": "Show more",
+    "settings_link": "Settings",
+    "settings_title": "Activity settings",
+    "settings_intro": "OpenVerse can post notable moments for you, such as a badge you earned, to the Game activity feed and your profile. It is off until you turn it on, and you pick what is shared.",
+    "post_activity": "Post my game activity",
+    "categories": "What to post",
+    "settings_note": "Posts are a short line with OpenPak artwork, never a game screenshot. At most 10 a day; a burst of moments becomes one summary post. Turning this off stops new posts; it does not remove old ones.",
+    "save": "Save",
+    "saved": "Saved.",
+    "back": "Back to Game activity",
+    "read_only": "This account is supervised, so activity posts are off.",
+    "profile_tab": "Activity",
+    "category": {
+      "badge": "Rewards badges I earn",
+      "splatfest": "Splatfest rounds I win",
+      "kart": "Mario Kart records and tournament wins",
+      "maker": "Mario Maker courses I upload",
+      "trophy": "PS3 trophies and Xbox 360 achievements",
+      "trade": "Pokémon trades I complete"
+    },
+    "text": {
+      "badge": "earned the {{subject}} badge",
+      "splatfest": "won a Splatfest round: {{subject}}",
+      "kart": "got a Mario Kart result: {{subject}}",
+      "maker": "uploaded the Mario Maker course {{subject}}",
+      "trophy": "unlocked {{subject}}",
+      "trade": "completed a Pokémon trade: {{subject}}",
+      "digest": "{{count}} more moments today"
+    }
   }
 }

@@ -71,6 +71,14 @@ const schema = z.object({
 		address: z.string().default(''),
 		key: z.string().default('')
 	}).default({ address: '', key: '' }),
+	// Automatic activity posts (POST /internal/v1/activity). Empty key = the endpoint answers 404.
+	// `categories` are the ones a source exists for, comma separated: only those get a switch on the
+	// settings page. `imageHosts` are the https hosts activity art may come from (our own only).
+	activity: z.object({
+		key: z.string().default(''),
+		categories: z.string().default('badge'),
+		imageHosts: z.string().default('rewards.openpak.org,openpak.org')
+	}).default({ key: '', categories: 'badge', imageHosts: 'rewards.openpak.org,openpak.org' }),
 	domains: z.object({
 		api: z.hostname().default('api.olv.pretendo.cc'),
 		discovery: z.hostname().default('discovery.olv.pretendo.cc'),
@@ -124,6 +132,11 @@ export const presets: Record<string, any> = {
 		parental: {
 			address: '',
 			key: ''
+		},
+		activity: {
+			key: '',
+			categories: 'badge',
+			imageHosts: 'rewards.openpak.org,openpak.org'
 		}
 	},
 	dummy: {

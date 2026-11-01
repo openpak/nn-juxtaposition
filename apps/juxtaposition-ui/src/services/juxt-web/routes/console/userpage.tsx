@@ -16,6 +16,7 @@ import { PortalUserMissingPage, PortalUserPageView } from '@/services/juxt-web/v
 import { CtrUserMissingPage, CtrUserPageView } from '@/services/juxt-web/views/ctr/userPageView';
 import { wrapApi } from '@/api/errors';
 import { buildListLinks } from '@/services/juxt-web/views/web/listView';
+import { WebActivityList } from '@/services/juxt-web/views/web/activityView';
 import type { Request, Response } from 'express';
 import type { UserPageFollowingViewProps } from '@/services/juxt-web/views/web/userPageFollowingView';
 import type { PostListViewProps } from '@/services/juxt-web/views/web/postList';
@@ -343,6 +344,34 @@ async function userRelations(req: Request, res: Response, userID: number): Promi
 				</CtrUserPageView>
 			)
 		});
+	}
+
+	if (params.type === 'activity') {
+		// Game activity (opt-in automatic posts) is a web page; consoles go back to the profile.
+		if (req.directory !== 'web') {
+			return res.redirect(link);
+		}
+		const { data: activity } = await req.api.users.activity.list({ id: userID, limit: 10, offset });
+		const activityProps = {
+			...buildListLinks(link + 'activity', offset, activity.items.length),
+			items: activity.items,
+			onProfile: true
+		};
+		if (query.pjax) {
+			return res.jsx(<WebActivityList {...activityProps} fragment />);
+		}
+		const pageProps: UserPageViewProps = {
+			baseLink: link,
+			selectedTab: 5,
+			profile,
+			requestUserContent: self?.content ?? null,
+			isFirstPage: offset === 0
+		};
+		return res.jsx(
+			<WebUserPageView {...pageProps}>
+				<WebActivityList {...activityProps} />
+			</WebUserPageView>
+		);
 	}
 
 	if (params.type === 'friends') {
