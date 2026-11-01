@@ -19,6 +19,18 @@ export const WEB_ONLY_PID_MIN = 1_800_000_001;
 /** users.pid is a 32-bit integer. */
 export const WEB_ONLY_PID_MAX = 2_147_483_647;
 
+/**
+ * The official Pakka account. A service identity inside the web-only range, far above where the
+ * sequence will ever get. It has no web_identities row, so no sign-in can ever resolve to it: the
+ * only way to post as it is the key-protected /internal/v1/official routes (services/official).
+ */
+export const OFFICIAL_PID = 2_000_000_000;
+export const OFFICIAL_NAME = 'Pakka';
+
+export function isOfficialPid(pid: number): boolean {
+	return pid === OFFICIAL_PID;
+}
+
 export function isWebOnlyPid(pid: number): boolean {
 	return Number.isInteger(pid) && pid >= WEB_ONLY_PID_MIN && pid <= WEB_ONLY_PID_MAX;
 }

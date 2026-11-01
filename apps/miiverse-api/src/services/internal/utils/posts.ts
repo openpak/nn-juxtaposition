@@ -4,7 +4,7 @@ import { uploadPainting, uploadScreenshot } from '@/images';
 import { getShotModeForTitleId } from '@/services/api/routes/posts';
 import { evaluateAutomodRules, getInvalidPostRegex, performAutomodAction } from '@/util';
 import { config } from '@/config';
-import { isWebOnlyPid } from '@/services/web-identity/web-identity';
+import { isOfficialPid, isWebOnlyPid } from '@/services/web-identity/web-identity';
 import { getDb, getDuplicatePosts } from '@/database';
 import { Post } from '@/models/post';
 import { asOpenapi } from '@/services/internal/builder/openapi';
@@ -45,6 +45,10 @@ export type PostCreateOptions = {
 	};
 	parentPost: HydratedPostDocument | null;
 	community: HydratedCommunityDocument;
+	/** A fixed post id, for callers that need to find the post again (the official account's idempotency) */
+	id?: string;
+	/** The official Pakka account: staff-controlled content skips the duplicate check and automod */
+	official?: boolean;
 };
 
 const defaultMiiFaceFilename = 'normal_face.png';
@@ -122,7 +126,7 @@ async function validateAndProcessPostBody(input: string): Promise<{ text: string
  */
 export async function createNewPost(ops: PostCreateOptions): Promise<HydratedPostDocument> {
 	const body = ops.body;
-	const postId = await generatePostUID(21);
+	const postId = ops.id ?? await generatePostUID(21);
 
 	let paintings: PaintingUrls | null = null;
 	if (body.painting) {
@@ -181,7 +185,7 @@ export async function createNewPost(ops: PostCreateOptions): Promise<HydratedPos
 		language_id: body.languageId,
 		mii: ops.author.miiData,
 		// A web-only player has no Mii: consoles get the default avatar (uploaded by the seed)
-		mii_face_url: `${config.cdnUrl}/mii/${isWebOnlyPid(ops.author.pid) ? 'default' : ops.author.pid}/${miiFace}`,
+		mii_face_url: `${config.cdnUrl}/mii/${isWebOnlyPid(ops.author.pid) && !isOfficialPid(ops.author.pid) ? 'default' : ops.author.pid}/${miiFace}`,
 		pid: ops.author.pid,
 		platform_id: body.platformId ?? 0,
 		region_id: body.regionId ?? 2,
@@ -190,7 +194,7 @@ export async function createNewPost(ops: PostCreateOptions): Promise<HydratedPos
 	};
 
 	const maxDuplicatePostAgeMs = 5 * 60 * 1000;
-	const duplicatePost = await getDuplicatePosts(ops.author.pid, document, maxDuplicatePostAgeMs);
+	const duplicatePost = ops.official ? null : await getDuplicatePosts(ops.author.pid, document, maxDuplicatePostAgeMs);
 	if (duplicatePost) {
 		throw new Error('Duplicate post found');
 	}
@@ -200,11 +204,13 @@ export async function createNewPost(ops: PostCreateOptions): Promise<HydratedPos
 	}
 
 	// Automod
-	const automodRules = await AutomodRule.find({ enabled: true });
-	const automodEval = evaluateAutomodRules(document, automodRules);
-	const automodResult = await performAutomodAction(document, automodEval);
-	if (!automodResult.allowPost) {
-		throw errors.for('automod_prevented');
+	if (!ops.official) {
+		const automodRules = await AutomodRule.find({ enabled: true });
+		const automodEval = evaluateAutomodRules(document, automodRules);
+		const automodResult = await performAutomodAction(document, automodEval);
+		if (!automodResult.allowPost) {
+			throw errors.for('automod_prevented');
+		}
 	}
 
 	const newPost = await Post.create(document);

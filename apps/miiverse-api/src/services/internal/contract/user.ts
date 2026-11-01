@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { isOfficialPid } from '@/services/web-identity/web-identity';
 import { asOpenapi } from '@/services/internal/builder/openapi';
 import type { GetUserDataResponse } from '@pretendonetwork/grpc/account/v2/get_user_data_rpc';
-import type { User } from '@/prisma/client';
 import type { UserWithSettings } from '@/services/internal/utils/user';
+import type { User } from '@/prisma/client';
 
 export const userBadgeSchema = z.enum([
 	'al:dev',
@@ -84,12 +85,16 @@ export function getProfileFlags(pnid: GetUserDataResponse): UserBadgeEnum[] {
 }
 
 export function mapUserProfile(user: UserWithSettings, pnid: GetUserDataResponse, followers: number, posts: number): UserProfileDto {
+	const flags = getProfileFlags(pnid);
+	if (isOfficialPid(user.pid) && !flags.includes('verified')) {
+		flags.push('verified'); // the official Pakka account
+	}
 	return {
 		pid: user.pid,
 		accountStatus: user.accountStatus,
 		username: pnid.username,
 		miiName: user.displayName,
-		flags: getProfileFlags(pnid),
+		flags,
 		isOnline: isDateInRange(user.lastSeen, 10),
 		profileInfo: {
 			comment: user.settings?.profileComment ?? null,

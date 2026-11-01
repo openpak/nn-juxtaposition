@@ -5,17 +5,44 @@
 
 import { deflateSync } from 'node:zlib';
 
-// 5x7 capitals, one string per row, '#' = on. Only the letters the seeds use.
+// 5x7 capitals, one string per row, '#' = on. Letters and digits, so any community name has a glyph.
 const FONT: Record<string, string[]> = {
 	A: ['.###.', '#...#', '#...#', '#####', '#...#', '#...#', '#...#'],
+	B: ['####.', '#...#', '#...#', '####.', '#...#', '#...#', '####.'],
+	C: ['.####', '#....', '#....', '#....', '#....', '#....', '.####'],
 	D: ['####.', '#...#', '#...#', '#...#', '#...#', '#...#', '####.'],
+	E: ['#####', '#....', '#....', '####.', '#....', '#....', '#####'],
 	F: ['#####', '#....', '#....', '####.', '#....', '#....', '#....'],
+	G: ['.####', '#....', '#....', '#..##', '#...#', '#...#', '.###.'],
 	H: ['#...#', '#...#', '#...#', '#####', '#...#', '#...#', '#...#'],
 	I: ['#####', '..#..', '..#..', '..#..', '..#..', '..#..', '#####'],
+	J: ['..###', '...#.', '...#.', '...#.', '...#.', '#..#.', '.##..'],
+	K: ['#...#', '#..#.', '#.#..', '##...', '#.#..', '#..#.', '#...#'],
+	L: ['#....', '#....', '#....', '#....', '#....', '#....', '#####'],
 	M: ['#...#', '##.##', '#.#.#', '#...#', '#...#', '#...#', '#...#'],
+	N: ['#...#', '##..#', '#.#.#', '#..##', '#...#', '#...#', '#...#'],
 	O: ['.###.', '#...#', '#...#', '#...#', '#...#', '#...#', '.###.'],
+	P: ['####.', '#...#', '#...#', '####.', '#....', '#....', '#....'],
+	Q: ['.###.', '#...#', '#...#', '#...#', '#.#.#', '#..#.', '.##.#'],
+	R: ['####.', '#...#', '#...#', '####.', '#.#..', '#..#.', '#...#'],
 	S: ['.####', '#....', '#....', '.###.', '....#', '....#', '####.'],
-	W: ['#...#', '#...#', '#...#', '#.#.#', '#.#.#', '##.##', '#...#']
+	T: ['#####', '..#..', '..#..', '..#..', '..#..', '..#..', '..#..'],
+	U: ['#...#', '#...#', '#...#', '#...#', '#...#', '#...#', '.###.'],
+	V: ['#...#', '#...#', '#...#', '#...#', '#...#', '.#.#.', '..#..'],
+	W: ['#...#', '#...#', '#...#', '#.#.#', '#.#.#', '##.##', '#...#'],
+	X: ['#...#', '#...#', '.#.#.', '..#..', '.#.#.', '#...#', '#...#'],
+	Y: ['#...#', '#...#', '.#.#.', '..#..', '..#..', '..#..', '..#..'],
+	Z: ['#####', '....#', '...#.', '..#..', '.#...', '#....', '#####'],
+	0: ['.###.', '#...#', '#..##', '#.#.#', '##..#', '#...#', '.###.'],
+	1: ['..#..', '.##..', '..#..', '..#..', '..#..', '..#..', '.###.'],
+	2: ['.###.', '#...#', '....#', '...#.', '..#..', '.#...', '#####'],
+	3: ['####.', '....#', '....#', '.###.', '....#', '....#', '####.'],
+	4: ['...#.', '..##.', '.#.#.', '#..#.', '#####', '...#.', '...#.'],
+	5: ['#####', '#....', '####.', '....#', '....#', '#...#', '.###.'],
+	6: ['.###.', '#....', '#....', '####.', '#...#', '#...#', '.###.'],
+	7: ['#####', '....#', '...#.', '..#..', '.#...', '.#...', '.#...'],
+	8: ['.###.', '#...#', '#...#', '.###.', '#...#', '#...#', '.###.'],
+	9: ['.###.', '#...#', '#...#', '.####', '....#', '....#', '.###.']
 };
 
 export type Rgb = [number, number, number];
@@ -168,5 +195,66 @@ export function renderAvatar(size = 256): Buffer {
 			setPixel(px, i, c);
 		}
 	}
+	return encodePng(size, size, px);
+}
+
+/** The letter a generated community icon shows: the first letter or digit of its name, else "O". */
+export function iconLetter(name: string): string {
+	const m = /[A-Za-z0-9]/.exec(name);
+	return m ? m[0].toUpperCase() : 'O';
+}
+
+/**
+ * The official Pakka avatar, in the style of the OpenPak site marks: an indigo disc with a white
+ * ring and a mint speech bubble carrying a "P". Every expression file of the Pakka account shows
+ * this same picture. Drawn with plain arithmetic like the other seed art.
+ */
+export function renderPakkaAvatar(size = 256): Buffer {
+	const px = new Uint8Array(size * size * 4);
+	const bgA: Rgb = [99, 102, 241];
+	const bgB: Rgb = [67, 56, 202];
+	const mint: Rgb = [52, 211, 153];
+	const ink: Rgb = [67, 56, 202];
+	const white: Rgb = [255, 255, 255];
+	const r = size / 2;
+	const ring = { inner: r * 0.7, outer: r * 0.78 };
+	// bubble: rounded rectangle, with a tail at its lower left
+	const bx0 = size * 0.27;
+	const bx1 = size * 0.73;
+	const by0 = size * 0.3;
+	const by1 = size * 0.64;
+	const br = size * 0.1;
+	const tail: [number, number][] = [[size * 0.33, size * 0.6], [size * 0.3, size * 0.74], [size * 0.46, size * 0.62]];
+	const inTail = (x: number, y: number): boolean => {
+		const side = (p: [number, number], q: [number, number]): number => (x - q[0]) * (p[1] - q[1]) - (p[0] - q[0]) * (y - q[1]);
+		const [a, b, c] = tail as [[number, number], [number, number], [number, number]];
+		const d1 = side(a, b);
+		const d2 = side(b, c);
+		const d3 = side(c, a);
+		return !((d1 < 0 || d2 < 0 || d3 < 0) && (d1 > 0 || d2 > 0 || d3 > 0));
+	};
+	for (let y = 0; y < size; y++) {
+		for (let x = 0; x < size; x++) {
+			const dx = x + 0.5 - r;
+			const dy = y + 0.5 - r;
+			const dist = Math.hypot(dx, dy);
+			if (dist > r) {
+				continue; // outside the disc: transparent
+			}
+			let c = mix(bgA, bgB, (x + y) / (2 * size));
+			if (dist >= ring.inner && dist <= ring.outer) {
+				c = white;
+			}
+			const cx = Math.min(Math.max(x + 0.5, bx0 + br), bx1 - br);
+			const cy = Math.min(Math.max(y + 0.5, by0 + br), by1 - br);
+			const inBubble = x + 0.5 >= bx0 && x + 0.5 <= bx1 && y + 0.5 >= by0 && y + 0.5 <= by1 && Math.hypot(x + 0.5 - cx, y + 0.5 - cy) <= br;
+			if (inBubble || inTail(x + 0.5, y + 0.5)) {
+				c = mint;
+			}
+			setPixel(px, (y * size + x) * 4, c);
+		}
+	}
+	const cell = Math.floor(size / 24);
+	drawLetter(px, size, 'P', Math.floor(size / 2 - (5 * cell) / 2), Math.floor((by0 + by1) / 2 - (7 * cell) / 2), cell, ink);
 	return encodePng(size, size, px);
 }

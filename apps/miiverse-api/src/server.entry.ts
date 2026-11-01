@@ -9,6 +9,7 @@ import api from '@/services/api';
 import { healthzRouter } from '@/services/healthz';
 import { cdnRouter } from '@/services/cdn';
 import { activityIngestRouter } from '@/services/activity/http';
+import { officialRouter } from '@/services/official/official';
 import { config } from '@/config';
 import { setupGrpc } from '@/services/internal/server';
 import { initImageProcessing } from '@/images';
@@ -29,6 +30,8 @@ app.disable('x-powered-by');
 // Create router
 logger.info('Setting up Middleware');
 app.use(loggerHttp);
+// Pakka's key-protected routes bring their own (larger) JSON parser, so they come first
+app.use('/internal/v1/official', officialRouter);
 app.use(express.json());
 app.use(healthzRouter);
 app.use(cdnRouter);

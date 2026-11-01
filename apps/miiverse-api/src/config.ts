@@ -79,6 +79,11 @@ const schema = z.object({
 		categories: z.string().default('badge'),
 		imageHosts: z.string().default('rewards.openpak.org,openpak.org')
 	}).default({ key: '', categories: 'badge', imageHosts: 'rewards.openpak.org,openpak.org' }),
+	// The official Pakka account (services/official). The key lets Pakka, OpenPak's assistant, post as
+	// the verified Pakka account through /internal/v1/official/*. Empty key = those routes answer 404.
+	official: z.object({
+		key: z.string().default('')
+	}).default({ key: '' }),
 	domains: z.object({
 		api: z.hostname().default('api.olv.pretendo.cc'),
 		discovery: z.hostname().default('discovery.olv.pretendo.cc'),
@@ -137,6 +142,9 @@ export const presets: Record<string, any> = {
 			key: '',
 			categories: 'badge',
 			imageHosts: 'rewards.openpak.org,openpak.org'
+		},
+		official: {
+			key: ''
 		}
 	},
 	dummy: {
