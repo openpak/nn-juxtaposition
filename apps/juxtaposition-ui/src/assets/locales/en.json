@@ -168,6 +168,7 @@
   "setup": {
     "title": "OpenVerse Setup",
     "welcome": "Welcome to OpenVerse!",
+    "welcome_title": "Welcome",
     "welcome_text": "OpenVerse is a gaming community that connects people from all over the world using Mii characters. Use OpenVerse to share your gaming experiences and meet people from around the world.",
     "beta": "Beta Disclaimer",
     "beta_text": {

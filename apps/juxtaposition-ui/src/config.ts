@@ -64,7 +64,6 @@ const schema = z.object({
 		/** Shared .env already carries SSO_CLIENT_OPENVERSE_SECRET for the website. */
 		clientSecret: z.string().default(process.env.SSO_CLIENT_OPENVERSE_SECRET ?? ''),
 		authorizeUrl: z.string().default('https://openpak.org/account/sso/authorize'),
-		logoutUrl: z.string().default('https://openpak.org/account/sso/logout'),
 		/** Private-network address of the website's token endpoint. */
 		tokenUrl: z.string().default('http://openpak-website:20010/internal/sso/token'),
 		linkUrl: z.string().default('https://openpak.org/account')

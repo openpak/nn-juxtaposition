@@ -7,6 +7,8 @@ import { ContextProviders } from '@/middleware/jsx';
 import { WebNoticeView } from '@/services/juxt-web/views/web/noticeView';
 import { WebNoWiiuView } from '@/services/juxt-web/views/web/noWiiuView';
 import { WebAboutView } from '@/services/juxt-web/views/web/aboutView';
+import { WebFirstRunView } from '@/services/juxt-web/views/web/firstRunView';
+import { logoutRouter } from '@/services/juxt-web/routes/web/logout';
 import { WebErrorView } from '@/services/juxt-web/views/web/errorView';
 import { WebRoot } from '@/services/juxt-web/views/web/root';
 import type { ReactElement } from 'react';
@@ -56,6 +58,26 @@ describe('web shell', () => {
 		const html = await render(<WebNoWiiuView linkUrl="https://openpak.org/account" />);
 		expect(html).toContain('No Wii U linked');
 		expect(html).toContain('href="https://openpak.org/account"');
+	});
+
+	it('first-run page is titled Welcome', async () => {
+		const html = await render(<WebFirstRunView />);
+		expect(html).toContain('<title>Welcome · OpenVerse</title>');
+	});
+
+	it('logout ends only this site and lands on /about, never openpak.org', () => {
+		const calls: unknown[][] = [];
+		const req = { session: { destroy: (cb: () => void) => cb() } };
+		const res = {
+			set: (...a: unknown[]) => calls.push(['set', ...a]),
+			clearCookie: (...a: unknown[]) => calls.push(['clear', ...a]),
+			redirect: (...a: unknown[]) => calls.push(['redirect', ...a])
+		};
+		const layer = logoutRouter.stack[0]!.route!.stack[0]!;
+		layer.handle(req as never, res as never, (() => {}) as never);
+		expect(calls).toContainEqual(['redirect', 303, '/about']);
+		expect(calls).toContainEqual(['clear', 'connect.sid']);
+		expect(JSON.stringify(calls)).not.toContain('openpak.org');
 	});
 
 	it('error page renders under the OpenVerse title', async () => {

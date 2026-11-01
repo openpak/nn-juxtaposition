@@ -9,8 +9,8 @@ The web UI has no sign-in form. `GET /login` on the canonical host (`PN_JUXTAPOS
   `SSO_CLIENT_OPENVERSE_SECRET` from the shared `.env`, never logged). Result `{account_id, display_name, wiiu_pid}`.
 - `wiiu_pid == null`: a page says no Wii U/3DS is linked, with a link to openpak.org's account page. No session is created.
 - Otherwise the session (Redis, regenerated after sign-in) keeps `{accountId, displayName, wiiuPid}`.
-- `GET /logout` destroys the session and sends the browser to openpak.org's `/account/sso/logout`.
-- Config: `PN_JUXTAPOSITION_UI_SSO_{CLIENT_ID,CLIENT_SECRET,AUTHORIZE_URL,LOGOUT_URL,TOKEN_URL,LINK_URL}`.
+- `GET /logout` destroys only this site's session and redirects (303) to `/about`, the signed-out landing page; openpak.org stays signed in.
+- Config: `PN_JUXTAPOSITION_UI_SSO_{CLIENT_ID,CLIENT_SECRET,AUTHORIZE_URL,TOKEN_URL,LINK_URL}`.
 
 ## How the session reaches the miiverse-api
 

@@ -1,14 +1,13 @@
 import express from 'express';
-import { config } from '@/config';
 
 export const logoutRouter = express.Router();
 
+// Sign out of this site only: openpak.org stays signed in (like leaving one Google app).
+// /about is the signed-out landing page; /login would send the browser straight back to openpak.org.
 logoutRouter.get('/', (req, res) => {
-	const done = new URL('/login', config.http.baseUrl);
-	const target = new URL(config.sso.logoutUrl);
-	target.searchParams.set('redirect_uri', done.toString());
+	res.set('Cache-Control', 'no-store');
 	req.session.destroy(() => {
 		res.clearCookie('connect.sid');
-		res.redirect(target.toString());
+		res.redirect(303, '/about');
 	});
 });

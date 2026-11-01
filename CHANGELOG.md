@@ -6,6 +6,11 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.9 — 2026-11-01
+
+- ui: `/logout` ends only the OpenVerse session and redirects (303) to `/about`, the signed-out landing page. It no longer goes through openpak.org's "Sign out of OpenPak?" page and openpak.org stays signed in; the next Sign in may sign straight back in. The `PN_JUXTAPOSITION_UI_SSO_LOGOUT_URL` setting is gone
+- ui: the first-run page title is "Welcome · OpenVerse" (was "Welcome to OpenVerse! · OpenVerse")
+
 ## v0.3.8 — 2026-11-01
 
 - ui: /feed sends an account that has not finished console onboarding to the first-run page instead of a 500
