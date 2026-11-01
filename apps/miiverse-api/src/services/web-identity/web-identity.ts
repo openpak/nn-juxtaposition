@@ -83,6 +83,8 @@ export type SsoIdentityInput = {
 	accountId: string;
 	displayName: string;
 	wiiuPid: number | null;
+	/** A console share (nx-share) names the person only when it creates them: the name stays their web sign-in's. */
+	keepName?: boolean;
 };
 
 function isUniqueViolation(e: unknown): boolean {
@@ -154,7 +156,7 @@ export async function resolveWebIdentity(db: IdentityDb, input: SsoIdentityInput
 				throw e;
 			}
 		}
-	} else if (!identity.linked && user.displayName !== name) {
+	} else if (!identity.linked && !input.keepName && user.displayName !== name) {
 		// A web-only player's name follows their OpenPak account. A console player's name is their Mii's.
 		await db.user.update({ where: { pid: identity.pid }, data: { displayName: name } });
 	}

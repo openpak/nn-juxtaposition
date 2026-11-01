@@ -25,7 +25,8 @@ ssoRouter.post({
 		body: z.object({
 			accountId: z.string().min(1).max(64),
 			displayName: z.string().max(200),
-			wiiuPid: z.number().int().nullable()
+			wiiuPid: z.number().int().nullable(),
+			keepName: z.boolean().optional()
 		}),
 		response: resolvedSchema
 	},

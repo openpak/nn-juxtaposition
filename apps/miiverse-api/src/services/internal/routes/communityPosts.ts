@@ -10,6 +10,7 @@ import { createNewPost, isValidPost, postCreateSchema } from '@/services/interna
 import { errors } from '@/services/internal/errors';
 import { isPostingAllowed } from '@/services/internal/utils/communities';
 import { mapSelf } from '@/services/internal/contract/self';
+import { CONSOLE_SHARE_ROOM, switchTitleIdForms } from '@/services/console-share/console-share';
 
 export const communityPostsRouter = createInternalApiRouter();
 
@@ -141,6 +142,73 @@ communityPostsRouter.post({
 			body,
 			community,
 			parentPost: null
+		});
+		const users = await db.user.findMany({
+			where: {
+				pid: {
+					in: getRelevantPidsFromPost([newPost])
+				}
+			}
+		});
+
+		return mapPost(newPost, community, users);
+	}
+});
+
+/* A screenshot shared from the Switch Album (Album -> Post). nx-share proves the console user,
+ * resolves their OpenVerse identity (sso.resolve) and calls this as that user (x-trusted-pid),
+ * so bans, read-only (supervised) accounts, community permissions, automod and the duplicate
+ * check all apply as they do to any post. The screenshot is the console's own capture, already
+ * scaled by nx-share to the 800x450 OpenVerse keeps. It goes to the game's community when one
+ * has the Switch title id, otherwise to the Switch room, and carries the game's name. */
+communityPostsRouter.post({
+	path: '/console-share/posts',
+	name: 'consoleShare.createPost',
+	description: 'Create a screenshot post shared from the Switch Album',
+	guard: guards.user,
+	schema: {
+		body: z.object({
+			titleId: z.string().regex(/^([0-9A-F]{16})?$/),
+			titleName: z.string().max(128).default(''),
+			body: z.string().trim().optional(),
+			isSpoiler: z.boolean().default(false),
+			screenshot: z.base64()
+		}),
+		response: postSchema
+	},
+	async handler({ body, auth, db }) {
+		const account = auth!;
+		const forms = switchTitleIdForms(body.titleId);
+		let community = forms.length > 0 ? await Community.findOne({ title_id: { $in: forms } }) : null;
+		if (!community) {
+			community = await Community.findOne({ name: CONSOLE_SHARE_ROOM });
+		}
+		if (!community) {
+			throw errors.for('not_found');
+		}
+
+		const self = mapSelf(account);
+		if (!isPostingAllowed(community, self, null)) {
+			throw errors.for('forbidden');
+		}
+
+		const newPost = await createNewPost({
+			author: {
+				pid: account.pnid.pid,
+				miiData: account.pnid.mii?.data ?? '',
+				screenName: account.user?.displayName ?? '',
+				verified: self.permissions.moderator
+			},
+			body: {
+				body: body.body,
+				feelingId: 0,
+				isSpoiler: body.isSpoiler,
+				isAppJumpable: false,
+				screenshot: { file: body.screenshot, titleId: body.titleId }
+			},
+			community,
+			parentPost: null,
+			consoleShare: { titleId: body.titleId, titleName: body.titleName }
 		});
 		const users = await db.user.findMany({
 			where: {

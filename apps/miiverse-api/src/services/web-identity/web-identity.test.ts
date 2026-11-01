@@ -133,6 +133,16 @@ describe('first sign-in (no first-run page)', () => {
 		expect(users[0].displayName).toBe('New');
 	});
 
+	it('lets a console share name a new person but never rename one (keepName)', async () => {
+		const { db, users } = fakeDb();
+		await resolveWebIdentity(db, { accountId: 'k', displayName: 'Web name', wiiuPid: null });
+		const again = await resolveWebIdentity(db, { accountId: 'k', displayName: 'Console nickname', wiiuPid: null, keepName: true });
+		expect(again.pid).toBe(WEB_ONLY_PID_MIN);
+		expect(users[0].displayName).toBe('Web name');
+		await resolveWebIdentity(db, { accountId: 'n', displayName: 'Console nickname', wiiuPid: null, keepName: true });
+		expect(users[1].displayName).toBe('Console nickname');
+	});
+
 	it('moves a web-only account to its real PID once a Wii U is linked', async () => {
 		const { db, users } = fakeDb();
 		const web = await resolveWebIdentity(db, { accountId: 'e', displayName: 'E', wiiuPid: null });

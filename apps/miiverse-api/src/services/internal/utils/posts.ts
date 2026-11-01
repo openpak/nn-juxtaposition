@@ -49,6 +49,14 @@ export type PostCreateOptions = {
 	id?: string;
 	/** The official Pakka account: staff-controlled content skips the duplicate check and automod */
 	official?: boolean;
+	/**
+	 * A Switch Album share (nx-share): the screenshot is the console's own capture of the game named here,
+	 * so it is kept in the Switch room too, and the post carries the game's title id and name.
+	 */
+	consoleShare?: {
+		titleId: string;
+		titleName: string;
+	};
 };
 
 const defaultMiiFaceFilename = 'normal_face.png';
@@ -144,7 +152,7 @@ export async function createNewPost(ops: PostCreateOptions): Promise<HydratedPos
 
 	let screenshots = null;
 	if (body.screenshot) {
-		const shotMode = getShotModeForTitleId(ops.community, body.screenshot.titleId);
+		const shotMode = ops.consoleShare ? 'allow' : getShotModeForTitleId(ops.community, body.screenshot.titleId);
 		if (shotMode !== 'block') {
 			screenshots = await uploadScreenshot({
 				blob: body.screenshot.file,
@@ -162,7 +170,8 @@ export async function createNewPost(ops: PostCreateOptions): Promise<HydratedPos
 	const postBody = body.body ? await validateAndProcessPostBody(body.body) : null;
 
 	const document: IPostInput = {
-		title_id: ops.community.title_id[0],
+		title_id: ops.consoleShare?.titleId || ops.community.title_id[0],
+		topic_tag: ops.consoleShare?.titleName || undefined,
 		community_id: ops.community.olive_community_id,
 		screen_name: ops.author.screenName,
 		body: postBody?.text,

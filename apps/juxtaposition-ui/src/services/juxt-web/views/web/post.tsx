@@ -130,6 +130,8 @@ export function WebPostView(props: PostViewProps): ReactNode {
 					}}
 				/>
 				<WebPostScreenshot post={props.post}></WebPostScreenshot>
+				{/* The game a Switch Album share was captured in (nx-share sets it as the topic tag). */}
+				{post.screenshot && post.topicTag ? <p className="post-topic-tag" style={{ margin: '4px 0 0', fontSize: '0.85em', opacity: 0.75 }}>{post.topicTag}</p> : null}
 				{post.painting ? <img id={post.id ?? undefined} className="painting" src={url.cdn(`/paintings/${post.author.pid}/${post.id}.png`)} /> : null}
 				{/* TODO add post.url back */}
 			</div>
