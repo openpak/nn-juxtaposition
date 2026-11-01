@@ -7,9 +7,13 @@ import { checkDiscovery } from '@/middleware/discovery';
 import { routes } from '@/services/juxt-web/routes';
 import { restrictHostnames } from '@/middleware/hostLimit';
 import { config } from '@/config';
+import { createLiteRouter, defaultFetchImage } from '@/lite/router';
+import { defaultDeps } from '@/lite/session';
+import { redisKv } from '@/services/juxt-web/routes/web/devices';
 import { internalApiMiddleware } from '@/middleware/internalApi';
 
 export const router = express.Router();
+const liteRouter = createLiteRouter({ ...defaultDeps, kv: redisKv, fetchImage: defaultFetchImage });
 const consoleRouter = express.Router();
 const webRouter = express.Router();
 
@@ -17,6 +21,8 @@ const webRouter = express.Router();
 // but we don't care about discovery until we're making it to the consoles themselves
 router.use(detectVersion);
 router.use(routes.STATIC);
+// OpenVerse Lite (old console browsers) has its own hosts, plain HTTP, and does not need discovery
+router.use(restrictHostnames(config.lite.hosts.split(',').map(h => h.trim()), liteRouter));
 router.use(routes.ENTRYPOINT);
 router.use(checkDiscovery);
 
@@ -53,5 +59,6 @@ webRouter.use('/login', routes.WEB_LOGIN);
 webRouter.use('/about', routes.WEB_ABOUT);
 webRouter.use('/logout', routes.WEB_LOGOUT);
 webRouter.use('/welcome', routes.WEB_WELCOME);
+webRouter.use('/devices', routes.WEB_DEVICES);
 webRouter.use('/activity', routes.WEB_ACTIVITY);
 webRouter.use('/admin', routes.ADMIN);

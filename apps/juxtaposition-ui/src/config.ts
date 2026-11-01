@@ -68,6 +68,15 @@ const schema = z.object({
 		tokenUrl: z.string().default('http://openpak-website:20010/internal/sso/token'),
 		linkUrl: z.string().default('https://openpak.org/account')
 	}).prefault({}),
+	/** OpenVerse Lite: plain-HTTP pages and a feed for older consoles (PS3, Wii, DSi browsers, Xbox 360 dashboard). */
+	lite: z.object({
+		/** Comma-separated hostnames that serve Lite. Served from our own edge, not through Cloudflare (old TLS). */
+		hosts: z.string().default('lite.verse.openpak.org'),
+		/** Private-network address of the API's /cdn route, for the drawing proxy. */
+		cdnInternalUrl: z.string().default('http://openpak-nn-juxtaposition-api:20090'),
+		/** Where people approve a link code (always HTTPS, behind openpak.org sign-in). */
+		approveUrl: z.string().default('https://verse.openpak.org/devices')
+	}).prefault({}),
 	domains: z.object({
 		/** Comma-separated list of hostnames that serve the web UI. */
 		web: z.string().default('verse.openpak.org'),

@@ -22,6 +22,7 @@ export function OpenPakTopBar(): ReactNode {
 				<a href="/" className="brand"><Mark size={32} />OpenVerse</a>
 				<nav aria-label="OpenVerse" className="navlinks">
 					<a href="/titles"><T k="shell.communities" /></a>
+					{signedIn ? <a href="/devices"><T k="shell.devices" /></a> : null}
 					<a href="/about"><T k="shell.about" /></a>
 				</nav>
 				<div className="ml-auto">

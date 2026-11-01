@@ -280,7 +280,8 @@
     "fine_print": "Based on Juxtaposition by Pretendo Network. Miiverse is a trademark of Nintendo.",
     "signin": "Sign in",
     "signout": "Sign out",
-    "feed": "Activity feed"
+    "feed": "Activity feed",
+    "devices": "Devices"
   },
   "about": {
     "title": "About OpenVerse",
@@ -341,5 +342,27 @@
       "trade": "completed a Pokémon trade: {{subject}}",
       "digest": "{{count}} more moments today"
     }
+  },
+  "devices": {
+    "title": "Linked devices",
+    "heading": "Linked devices",
+    "intro": "Link a PlayStation 3, Wii, Nintendo DSi or Xbox 360 to read and post on OpenVerse without typing a password on the console. Open OpenVerse Lite on the device, then type the code it shows.",
+    "code_label": "Code shown on the device",
+    "check": "Continue",
+    "confirm_heading": "Link this device?",
+    "confirm_text": "A {{device}} asked to be linked to your OpenPak account. Only continue if you started this on a device you are holding. It will be able to read OpenVerse, post, reply and send Yeahs as you.",
+    "confirm_yes": "Link it",
+    "confirm_no": "Cancel",
+    "list_heading": "Your linked devices",
+    "none": "No devices are linked.",
+    "added": "Linked {{date}}",
+    "last_used": "last used {{date}}",
+    "never_used": "not used yet",
+    "revoke": "Remove",
+    "n_approved": "Done. The device will finish linking in a few seconds.",
+    "n_removed": "Device removed. It can no longer use your account.",
+    "n_bad": "That code was not found. Check it on the device. Codes work for 10 minutes.",
+    "n_toomany": "This account has too many linked devices. Remove one first.",
+    "n_slow": "Too many tries. Wait a minute and try again."
   }
 }

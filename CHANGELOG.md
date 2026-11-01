@@ -6,6 +6,16 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.17 — 2026-11-02
+
+- lite: OpenVerse Lite, plain-HTTP pages for the PS3, Wii (Internet Channel) and DSi browsers on their own host (`lite.verse.openpak.org`, `PN_JUXTAPOSITION_UI_LITE_HOSTS`),
+  served from our edge because those browsers cannot reach Cloudflare's modern TLS. Server-rendered HTML 4 with no JavaScript, per-device sizes (`/ps3`, `/wii`, `/dsi`, or by user agent),
+  communities, posts, replies, Yeah and text posts; drawings are proxied (`/img/paintings/...`) and left out on the DSi. Supervised accounts are read-only. See docs/lite.md
+- lite: sign-in is a device link code, not a password: the console shows `ABC-DEF`, the person approves it at verse.openpak.org/devices (new Devices page: confirm step, list, Remove),
+  the console receives a revocable device token (SHA-256 stored, cookie `ovl`). Internal API `deviceLinks.create/resolve/list/revoke`, table `device_links`
+  (migration `20261102110000_device_links`; run `npm run migration:deploy`); 12 devices per account
+- x360: read-only feed for the Xbox 360 dashboard under `/x360/v1` on the Lite host (link, `feed`, `communities`, `posts`, `activity`), JSON or XML, bearer device token; see docs/lite.md
+
 ## v0.3.16 — 2026-11-01
 
 - web: the welcome page remembers the page you first asked for and never sends you back to a sign-in step (`/login/callback?code=...` is no longer wrapped in `/welcome?redirect=`, and `code`/`state` are stripped); the sign-in steps are exempt from the welcome redirect

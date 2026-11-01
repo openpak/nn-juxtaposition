@@ -16,6 +16,7 @@ import { discoveryRouter } from '@/services/internal/routes/discovery';
 import { adminAutomodRouter } from '@/services/internal/routes/admin/adminAutomod';
 import { onboardingRouter } from '@/services/internal/routes/onboarding';
 import { ssoRouter } from '@/services/internal/routes/sso';
+import { deviceLinksRouter } from '@/services/internal/routes/deviceLinks';
 import { activityRouter } from '@/services/internal/routes/activity';
 import { userSettingsRouter } from '@/services/internal/routes/userSettings';
 
@@ -34,6 +35,7 @@ internalApiRouter.use('/api/v1', notificationsRouter.toRouter());
 internalApiRouter.use('/api/v1', onboardingRouter.toRouter());
 internalApiRouter.use('/api/v1', ssoRouter.toRouter());
 internalApiRouter.use('/api/v1', activityRouter.toRouter());
+internalApiRouter.use('/api/v1', deviceLinksRouter.toRouter());
 
 internalApiRouter.use('/api/v1', adminCommunitiesRouter.toRouter());
 internalApiRouter.use('/api/v1', adminReportsRouter.toRouter());

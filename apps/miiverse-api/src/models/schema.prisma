@@ -129,6 +129,25 @@ model WebIdentity {
   @@map("web_identities")
 }
 
+/// A console that was linked to an OpenPak account with a short code (OpenVerse Lite on the PS3, Wii and
+/// DSi browsers, and the Xbox 360 feed). Only the SHA-256 of the token is stored; the token itself
+/// lives on the device. Revoked rows are kept so the list can say so.
+model DeviceLink {
+  id          String    @id @default(uuid())
+  accountId   String    @map("account_id")
+  /// ps3 | wii | dsi | x360 | lite
+  deviceClass String    @map("device_class")
+  label       String
+  tokenHash   String    @unique @map("token_hash")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  lastUsedAt  DateTime? @map("last_used_at")
+  revokedAt   DateTime? @map("revoked_at")
+
+  @@index([accountId])
+  @@map("device_links")
+}
+
+
 /// Opt-in automatic activity posts (a badge earned, a course uploaded...). Off by default; keyed by the
 /// OpenPak account like web_identities. `categories` holds the switched-on category ids.
 model ActivitySetting {
