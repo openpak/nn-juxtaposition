@@ -1,7 +1,6 @@
 import express from 'express';
 import { z } from 'zod';
 import { parseReq } from '@/services/juxt-web/routes/routeUtils';
-import { WebFirstRunView } from '@/services/juxt-web/views/web/firstRunView';
 import { PortalFirstRunView } from '@/services/juxt-web/views/portal/firstRunView';
 import { CtrFirstRunView } from '@/services/juxt-web/views/ctr/firstRunView';
 
@@ -16,9 +15,12 @@ showRouter.get('/', async function (req, res) {
 	});
 
 	const self = hasAuth() ? auth().self : null;
+	if (req.directory === 'web') {
+		// The web has no first-run page: signing in sets the user up (routes/web/login.tsx)
+		return res.redirect(query.topic_tag ? `/topics?${new URLSearchParams({ topic_tag: query.topic_tag })}` : '/titles');
+	}
 	if (!self?.hasDoneOnboarding) {
 		return res.jsxForDirectory({
-			web: <WebFirstRunView />,
 			portal: <PortalFirstRunView />,
 			ctr: <CtrFirstRunView />
 		});
@@ -34,8 +36,10 @@ showRouter.get('/', async function (req, res) {
 });
 
 showRouter.get('/first', async function (req, res) {
+	if (req.directory === 'web') {
+		return res.redirect('/titles');
+	}
 	return res.jsxForDirectory({
-		web: <WebFirstRunView />,
 		portal: <PortalFirstRunView />,
 		ctr: <CtrFirstRunView />
 	});

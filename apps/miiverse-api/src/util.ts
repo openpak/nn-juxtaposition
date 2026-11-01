@@ -4,6 +4,7 @@ import { SystemType } from '@pretendonetwork/grpc/account/v2/token_info';
 import xmlbuilder from 'xmlbuilder';
 import { config } from '@/config';
 import { logger } from '@/logger';
+import { buildWebOnlyAccount, isWebOnlyPid } from '@/services/web-identity/web-identity';
 import { grpcAccount, grpcApi, oldGrpcFriends } from '@/grpc';
 import { getS3 } from '@/s3';
 import { AutomodLog } from '@/models/automodLog';
@@ -151,6 +152,10 @@ export async function getUserFriendRequestsIncoming(pid: number): Promise<Friend
 }
 
 export function getUserAccountData(pid: number): Promise<GetPNIDResponse> {
+	// A web-only OpenPak account has no console account to ask about (see services/web-identity)
+	if (isWebOnlyPid(pid)) {
+		return Promise.resolve(buildWebOnlyAccount(pid));
+	}
 	// getUserData is deprecated, but the alternatives aren't implemented yet...
 	return grpcAccount.client().getUserData({
 		pid

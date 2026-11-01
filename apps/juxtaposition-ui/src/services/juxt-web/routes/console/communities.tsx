@@ -154,7 +154,8 @@ communitiesRouter.get('/:communityID/create', async function (req, res) {
 		show: 'post',
 		shotMode,
 		community,
-		errorText: query['error-text']
+		errorText: query['error-text'],
+		readOnly: auth().self.readOnly
 	};
 	res.jsxForDirectory({
 		ctr: <CtrNewPostPage {...props} />,

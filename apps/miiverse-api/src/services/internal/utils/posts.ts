@@ -4,6 +4,7 @@ import { uploadPainting, uploadScreenshot } from '@/images';
 import { getShotModeForTitleId } from '@/services/api/routes/posts';
 import { evaluateAutomodRules, getInvalidPostRegex, performAutomodAction } from '@/util';
 import { config } from '@/config';
+import { isWebOnlyPid } from '@/services/web-identity/web-identity';
 import { getDb, getDuplicatePosts } from '@/database';
 import { Post } from '@/models/post';
 import { asOpenapi } from '@/services/internal/builder/openapi';
@@ -179,7 +180,8 @@ export async function createNewPost(ops: PostCreateOptions): Promise<HydratedPos
 		is_app_jumpable: body.isAppJumpable ? 1 : 0,
 		language_id: body.languageId,
 		mii: ops.author.miiData,
-		mii_face_url: `${config.cdnUrl}/mii/${ops.author.pid}/${miiFace}`,
+		// A web-only player has no Mii: consoles get the default avatar (uploaded by the seed)
+		mii_face_url: `${config.cdnUrl}/mii/${isWebOnlyPid(ops.author.pid) ? 'default' : ops.author.pid}/${miiFace}`,
 		pid: ops.author.pid,
 		platform_id: body.platformId ?? 0,
 		region_id: body.regionId ?? 2,

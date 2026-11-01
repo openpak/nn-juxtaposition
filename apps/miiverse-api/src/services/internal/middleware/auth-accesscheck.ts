@@ -40,3 +40,16 @@ export async function authAccessCheck(request: express.Request, response: expres
 
 	return next();
 }
+
+/**
+ * A read-only account (supervised, web) may look but not change anything. Only the web UI can be
+ * read-only, and accepting the rules stays allowed so the welcome page still works.
+ */
+export async function readOnlyGate(request: express.Request, response: express.Response, next: express.NextFunction): Promise<void> {
+	const account = response.locals.account;
+	const isWrite = request.method !== 'GET' && request.method !== 'HEAD' && request.method !== 'OPTIONS';
+	if (account?.readOnly && isWrite && !request.path.startsWith('/api/v1/sso/')) {
+		throw errors.for('auth_read_only');
+	}
+	return next();
+}

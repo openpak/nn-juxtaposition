@@ -1,7 +1,6 @@
 import { PortalPageBody, PortalRoot } from '@/services/juxt-web/views/portal/root';
 import { T } from '@/services/juxt-web/views/common/components/T';
 import type { ReactNode } from 'react';
-import type { FirstRunViewProps } from '@/services/juxt-web/views/web/firstRunView';
 
 const AboutSection = {
 	Root(props: { children?: ReactNode; id?: string; visible?: boolean }): ReactNode {
@@ -54,6 +53,8 @@ const AboutSection = {
 		);
 	}
 };
+
+export type FirstRunViewProps = Record<string, never>;
 
 export function PortalFirstRunView(_props: FirstRunViewProps): ReactNode {
 	const sections = {

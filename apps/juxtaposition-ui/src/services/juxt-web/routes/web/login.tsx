@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { config } from '@/config';
 import { logger } from '@/logger';
 import { finishSso, safeRedirect, startSso } from '@/sso';
-import { WebNoWiiuView } from '@/services/juxt-web/views/web/noWiiuView';
+import { createInternalApiClient } from '@/api/client';
 import { parseReq } from '@/services/juxt-web/routes/routeUtils';
 import { getDiscoveryStatusMessage } from '@/middleware/discovery';
 import type { SsoSettings } from '@/sso';
@@ -54,10 +54,6 @@ loginRouter.get('/callback', async (req, res) => {
 	}
 
 	const { identity, redirect } = result;
-	if (identity.wiiuPid === null) {
-		req.session.sso = undefined;
-		return req.session.save(() => res.jsx(<WebNoWiiuView linkUrl={config.sso.linkUrl} />));
-	}
 
 	const { data: discovery } = await req.api.discovery.get({ environment: config.serverEnvironment });
 	if (discovery.status !== 'open') {
@@ -67,13 +63,28 @@ loginRouter.get('/callback', async (req, res) => {
 		});
 	}
 
+	// Find or create the OpenVerse user for this OpenPak account: a linked Wii U keeps its PID, an
+	// account with no console gets a web-only number. Nobody sees a first-run page.
+	let pid: number;
+	try {
+		const { data } = await createInternalApiClient({}).sso.resolve({
+			accountId: identity.accountId,
+			displayName: identity.displayName,
+			wiiuPid: identity.wiiuPid
+		});
+		pid = data.pid;
+	} catch (e) {
+		logger.error(e, 'Failed to set up the OpenVerse user for the SSO sign-in');
+		return res.renderError({ code: 502, message: 'Sign-in with OpenPak is unavailable right now. Please try again in a moment.' });
+	}
+
 	// Fresh session id after sign-in (fixation).
 	req.session.regenerate((err) => {
 		if (err) {
 			logger.error(err, 'Failed to regenerate the session');
 			return res.renderError({ code: 500, message: 'Error' });
 		}
-		req.session.sso = { accountId: identity.accountId, displayName: identity.displayName, wiiuPid: identity.wiiuPid };
+		req.session.sso = { accountId: identity.accountId, displayName: identity.displayName, wiiuPid: identity.wiiuPid, pid };
 		req.session.save(() => res.redirect(redirect));
 	});
 });

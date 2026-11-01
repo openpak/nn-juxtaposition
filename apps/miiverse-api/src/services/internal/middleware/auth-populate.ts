@@ -1,6 +1,8 @@
 import { getUserAccountData, getUserDataFromServiceToken, getUserDataFromToken, getValueFromHeaders } from '@/util';
 import { errors } from '@/services/internal/errors';
-import { getUser } from '@/database';
+import { getDb, getUser } from '@/database';
+import { isWebOnlyPid } from '@/services/web-identity/web-identity';
+import { getWebAccess } from '@/services/web-identity/access';
 import type express from 'express';
 import type { GetUserDataResponse } from '@pretendonetwork/grpc/account/v2/get_user_data_rpc';
 
@@ -39,7 +41,17 @@ export async function authPopulate(request: express.Request, response: express.R
 		const moderator = accountIsModerator(pnid);
 		const developer = accountIsDeveloper(pnid);
 
-		response.locals.account = { pnid, user, moderator, developer };
+		// Only the web UI sends x-trusted-pid; its identity row says who the person is and whether
+		// they have accepted the rules / are supervised.
+		let readOnly = false;
+		let rulesAccepted = true;
+		if (trustedPid) {
+			const identity = await getDb().webIdentity.findFirst({ where: { pid: pnid.pid } });
+			rulesAccepted = identity ? identity.rulesAcceptedAt !== null : true;
+			readOnly = (await getWebAccess(identity?.accountId ?? null)) === 'read_only';
+		}
+
+		response.locals.account = { pnid, user, moderator, developer, readOnly, rulesAccepted };
 	} else {
 		// Guest access
 		response.locals.account = null;
@@ -73,6 +85,13 @@ async function webAuth(request: express.Request, oAuthToken: string): Promise<Ge
 async function trustedAuth(trustedPid: string): Promise<GetUserDataResponse> {
 	if (!/^[1-9][0-9]{0,15}$/.test(trustedPid)) {
 		throw errors.for('bad_request', 'Invalid trusted PID');
+	}
+	if (isWebOnlyPid(Number(trustedPid))) {
+		// No console account behind this one: the identity row and the user row are all there is.
+		const known = await getUser(Number(trustedPid));
+		if (!known) {
+			throw errors.for('unauthorized', 'Unknown account!');
+		}
 	}
 	return await getUserAccountData(Number(trustedPid)).catch(() => {
 		throw errors.for('unauthorized', 'Unknown account!');

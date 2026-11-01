@@ -115,3 +115,16 @@ model NotificationRecipient {
   @@index([pid])
   @@map("notification_recipients")
 }
+
+/// Maps an OpenPak account (web sign-in) to the numeric id the rest of this service is keyed by.
+/// A Wii U-linked account uses its real PID; a web-only account gets a number from the sequence
+/// below, which starts above the highest PID nn-account ever hands out (1799999999).
+model WebIdentity {
+  accountId       String    @id @map("account_id")
+  pid             Int       @unique @default(autoincrement())
+  linked          Boolean   @default(false)
+  rulesAcceptedAt DateTime? @map("rules_accepted_at")
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  @@map("web_identities")
+}

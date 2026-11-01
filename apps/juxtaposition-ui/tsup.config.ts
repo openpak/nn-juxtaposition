@@ -149,6 +149,7 @@ export default defineConfig([
 	{
 		entry: [
 			'webfiles/web/js/admin.ts',
+			'webfiles/web/js/drawing.ts',
 			'webfiles/web/js/login.js',
 			'webfiles/web/js/painting.js',
 			'webfiles/web/js/web.js',

@@ -7,8 +7,12 @@ The web UI has no sign-in form. `GET /login` on the canonical host (`PN_JUXTAPOS
 - `GET /login/callback`: checks `state` against the session, then POSTs the code to
   `http://openpak-website:20010/internal/sso/token` (HTTP Basic `openverse:<secret>`,
   `SSO_CLIENT_OPENVERSE_SECRET` from the shared `.env`, never logged). Result `{account_id, display_name, wiiu_pid}`.
-- `wiiu_pid == null`: a page says no Wii U/3DS is linked, with a link to openpak.org's account page. No session is created.
-- Otherwise the session (Redis, regenerated after sign-in) keeps `{accountId, displayName, wiiuPid}`.
+- Right after the code exchange the UI calls the internal `sso.resolve` (`POST /sso/resolve`), which finds or creates the
+  OpenVerse user for the account (see "Identity" below). There is no first-run page on the web and no "link a console" gate:
+  every OpenPak account can sign in, with or without a Wii U or 3DS.
+- The session (Redis, regenerated after sign-in) keeps `{accountId, displayName, wiiuPid, pid}`; `pid` is the number OpenVerse knows the person by.
+- First visit: until the account has accepted the community rules, every page redirects to `/welcome` (rules, one Accept button).
+  Acceptance is stored once per account (`web_identities.rules_accepted_at`).
 - `GET /logout` destroys only this site's session and redirects (303) to `/about`, the signed-out landing page; openpak.org stays signed in.
 - Config: `PN_JUXTAPOSITION_UI_SSO_{CLIENT_ID,CLIENT_SECRET,AUTHORIZE_URL,TOKEN_URL,LINK_URL}`.
 
@@ -19,3 +23,53 @@ accepts it as a third authentication method next to `x-service-token` (consoles)
 (old web login) and loads the account by PID. It is safe because the internal Express app is reachable only
 through the gRPC `sendPacket` channel, which requires the shared API key; browsers and consoles cannot set it.
 This needed no change to nn-account. Console login (NNAS service tokens) is untouched.
+
+## Identity (who a web account is)
+
+Everything in miiverse-api is keyed by a number called `pid`. `web_identities` (Postgres) maps an OpenPak `account_id` to it:
+
+| Account | `pid` | `linked` |
+| --- | --- | --- |
+| Has a Wii U linked | the real Wii U PID from nn-account (1000000000 to 1799999999) | true |
+| Web only (no console) | next value of the `web_identities_pid_seq` sequence, from 1800000001 up to 2147483647 | false |
+
+nn-account never issues a PID above 1799999999, so a web-only number cannot collide with a console PID. The upper bound is the
+largest 32-bit integer because `users.pid` is an `INTEGER`. A Wii U-linked account uses its real PID on the web too, so console
+posts and web posts are one user. A web-only account that links a console later switches to the real PID from then on; what it posted
+before stays under the old number (merging them is a follow-up).
+
+`sso.resolve` is idempotent: it creates the `web_identities` row, the `users` row and its settings (the same defaults the console
+first-run page writes) on first use, keeps a console player's name (their Mii's), and keeps a web-only player's name in step with the
+OpenPak account. A web-only account has no Mii and no console account, so `getUserAccountData` answers from a local record
+(`buildWebOnlyAccount`) instead of nn-account, `username` is empty (the user page then shows no `@handle`), and posts carry the
+default avatar (`mii/default/*.png`, written by `npm run db:seed`) for consoles.
+
+## Posting from the web
+
+- Text and drawings only. There is no image or screenshot upload on the web.
+- The drawing pad is 320x120, black on white, the console's size. The page posts a 1-bit BMP (`painting`, base64, `bmp=true`); the
+  server reads it with the same code path as a 3DS, crops to 320x120, makes it bilevel and stores the zlib-compressed TGA that Wii U
+  and 3DS read, plus the PNGs the web shows. `apps/miiverse-api/src/images.drawing.test.ts` runs the web encoder through that code and
+  checks the stored TGA. Not verified on a console (nothing here is).
+- Yeahs, replies, follows and user pages go through the same internal API as a console account, using the web-only `pid`.
+
+## Supervised accounts
+
+OFF by default is the aim; what ships is read-only. The OpenPak parental controls core (`platforms/core/infra/parental`) has no
+OpenVerse setting, is not deployed on the production box, and the website has no parent screen for account-level supervision
+(its parental page edits a Switch console's setting through nx-pctl). So no new setting was added there. Instead:
+
+- With `PN_MIIVERSE_API_PARENTAL_ADDRESS` (gRPC address) and `PN_MIIVERSE_API_PARENTAL_KEY` (the `wiiu` adapter key) set, the API asks
+  `Parental.GetProfile(account_id)` (cached 60 s) and treats a supervised account as read-only on the web: it can browse, and cannot
+  post, reply, Yeah or follow (`403 auth_read_only`; the post page explains why).
+- If it is configured and the core cannot be reached, the account is read-only (fail closed).
+- If it is not configured (today), there is no check.
+- Follow-up: deploy parental, give it a `wiiu=<key>` adapter key, add an `openverse` level (`off`, `read`, `read_post`) to the profile
+  and a parent screen; apply the check to console traffic by resolving PID to account id.
+
+## Seeded communities
+
+`npm run db:seed` (inside the api image: `node dist/seed.js`) creates, if missing by name or title ID: Announcements (team-only
+posting), Help, Introductions, Off-topic, Drawing and Art, Feedback, Switch, Wii U and 3DS, and Super Mario Maker. Each gets a drawn
+icon and banners through the normal upload pipeline. Edits made later in the admin panel are kept. The two hubs are ordinary
+communities; game communities are not re-parented under them.

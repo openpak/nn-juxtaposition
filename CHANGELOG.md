@@ -6,6 +6,20 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.10 — 2026-11-01
+
+- web: signing in with openpak.org creates the OpenVerse user on the spot (internal `sso.resolve`); there is no first-run page on the web
+  and no Wii U requirement. A Wii U-linked account keeps its PID; a web-only account gets a number from 1800000001 (`web_identities`
+  table, migration `20261101190000_web_identities`; run `npm run migration:deploy`)
+- web: a short welcome page (community rules, Accept) on the first visit
+- web: posting for everyone, text or a 320x120 drawing (canvas posts a 1-bit BMP the console drawing pipeline turns into the stored TGA);
+  no image uploads from the web
+- web: a failed Mii picture falls back to the OpenPak default avatar; console views of a web-only player's posts use `mii/default/*`
+- web: supervised accounts are read-only when the parental controls core is configured (`PN_MIIVERSE_API_PARENTAL_ADDRESS/KEY`); see docs/web-sso.md
+- seed: `npm run db:seed` creates the starting communities (Announcements, Help, Introductions, Off-topic, Drawing and Art, Feedback,
+  Switch, Wii U and 3DS, Super Mario Maker) with drawn icons and banners, and uploads the default avatar
+- ui: the user page leaves out an empty `@handle`
+
 ## v0.3.9 — 2026-11-01
 
 - ui: `/logout` ends only the OpenVerse session and redirects (303) to `/about`, the signed-out landing page. It no longer goes through openpak.org's "Sign out of OpenPak?" page and openpak.org stays signed in; the next Sign in may sign straight back in. The `PN_JUXTAPOSITION_UI_SSO_LOGOUT_URL` setting is gone

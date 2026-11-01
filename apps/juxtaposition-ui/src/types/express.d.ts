@@ -77,6 +77,7 @@ declare module 'express-session' {
 		/** openpak.org SSO sign-in in flight (state + PKCE verifier) */
 		ssoPending?: import('@/sso').SsoPending;
 		/** Signed-in openpak.org account for the web UI */
-		sso?: { accountId: string; displayName: string; wiiuPid: number | null };
+		/** `pid` is the number OpenVerse knows them by: their Wii U PID, or a web-only number (see webIdentity.ts) */
+		sso?: { accountId: string; displayName: string; wiiuPid: number | null; pid?: number };
 	}
 }

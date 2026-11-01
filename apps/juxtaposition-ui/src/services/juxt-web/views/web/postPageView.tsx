@@ -31,7 +31,8 @@ function PostHead(props: PostPageViewProps): ReactNode {
 		);
 	}
 
-	const title = `${post.author.miiName} (@${props.postPNID.username}) - ${props.community.name}`;
+	const handle = props.postPNID.username ? ` (@${props.postPNID.username})` : '';
+	const title = `${post.author.miiName}${handle} - ${props.community.name}`;
 	const description = `${post.body ?? ''}` + '\n\n' +
 		`${post.stats.replyCount} 🗨️  ${post.stats.empathyCount} ❤️`;
 	let image: string | null = null;

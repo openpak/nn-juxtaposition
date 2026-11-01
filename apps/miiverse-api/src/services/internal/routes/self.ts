@@ -46,7 +46,7 @@ selfRouter.get({
 			if (auth.pnid.mii) {
 				data.displayName = auth.pnid.mii.name;
 			}
-			if (auth.pnid.username !== user.pnid) {
+			if (auth.pnid.username && auth.pnid.username !== user.pnid) {
 				data.pnid = auth.pnid.username;
 				data.pnidNormalized = auth.pnid.username.toLowerCase();
 			}

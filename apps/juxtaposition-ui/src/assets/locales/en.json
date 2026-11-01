@@ -145,7 +145,20 @@
     "no_screenshot": "No Screenshot",
     "spoiler_label": "Spoiler",
     "painting_close": "Cancel",
-    "painting_submit": "OK"
+    "painting_submit": "OK",
+    "tab_text": "Text",
+    "tab_drawing": "Drawing",
+    "drawing_label": "Draw with your mouse, finger or pen",
+    "pen_small": "Small pen",
+    "pen_large": "Large pen",
+    "eraser": "Eraser",
+    "undo": "Undo",
+    "clear": "Clear",
+    "drawing_empty": "Draw something first, or switch to Text.",
+    "submit": "Post",
+    "read_only_title": "Posting is turned off for this account",
+    "read_only_text": "You can read everything in OpenVerse. A parent or guardian can change this in OpenPak parental controls.",
+    "back": "Back to OpenVerse"
   },
   "post": {
     "title": "Post by {{username}}",
@@ -280,9 +293,17 @@
   "notice": {
     "title": "Notice"
   },
-  "no_wiiu": {
-    "title": "No Wii U linked",
-    "text": "Your OpenPak account has no Wii U or 3DS linked yet. Link a console on openpak.org, then sign in again.",
-    "action": "Link a console on openpak.org"
+  "welcome": {
+    "title": "Welcome",
+    "heading": "Welcome to OpenVerse",
+    "intro": "Share posts and drawings with friends on Wii U, 3DS and the web. Before you start, please read the community rules.",
+    "rule_kind": "Be kind. No bullying, hate or harassment.",
+    "rule_family": "Keep it friendly for all ages: nothing adult, violent or disturbing.",
+    "rule_private": "Keep personal details private, yours and other people’s.",
+    "rule_spam": "No spam, advertising or pirated content.",
+    "rule_enforce": "Posts that break these rules are removed, and repeat offenders can lose access.",
+    "terms": "Read the full terms",
+    "accept": "Accept and continue",
+    "decline": "Not now, sign out"
   }
 }

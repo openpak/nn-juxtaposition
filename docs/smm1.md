@@ -28,8 +28,8 @@ a comment and a clear post from a real console (the post body shows `search_key`
 
 ## What this repository does
 
-- `services/communities/title-communities.ts` describes the Super Mario Maker community and creates
+- `services/communities/seed-communities.ts` describes the Super Mario Maker community and creates
   it when no community owns one of its title IDs. `npm run db:seed` runs it (with the discovery endpoints).
   Production had no communities when this was written, so a console cannot post until the seed has run.
-  The seed has a placeholder icon: replace it from the admin panel.
+  The seed draws its icon and banners itself (a coloured square with an M); an admin can replace them later.
 - Players cannot create sub-communities in it (`minimum_new_community_access_level` 3).

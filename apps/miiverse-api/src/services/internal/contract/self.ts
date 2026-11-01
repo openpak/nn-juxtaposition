@@ -32,6 +32,10 @@ export const selfSchema = z.object({
 	pid: z.number(),
 	username: z.string(),
 	hasDoneOnboarding: z.boolean(),
+	/** Web sign-in: the community rules have been accepted (always true for console sign-ins) */
+	hasAcceptedRules: z.boolean(),
+	/** Supervised account on the web: may read, may not post, reply, Yeah or follow */
+	readOnly: z.boolean(),
 	miiName: z.string(),
 	accountStatus: z.number(),
 	content: selfContentSchema,
@@ -60,6 +64,8 @@ const baseSelf: SelfDto = {
 	username: '',
 	accountStatus: 0,
 	hasDoneOnboarding: false,
+	hasAcceptedRules: true,
+	readOnly: false,
 	miiName: '',
 	content: {
 		followed_communities: [],
@@ -102,6 +108,8 @@ export function mapSelf(auth: AccountData): SelfDto {
 		accountStatus: auth.user.accountStatus,
 		miiName: auth.user.displayName,
 		hasDoneOnboarding: true,
+		hasAcceptedRules: auth.rulesAccepted,
+		readOnly: auth.readOnly,
 		content: {
 			followed_communities: auth.user.followedCommunities.map(v => v.communityId),
 			followed_users: auth.user.follows.map(v => v.followingPid)
@@ -113,7 +121,7 @@ export function mapSelf(auth: AccountData): SelfDto {
 			accessLevel: auth.pnid.accessLevel,
 
 			// 0 = normal, 1 = limited from posting, 2 = temp ban, 3 = perma ban
-			posting: auth.user.accountStatus === 0
+			posting: auth.user.accountStatus === 0 && !auth.readOnly
 		},
 		banState: null
 	};

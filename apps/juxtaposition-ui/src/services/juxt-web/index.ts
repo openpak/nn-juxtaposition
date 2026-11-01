@@ -52,4 +52,5 @@ webRouter.use('/news', routes.PORTAL_NEWS);
 webRouter.use('/login', routes.WEB_LOGIN);
 webRouter.use('/about', routes.WEB_ABOUT);
 webRouter.use('/logout', routes.WEB_LOGOUT);
+webRouter.use('/welcome', routes.WEB_WELCOME);
 webRouter.use('/admin', routes.ADMIN);

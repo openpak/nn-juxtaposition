@@ -2,7 +2,6 @@ import { CtrPageBody, CtrRoot } from '@/services/juxt-web/views/ctr/root';
 import { T } from '@/services/juxt-web/views/common/components/T';
 import { CtrPageTitledHeader } from '@/services/juxt-web/views/ctr/components/CtrPageHeader';
 import type { ReactNode } from 'react';
-import type { FirstRunViewProps } from '@/services/juxt-web/views/web/firstRunView';
 
 const AboutSection = {
 	Root(props: { children?: ReactNode; id?: string; visible?: boolean }): ReactNode {
@@ -55,6 +54,8 @@ const AboutSection = {
 		);
 	}
 };
+
+export type FirstRunViewProps = Record<string, never>;
 
 export function CtrFirstRunView(_props: FirstRunViewProps): ReactNode {
 	const sections = {

@@ -9,6 +9,7 @@ import { rateLimit } from 'express-rate-limit';
 import { SystemType } from '@pretendonetwork/grpc/account/v2/token_info';
 import { logger } from '@/logger';
 import { config } from '@/config';
+import { isWebOnlyPid, webOnlyAccount } from '@/webIdentity';
 import type { StringUnitLength } from 'luxon';
 import type { Options as RatelimitOptions } from 'express-rate-limit';
 import type { ZodType } from 'zod';
@@ -131,6 +132,9 @@ export function getReasonMap(): string[] {
 }
 
 export async function getUserAccountData(pid: number): Promise<AccountGetUserDataResponse> {
+	if (isWebOnlyPid(pid)) {
+		return webOnlyAccount(pid);
+	}
 	// getUserData is deprecated, but the alternatives aren't implemented yet...
 	const result: AccountGetUserDataResponse = await gRPCAccountClient.getUserData({
 		pid: pid

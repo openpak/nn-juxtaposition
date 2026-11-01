@@ -5,9 +5,9 @@ import { describe, expect, it } from 'vitest';
 import en from '@/assets/locales/en.json';
 import { ContextProviders } from '@/middleware/jsx';
 import { WebNoticeView } from '@/services/juxt-web/views/web/noticeView';
-import { WebNoWiiuView } from '@/services/juxt-web/views/web/noWiiuView';
 import { WebAboutView } from '@/services/juxt-web/views/web/aboutView';
-import { WebFirstRunView } from '@/services/juxt-web/views/web/firstRunView';
+import { WebWelcomeView } from '@/services/juxt-web/views/web/welcomeView';
+import { WebNewPostPage } from '@/services/juxt-web/views/web/newPostView';
 import { logoutRouter } from '@/services/juxt-web/routes/web/logout';
 import { WebErrorView } from '@/services/juxt-web/views/web/errorView';
 import { WebRoot } from '@/services/juxt-web/views/web/root';
@@ -54,15 +54,38 @@ describe('web shell', () => {
 		expect(html).toContain('https://github.com/openpak/nn-juxtaposition');
 	});
 
-	it('no-Wii-U page links to openpak.org', async () => {
-		const html = await render(<WebNoWiiuView linkUrl="https://openpak.org/account" />);
-		expect(html).toContain('No Wii U linked');
-		expect(html).toContain('href="https://openpak.org/account"');
+	it('welcome page shows the rules and one accept button, no console wording', async () => {
+		const html = await render(<WebWelcomeView redirect="/titles" />);
+		expect(html).toContain('<title>Welcome · OpenVerse</title>');
+		expect(html).toContain('Welcome to OpenVerse');
+		expect(html).toContain('<form action="/welcome/accept" method="post">');
+		expect(html).toContain('value="/titles"');
+		expect(html).toContain('Accept and continue');
+		expect(html.match(/<ul class="rules">(.*?)<\/ul>/)![1]!.match(/<li>/g)).toHaveLength(5);
+		expect(html).not.toMatch(/no_wiiu|welcome\.|new_post\./);
+		expect(html).not.toMatch(/first.run|Account Creation|Wii U linked|finish setup/i);
+		expect(html).not.toMatch(/pretendo\.|preten\.do/i);
 	});
 
-	it('first-run page is titled Welcome', async () => {
-		const html = await render(<WebFirstRunView />);
-		expect(html).toContain('<title>Welcome · OpenVerse</title>');
+	it('new post page has text and drawing, and a drawing field the server reads as a BMP', async () => {
+		const html = await render(<WebNewPostPage id="1" name="Help" url="/posts/new" show="post" shotMode="block" />);
+		expect(html).toContain('name="_post_type"');
+		expect(html).toContain('data-drawing-canvas');
+		expect(html).toContain('width="320" height="120"');
+		expect(html).toContain('name="bmp" value="true"');
+		expect(html).toContain('name="painting"');
+		expect(html).toContain('drawing.global.js');
+		expect(html).not.toContain('Posting is disabled on web');
+		expect(html).not.toMatch(/new_post\./);
+		// no image or screenshot upload from the web
+		expect(html).not.toMatch(/type="file"|name="shot"|name="screenshot"/);
+	});
+
+	it('new post page tells a supervised account why it cannot post, with no form', async () => {
+		const html = await render(<WebNewPostPage id="1" name="Help" url="/posts/new" show="post" shotMode="block" readOnly />);
+		expect(html).toContain('Posting is turned off for this account');
+		expect(html).not.toContain('<form');
+		expect(html).not.toContain('data-drawing-canvas');
 	});
 
 	it('logout ends only this site and lands on /about, never openpak.org', () => {

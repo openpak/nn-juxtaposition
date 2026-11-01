@@ -5,6 +5,7 @@ import { deletePostById, spoilerPostById, unspoilerPostById } from '@/js/api';
 import { initYeahButton, initSpoilers } from '@/js/post';
 import { initSearchForm } from '@/js/components/ui/WebSearchForm';
 import { Toast, initToast } from '@/js/toast';
+import '@/js/avatars';
 
 setInterval(checkForUpdates, 30000);
 

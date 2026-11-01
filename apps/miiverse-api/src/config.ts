@@ -64,6 +64,13 @@ const schema = z.object({
 		nnasUrl: z.string().default(''),
 		nnasKey: z.string().default('')
 	}).default({ chatUrl: '', chatKey: '', nnasUrl: '', nnasKey: '' }),
+	// OpenPak parental controls core (gRPC, adapter key for the wiiu namespace). Unset address = no
+	// supervision check. Set = a supervised account is read-only on the web, and an unreachable
+	// core also means read-only (fail closed).
+	parental: z.object({
+		address: z.string().default(''),
+		key: z.string().default('')
+	}).default({ address: '', key: '' }),
 	domains: z.object({
 		api: z.hostname().default('api.olv.pretendo.cc'),
 		discovery: z.hostname().default('discovery.olv.pretendo.cc'),
@@ -113,6 +120,10 @@ export const presets: Record<string, any> = {
 			chatKey: '',
 			nnasUrl: '',
 			nnasKey: ''
+		},
+		parental: {
+			address: '',
+			key: ''
 		}
 	},
 	dummy: {

@@ -125,3 +125,31 @@ form.account a:hover { color: var(--ink); text-decoration: underline; }
 .site-foot a:hover { color: var(--ink); text-decoration: underline; }
 .site-foot .muted { color: var(--muted); max-width: 24rem; font-size: .9rem; margin: .75rem 0 0; line-height: 1.5; }
 .foot-bottom { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-top: 22px; border-top: 1px solid var(--line); font-size: .86rem; color: var(--muted); }
+
+/* ---- New post: text or drawing --------------------------------------------------------------- */
+.web-post-form { width: 100%; max-width: 44rem; margin-left: auto; margin-right: auto; background: var(--raised); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+.web-post-form form { width: 100%; }
+.web-post-form .post-tabs { display: flex; gap: .5rem; margin: 0 0 1rem; }
+.web-post-form .post-tabs button { margin: 0; min-height: 40px; padding: 0 1.1rem; border-radius: 999px; font-weight: 700; cursor: pointer; background: var(--paper-2); color: var(--ink-2); border: 1px solid var(--line-2); }
+.web-post-form .post-tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+@media (prefers-color-scheme: dark) { .web-post-form .post-tabs button[aria-selected="true"] { color: #15172e; } }
+.web-post-form .post-tabs button[hidden] { display: none; }
+.add-post-page.web-post-form .textarea-text { background: var(--paper-2); color: var(--ink); border: 1px solid var(--line-2); border-radius: 12px; width: 100%; box-sizing: border-box; height: 12rem; }
+.web-post-form [hidden] { display: none !important; }
+.web-post-form .drawing-hint { margin: 0 0 .5rem; color: var(--ink-2); }
+.web-post-form .drawing-canvas { display: block; width: 100%; max-width: 640px; aspect-ratio: 320 / 120; margin: 0 auto; background: #fff; border: 2px solid var(--line-2); border-radius: 10px;
+                                  image-rendering: pixelated; touch-action: none; cursor: crosshair; box-sizing: border-box; }
+.web-post-form .drawing-tools { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: .75rem; }
+.web-post-form .drawing-tools button { margin: 0; min-height: 40px; padding: 0 1rem; border-radius: 999px; cursor: pointer; background: var(--paper-2); color: var(--ink); border: 1px solid var(--line-2); }
+.web-post-form .drawing-tools button[aria-pressed="true"] { border-color: var(--cursor); box-shadow: 0 0 0 2px var(--cursor); }
+.web-post-form .form-error { color: var(--bad); font-weight: 700; margin: .5rem 0; }
+.web-post-form #button-wrapper { margin-top: 1rem; }
+.read-only-note { max-width: 34rem; margin: 0 auto; padding: 1rem; color: var(--ink); }
+.read-only-note h3, .read-only-note p { color: var(--ink); }
+
+/* ---- Welcome (community rules) --------------------------------------------------------------- */
+.account-form-wrapper.welcome { max-width: 38rem; }
+.account-form-wrapper.welcome .rules { margin: 1rem 0; padding-left: 1.25rem; color: var(--ink); line-height: 1.6; }
+.account-form-wrapper.welcome .rules li { margin: .35rem 0; }
+.account-form-wrapper.welcome .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+.account-form-wrapper.welcome button.btn.primary { cursor: pointer; }

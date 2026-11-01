@@ -5,15 +5,26 @@ import type { RequestHandler, Request, Response } from 'express';
 
 export const webAuth: RequestHandler = async (request, response, next) => {
 	// The web UI signs in through openpak.org SSO only (see routes/web/login.tsx). The session holds the
-	// account and its Wii U PID; the miiverse-api is told who we are with the trusted `x-trusted-pid`
-	// header, which only this UI can set (the API's internal routes are reachable over gRPC with the API key only).
+	// account and the number OpenVerse knows it by (a Wii U PID, or a web-only number); the miiverse-api
+	// is told who we are with the trusted `x-trusted-pid` header, which only this UI can set (the API's
+	// internal routes are reachable over gRPC with the API key only).
 	const sso = request.session?.sso;
-	if (sso?.wiiuPid) {
+	if (sso) {
 		try {
-			request.pid = sso.wiiuPid;
-			if (!request.session.user || request.session.pid !== sso.wiiuPid) {
-				request.session.user = await getUserAccountData(sso.wiiuPid);
-				request.session.pid = sso.wiiuPid;
+			if (!sso.pid) {
+				// Signed in before web-only accounts existed: set the user up now.
+				const { data } = await createInternalApiClient({}).sso.resolve({
+					accountId: sso.accountId,
+					displayName: sso.displayName,
+					wiiuPid: sso.wiiuPid
+				});
+				sso.pid = data.pid;
+			}
+			const pid = sso.pid;
+			request.pid = pid;
+			if (!request.session.user || request.session.pid !== pid) {
+				request.session.user = await getUserAccountData(pid);
+				request.session.pid = pid;
 			}
 			request.user = request.session.user;
 			response.locals.displayName = sso.displayName;
@@ -50,12 +61,21 @@ export const webAuth: RequestHandler = async (request, response, next) => {
 	}
 
 	if (request.pid && request.path === '/login') {
-		return response.redirect('/titles/show?src=login');
+		return response.redirect('/titles');
+	}
+
+	// First visit: show the community rules once before anything else.
+	if (!request.self.hasAcceptedRules && !isWelcomeExempt(request.path)) {
+		return response.redirect(`/welcome?redirect=${encodeURIComponent(request.originalUrl)}`);
 	}
 
 	response.locals.pid = request.pid;
 	return next();
 };
+
+function isWelcomeExempt(path: string): boolean {
+	return path === '/welcome' || path === '/welcome/accept' || path === '/logout' || path === '/about';
+}
 
 function isStartOfPath(path: string, value: string): boolean {
 	return path.indexOf(value) === 0;

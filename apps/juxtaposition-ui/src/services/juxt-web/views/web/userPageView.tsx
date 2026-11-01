@@ -185,9 +185,7 @@ export function WebUserPageView(props: UserPageViewProps): ReactNode {
 						/>
 						<div className="title">
 							{profile.miiName}
-							{' '}
-							@
-							{profile.username}
+							{profile.username ? ` @${profile.username}` : null}
 							{ profile.flags.includes('verified') ? <span className="verified-badge">✓</span> : null}
 						</div>
 						{!isSelf
