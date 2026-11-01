@@ -73,3 +73,21 @@ level of the parental controls core (`platforms/core/infra/parental`). A supervi
 posting), Help, Introductions, Off-topic, Drawing and Art, Feedback, Switch, Wii U and 3DS, and Super Mario Maker. Each gets a drawn
 icon and banners through the normal upload pipeline. Edits made later in the admin panel are kept. The two hubs are ordinary
 communities; game communities are not re-parented under them.
+
+## Game communities
+
+Every game OpenPak serves (website titles with status live or beta) has one community. The same game on several consoles shares one
+community (no sub-communities): its `title_id` list holds the Wii U, 3DS and Switch IDs, so an in-game post lands there whichever
+console it comes from. Wii and DS games have no title ID to give and are web-only.
+
+- Bundle: `python3 apps/miiverse-api/tools/game-communities/build.py <titles.json> <dir>` reads the website's live and beta titles
+  (`requests`, kind `title`; columns name, console, title_id, title_ids) and copies each game's tile from openpak.org into `<dir>/icons`
+  (non-Switch tiles from `/static/art/titles/<slug>.jpg`, Switch icons from `/titles/icon/<id>`). A game with no art is drawn as an
+  OpenVerse letter icon.
+- Sync: `node dist/game-communities.js <dir>` (`npm run db:sync-games -- <dir>`). Idempotent and never deletes. A game is found by its
+  fixed id, then by a shared title ID, then by name; what is missing is created (owner: Pakka), what exists gets its name, title IDs
+  (only added to) and art updated. A community the sync made also follows the generated description; a hand-made one keeps its own.
+- Id: `olive_community_id` = sha256("openverse-game:" + slug of the name), first 8 bytes big endian, top bit set
+  (`communityIdForKey`). openpak.org computes the same id (`verseCommunityID`) to put an "OpenVerse community" button on each game's
+  details, so only live and beta games link. Super Mario Maker predates the sync and keeps its old id (an override on the website).
+- Pakka's News mirror already looks a channel's games up by title ID, so game news lands in these communities with no change there.

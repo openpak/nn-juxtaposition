@@ -6,6 +6,10 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## Unreleased
+
+- one OpenVerse community per game OpenPak serves: `tools/game-communities/build.py` builds a bundle from the website titles and their tiles, `npm run db:sync-games` creates and updates the communities (idempotent, never deletes). Wii U, 3DS and Switch title IDs go on the community so in-game posting lands in it
+
 ## v0.3.22 — 2026-11-02
 
 - lite: drawings load on the PS3 and Wii (the API names the drawing URL on verse.openpak.org, not the console CDN host); the Devices page tells people to open lite.verse.openpak.org;

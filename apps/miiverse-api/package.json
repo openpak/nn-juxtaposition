@@ -13,6 +13,7 @@
 		"migration:deploy": "prisma migrate deploy",
 		"migration:reset": "prisma migrate reset",
 		"db:seed": "tsup && node --enable-source-maps dist/seed.js",
+		"db:sync-games": "tsup && node --enable-source-maps dist/game-communities.js",
 		"media:orphans": "tsup && node --enable-source-maps dist/media-orphans.js",
 		"test": "vitest run",
 		"lint": "eslint .",
