@@ -28,12 +28,12 @@ const community = { olive_community_id: '777', name: 'Announcements', title_id: 
 
 beforeEach(() => {
 	vi.resetAllMocks();
-	config.official.key = KEY;
+	(config.official as { key: string }).key = KEY;
 });
 
 describe('official routes: who may call', () => {
 	it('answer 404 when no key is configured', async () => {
-		config.official.key = '';
+		(config.official as { key: string }).key = '';
 		const res = await superRequest(app).get('/internal/v1/official/account').set('x-internal-key', KEY);
 		expect(res.status).toBe(404);
 	});
