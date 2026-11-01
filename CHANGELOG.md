@@ -6,9 +6,9 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
-## v0.3.5 — 2026-11-01
+## v0.3.6 — 2026-11-01
 
-- ui: About page title is "About · OpenVerse"
+- ui: About and first-run page titles follow "<page> · OpenVerse"
 
 ## v0.3.4 — 2026-11-01
 

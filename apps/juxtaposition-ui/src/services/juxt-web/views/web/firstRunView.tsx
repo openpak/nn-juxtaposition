@@ -8,7 +8,7 @@ export type FirstRunViewProps = {
 export function WebFirstRunView(_props: FirstRunViewProps): ReactNode {
 	const extraHead = (
 		<>
-			<title>{T.str('login.heading') + ' · OpenVerse'}</title>
+			<title>{T.str('setup.welcome') + ' · OpenVerse'}</title>
 			<link rel="stylesheet" href="/assets/web/css/first_run.css" />
 		</>
 	);
