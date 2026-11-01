@@ -6,6 +6,16 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.0 — 2026-11-01
+
+- upstream: merged PretendoNetwork/juxtaposition `dev` b4963d0e (150 commits: markdown and mentions,
+  notification fixes, profile borders, frontend islands, user pnid column; migration
+  `20260918001215_add_pnid_to_user_table`). See `docs/upstream.md`
+- api: `GET /cdn/<key>` reads drawings, screenshots, icons and headers from the object store
+  (MinIO); point `PN_MIIVERSE_API_CDN_URL` and `PN_JUXTAPOSITION_UI_CDN_DOMAIN` at `https://<api host>/cdn`
+- api: `npm run db:seed` (node dist/seed.js) creates the prod/test/dev discovery endpoints
+- api: vitest setup; docs: `docs/roadmap.md`
+
 ## v0.2.2 — 2026-09-24
 
 - deps: npm audit fix plus overrides (js-yaml, mysql2, deepmerge-ts, esbuild) and @hey-api/openapi-ts 0.99 (Dependabot)
