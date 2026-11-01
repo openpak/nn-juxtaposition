@@ -75,7 +75,7 @@
     "language": "Gaeilge",
     "shell": {
         "skip": "Skip to content",
-        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "tagline": "Is spás pobail OpenPak é OpenVerse: poist, líníochtaí agus comhráite faoi na cluichí a imríonn tú.",
         "part_of": "Part of the OpenPak network",
         "openpak": "OpenPak",
         "home": "Home",
@@ -107,9 +107,17 @@
     "notice": {
         "title": "Notice"
     },
-    "no_wiiu": {
-        "title": "No Wii U linked",
-        "text": "Your OpenPak account has no Wii U or 3DS linked yet. Link a console on openpak.org, then sign in again.",
-        "action": "Link a console on openpak.org"
+    "welcome": {
+        "title": "Fáilte",
+        "heading": "Fáilte go OpenVerse",
+        "intro": "Roinn poist agus líníochtaí le pobal OpenPak, ón ngréasán, ón aip, ó Wii U agus ó 3DS. Sula dtosóidh tú, léigh rialacha an phobail le do thoil.",
+        "rule_kind": "Bí cineálta. Gan bulaíocht, gráin ná ciapadh.",
+        "rule_family": "Coinnigh an t-ábhar oiriúnach do gach aois: rud ar bith do dhaoine fásta, foréigneach nó suaite.",
+        "rule_private": "Coinnigh sonraí pearsanta príobháideach, do chuid féin agus cuid daoine eile.",
+        "rule_spam": "Gan turscar, fógraíocht ná ábhar píoráideach.",
+        "rule_enforce": "Baintear poist a bhriseann na rialacha seo, agus is féidir le ciontóirí athchleachtacha rochtain a chailleadh.",
+        "terms": "Léigh na téarmaí iomlána",
+        "accept": "Glac leis agus lean ar aghaidh",
+        "decline": "Ní anois"
     }
 }

@@ -16,7 +16,7 @@ export function LoginHead(): ReactNode {
 
 			{/* open graph/embeds */}
 			<meta property="og:title" content="OpenVerse" />
-			<meta property="og:description" content="OpenVerse is OpenPak's social network for Wii U and 3DS: communities, posts and drawings from your console." />
+			<meta property="og:description" content="OpenVerse is OpenPak's community space: posts, drawings and conversations about the games you play." />
 			<meta property="og:type" content="website" />
 			<meta property="og:url" content="https://verse.openpak.org/" />
 			<meta property="og:image" content="https://verse.openpak.org/assets/web/images/opengraph.png" />
@@ -27,11 +27,11 @@ export function LoginHead(): ReactNode {
 			<meta name="twitter:url" content="https://verse.openpak.org/" />
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:title" content="OpenVerse" />
-			<meta name="twitter:description" content="OpenVerse is OpenPak's social network for Wii U and 3DS: communities, posts and drawings from your console." />
+			<meta name="twitter:description" content="OpenVerse is OpenPak's community space: posts, drawings and conversations about the games you play." />
 			<meta name="twitter:image" content="https://verse.openpak.org/assets/web/images/opengraph.png" />
 
 			{/* google seo */}
-			<meta name="description" content="OpenVerse is OpenPak's social network for Wii U and 3DS: communities, posts and drawings from your console." />
+			<meta name="description" content="OpenVerse is OpenPak's community space: posts, drawings and conversations about the games you play." />
 			<meta name="robots" content="index, follow" />
 
 			{/* favicon */}

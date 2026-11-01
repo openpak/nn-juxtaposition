@@ -98,7 +98,7 @@
     "language": "Latviešu valoda",
     "shell": {
         "skip": "Skip to content",
-        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "tagline": "OpenVerse ir OpenPak kopienas telpa: ieraksti, zīmējumi un sarunas par spēlēm, ko tu spēlē.",
         "part_of": "Part of the OpenPak network",
         "openpak": "OpenPak",
         "home": "Home",
@@ -130,9 +130,17 @@
     "notice": {
         "title": "Notice"
     },
-    "no_wiiu": {
-        "title": "No Wii U linked",
-        "text": "Your OpenPak account has no Wii U or 3DS linked yet. Link a console on openpak.org, then sign in again.",
-        "action": "Link a console on openpak.org"
+    "welcome": {
+        "title": "Laipni lūdzam",
+        "heading": "Laipni lūdzam OpenVerse",
+        "intro": "Dalies ar ierakstiem un zīmējumiem ar OpenPak kopienu tīmeklī, lietotnē, Wii U un 3DS. Pirms sākšanas izlasi kopienas noteikumus.",
+        "rule_kind": "Esi laipns. Nekādas iebiedēšanas, naida vai uzmākšanās.",
+        "rule_family": "Saglabā piemērotu visiem vecumiem: nekā pieaugušajiem paredzēta, vardarbīga vai satraucoša.",
+        "rule_private": "Saglabā personas datus privātus, savus un citu.",
+        "rule_spam": "Nekāda surogātpasta, reklāmas vai pirātiska satura.",
+        "rule_enforce": "Ieraksti, kas pārkāpj šos noteikumus, tiek noņemti, un atkārtoti pārkāpēji var zaudēt piekļuvi.",
+        "terms": "Lasīt pilnos noteikumus",
+        "accept": "Piekrist un turpināt",
+        "decline": "Ne tagad"
     }
 }

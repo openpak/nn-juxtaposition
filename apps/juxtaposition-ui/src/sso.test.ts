@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { describe, expect, it, vi } from 'vitest';
-import { finishSso, safeRedirect, startSso } from '@/sso';
+import { finishSso, safeRedirect, startSso, welcomeTarget } from '@/sso';
 import type { SsoSettings } from '@/sso';
 
 const settings: SsoSettings = {
@@ -86,5 +86,24 @@ describe('safeRedirect', () => {
 		expect(safeRedirect('//evil.example')).toBe('/');
 		expect(safeRedirect('/login')).toBe('/');
 		expect(safeRedirect(undefined)).toBe('/');
+	});
+});
+
+describe('welcomeTarget (where Accept goes)', () => {
+	it('never replays a sign-in step or its one-time code', () => {
+		expect(welcomeTarget('/login/callback?code=abc&state=xyz')).toBe('/titles');
+		expect(welcomeTarget('/login?redirect=/feed')).toBe('/titles');
+	});
+
+	it('remembers the page that was asked for, minus code and state', () => {
+		expect(welcomeTarget('/feed')).toBe('/feed');
+		expect(welcomeTarget('/posts/abc?sort=newest-first&code=1&state=2')).toBe('/posts/abc?sort=newest-first');
+		expect(welcomeTarget('/titles/123/new?offset=30')).toBe('/titles/123/new?offset=30');
+	});
+
+	it('falls back to the communities page for the root, the welcome page, nothing, or another site', () => {
+		for (const bad of [undefined, '', '/', '/welcome?redirect=/x', '/logout', '//evil.example/x', 'https://evil.example/', '/\\evil']) {
+			expect(welcomeTarget(bad)).toBe('/titles');
+		}
 	});
 });

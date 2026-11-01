@@ -36,7 +36,10 @@ describe('web shell', () => {
 		expect(html).toContain('href="/login"');
 		expect(html).toContain('https://openpak.org/terms');
 		expect(html).toContain('github.com/openpak/nn-juxtaposition');
-		expect(html).toContain('© OpenPak · AGPL-3.0 · Based on Juxtaposition by Pretendo Network. Miiverse is a trademark of Nintendo.');
+		expect(html).toContain('<span><a href="https://openpak.org/">Part of the OpenPak network</a> · © OpenPak · AGPL-3.0 · Based on Juxtaposition by Pretendo Network. Miiverse is a trademark of Nintendo.</span>');
+		expect(html).toContain('OpenVerse is OpenPak&#x27;s community space: posts, drawings and conversations about the games you play.');
+		expect(html.match(/Part of the OpenPak network/g)).toHaveLength(1);
+		expect(html).not.toMatch(/for Wii U and 3DS|from your console/);
 		// No OpenPak logo in the header and no other network's links
 		expect(html).not.toMatch(/pretendo\.|preten\.do/i);
 	});

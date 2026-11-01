@@ -134,3 +134,24 @@ export async function finishSso(
 		}
 	};
 }
+
+/**
+ * Where to send a person once they have accepted the rules: the page they first asked for.
+ * Never a sign-in step (a used code must not be replayed), never the welcome page itself, and the
+ * SSO `code` and `state` parameters are dropped. Anything unusable becomes the communities page.
+ */
+export function welcomeTarget(redirect: string | undefined): string {
+	const safe = safeRedirect(redirect);
+	if (safe === '/' || safe.startsWith('/welcome') || safe.startsWith('/logout')) {
+		return '/titles';
+	}
+	const url = new URL(safe, 'https://verse.invalid');
+	url.searchParams.delete('code');
+	url.searchParams.delete('state');
+	return url.pathname + url.search;
+}
+
+export function isWelcomeExempt(path: string): boolean {
+	// the sign-in steps carry a one-time code: they must run, not be bounced to the welcome page
+	return path === '/welcome' || path === '/welcome/accept' || path === '/logout' || path === '/about' || path === '/login' || path === '/login/callback';
+}

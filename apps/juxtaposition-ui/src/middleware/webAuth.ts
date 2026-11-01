@@ -1,5 +1,6 @@
 import { createInternalApiClient } from '@/api/client';
 import { logger } from '@/logger';
+import { isWelcomeExempt, welcomeTarget } from '@/sso';
 import { getUserAccountData } from '@/util';
 import type { RequestHandler, Request, Response } from 'express';
 
@@ -66,16 +67,12 @@ export const webAuth: RequestHandler = async (request, response, next) => {
 
 	// First visit: show the community rules once before anything else.
 	if (!request.self.hasAcceptedRules && !isWelcomeExempt(request.path)) {
-		return response.redirect(`/welcome?redirect=${encodeURIComponent(request.originalUrl)}`);
+		return response.redirect(`/welcome?redirect=${encodeURIComponent(welcomeTarget(request.originalUrl))}`);
 	}
 
 	response.locals.pid = request.pid;
 	return next();
 };
-
-function isWelcomeExempt(path: string): boolean {
-	return path === '/welcome' || path === '/welcome/accept' || path === '/logout' || path === '/about';
-}
 
 function isStartOfPath(path: string, value: string): boolean {
 	return path.indexOf(value) === 0;

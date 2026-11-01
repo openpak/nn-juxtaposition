@@ -6,6 +6,13 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.16 — 2026-11-01
+
+- web: the welcome page remembers the page you first asked for and never sends you back to a sign-in step (`/login/callback?code=...` is no longer wrapped in `/welcome?redirect=`, and `code`/`state` are stripped); the sign-in steps are exempt from the welcome redirect
+- web: welcome page rebuilt on the shared page head and card, h1 in the site style, a primary "Accept and continue" and a secondary "Not now" button in a row (stacked full width on phones), no leftover background image
+- web: copy now says everyone can join from the web or the app, with or without a console (welcome intro, footer blurb, page descriptions), translated in every locale
+- web: footer "Part of the OpenPak network" moved into the bottom line, like OpenKart, OpenSplat and OpenMaker
+
 ## v0.3.15 — 2026-11-02
 
 - Switch Album shares: `POST /api/v1/console-share/posts` (internal API) creates a screenshot post for a console user that nx-share

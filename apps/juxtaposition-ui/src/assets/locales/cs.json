@@ -113,7 +113,7 @@
         "beta_text": {
             "third": "Tyto webové stránky, jejich software a veškerý obsah na nich uvedený jsou poskytovány „tak, jak jsou“ a „jak jsou k dispozici“. OpenPak nenabízí žádnou záruku, ať již expresní či implikovanou, ve věci vhodnosti a použitelnosti webových stránek, jejich softwaru a obsahu na nich.",
             "second": "S tím přichází i to riziko, že databáze může být kompletně vymazána na konci nebo v průběhu bety.",
-            "first": "Vítejte ve veřejné betě OpenPaku! Přestože se od první veřejné bety leccos změnilo, na OpenVerse se stále pracuje a mnohé se stále může změnit."
+            "first": "Vítejte ve veřejné betě projektu OpenPak! Přestože se od první veřejné bety leccos změnilo, na OpenVerse se stále pracuje a mnohé se stále může změnit."
         },
         "experience_text": {
             "expert": "Expert",
@@ -198,7 +198,7 @@
     },
     "shell": {
         "skip": "Skip to content",
-        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "tagline": "OpenVerse je komunitní prostor OpenPak: příspěvky, kresby a konverzace o hrách, které hrajete.",
         "part_of": "Part of the OpenPak network",
         "openpak": "OpenPak",
         "home": "Home",
@@ -230,9 +230,17 @@
     "notice": {
         "title": "Notice"
     },
-    "no_wiiu": {
-        "title": "No Wii U linked",
-        "text": "Your OpenPak account has no Wii U or 3DS linked yet. Link a console on openpak.org, then sign in again.",
-        "action": "Link a console on openpak.org"
+    "welcome": {
+        "title": "Vítejte",
+        "heading": "Vítejte v OpenVerse",
+        "intro": "Sdílejte příspěvky a kresby s komunitou OpenPak z webu, aplikace, Wii U i 3DS. Než začnete, přečtěte si prosím pravidla komunity.",
+        "rule_kind": "Buďte laskaví. Žádná šikana, nenávist ani obtěžování.",
+        "rule_family": "Udržujte obsah vhodný pro všechny věkové kategorie: nic pro dospělé, násilného ani znepokojivého.",
+        "rule_private": "Chraňte osobní údaje, své i cizí.",
+        "rule_spam": "Žádný spam, reklama ani pirátský obsah.",
+        "rule_enforce": "Příspěvky porušující tato pravidla jsou odstraňovány a opakovaným porušovatelům může být odebrán přístup.",
+        "terms": "Přečíst úplné podmínky",
+        "accept": "Přijmout a pokračovat",
+        "decline": "Teď ne"
     }
 }

@@ -69,7 +69,7 @@
     },
     "shell": {
         "skip": "Skip to content",
-        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "tagline": "Gofod cymunedol OpenPak yw OpenVerse: postiadau, lluniau a sgyrsiau am y gemau rydych chi'n eu chwarae.",
         "part_of": "Part of the OpenPak network",
         "openpak": "OpenPak",
         "home": "Home",
@@ -101,9 +101,17 @@
     "notice": {
         "title": "Notice"
     },
-    "no_wiiu": {
-        "title": "No Wii U linked",
-        "text": "Your OpenPak account has no Wii U or 3DS linked yet. Link a console on openpak.org, then sign in again.",
-        "action": "Link a console on openpak.org"
+    "welcome": {
+        "title": "Croeso",
+        "heading": "Croeso i OpenVerse",
+        "intro": "Rhannwch bostiadau a lluniau gyda chymuned OpenPak, o'r we, yr ap, Wii U a 3DS. Cyn i chi ddechrau, darllenwch reolau'r gymuned.",
+        "rule_kind": "Byddwch yn garedig. Dim bwlio, casineb na aflonyddu.",
+        "rule_family": "Cadwch bethau'n gyfeillgar i bob oed: dim byd i oedolion, treisgar na gofidus.",
+        "rule_private": "Cadwch fanylion personol yn breifat, eich rhai chi a rhai pobl eraill.",
+        "rule_spam": "Dim sbam, hysbysebu na chynnwys môr-ladrad.",
+        "rule_enforce": "Caiff postiadau sy'n torri'r rheolau hyn eu tynnu, a gall troseddwyr mynych golli mynediad.",
+        "terms": "Darllen y telerau llawn",
+        "accept": "Derbyn a pharhau",
+        "decline": "Nid nawr"
     }
 }

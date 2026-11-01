@@ -46,7 +46,6 @@ export function OpenPakFooter(): ReactNode {
 				<div>
 					<a href="/" className="brand"><Mark size={28} />OpenVerse</a>
 					<p className="muted"><T k="shell.tagline" /></p>
-					<p className="muted"><a href={`${OPENPAK}/`}><T k="shell.part_of" /></a></p>
 				</div>
 				<nav aria-labelledby="foot-net">
 					<h2 id="foot-net"><T k="shell.openpak" /></h2>
@@ -79,7 +78,7 @@ export function OpenPakFooter(): ReactNode {
 						<li><a href={`${OPENPAK}/legal`}><T k="shell.legal" /></a></li>
 					</ul>
 				</nav>
-				<div className="foot-bottom"><span>© OpenPak · AGPL-3.0 · <T k="shell.fine_print" /></span></div>
+				<div className="foot-bottom"><span><a href={`${OPENPAK}/`}><T k="shell.part_of" /></a> · © OpenPak · AGPL-3.0 · <T k="shell.fine_print" /></span></div>
 			</div>
 		</footer>
 	);

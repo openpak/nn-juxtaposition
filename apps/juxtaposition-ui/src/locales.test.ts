@@ -15,7 +15,7 @@ function flatten(value: unknown, key: string, out: [string, string][]): void {
 }
 
 // CJK languages attach particles directly (OpenVerseは, OpenVerse를); that is correct there.
-const CJK_FREE_LETTER = /OpenVerse(?![\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}])\p{L}/u;
+const CJK_FREE_LETTER = /Open(?:Verse|Pak)(?![\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}])\p{L}/u;
 
 const locales = readdirSync(dir)
 	.filter(f => f.endsWith('.json'))
@@ -26,7 +26,7 @@ const locales = readdirSync(dir)
 	});
 
 describe('locale files', () => {
-	it('never attach letters to the brand name (OpenVerse[a-z] and friends)', () => {
+	it('never attach letters to the brand name (OpenVerse[a-z], OpenPak[a-z])', () => {
 		const bad = locales.flatMap(l => l.values.filter(([, v]) => CJK_FREE_LETTER.test(v)).map(([k]) => `${l.file}:${k}`));
 		expect(bad).toEqual([]);
 	});

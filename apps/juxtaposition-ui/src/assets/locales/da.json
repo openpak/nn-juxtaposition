@@ -147,7 +147,7 @@
             "message_with_reason": "Du er begrænset for at lave opslag. Grund: \"{{reason}}\".",
             "temporary": "Du er blevet begrænset for at lave opslag indtil {{until}}.",
             "temporary_with_reason": "Du er blevet begrænset for at lave opslag indtil {{until}}. Grund: \"{{reason}}\".",
-            "footer": "Klik på denne besked for at vise reglerne for OpenVerse. Hvis du har nogen spørgsmål, vær så venlig at kontakte moderatorerne på OpenPakmet {{banAppealUrl}}."
+            "footer": "Klik på denne besked for at vise reglerne for OpenVerse. Hvis du har nogen spørgsmål, vær så venlig at kontakte moderatorerne hos OpenPak: {{banAppealUrl}}."
         }
     },
     "language": "Dansk",
@@ -228,7 +228,7 @@
     },
     "shell": {
         "skip": "Skip to content",
-        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "tagline": "OpenVerse er fællesskabsrummet i OpenPak: opslag, tegninger og samtaler om de spil, du spiller.",
         "part_of": "Part of the OpenPak network",
         "openpak": "OpenPak",
         "home": "Home",
@@ -260,9 +260,17 @@
     "notice": {
         "title": "Notice"
     },
-    "no_wiiu": {
-        "title": "No Wii U linked",
-        "text": "Your OpenPak account has no Wii U or 3DS linked yet. Link a console on openpak.org, then sign in again.",
-        "action": "Link a console on openpak.org"
+    "welcome": {
+        "title": "Velkommen",
+        "heading": "Velkommen til OpenVerse",
+        "intro": "Del opslag og tegninger med OpenPak-fællesskabet fra nettet, appen, Wii U og 3DS. Læs fællesskabets regler, før du går i gang.",
+        "rule_kind": "Vær venlig. Ingen mobning, had eller chikane.",
+        "rule_family": "Hold det venligt for alle aldre: intet voksent, voldeligt eller forstyrrende.",
+        "rule_private": "Hold personlige oplysninger private, dine egne og andres.",
+        "rule_spam": "Ingen spam, reklamer eller piratkopieret indhold.",
+        "rule_enforce": "Opslag, der bryder reglerne, fjernes, og gentagne overtrædere kan miste adgangen.",
+        "terms": "Læs de fulde vilkår",
+        "accept": "Accepter og fortsæt",
+        "decline": "Ikke nu"
     }
 }

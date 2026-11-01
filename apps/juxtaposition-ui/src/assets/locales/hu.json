@@ -247,7 +247,7 @@
     },
     "shell": {
         "skip": "Skip to content",
-        "tagline": "OpenVerse is OpenPak's own social network for Wii U and 3DS: communities, posts and drawings from your console.",
+        "tagline": "Az OpenVerse az OpenPak közösségi tere: bejegyzések, rajzok és beszélgetések a játékaidról.",
         "part_of": "Part of the OpenPak network",
         "openpak": "OpenPak",
         "home": "Home",
@@ -279,9 +279,17 @@
     "notice": {
         "title": "Notice"
     },
-    "no_wiiu": {
-        "title": "No Wii U linked",
-        "text": "Your OpenPak account has no Wii U or 3DS linked yet. Link a console on openpak.org, then sign in again.",
-        "action": "Link a console on openpak.org"
+    "welcome": {
+        "title": "Üdvözlünk",
+        "heading": "Üdvözlünk az OpenVerse-ben",
+        "intro": "Oszd meg bejegyzéseidet és rajzaidat az OpenPak közösségével a weben, az alkalmazásban, Wii U-n és 3DS-en. Kezdés előtt olvasd el a közösségi szabályokat.",
+        "rule_kind": "Légy kedves. Nincs zaklatás, gyűlölet vagy megfélemlítés.",
+        "rule_family": "Maradj barátságos minden korosztály számára: semmi felnőtt, erőszakos vagy zavaró tartalom.",
+        "rule_private": "Tartsd titokban a személyes adatokat, a sajátodat és másokét is.",
+        "rule_spam": "Nincs spam, reklám vagy kalóztartalom.",
+        "rule_enforce": "A szabályokat megszegő bejegyzéseket töröljük, az ismétlődő szabálysértők pedig elveszíthetik a hozzáférésüket.",
+        "terms": "Teljes feltételek elolvasása",
+        "accept": "Elfogadás és folytatás",
+        "decline": "Most nem"
     }
 }
