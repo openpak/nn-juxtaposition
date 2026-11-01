@@ -53,6 +53,7 @@ async function list(req: Request): Promise<DevicesViewProps['devices']> {
 	const { data } = await req.api.deviceLinks.list({ accountId });
 	return data.items.map(d => ({
 		id: d.id,
+		deviceClass: d.deviceClass,
 		label: d.label,
 		createdAt: String(d.createdAt),
 		lastUsedAt: d.lastUsedAt ? String(d.lastUsedAt) : null

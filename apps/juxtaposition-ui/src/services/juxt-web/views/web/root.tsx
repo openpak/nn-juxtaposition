@@ -1,5 +1,6 @@
 import cx from 'classnames';
 import { isValidElement } from 'react';
+import { assetVersion } from '@/assetVersion';
 import { OpenPakFooter, OpenPakTopBar } from '@/services/juxt-web/views/web/components/OpenPakShell';
 import type { ReactElement, ReactNode } from 'react';
 
@@ -26,7 +27,7 @@ function hasTitle(node: ReactNode): boolean {
 }
 
 export function OpenVerseStyling(): ReactNode {
-	return <link rel="stylesheet" type="text/css" href="/assets/web/css/openverse.css" />;
+	return <link rel="stylesheet" type="text/css" href={`/assets/web/css/openverse.css?v=${assetVersion('web/css/openverse.css')}`} />;
 }
 
 type DefaultStylingType = 'normal' | 'admin';

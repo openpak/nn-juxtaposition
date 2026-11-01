@@ -10,6 +10,12 @@ OpenPak work starts at the port/fork commit.
 
 - one OpenVerse community per game OpenPak serves: `tools/game-communities/build.py` builds a bundle from the website titles and their tiles, `npm run db:sync-games` creates and updates the communities (idempotent, never deletes). Wii U, 3DS and Switch title IDs go on the community so in-game posting lands in it
 
+## v0.3.23 — 2026-11-02
+
+- web: Linked devices page rebuilt on the shared layout (wrap, page head, cards): a code field (one-time-code, monospace, inline errors), where-to-find-the-code help, device rows with an icon, linked and last-used dates and a confirmed Remove, a friendly empty state
+- web: "Devices" is no longer in the top bar; Linked devices is in the account menu on the avatar (profile, linked devices, sign out)
+- web: openverse.css is requested with a content hash (`?v=`), so a changed stylesheet is never served stale by the CDN or the browser (the first Devices page was shown unstyled for that reason)
+
 ## v0.3.22 — 2026-11-02
 
 - lite: drawings load on the PS3 and Wii (the API names the drawing URL on verse.openpak.org, not the console CDN host); the Devices page tells people to open lite.verse.openpak.org;

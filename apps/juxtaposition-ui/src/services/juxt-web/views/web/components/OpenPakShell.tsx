@@ -22,16 +22,20 @@ export function OpenPakTopBar(): ReactNode {
 				<a href="/" className="brand"><Mark size={32} />OpenVerse</a>
 				<nav aria-label="OpenVerse" className="navlinks">
 					<a href="/titles"><T k="shell.communities" /></a>
-					{signedIn ? <a href="/devices"><T k="shell.devices" /></a> : null}
 					<a href="/about"><T k="shell.about" /></a>
 				</nav>
 				<div className="ml-auto">
 					{signedIn
 						? (
-								<>
-									<a className="btn ghost" href="/logout"><T k="shell.signout" /></a>
-									<a className="avatar-btn" href="/users/me" aria-label={user.displayName ?? ''} title={user.displayName ?? ''}>{initial}</a>
-								</>
+								<details className="acct-menu">
+									<summary className="avatar-btn" aria-label={T.str('shell.account_menu')} title={user.displayName ?? ''}>{initial}</summary>
+									<div className="acct-panel" role="menu">
+										<p className="acct-name">{user.displayName}</p>
+										<a role="menuitem" href="/users/me"><T k="global.user_page" /></a>
+										<a role="menuitem" href="/devices"><T k="shell.linked_devices" /></a>
+										<a role="menuitem" href="/logout"><T k="shell.signout" /></a>
+									</div>
+								</details>
 							)
 						: <a className="btn ghost" href="/login"><T k="shell.signin" /></a>}
 				</div>

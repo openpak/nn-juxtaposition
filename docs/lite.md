@@ -134,6 +134,25 @@ with the matching status; 120 requests a minute per address.
 XML mirrors the JSON: the root is `<feed>`, `<communities>`, `<posts>`, `<thread>`, `<activity>`, `<me>`, `<link>` or `<error>`;
 arrays are `<communities><community>...`, `<posts><post>...`, `<replies><item>...`; `null` is an empty element.
 
+## Internal API for the device-link logic
+
+For the OpenVerse web rebuild (or any other service on the private network). These are routes of the miiverse-api internal API
+(`/api/v1`, reachable only through the API-key gRPC channel, like `/sso/*`); the caller has already authenticated the person.
+All are `POST` with a JSON body. Device classes: `ps3`, `wii`, `dsi`, `x360`, `lite`.
+
+| Operation | Path | Body | Answer |
+| --- | --- | --- | --- |
+| `deviceLinks.create` | `/device-links` | `{accountId, deviceClass}` | `{id, token, deviceClass, label}` (the token is shown once); `403 forbidden` reason `too_many_links` at 12 active links |
+| `deviceLinks.resolve` | `/device-links/resolve` | `{token}` | `{id, accountId, pid, deviceClass}`, or `null` for an unknown or revoked token; `pid` is the account's current OpenVerse number |
+| `deviceLinks.list` | `/device-links/list` | `{accountId}` | `{items: [{id, deviceClass, label, createdAt, lastUsedAt}]}`, active links only |
+| `deviceLinks.revoke` | `/device-links/revoke` | `{accountId, id}` | `{status: "success"}`; `404` if it is not that account's active link |
+
+Code approval (the step before `create`) lives in Redis, `apps/juxtaposition-ui/src/lite/linkCodes.ts`: `verse-lite:code:<CODE>` holds
+`{deviceClass, secretHash, ip, createdAt, accountId|null}` for 10 minutes. The device side `startLink` writes it; the web side `peekCode` shows what is
+asking and `approveCode(code, accountId)` sets `accountId`; the device's `pollCode(code, secret, ip)` consumes it once (GETDEL) and then calls `deviceLinks.create`.
+A Go service can reimplement those four calls against the same key shape; the token table behind the four routes is what must be shared.
+Web pages: `GET /devices` (link form, list), `POST /devices/check` (code, then the confirm step), `POST /devices/approve`, `POST /devices/revoke`, all with a per-session `k` form token.
+
 ## Deploy
 
 1. Migration `20261102110000_device_links` (`npm run migration:deploy`).

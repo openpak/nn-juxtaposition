@@ -9,6 +9,7 @@ import { WebAboutView } from '@/services/juxt-web/views/web/aboutView';
 import { WebWelcomeView } from '@/services/juxt-web/views/web/welcomeView';
 import { WebNewPostPage } from '@/services/juxt-web/views/web/newPostView';
 import { logoutRouter } from '@/services/juxt-web/routes/web/logout';
+import { WebDevicesView } from '@/services/juxt-web/views/web/devicesView';
 import { WebErrorView } from '@/services/juxt-web/views/web/errorView';
 import { WebRoot } from '@/services/juxt-web/views/web/root';
 import type { ReactElement } from 'react';
@@ -47,8 +48,9 @@ describe('web shell', () => {
 	it('shows the signed-in chip with the display name initial', async () => {
 		const html = await render(<WebNoticeView message="x" />, 1800000001, 'Tobi');
 		expect(html).toContain('class="avatar-btn"');
-		expect(html).toContain('>T</a>');
+		expect(html).toContain('>T</summary>');
 		expect(html).toContain('href="/logout"');
+		expect(html).toContain('href="/devices"');
 	});
 
 	it('about page carries the AGPL credit and the source link', async () => {
@@ -179,3 +181,38 @@ describe('game activity', () => {
 		expect(ro).toContain('disabled');
 	});
 });
+
+describe('linked devices page', () => {
+	const base = { csrf: 'abc', devices: [] as never[], note: null, confirm: null };
+	const one = [{ id: 'd1', deviceClass: 'ps3', label: 'PlayStation 3', createdAt: '2026-11-01T10:00:00.000Z', lastUsedAt: null }];
+
+	it('is not in the top bar; it lives in the account menu', async () => {
+		const html = await render(<WebDevicesView {...base} />, 1800000001, 'Tobi');
+		const nav = /<nav aria-label="OpenVerse" class="navlinks">(.*?)<\/nav>/.exec(html)![1]!;
+		expect(nav).not.toContain('/devices');
+		expect(html).toMatch(/<details class="acct-menu">.*href="\/devices".*Linked devices/);
+	});
+
+	it('uses the shared wrap, page head and cards, with a one-time-code field and inline errors', async () => {
+		const html = await render(<WebDevicesView {...base} note="bad" />, 1800000001, 'Tobi');
+		expect(html).toContain('class="wrap devices-page"');
+		expect(html).toContain('class="page-head"');
+		expect(html).toMatch(/autocomplete="one-time-code"/i);
+		expect(html).toContain('placeholder="ABC-DEF"');
+		expect(html).toContain('id="device-code-error"');
+		expect(html).toContain('Link device');
+		expect(html).toContain('lite.verse.openpak.org');
+		expect(html).not.toMatch(/devices\.[a-z_]+|undefined/);
+	});
+
+	it('has a friendly empty state and a row per device with a confirmed Remove', async () => {
+		expect(await render(<WebDevicesView {...base} />, 1800000001, 'Tobi')).toContain('No devices linked yet');
+		const html = await render(<WebDevicesView {...base} devices={one as never} />, 1800000001, 'Tobi');
+		expect(html).toContain('dev-icon dev-ps3');
+		expect(html).toContain('Linked 2026-11-01');
+		expect(html).toContain('not used yet');
+		expect(html).toContain('Remove this device?');
+		expect(html).not.toContain('No devices linked yet');
+	});
+});
+
