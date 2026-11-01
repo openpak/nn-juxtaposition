@@ -89,11 +89,11 @@
     "setup": {
         "welcome": "Vitajte v OpenVerse!",
         "info": "Čo je OpenVerse?",
-        "rules": "Pravidlá OpenVersea",
+        "rules": "Pravidlá služby OpenVerse",
         "rules_text": {
             "eighth": "Neposielajte Spojlery",
             "third": "OpenVerse obsahuje mnoho herných komunít, kde môžu ľudia z celého sveta zdieľať svoje myšlienky. Keď uverejňujete príspevok v komunite, pamätajte na to, že ho môže vidieť každý, preto sa prosím vyjadrite spôsobom, ktorý bude baviť každého. Použite zdravý rozum a premýšľajte skôr, ako uverejníte príspevok. OpenVerse je služba, ktorá je dostupná aj z internetu, takže majte na pamäti, že vaše príspevky môžu vidieť aj ľudia, ktorí nepoužívajú OpenVerse. Navyše, všetky komentáre, ktoré pridáte k príspevkom svojich priateľov, uvidia nielen vaši priatelia, ale aj ľudia na celom svete. Majte to prosím na pamäti.",
-            "seventh": "Pamätajte, že poznať niekoho v OpenVersee nie je to isté ako poznať ho v skutočnom živote. Nikdy nezdieľajte svoju e-mailovú adresu, domácu adresu, meno do práce alebo školy ani iné osobné identifikačné údaje s nikým na OpenVerse a nikdy nezdieľajte informácie nikoho iného. Navyše, ak vás niekto, koho stretnete v OpenVersee, pozve, aby ste sa s ním stretli v skutočnom svete, neprijmite ho. OpenVerse je online komunita a nemala by sa používať na organizovanie stretnutí v reálnom svete.",
+            "seventh": "Pamätajte, že poznať niekoho v službe OpenVerse nie je to isté ako poznať ho v skutočnom živote. Nikdy nezdieľajte svoju e-mailovú adresu, domácu adresu, meno do práce alebo školy ani iné osobné identifikačné údaje s nikým na OpenVerse a nikdy nezdieľajte informácie nikoho iného. Navyše, ak vás niekto, koho stretnete v službe OpenVerse, pozve, aby ste sa s ním stretli v skutočnom svete, neprijmite ho. OpenVerse je online komunita a nemala by sa používať na organizovanie stretnutí v reálnom svete.",
             "ninth": "Niektorí ľudia prichádzajú do OpenVerse hľadať tipy a triky pre hry, no iní chcú objaviť tajomstvá hry úplne sami. Príspevky, ktoré odhaľujú tajomstvá hry alebo jej príbeh, sa nazývajú „spojlery“. Ak uverejňujete niečo o hre, ktorá by mohla byť spojlerom, pred odoslaním príspevku nezabudnite zaškrtnúť políčko Spojlery. Týmto spôsobom ľudia, ktorí nechcú byť rozmaznaní, neuvidia váš príspevok.",
             "first": "Nasleduje niekoľko dôležitých pokynov na to, aby bol OpenVerse zábavný a príjemný pre každého. Etický kódex OpenVerse obsahuje podrobné informácie, preto si ho pozorne prečítajte.",
             "second": "Príspevky je možné prezerať po celom svete",
@@ -121,7 +121,7 @@
         "welcome_text": "OpenVerse je herná komunita, ktorá spája ľudí z celého sveta pomocou postavičiek Mii. Pomocou OpenVerse môžete zdieľať svoje herné zážitky a stretnúť sa s ľuďmi z celého sveta.",
         "beta": "Odmietnutie Zodpovednosti za Beta Verziu",
         "info_text": "OpenVerse je herná komunita riadená používateľmi, kde môžete komunikovať s ľuďmi\n                po celom svete. Môžete písať alebo kresliť príspevky v herných komunitách alebo posielať správy priamo svojim priateľom.",
-        "ready_text": "Najprv si pozrite niektoré komunity a zistite, o čom píšu ľudia z celého sveta. Využite túto príležitosť a zoznámte sa s OpenVerseom. Na ceste môžete urobiť nejaké nové objavy!",
+        "ready_text": "Najprv si pozrite niektoré komunity a zistite, o čom píšu ľudia z celého sveta. Využite túto príležitosť a zoznámte sa so službou OpenVerse. Na ceste môžete urobiť nejaké nové objavy!",
         "experience": "Skúsenosť s hrami",
         "analytics": "Analytické údaje",
         "analytics_text": "OpenVerse používa Cloudflare Web Analytics na sledovanie toho, ako používatelia používajú našu službu. Zhromaždené údaje zahŕňajú, ale nie sú obmedzené na čas návštevy, navštívené stránky a čas strávený na stránke. Tieto údaje sa k vám žiadnym spôsobom nepripájajú a nepoužívajú sa ani my, ani spoločnosť Cloudflare.",

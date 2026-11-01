@@ -43,28 +43,28 @@
         "swearing": "Gönderiler açık bir dil içeremez."
     },
     "setup": {
-        "welcome": "OpenVerse'a hoşgeldiniz!",
+        "welcome": "OpenVerse'e hoşgeldiniz!",
         "beta": "Beta Sorumluluk Reddi",
         "beta_text": {
             "second": "Bu, beta döneminde veritabanının tamamen silinmesini içerebilir.",
-            "first": "OpenVerse'un ilk herkese açık beta sürümünü denemek üzeresiniz. Bu, pek çok şeyin kararsız olduğu ve her an pek çok şeyin değişebileceği anlamına gelir.",
+            "first": "OpenVerse'in ilk herkese açık beta sürümünü denemek üzeresiniz. Bu, pek çok şeyin kararsız olduğu ve her an pek çok şeyin değişebileceği anlamına gelir.",
             "third": "Web sitesi, yazılımı ve üzerinde bulunan tüm içerik “olduğu gibi” ve “mevcut olduğu şekilde” sağlanmaktadır. OpenPak, web sitesinin, yazılımının veya herhangi bir içeriğinin uygunluğu veya kullanılabilirliği konusunda açık veya zımni hiçbir garanti vermez."
         },
         "info": "OpenVerse nedir?",
         "rules": "OpenVerse Kuralları",
         "rules_text": {
-            "first": "Aşağıda, OpenVerse'u herkes için eğlenceli ve keyifli bir deneyim haline getirmek için bazı önemli yönergeler verilmiştir. OpenVerse Davranış Kuralları ayrıntılı bilgiler içerir, bu yüzden lütfen dikkatlice okuyun.",
+            "first": "Aşağıda, OpenVerse'i herkes için eğlenceli ve keyifli bir deneyim haline getirmek için bazı önemli yönergeler verilmiştir. OpenVerse Davranış Kuralları ayrıntılı bilgiler içerir, bu yüzden lütfen dikkatlice okuyun.",
             "fourth": "Birbirinize iyi davranın",
-            "fifth": "OpenVerse'u herkes için eğlenceli bir yer olarak tutmak için, diğer kullanıcılara karşı düşünceli olmanızı rica ediyoruz. Uygunsuz veya rahatsız edici hiçbir şey yayınlamayarak OpenVerse'u keyifli bir deneyim haline getirmemize yardımcı olun.",
+            "fifth": "OpenVerse'i herkes için eğlenceli bir yer olarak tutmak için, diğer kullanıcılara karşı düşünceli olmanızı rica ediyoruz. Uygunsuz veya rahatsız edici hiçbir şey yayınlamayarak OpenVerse'i keyifli bir deneyim haline getirmemize yardımcı olun.",
             "sixth": "Kişisel Bilgilerinizi Göndermeyin—Sizin veya Başkalarının",
-            "eleventh": "Amacımız OpenVerse'u herkes için eğlenceli ve eğlenceli kılmaktır. Birinin OpenVerse Davranış Kurallarını ihlal etmesi durumunda, ihlalde bulunan kullanıcıyı veya konsolu engellemek de dahil olmak üzere uygun önlemleri alacağız.",
+            "eleventh": "Amacımız OpenVerse'i herkes için eğlenceli ve eğlenceli kılmaktır. Birinin OpenVerse Davranış Kurallarını ihlal etmesi durumunda, ihlalde bulunan kullanıcıyı veya konsolu engellemek de dahil olmak üzere uygun önlemleri alacağız.",
             "twelfth": "O Oyunu Oynadın mı?",
             "thirteenth": "Oynadığınız bir oyun için toplulukta gönderi paylaşıyorsanız, gönderilerinizde onu oynadığınızı gösteren bir simge olacaktır.",
             "second": "Gönderiler Dünyanın Her Yerinde Görüntülenebilir",
             "third": "OpenVerse, dünyanın her yerinden insanların düşüncelerini paylaşabileceği birçok oyun topluluğu içerir. Bir toplulukta paylaşımda bulunduğunuzda, herkesin görebileceğini unutmayın, bu yüzden lütfen kendinizi herkesin keyif alabileceği bir şekilde ifade edin. Sağduyunuzu kullanın ve göndermeden önce düşünün. OpenVerse, İnternet'ten de erişilebilen bir hizmettir, bu nedenle OpenVerse kullanmayan kişilerin de gönderilerinizi görebileceğini unutmayın. Ayrıca, arkadaşlarınızın gönderilerine yaptığınız yorumlar sadece arkadaşlarınız tarafından değil, dünyanın her yerinden insanlar tarafından da görülecektir. Lütfen bunu aklınızda bulundurun.",
-            "seventh": "Unutmayın, birini OpenVerse'ta tanımak, onu gerçek hayatta tanımakla aynı şey değildir. E-posta adresinizi, ev adresinizi, iş veya okul adınızı veya diğer kişisel kimlik bilgilerinizi OpenVerse'ta asla kimseyle paylaşmayın ve asla başka birinin bilgilerini de paylaşmayın. Ek olarak, OpenVerse'ta tanıştığınız biri sizi onunla gerçek dünyada buluşmaya davet ederse, kabul etmeyin. OpenVerse çevrimiçi bir topluluktur ve gerçek dünyadaki buluşmaları düzenlemek için kullanılmamalıdır.",
+            "seventh": "Unutmayın, birini OpenVerse'te tanımak, onu gerçek hayatta tanımakla aynı şey değildir. E-posta adresinizi, ev adresinizi, iş veya okul adınızı veya diğer kişisel kimlik bilgilerinizi OpenVerse'te asla kimseyle paylaşmayın ve asla başka birinin bilgilerini de paylaşmayın. Ek olarak, OpenVerse'te tanıştığınız biri sizi onunla gerçek dünyada buluşmaya davet ederse, kabul etmeyin. OpenVerse çevrimiçi bir topluluktur ve gerçek dünyadaki buluşmaları düzenlemek için kullanılmamalıdır.",
             "eighth": "Spoiler Göndermeyin",
-            "ninth": "Bazı insanlar oyunlar için ipuçları ve püf noktaları aramak için OpenVerse'a gelir, ancak diğerleri bir oyunun sırlarını kendi başlarına keşfetmek ister. Bir oyunun veya hikayesinin sırlarını açığa çıkaran gönderilere \"spoiler\" denir. Spoiler olabilecek bir oyun hakkında bir şeyler yayınlıyorsanız, yazınızı göndermeden önce Spoiler kutusunu kontrol ettiğinizden emin olun. Bu sayede spoiler görmek istemeyen kişiler gönderinizi görmeyecektir.",
+            "ninth": "Bazı insanlar oyunlar için ipuçları ve püf noktaları aramak için OpenVerse'e gelir, ancak diğerleri bir oyunun sırlarını kendi başlarına keşfetmek ister. Bir oyunun veya hikayesinin sırlarını açığa çıkaran gönderilere \"spoiler\" denir. Spoiler olabilecek bir oyun hakkında bir şeyler yayınlıyorsanız, yazınızı göndermeden önce Spoiler kutusunu kontrol ettiğinizden emin olun. Bu sayede spoiler görmek istemeyen kişiler gönderinizi görmeyecektir.",
             "tenth": "Davranış Kuralları İhlalleri"
         },
         "info_text": "OpenVerse, dünyanın her yerinden insanlarla etkileşime girebileceğiniz, kullanıcı odaklı bir oyun topluluğudur. Oyun topluluklarında yazı yazabilir veya çizebilir veya doğrudan arkadaşlarınıza mesaj gönderebilirsiniz.",
@@ -75,11 +75,11 @@
             "intermediate": "Orta düzey",
             "expert": "Uzman"
         },
-        "ready": "OpenVerse'u Kullanmaya Hazır",
-        "ready_text": "Önce bazı topluluklara göz atın ve dünyanın her yerinden insanların neler hakkında gönderiler paylaştığını görün. OpenVerse'u tanımak için bu fırsatı kullanın. Yol boyunca birçok yeni keşifler yapabilirsiniz!",
-        "done": "OpenVerse'ta iyi eğlenceler!",
+        "ready": "OpenVerse'i Kullanmaya Hazır",
+        "ready_text": "Önce bazı topluluklara göz atın ve dünyanın her yerinden insanların neler hakkında gönderiler paylaştığını görün. OpenVerse'i tanımak için bu fırsatı kullanın. Yol boyunca birçok yeni keşifler yapabilirsiniz!",
+        "done": "OpenVerse'te iyi eğlenceler!",
         "done_button": "Hadi gidelim!",
-        "welcome_text": "OpenVerse, Mii karakterlerini kullanarak dünyanın her yerinden insanları birbirine bağlayan bir oyun topluluğudur. Oyun deneyimlerinizi paylaşmak ve dünyanın her yerinden insanlarla tanışmak için OpenVerse'u kullanın.",
+        "welcome_text": "OpenVerse, Mii karakterlerini kullanarak dünyanın her yerinden insanları birbirine bağlayan bir oyun topluluğudur. Oyun deneyimlerinizi paylaşmak ve dünyanın her yerinden insanlarla tanışmak için OpenVerse'i kullanın.",
         "analytics": "Analytics",
         "analytics_text": "OpenVerse, kullanıcıların hizmetimizi nasıl kullandığını izlemek için Cloudflare Web Analytics'i kullanır. Toplanan veriler, ziyaret süresi, ziyaret edilen sayfalar ve sitede geçirilen süreyi içerir ancak bunlarla sınırlı değildir. Bu veriler hiçbir şekilde size bağlı değildir ve biz veya Cloudflare tarafından reklamlar için kullanılmaz."
     },

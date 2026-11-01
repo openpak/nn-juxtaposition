@@ -115,7 +115,7 @@
             "expert": "전문가"
         },
         "analytics": "통계",
-        "analytics_text": "OpenVerse은 사용자들이 어떻게 저희의 서비스를 활용하고 있는지 트래킹하기 위해 Cloudflare Web Analytics를 사용합니다. 수집하고 있는 데이터는 방문 횟수, 방문 페이지, 사이트에서 보낸 시간 등을 포함합니다. 이 데이터는 당신과 어떠한 연결도 없으며, 저희나 Cloudflare의 광고에 쓰이지도 않습니다.",
+        "analytics_text": "OpenVerse는 사용자들이 어떻게 저희의 서비스를 활용하고 있는지 트래킹하기 위해 Cloudflare Web Analytics를 사용합니다. 수집하고 있는 데이터는 방문 횟수, 방문 페이지, 사이트에서 보낸 시간 등을 포함합니다. 이 데이터는 당신과 어떠한 연결도 없으며, 저희나 Cloudflare의 광고에 쓰이지도 않습니다.",
         "ready": "OpenVerse 사용 준비 완료",
         "ready_text": "처음엔 여러 커뮤니티를 돌아다니면서 전세계의 사람들이 어떠한 얘기를 하고 있는지 살펴보세요. 그리고 이 기회를 OpenVerse와 친해질 수 있는 기회로 삼으세요. 무언가 새로운 발견을 하실 수도 있어요!",
         "done": "OpenVerse에서 좋은 시간을 보내시기 바랍니다!",

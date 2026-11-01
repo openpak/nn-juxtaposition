@@ -92,14 +92,14 @@
             "post_removed_for_reason": "A(z) \"{{postId}}\" bejegyzésed törlésre került, a következő okból: \"{{reason}}\".",
             "comment_removed": "A(z) \"{{postId}}\" hozzászólásod törlésre került.",
             "comment_removed_for_reason": "A(z) \"{{postId}}\" hozzászólásod törlésre került, a következő okból: \"{{reason}}\".",
-            "footer": "Kattints erre az üzenetre, hogy megtekintsd a OpenVerse magatartás kódexét. Ha kérdéseid vannak, vedd fel a kapcsolatot a moderátorokkal a OpenPak-on ({{contactModsUrl}})."
+            "footer": "Kattints erre az üzenetre, hogy megtekintsd az OpenVerse magatartás kódexét. Ha kérdéseid vannak, vedd fel a kapcsolatot a moderátorokkal a OpenPak-on ({{contactModsUrl}})."
         },
         "limited_from_posting": {
             "message": "Korlátozva vagy a bejegyzések létrehozásában.",
             "message_with_reason": "Korlátozva vagy a bejegyzések létrehozásában. Oka: \"{{reason}}\".",
             "temporary": "Korlátozva vagy a bejegyzések létrehozásában {{until}} -ig.",
             "temporary_with_reason": "Korlátozva vagy a bejegyzések létrehozásában {{until}} -ig. Oka: \"{{reason}}\".",
-            "footer": "Kattints erre az üzenetre, hogy megtekintsd a OpenVerse magatartás kódexét. Ha kérdéseid vannak, vedd fel a kapcsolatot a moderátorokkal a OpenPak-on ({{banAppealUrl}})."
+            "footer": "Kattints erre az üzenetre, hogy megtekintsd az OpenVerse magatartás kódexét. Ha kérdéseid vannak, vedd fel a kapcsolatot a moderátorokkal a OpenPak-on ({{banAppealUrl}})."
         },
         "new_empathy": {
             "message/one": "<empathy_one /> adott a bejegyzésednek egy Yeah-t!",
@@ -119,33 +119,33 @@
         "spoiler_label": "Spoiler",
         "content_placeholder": "Oszd meg gondolataid egy bejegyzésben egy közösség vagy a követőid felé.",
         "screenshots_coming_soon": "A képernyőképek még nincs kész. Nézd meg újra nemsokára!",
-        "automod_error": "A bejegyzésed olyan szöveget tartalmaz, ami nem engedélyezett a OpenVerse-ön. További információért látogasd meg a https://openpak.org/terms oldalt"
+        "automod_error": "A bejegyzésed olyan szöveget tartalmaz, ami nem engedélyezett az OpenVerse szolgáltatáson. További információért látogasd meg a https://openpak.org/terms oldalt"
     },
     "setup": {
-        "welcome": "Köszöntünk OpenVerse-ben!",
+        "welcome": "Köszöntünk az OpenVerse szolgáltatásban!",
         "beta": "Béta Jogi nyilatkozat",
         "beta_text": {
-            "first": "A OpenVerse első publikus bétáját fogod kipróbálni. Ez azt jelenti, hogy egy csomó minden lóg a levegőben, és változhat idővel.",
+            "first": "Az OpenVerse első publikus bétáját fogod kipróbálni. Ez azt jelenti, hogy egy csomó minden lóg a levegőben, és változhat idővel.",
             "third": "A weboldal, a szoftver és mindent tartalom “as is” és “as available” alapon biztosított. A OpenPak nem biztosít semmilyen garanciát, akár közvetlen, akár beleértett, a megfelelőségéről és használhatóságáról a weboldalnak a szoftvernek, vagy bármilyen tartalomnak.",
             "second": "Ez jelentheti az adatbázis teljes törlését valamilyen döntést követően vagy a béta periódus végén."
         },
-        "info": "Mi az a OpenVerse?",
-        "info_text": "A OpenVerse egy felhasználó alapú játék közösség, ahol kapcsolatba léphetsz emberekkel\n                 a világ minden tájáról. Írhatsz és rajzolhatsz bejegyzéseket a játék közösségekbe, vagy küldhetsz közvetlen üzenetet barátaidnak.",
+        "info": "Mi az az OpenVerse?",
+        "info_text": "Az OpenVerse egy felhasználó alapú játék közösség, ahol kapcsolatba léphetsz emberekkel\n                 a világ minden tájáról. Írhatsz és rajzolhatsz bejegyzéseket a játék közösségekbe, vagy küldhetsz közvetlen üzenetet barátaidnak.",
         "rules": "OpenVerse szabályok",
         "rules_text": {
             "second": "A bejegyzéseket az egész világon megtekinthetik",
             "fourth": "Legyetek kedvesek egymáshoz",
-            "fifth": "Annak érdekében, hogy a OpenVerse mindenki számára szórakoztató hely maradjon, kérjük, légy figyelmes más felhasználókkal szemben. Segíts nekünk abban, hogy a OpenVerse élvezetes élmény legyen azáltal, hogy nem teszel közzé semmi nem helyénvalót vagy sértőt.",
+            "fifth": "Annak érdekében, hogy az OpenVerse mindenki számára szórakoztató hely maradjon, kérjük, légy figyelmes más felhasználókkal szemben. Segíts nekünk abban, hogy az OpenVerse élvezetes élmény legyen azáltal, hogy nem teszel közzé semmi nem helyénvalót vagy sértőt.",
             "sixth": "Ne posztolj személyes információt - se sajátodat, se másokét",
             "tenth": "Magatartási kódex megsértése",
             "eighth": "Ne posztolj spoilereket",
-            "eleventh": "Célunk, hogy a OpenVerse szórakoztató és élvezetes legyen mindenki számára. Abban az esetben, ha valaki megsérti a OpenVerse magatartási kódexét, megtesszük a megfelelő lépéseket, beleértve a jogsértő felhasználó vagy konzol letiltását is.",
+            "eleventh": "Célunk, hogy az OpenVerse szórakoztató és élvezetes legyen mindenki számára. Abban az esetben, ha valaki megsérti az OpenVerse magatartási kódexét, megtesszük a megfelelő lépéseket, beleértve a jogsértő felhasználó vagy konzol letiltását is.",
             "twelfth": "Játszottál már azzal a játékkal?",
             "thirteenth": "Ha a közösségbe posztolod egy játékról, hogy játszottad, a posztjaid tartalmazni fognak egy ikont, hogy játszottál vele.",
-            "seventh": "Ne feledd, hogy valakit a OpenVerse-ban ismerni nem ugyanaz, mint a való életben. Soha ne oszd meg e-mail címed, otthoni címed, munkahelyed vagy iskolád nevét vagy más személyazonosításra alkalmas adatod senkivel a OpenVerse-on, és soha ne oszd meg más adatait sem. Továbbá, ha valaki, akivel a OpenVerse-ban találkozol, meghív, hogy találkozz vele a való világban, ne fogadd el. A OpenVerse egy online közösség, és nem javasolt valós találkozók szervezésére használni.",
-            "ninth": "Vannak, akik azért jönnek a OpenVerse-hoz, hogy tippeket és trükköket keressenek a játékokhoz, de mások egyedül szeretnék felfedezni egy játék titkait. Azokat a bejegyzéseket, amelyek egy játék vagy annak történetének titkait fedik fel, „spoilereknek” nevezzük. Ha egy játékról teszel közzé valamit, ami spoiler lehet, a bejegyzés elküldése előtt feltétlenül jelöld be a \"spoilers\" négyzetet. Így azok, akik nem akarnak spoilert látni, nem fogják látni a bejegyzésedet.",
-            "first": "Az alábbiakban felsorolunk néhány fontos irányelvet, amelyekkel a OpenVerse mindenki számára szórakoztató és élvezetes élmény lehet. A OpenVerse magatartási kódexe részletes információkat tartalmaz, ezért kérjük, figyelmesen olvassa el azt.",
-            "third": "A OpenVerse számos játékközösséget tartalmaz, ahol az emberek a világ minden tájáról megoszthatják gondolataikat. Amikor közzé teszel valamit egy közösségben, ne feledd, hogy mindenki láthatja, ezért kérjük, fejezd ki magad úgy, hogy az mindenki számára élvezetes legyen. Használd a józan eszedet, és gondolkozz, mielőtt posztolsz. A OpenVerse egy olyan szolgáltatás, amely az internetről is elérhető, ezért ne feledd, hogy azok is láthatják a bejegyzéseid, akik nem használják a OpenVerse-ot. Ezenkívül az ismerőseid bejegyzéseihez írt megjegyzéseid nemcsak az ismerőseid, hanem a világ minden tájáról. Kérjük, tartsd ezt szem előtt."
+            "seventh": "Ne feledd, hogy valakit az OpenVerse szolgáltatásban ismerni nem ugyanaz, mint a való életben. Soha ne oszd meg e-mail címed, otthoni címed, munkahelyed vagy iskolád nevét vagy más személyazonosításra alkalmas adatod senkivel az OpenVerse szolgáltatáson, és soha ne oszd meg más adatait sem. Továbbá, ha valaki, akivel az OpenVerse szolgáltatásban találkozol, meghív, hogy találkozz vele a való világban, ne fogadd el. Az OpenVerse egy online közösség, és nem javasolt valós találkozók szervezésére használni.",
+            "ninth": "Vannak, akik azért jönnek az OpenVerse szolgáltatáshoz, hogy tippeket és trükköket keressenek a játékokhoz, de mások egyedül szeretnék felfedezni egy játék titkait. Azokat a bejegyzéseket, amelyek egy játék vagy annak történetének titkait fedik fel, „spoilereknek” nevezzük. Ha egy játékról teszel közzé valamit, ami spoiler lehet, a bejegyzés elküldése előtt feltétlenül jelöld be a \"spoilers\" négyzetet. Így azok, akik nem akarnak spoilert látni, nem fogják látni a bejegyzésedet.",
+            "first": "Az alábbiakban felsorolunk néhány fontos irányelvet, amelyekkel az OpenVerse mindenki számára szórakoztató és élvezetes élmény lehet. Az OpenVerse magatartási kódexe részletes információkat tartalmaz, ezért kérjük, figyelmesen olvassa el azt.",
+            "third": "Az OpenVerse számos játékközösséget tartalmaz, ahol az emberek a világ minden tájáról megoszthatják gondolataikat. Amikor közzé teszel valamit egy közösségben, ne feledd, hogy mindenki láthatja, ezért kérjük, fejezd ki magad úgy, hogy az mindenki számára élvezetes legyen. Használd a józan eszedet, és gondolkozz, mielőtt posztolsz. Az OpenVerse egy olyan szolgáltatás, amely az internetről is elérhető, ezért ne feledd, hogy azok is láthatják a bejegyzéseid, akik nem használják az OpenVerse szolgáltatást. Ezenkívül az ismerőseid bejegyzéseihez írt megjegyzéseid nemcsak az ismerőseid, hanem a világ minden tájáról. Kérjük, tartsd ezt szem előtt."
         },
         "experience": "Játék tapasztalat",
         "experience_text": {
@@ -155,12 +155,12 @@
             "expert": "Profi"
         },
         "analytics": "Analitika",
-        "ready": "Készen állsz használni a OpenVerse-ot",
-        "ready_text": "Először nézz meg néhány közösséget, és nézd meg, miről posztolnak az emberek a világ minden tájáról. Használd ki az alkalmat, hogy megismerkedj a OpenVersetal. Útközben új felfedezéseket tehetsz!",
-        "done": "Jó szórakozást a OpenVerse-ban!",
+        "ready": "Készen állsz használni az OpenVerse szolgáltatást",
+        "ready_text": "Először nézz meg néhány közösséget, és nézd meg, miről posztolnak az emberek a világ minden tájáról. Használd ki az alkalmat, hogy megismerkedj az OpenVerse szolgáltatással. Útközben új felfedezéseket tehetsz!",
+        "done": "Jó szórakozást az OpenVerse szolgáltatásban!",
         "done_button": "Kezdjük!",
-        "welcome_text": "A OpenVerse egy játék közösség, ami összeköti az embereket a világ minden tájáról Mii karakterek használatával. Használd a OpenVerse-ot, hogy megoszd játék tapasztalataid és találkozz emberekkel a világ minden tájáról.",
-        "analytics_text": "A OpenVerse a Cloudflare Web Analytics szolgáltatást használja annak nyomon követésére, hogy a felhasználók hogyan használják szolgáltatásunkat. Az összegyűjtött adatok magukban foglalják, de nem kizárólagosan a látogatás idejét, a meglátogatott oldalakat és az oldalon töltött időt. Ezeket az adatokat semmilyen módon nem kapcsoljuk Önhöz, és sem mi, sem a Cloudflare nem használja fel hirdetésekhez.",
+        "welcome_text": "Az OpenVerse egy játék közösség, ami összeköti az embereket a világ minden tájáról Mii karakterek használatával. Használd az OpenVerse szolgáltatást, hogy megoszd játék tapasztalataid és találkozz emberekkel a világ minden tájáról.",
+        "analytics_text": "Az OpenVerse a Cloudflare Web Analytics szolgáltatást használja annak nyomon követésére, hogy a felhasználók hogyan használják szolgáltatásunkat. Az összegyűjtött adatok magukban foglalják, de nem kizárólagosan a látogatás idejét, a meglátogatott oldalakat és az oldalon töltött időt. Ezeket az adatokat semmilyen módon nem kapcsoljuk Önhöz, és sem mi, sem a Cloudflare nem használja fel hirdetésekhez.",
         "title": "OpenVerse kezdeti beállítások"
     },
     "activity_feed": {
@@ -220,7 +220,7 @@
         "reason_inappropiate": "Nem megfelelő/káros viselkedés",
         "reason_bullying": "Gyűlölet/zaklatás",
         "additional_info_placeholder": "Adj meg további megjegyzéseket vagy információt",
-        "description": "Jelenteni készülsz egy bejegyzést ami megsérti a OpenVerse magatartási kódexét. Ez a bejelentés a OpenVerse moderátorainak lesz elküldve, nem a bejegyzés létrehozójának.",
+        "description": "Jelenteni készülsz egy bejegyzést ami megsérti az OpenVerse magatartási kódexét. Ez a bejelentés az OpenVerse moderátorainak lesz elküldve, nem a bejegyzés létrehozójának.",
         "reason_inappropiate_ingame": "Nem megfelelő viselkedés a játékban",
         "reason_missing_images": "Hiányzó képek",
         "reason_others": "Egyéb",

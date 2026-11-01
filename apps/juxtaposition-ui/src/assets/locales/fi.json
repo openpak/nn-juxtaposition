@@ -1,13 +1,13 @@
 {
     "setup": {
         "beta_text": {
-            "first": "Olet aloittamassa OpenVersein julkisen betaversion kokeilemisen. Tämä tarkoittaa sitä, että toiminnallisuudesta puuttuu yhä osia ja kerralla voi tapahtua suuriakin muutoksia.",
+            "first": "Olet aloittamassa OpenVerse-palvelun julkisen betaversion kokeilemisen. Tämä tarkoittaa sitä, että toiminnallisuudesta puuttuu yhä osia ja kerralla voi tapahtua suuriakin muutoksia.",
             "second": "Tämä voi hyvin mahdollisesti sisältää tietokannan täyden tyhjentämisen betavaiheen aikana tai sen päätyttyä.",
             "third": "Tämä sivusto, sen ohjelmistot ja kaikki sisältö tarjotaan \"sellaisenaan\" ja \"kulloisenkin saatavuuden\" perusteella. OpenPak ei myönnä minkäänlaisia takuita sivuston, ohjelmistojen tai sisällön sopivuudesta tai käyttökelpoisuudesta."
         },
         "info": "Mikä on OpenVerse?",
-        "rules": "OpenVersein säännöt",
-        "welcome": "Tervetuloa OpenVerseiin!",
+        "rules": "OpenVerse-palvelun säännöt",
+        "welcome": "Tervetuloa OpenVerse-palveluun!",
         "beta": "Betatestin vastuuvapauslauseke",
         "rules_text": {
             "second": "Kirjoituksia voidaan lukea kaikkialta maailmasta",
@@ -16,13 +16,13 @@
             "eighth": "Älä spoilaa",
             "twelfth": "Oletko pelannut tätä peliä?",
             "thirteenth": "Kun kirjoitat sellaisen pelin yhteisöön, jota olet pelannut, viesteissäsi on kuvake ilmaisemassa että olet pelannut kyseistä peliä.",
-            "third": "OpenVerseissa on monia peliyhteisöjä, joissa ihmiset ympäri maapallon voivat jakaa ajatuksiaan. Kirjoittaessasi yhteisöön, muista että kuka tahansa voi nähdä sen, joten ilmaise itseäsi siten, että kukaan ei pahastu. Käytä maalaisjärkeä ja ajattele ennen viestisi lähettämistä. OpenVersein sisältö on myös julkisesti nähtävillä Internetissä, joten pidä mielessä, että viestisi ovat myös niiden nähtävillä, jotka eivät käytä OpenVerseia. Lisäksi kommenttisi ystäviesi kirjoituksiin ovat kaikkien nähtävissä, ei ainoastaan ystäviesi. Pidä tämä mielessä.",
-            "fifth": "Pitääksesi OpenVersein mukavana paikka kaikille, pyydämme sinua huomioimaan toisten käyttäjien tunteet. Auta pitämään OpenVerse nautittavana välttämällä sopimattomia tai loukkaavia kirjoituksia.",
-            "seventh": "Muista, että OpenVerse-tuttavuus ei tarkoita tuttavuutta reaalielämässä. Älä jaa omaa tai kenenkään muun sähköposti- tai kotiosoitetta, työpaikan tai oppilaitoksen nimeä tai muuta tunnistetietoa kenellekään OpenVerseissa. Lisäksi jos joku OpenVerseissa tapaamasi pyytää tapaamista reaalielämässä, älä hyväksy pyyntöä. OpenVerse on verkkoyhteisö ja sitä ei pidä käyttää tapaamisten reaalielämässä sopimiseen.",
+            "third": "OpenVerse-palvelussa on monia peliyhteisöjä, joissa ihmiset ympäri maapallon voivat jakaa ajatuksiaan. Kirjoittaessasi yhteisöön, muista että kuka tahansa voi nähdä sen, joten ilmaise itseäsi siten, että kukaan ei pahastu. Käytä maalaisjärkeä ja ajattele ennen viestisi lähettämistä. OpenVerse-palvelun sisältö on myös julkisesti nähtävillä Internetissä, joten pidä mielessä, että viestisi ovat myös niiden nähtävillä, jotka eivät käytä OpenVerse-palvelua. Lisäksi kommenttisi ystäviesi kirjoituksiin ovat kaikkien nähtävissä, ei ainoastaan ystäviesi. Pidä tämä mielessä.",
+            "fifth": "Pitääksesi OpenVerse-palvelun mukavana paikka kaikille, pyydämme sinua huomioimaan toisten käyttäjien tunteet. Auta pitämään OpenVerse nautittavana välttämällä sopimattomia tai loukkaavia kirjoituksia.",
+            "seventh": "Muista, että OpenVerse-tuttavuus ei tarkoita tuttavuutta reaalielämässä. Älä jaa omaa tai kenenkään muun sähköposti- tai kotiosoitetta, työpaikan tai oppilaitoksen nimeä tai muuta tunnistetietoa kenellekään OpenVerse-palvelussa. Lisäksi jos joku OpenVerse-palvelussa tapaamasi pyytää tapaamista reaalielämässä, älä hyväksy pyyntöä. OpenVerse on verkkoyhteisö ja sitä ei pidä käyttää tapaamisten reaalielämässä sopimiseen.",
             "tenth": "Käytössääntörikkomukset",
-            "ninth": "Jotkut tulevat OpenVerseiin etsien vihjeitä ja vinkkejä peleihin, mutta toiset haluavat löytää pelien salaisuudet itsenäisesti. Viestejä, jotka paljastavat pelin tai sen tarinan salaisuuksia kutsutaan \"spoilereiksi\". Jos olet kirjoittamassa pelistä jotain, joka voidaan kokea spoilerina, muista rastittaa \"Spoileri\" ruutu ennen viestin lähettämistä. Täten varmistat ettei spoilereita välttävät näe viestiäsi.",
-            "first": "Seuraavana tulee joitain tärkeitä sääntöjä, joilla OpenVerse pysyy hauskana ja nautinnollisena kokemuksena käyttäjilleen. OpenVersein käytössäännöt (CoC) sisältää yksityiskohtaista informaatiota, joten luethan sen tarkasti.",
-            "eleventh": "Haluamme pitää OpenVersein hauskana ja nautinnollisena kaikille. Jonkun rikkoessa OpenVersein käytössääntöjä, puutumme asiaan, aina käyttäjätilin ja konsolin estämiseen palvelusta saakka."
+            "ninth": "Jotkut tulevat OpenVerse-palveluun etsien vihjeitä ja vinkkejä peleihin, mutta toiset haluavat löytää pelien salaisuudet itsenäisesti. Viestejä, jotka paljastavat pelin tai sen tarinan salaisuuksia kutsutaan \"spoilereiksi\". Jos olet kirjoittamassa pelistä jotain, joka voidaan kokea spoilerina, muista rastittaa \"Spoileri\" ruutu ennen viestin lähettämistä. Täten varmistat ettei spoilereita välttävät näe viestiäsi.",
+            "first": "Seuraavana tulee joitain tärkeitä sääntöjä, joilla OpenVerse pysyy hauskana ja nautinnollisena kokemuksena käyttäjilleen. OpenVerse-palvelun käytössäännöt (CoC) sisältää yksityiskohtaista informaatiota, joten luethan sen tarkasti.",
+            "eleventh": "Haluamme pitää OpenVerse-palvelun hauskana ja nautinnollisena kaikille. Jonkun rikkoessa OpenVerse-palvelun käytössääntöjä, puutumme asiaan, aina käyttäjätilin ja konsolin estämiseen palvelusta saakka."
         },
         "experience": "Kokeneisuus pelaajana",
         "experience_text": {
@@ -32,11 +32,11 @@
             "beginner": "Aloittelija"
         },
         "analytics": "analytiikka",
-        "done": "Pidä hauskaa OpenVerseissa!",
-        "welcome_text": "OpenVerse on maailmanlaajuinen pelaajayhteisö joka käyttää Mii -hahmoja. Jaa pelikokemuksesi ja tapaa ihmisiä ympäri maapalloa OpenVersein kautta.",
-        "ready": "Valmiina OpenVersein käyttöön",
+        "done": "Pidä hauskaa OpenVerse-palvelussa!",
+        "welcome_text": "OpenVerse on maailmanlaajuinen pelaajayhteisö joka käyttää Mii -hahmoja. Jaa pelikokemuksesi ja tapaa ihmisiä ympäri maapalloa OpenVerse-palvelun kautta.",
+        "ready": "Valmiina OpenVerse-palvelun käyttöön",
         "analytics_text": "OpenVerse käyttää Cloudflare analytiikkaa seuratakseen miten käyttäjät käyttävät palveluamme. Kerätty tieto sisältää, mutta ei ole rajoitettu seuraaviin: käyntiaika, vieraillut sivut ja sivustolla vietetty aika. Cloudflare mukaan tietoa ei ole kytketty mitenkään sinuun ja sitä ei käytetä palvelumme tai Cloudflare tarjoamiin mainoksiin.",
-        "ready_text": "Aluksi tutustu joihinkin yhteisöihin katsoaksesi mitä ihmiset ympäri maailman keskustelevat. Käytä tätä hyväksesi tutustuaksesi OpenVerseiin paremmin. Saatat jopa löytää uusia asioita tätä kautta!",
+        "ready_text": "Aluksi tutustu joihinkin yhteisöihin katsoaksesi mitä ihmiset ympäri maailman keskustelevat. Käytä tätä hyväksesi tutustuaksesi OpenVerse-palveluun paremmin. Saatat jopa löytää uusia asioita tätä kautta!",
         "done_button": "Aloitetaan!",
         "info_text": "OpenVerse on käyttäjälähtöinen pelaajayhteisö, jossa voit olla vuorovaikutuksessa ihmisten kanssa ympäri maailman.\nVoit kirjoittaa tai piirtää viestejä peliyhteisöihin tai lähettää viestejä suoraan ystävillesi."
     },

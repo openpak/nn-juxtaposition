@@ -22,14 +22,14 @@
             "second": "Dette kan inkludere en fuldstændig fjernelse af alt data i løbet af eller i slutningen betaen."
         },
         "rules_text": {
-            "first": "Det følgende er nogle vigtige retningslinjer, der sørger for at OpenVerse er en god oplevelse for alle. OpenVerses adfærdskodeks indeholder vigtig information, så vær rar med at give dig selv tid til at læse det omhyggeligt.",
+            "first": "Det følgende er nogle vigtige retningslinjer, der sørger for at OpenVerse er en god oplevelse for alle. Adfærdskodekset for OpenVerse indeholder vigtig information, så vær rar med at give dig selv tid til at læse det omhyggeligt.",
             "sixth": "Del ikke personlige oplysninger - Dine eller Andres",
             "twelfth": "Har du spillet det spil?",
             "fourth": "Vær respektfulde over for hinanden",
             "second": "Oplæg Kan Ses Verdenen Over",
             "eighth": "Del ikke Spoilere",
             "tenth": "Retningslinjer Overtrædelser",
-            "eleventh": "Vores mål er at holde OpenVerse sjovt og underholdende for alle. I tilfældet ved at nogen bryder OpenVerses regler, vil vi udføre passende handlinger, op til og inkluderer blokere den pågældende bruger eller konsol.",
+            "eleventh": "Vores mål er at holde OpenVerse sjovt og underholdende for alle. I tilfældet ved at nogen bryder reglerne for OpenVerse, vil vi udføre passende handlinger, op til og inkluderer blokere den pågældende bruger eller konsol.",
             "third": "OpenVerse indeholder mange gaming fællesskaber, hvor folk verden over kan dele deres tanker. Når du deler et opslag i et fællesskab, husk på at alle kan se det, så vær så venlig at udtrykke dig selv på en måde til alle. Brug sund fornuft, og tænk før du deler. OpenVerse er en service, der også er tilgængeligt fra internettet, så husk på at folk, der ikke bruger OpenVerse, også kan se dine opslag. Derudover, enhver kommentar du laver på dine venners opslag vil ikke kun ses a dine venner, men af alle over hele verdenen også. Vær rar at huske på alt det.",
             "thirteenth": "Hvis du indsender et opslag i et fællesskab for et spil du har spillet, vil dit opslag have et ikon der viser at du har spillet det spil.",
             "fifth": "For at sørge for at OpenVerse er et sjovt sted for alle, spørger vi dig om at vise hensyn til andre brugere. Hjælp os med at holde OpenVerse en god oplevelse ved ikke at dele noget, der er upassende eller stødende.",
@@ -140,14 +140,14 @@
             "post_removed_for_reason": "Dit opslag \"{{postId}}\" er blevet fjernet af følgende grund: \"{{reason}}\".",
             "comment_removed": "Din kommentar \"{{postId}}\" er blevet fjernet.",
             "comment_removed_for_reason": "Din kommentar \"{{postId}}\" er blevet fjernet af følgende grund: \"{{reason}}\".",
-            "footer": "Klik på denne besked for at vise OpenVerses regler. Hvis du har nogen spørgsmål, vær venlig at kontakte moderatorerne på OpenPak forummet {{contactModsUrl}}."
+            "footer": "Klik på denne besked for at vise reglerne for OpenVerse. Hvis du har nogen spørgsmål, vær venlig at kontakte moderatorerne på OpenPak forummet {{contactModsUrl}}."
         },
         "limited_from_posting": {
             "message": "Du er blevet begrænset for at lave opslag.",
             "message_with_reason": "Du er begrænset for at lave opslag. Grund: \"{{reason}}\".",
             "temporary": "Du er blevet begrænset for at lave opslag indtil {{until}}.",
             "temporary_with_reason": "Du er blevet begrænset for at lave opslag indtil {{until}}. Grund: \"{{reason}}\".",
-            "footer": "Klik på denne besked for at vise OpenVerses regler. Hvis du har nogen spørgsmål, vær så venlig at kontakte moderatorerne på OpenPakmet {{banAppealUrl}}."
+            "footer": "Klik på denne besked for at vise reglerne for OpenVerse. Hvis du har nogen spørgsmål, vær så venlig at kontakte moderatorerne på OpenPakmet {{banAppealUrl}}."
         }
     },
     "language": "Dansk",
@@ -192,7 +192,7 @@
         "title": "Reporter opslag",
         "submit": "Send report",
         "label": "Grund:",
-        "description": "Du er i gang med at rapporterer et opslag, der går i strid mod OpenVerse regler. Denne report vil kun blive sendt til OpenVerse moderatorer og ikke forfatteren af dette opslag.",
+        "description": "Du er i gang med at rapporterer et opslag, der går i strid mod reglerne for OpenVerse. Denne report vil kun blive sendt til OpenVerse moderatorer og ikke forfatteren af dette opslag.",
         "additional_info_placeholder": "Indtast yderligere kommentarer eller information",
         "reason_spoiler": "Spoiler",
         "reason_personal_info": "Personlig information",

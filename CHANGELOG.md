@@ -6,6 +6,14 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.7 — 2026-11-01
+
+- ui: the web UI is now selected by the `config.domains.web` host list instead of a subdomain containing "juxt";
+  signed-in pages on verse.openpak.org were being rendered with the console (CTR) views
+- locales: inflected forms of the brand name fixed in da, fi, hr, hu, sk, ko, nl, ta, tr, fr, fr_CA, ca, ro and cy
+  (no more "OpenVerseu"-style suffixes); remaining "juxtaposition" strings in ca and cy replaced
+- test: locale values may not attach Latin/Cyrillic letters to "OpenVerse" or mention Juxtaposition outside the credit lines
+
 ## v0.3.6 — 2026-11-01
 
 - ui: About and first-run page titles follow "<page> · OpenVerse"

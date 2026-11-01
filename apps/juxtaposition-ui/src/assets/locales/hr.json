@@ -86,7 +86,7 @@
         "content_placeholder": "Dijeli svoje misli u objavi sa zajednicom ili sa svojim pratiteljima.",
         "screenshots_coming_soon": "Snimke ekrana još nisu spremne. Navrati kasnije!",
         "spoiler_label": "Spoiler",
-        "automod_error": "Tvoja objava sadrži tekst koji nije dopušten na OpenVerseu. Za više informacija posjeti https://openpak.org/terms"
+        "automod_error": "Tvoja objava sadrži tekst koji nije dopušten na usluzi OpenVerse. Za više informacija posjeti https://openpak.org/terms"
     },
     "setup": {
         "welcome": "Dobro došli u OpenVerse!",
@@ -106,10 +106,10 @@
             "eighth": "Nemoj objavljivati tajne igre",
             "ninth": "Neki ljudi traže savjete i trikove za igre, drugi žele otkriti tajne igre samostalno. Objave koje otkrivaju tajne igre ili njezinu priču nazivaju se „spojleri”. Ako objavljuješ nešto o igri koja bi mogla biti spojler, prije slanja označi kvadratić spojlera. Na taj način, ljudi koji ne žele spojlere neće vidjeti tvoju objavu.",
             "tenth": "Kršenja kodeksa ponašanja",
-            "eleventh": "Želimo da OpenVerse bude zabavan i ugodan za sve. U slučaju da netko prekrši kodeks ponašanja OpenVersea, poduzet ćemo odgovarajuće mjere, sve do blokiranja korisnika ili njegove konzole.",
+            "eleventh": "Želimo da OpenVerse bude zabavan i ugodan za sve. U slučaju da netko prekrši kodeks ponašanja usluge OpenVerse, poduzet ćemo odgovarajuće mjere, sve do blokiranja korisnika ili njegove konzole.",
             "twelfth": "Jesi li igrao/la tu igru?",
             "thirteenth": "Ako u zajednici objavljuješ igru koju si igrao/la, tvoje će objave dobiti ikonu koja ukazuje na to da si je igralo/la.",
-            "first": "Slijede neke važne smjernice za stvaranje zabavnog i ugodnog iskustva za sve. Kodeks ponašanja OpenVersea sadrži detaljne informacije, pa ih pažljivo pročitaj.",
+            "first": "Slijede neke važne smjernice za stvaranje zabavnog i ugodnog iskustva za sve. Kodeks ponašanja usluge OpenVerse sadrži detaljne informacije, pa ih pažljivo pročitaj.",
             "second": "Objave se mogu prikazati širom svijeta",
             "fourth": "Budite uljudni jedni prema drugima",
             "fifth": "Kako bismo održali zabavno mjesto za sve, budite uljudni jedni prema drugima. Pomognite nam zadržati ugodno iskustvo ne objavljujući ništa što je neprimjereno ili uvredljivo."
@@ -123,12 +123,12 @@
         },
         "analytics": "Analitika",
         "analytics_text": "OpenVerse koristi Cloudflare Web Analytics kako bi pratio način na koji korisnici koriste našu uslugu. Prikupljeni podaci uključuju, ali nisu ograničeni na vrijeme posjete, posjećene stranice i provedeno vrijeme na web stranici. Ovi podaci nisu na nikoji način s tobom povezani i mi niti Cloudflare ih ne koristimo za oglase.",
-        "ready": "Sve je spremno za početak korištenja OpenVersea",
+        "ready": "Sve je spremno za početak korištenja usluge OpenVerse",
         "ready_text": "Najprije pogledaj neke zajednice i vidi što ljudi iz cijelog svijeta objavljuju. Iskoristi ovu priliku da upoznaš OpenVerse. Možda ćeš otkriti nešto novo!",
         "done": "Uživaj u OpenVerse!",
         "done_button": "Krenimo!",
         "rules": "OpenVerse pravila",
-        "title": "Postavljanje OpenVersea"
+        "title": "Postavljanje usluge OpenVerse"
     },
     "language": "Hrvatski",
     "activity_feed": {
@@ -171,7 +171,7 @@
     "reporting": {
         "title": "Prijavi objavu",
         "submit": "Pošalji prijavu",
-        "description": "Prijavit ćeš objavu sa sadržajem koji krši kodeks ponašanja za OpenVerse. Ova prijava će se poslati administratorima OpenVersea, a ne autoru objave.",
+        "description": "Prijavit ćeš objavu sa sadržajem koji krši kodeks ponašanja za OpenVerse. Ova prijava će se poslati administratorima usluge OpenVerse, a ne autoru objave.",
         "label": "Razlog:",
         "additional_info_placeholder": "Unesi dodatne komentare ili informacije",
         "reason_personal_info": "Osobne informacije",
