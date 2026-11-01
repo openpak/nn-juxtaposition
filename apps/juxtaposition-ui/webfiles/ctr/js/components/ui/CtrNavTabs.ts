@@ -1,6 +1,6 @@
-import { GET } from '../../xhr';
-import { pjaxSetUrl, pjaxRefresh } from '../../pjax';
-import { initPosts } from '../../juxt';
+import { GET } from '@/js/xhr';
+import { pjaxSetUrl, pjaxRefresh, pjaxCanGoBack } from '@/js/pjax';
+import { initPosts } from '@/js/juxt';
 
 function navTabsClick(this: HTMLElement, ev: Event): void {
 	/* Note: because we use ev.target here, the nav-tab can not have any HTML elements inside it.
@@ -34,6 +34,11 @@ function navTabsClick(this: HTMLElement, ev: Event): void {
 		initPosts();
 		pjaxRefresh();
 		cave.transition_end();
+		if (pjaxCanGoBack()) {
+			cave.toolbar_setButtonType(1);
+		} else {
+			cave.toolbar_setButtonType(0);
+		}
 	});
 }
 

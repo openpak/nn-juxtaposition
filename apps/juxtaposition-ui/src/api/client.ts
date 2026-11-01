@@ -58,13 +58,12 @@ export function createInternalApiClient(tokens: UserTokens): InternalApi {
 	});
 
 	client.interceptors.error.use((err, response, _req, options) => {
-		// Since openapi-ts 0.97 the error interceptor also runs when no response
-		// was received (e.g. the gRPC call itself threw); pass that error through as before.
-		if (!options.throwOnError || !response) {
+		const throwOnError = options.throwOnError ?? true; // Default is set at createClient but is not resolved
+		if (!throwOnError) {
 			return err;
 		}
 
-		return new InternalApiError(response.status, err);
+		return new InternalApiError(response?.status ?? 500, err);
 	});
 
 	return new InternalApi({

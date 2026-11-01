@@ -1,16 +1,18 @@
-import './polyfills';
-import { initCheckboxes } from './controls/checkbox';
-import { initClientTabs } from './controls/ctabs';
-import { initNewPostView } from './new-post-view';
-import { pjaxBack, pjaxCanGoBack, pjaxInit, pjaxLoadUrl, pjaxRefresh } from './pjax';
-import { initPostPageView, initYeahButton } from './post';
-import { initToolbarConfigs } from './toolbar';
-import { GET, POST } from './xhr';
-import { initNavTabs } from './components/ui/CtrNavTabs';
-import { initSearchForm } from './components/ui/CtrSearchForm';
+import '@/js/polyfills';
+import { initNewPostView } from '@/js/new-post-view';
+import { pjaxBack, pjaxCanGoBack, pjaxInit, pjaxLoadUrl, pjaxRefresh } from '@/js/pjax';
+import { initPostPageView, initYeahButton, initSpoilers } from '@/js/post';
+import { initToolbarConfigs } from '@/js/toolbar';
+import { GET, POST } from '@/js/xhr';
+import { initNavTabs } from '@/js/components/ui/CtrNavTabs';
+import { initSearchForm } from '@/js/components/ui/CtrSearchForm';
+import { islands } from '@/js/islands';
+import { checkboxIsland } from '@/js/islands/checkbox';
+import { ctabsIsland } from '@/js/islands/ctabs';
 
 setInterval(checkForUpdates, 30000);
 
+cave.toolbar_enableBackBtnFunc(false);
 cave.toolbar_setCallback(1, back);
 cave.toolbar_setCallback(99, back);
 cave.toolbar_setCallback(2, function () {
@@ -39,30 +41,18 @@ export function initPosts() {
 	}
 	for (var i = 0; i < els.length; i++) {
 		els[i].addEventListener('click', function (e) {
+			// Prevent click event from happening if click target was in a link
+			if (e.target.closest('a[data-pjax]')) {
+				return;
+			}
+
 			pjaxLoadUrl(e.currentTarget.getAttribute('data-href'), true);
 		});
 	}
 	initYeahButton(document);
-	initSpoilers();
+	initSpoilers(document);
 }
 
-function initSpoilers() {
-	var els = document.querySelectorAll('button[data-post-id]');
-	if (!els) {
-		return;
-	}
-	for (var i = 0; i < els.length; i++) {
-		els[i].addEventListener('click', function (e) {
-			var el = e.currentTarget;
-			var spoilerWrapper = document.getElementById('spoiler-' + el.getAttribute('data-post-id'));
-			var postEl = document.getElementById('post-' + el.getAttribute('data-post-id'));
-
-			postEl.classList.remove('spoiler');
-			spoilerWrapper.outerHTML = '';
-			cave.snd_playSe('SE_OLV_OK');
-		});
-	}
-}
 function back() {
 	if (!pjaxCanGoBack()) {
 		cave.toolbar_setButtonType(0);
@@ -87,12 +77,11 @@ function initAll() {
 	initNewPostView();
 	initNavTabs();
 	initPostPageView();
-	initClientTabs();
-	initCheckboxes();
 	initSearchForm();
 	checkForUpdates();
 	initToolbarConfigs();
 	pjaxRefresh();
+	islands.loadBody();
 }
 
 function checkForUpdates() {
@@ -151,6 +140,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	console.debug('Pjax initialized.');
 	initAll();
 	stopLoading();
+	if (pjaxCanGoBack()) {
+		cave.toolbar_setButtonType(1);
+	} else {
+		cave.toolbar_setButtonType(0);
+	}
 });
 document.addEventListener('PjaxRequest', function () {
 	cave.transition_begin();
@@ -179,3 +173,8 @@ document.addEventListener('error', (e) => {
 		target.setAttribute('src', placeholder);
 	}
 }, true);
+
+islands.register([
+	checkboxIsland,
+	ctabsIsland
+]);

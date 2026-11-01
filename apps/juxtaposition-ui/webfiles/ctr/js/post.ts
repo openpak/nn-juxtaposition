@@ -1,5 +1,5 @@
 // Script for the post page view (postPageView.tsx)
-import { deletePostById, empathyPostById } from './api';
+import { deletePostById, empathyPostById } from '@/js/api';
 
 function deletePost(this: HTMLElement, _e: Event): void {
 	var id = this.getAttribute('data-button-delete-post');
@@ -78,6 +78,22 @@ export function initYeahButton(posts: Element | Document | DocumentFragment): vo
 	for (var i = 0; i < els.length; i++) {
 		els[i].addEventListener('click', yeahPost);
 	}
+}
+
+function unspoilerPost(this: HTMLButtonElement, _e: Event): void {
+	var spoilerWrapper = document.getElementById('spoiler-' + this.getAttribute('data-post-id'))!;
+	var postEl = document.getElementById('post-' + this.getAttribute('data-post-id'))!;
+
+	postEl.classList.remove('spoiler');
+	spoilerWrapper.outerHTML = '';
+	// @ts-expect-error incorrect upstream types
+	cave.snd_playSe('SE_OLV_OK');
+}
+
+export function initSpoilers(posts: Element | Document | DocumentFragment): void {
+	posts.querySelectorAll('button[data-post-id]').forEach((el) => {
+		el.addEventListener('click', unspoilerPost);
+	});
 }
 
 export function initPostPageView(): void {

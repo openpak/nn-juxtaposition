@@ -1,4 +1,4 @@
-import { empathyPostById } from './api';
+import { empathyPostById } from '@/js/api';
 
 function inc(base: string, val: number): string {
 	return (Number(base) + val).toString();
@@ -41,4 +41,18 @@ export function initYeahButton(posts: Element | Document | DocumentFragment): vo
 	for (let i = 0; i < els.length; i++) {
 		els[i].addEventListener('click', yeahPost);
 	}
+}
+
+function unspoilerPost(this: HTMLButtonElement, _e: Event): void {
+	const spoilerWrapper = document.getElementById('spoiler-' + this.getAttribute('data-post-id'))!;
+	const postEl = document.getElementById('post-' + this.getAttribute('data-post-id'))!;
+
+	postEl.classList.remove('spoiler');
+	spoilerWrapper.outerHTML = '';
+}
+
+export function initSpoilers(posts: Element | Document | DocumentFragment): void {
+	posts.querySelectorAll('button[data-post-id]').forEach((el) => {
+		el.addEventListener('click', unspoilerPost);
+	});
 }

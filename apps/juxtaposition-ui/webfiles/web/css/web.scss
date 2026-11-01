@@ -17,6 +17,8 @@
   --text-light: #7d7f94;
   --border: rgba(255, 255, 255, 0.1);
   --background-alt-alt: #383f6b;
+  --accent-tester : #0E6AC0;
+  --accent-dev: #C53655;
 }
 
 p {
@@ -237,20 +239,43 @@ header>.selected svg {
 }
 
 .post-body-content.removed {
-  height: 1.8rem;
-}
+  height: 1.9rem;
 
-.post-body-content.removed h3 {
-  border-bottom: 1px solid var(--background-alt-alt);
-  font-size: .8rem;
-  padding: 0.5rem 1rem;
-  margin: 0;
-  text-align: center;
-  color: var(--text-light);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  h3 {
+    border-bottom: 1px solid var(--background-alt-alt);
+    font-size: .8rem;
+    padding: 0.7rem 1rem;
+    margin: 0;
+    text-align: left;
+    color: var(--text-light);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .post-removed-by {
+    text-align: right;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .post-removed-by-user {
+      color: var(--text-secondary);
+    }
+
+    .mii-icon {
+      height: 1.5rem;
+      width: 1.5rem;
+      margin: -0.5rem 0;
+      border-radius: 9999px;
+    }
+  }
 }
 
 .icon-container>img,
@@ -299,13 +324,73 @@ header>.selected svg {
   cursor: pointer;
 }
 
-.post-content>p {
+.spoiler .post-content {
+  display: none;
+}
+
+.post-content > .post-content-text-container {
   margin-top: 0;
   margin-bottom: 0.5em;
-  font-weight: 400;
   margin-left: 0.25em;
+}
+
+.post-content-text-container.post-content-text-container-plain {
+  font-weight: 400;
   word-wrap: break-word;
   white-space: pre-wrap;
+}
+
+.post-content-text-container.post-content-text-container-markdown {
+  .prose-par {
+    margin: 0;
+    margin-bottom: 1.6rem; // Roughly 2 newlines
+    word-wrap: break-word;
+    line-height: 1.3;
+  }
+
+  .prose-bold {
+    font-weight: 700;
+    color: white;
+  }
+  .prose-italic {
+    font-style: italic;
+  }
+  .prose-strikethrough {
+    text-decoration: line-through;
+  }
+  .prose-code {
+    font-size: 0.9rem;
+    background-color: var(--background-dark);
+    border: 1px solid var(--background-alt);
+    padding: 0.1em 0.5em;
+    color: var(--text-light);
+    font-family: monospace;
+    display: inline;
+    border-radius: 5px;
+  }
+  .prose-mention {
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 0.1em 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 100ms ease-in-out, opacity 100ms ease-in-out;
+
+    &:hover {
+      background-color: var(--background-dark);
+      text-decoration: none;
+    }
+
+    &:active {
+      opacity: 0.8;
+      text-decoration: none;
+    }
+  }
+
+  > *:last-child {
+    margin-bottom: 0; // Prevent post content from sticking out at the bottom
+  }
 }
 
 .post-content,
@@ -324,6 +409,10 @@ header>.selected svg {
   justify-content: space-between;
   user-select: none;
   margin-left: 74px;
+}
+
+.spoiler .post-buttons-wrapper {
+  display: none;
 }
 
 .post-buttons-wrapper>.post-button {
@@ -422,6 +511,10 @@ header>.selected svg {
 #load-more {
   width: 100%;
   margin-bottom: 1em;
+}
+
+#news-list-content #load-more {
+  margin-top: 1em; // lol, lmao
 }
 
 #toast,
@@ -722,7 +815,8 @@ button.report {
   resize: none;
 }
 
-[hidden] {
+[hidden],
+.hide {
   display: none !important;
 }
 
@@ -954,110 +1048,6 @@ input[type="radio"] {
   justify-content: center;
 }
 
-.message-post-list .post {
-  position: relative;
-  padding: 10px 0;
-  margin-bottom: 20px;
-  margin-top: 30px;
-}
-
-.message-post-list .post.my-post .mii-icon-container {
-  float: right;
-  margin: 0 0 0 10px;
-}
-
-.message-post-list .post .mii-icon-container {
-  position: relative;
-  float: left;
-  width: 50px;
-  height: 50px;
-  margin-right: 20px;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
-}
-
-.message-post-list .post .mii-icon {
-  width: 50px;
-  height: 50px;
-  background: #fff;
-  border-radius: 12px;
-}
-
-.message-post-list .post.my-post footer {
-  right: 0;
-}
-
-.message-post-list .post footer {
-  display: block;
-  height: 16px;
-  color: var(--text-secondary-2);
-  font-size: 16px;
-  position: absolute;
-  bottom: -14px;
-}
-
-.message-post-list .post.my-post .post-body {
-  float: right;
-  background: var(--theme);
-  color: #fff;
-}
-
-.message-post-list .post .post-body {
-  float: left;
-  position: relative;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
-  padding: 15px 20px;
-  color: #000;
-}
-
-.message-post-list .post .post-content {
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  margin-bottom: 0;
-  margin-left: 0;
-  margin-top: 0;
-}
-
-.message-post-list .post::after,
-.settings-list-content .settings-list>li:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-.message-viewer-bubble-sent-memo {
-  width: 340px;
-  height: 127px;
-}
-
-.message-viewer-bubble-sent-screenshot {
-  max-width: 500px;
-  max-height: 281px;
-  width: 100%;
-}
-
-.message-post-list .post .post-buttons {
-  margin: 10px -20px -15px;
-  border-top: 2px solid #938a8a;
-  border-radius: 0 0 20px 20px;
-  text-align: right;
-}
-
-.message-post-list .post .post-buttons a,
-.message-post-list .post .post-buttons button {
-  display: inline-block;
-  padding: 0 15px;
-  margin: 0;
-  border-width: 0;
-  border-left: none currentcolor;
-  line-height: 50px;
-  font-size: 20px;
-  color: #938a8a;
-  box-shadow: inset 2px 0 0#ddd;
-}
-
 .header-button {
   position: fixed;
   bottom: 5%;
@@ -1079,7 +1069,7 @@ input[type="radio"] {
   justify-content: center;
 }
 
-.feeling-selector.expression>#mii-face {
+.feeling-selector.expression>.icon {
   width: 66px;
   height: 66px;
   margin: 0 1ch 1em 0;
@@ -1582,10 +1572,6 @@ li.reports .button-spacer {
     stroke: var(--theme-light);
   }
 
-  #load-more {
-    margin-bottom: 1em;
-  }
-
   #title {
     color: var(--text);
     width: 100vw;
@@ -1743,73 +1729,6 @@ button.report {
   justify-content: center
 }
 
-.message-post-list .post {
-  position: relative;
-  padding: 10px 0;
-  margin-bottom: 20px;
-  margin-top: 30px;
-}
-
-.message-post-list .post.my-post .mii-icon-container {
-  float: right;
-  margin: 0 0 0 10px
-}
-
-.message-post-list .post .mii-icon-container {
-  position: relative;
-  float: left;
-  width: 50px;
-  height: 50px;
-  margin-right: 20px;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, .6)
-}
-
-.message-post-list .post .mii-icon {
-  width: 50px;
-  height: 50px;
-  background: #fff;
-  border-radius: 12px
-}
-
-.message-post-list .post.my-post footer {
-  right: 0;
-}
-
-.message-post-list .post footer {
-  display: block;
-  height: 16px;
-  color: var(--text-secondary-2);
-  font-size: 16px;
-  position: absolute;
-  bottom: -14px;
-}
-
-.message-post-list .post.my-post .post-body {
-  float: right;
-  background: var(--theme);
-  color: #fff
-}
-
-.message-post-list .post .post-body {
-  float: left;
-  position: relative;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, .4);
-  padding: 15px 20px;
-  color: #000
-}
-
-.message-post-list .post .post-content {
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  margin-bottom: 0;
-  margin-left: 0;
-  margin-top: 0
-}
-
-.message-post-list .post::after,
 .settings-list-content .settings-list>li:after {
   content: "";
   display: block;
@@ -1825,43 +1744,6 @@ button.report {
   max-width: 500px;
   max-height: 281px;
   width: 100%;
-}
-
-.message-post-list .post .post-buttons {
-  margin: 10px -20px -15px;
-  border-top: 2px solid #938a8a;
-  border-radius: 0 0 20px 20px;
-  text-align: right
-}
-
-.message-post-list .post .post-buttons a,
-.message-post-list .post .post-buttons button {
-  display: inline-block;
-  padding: 0 15px;
-  margin: 0;
-  border-width: 0;
-  border-left: none currentcolor;
-  line-height: 50px;
-  font-size: 20px;
-  color: #938a8a;
-  box-shadow: inset 2px 0 0#ddd
-}
-
-.message-post-list .dm-banner {
-  background: var(--background-alt);
-  border: 1px solid var(--btn);
-  border-radius: 20px;
-  padding: .5rem 1rem;
-  margin: 4rem 0 2rem 0;
-  text-align: center;
-
-  p {
-    color: var(--text-secondary);
-  }
-
-  a {
-    color: white;
-  }
 }
 
 .header-button {
@@ -2024,10 +1906,6 @@ button.report {
 
   header>.selected>svg {
     stroke: var(--theme-light)
-  }
-
-  #load-more {
-    margin-bottom: 1em;
   }
 
   #title {

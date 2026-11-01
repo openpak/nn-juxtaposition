@@ -3,7 +3,7 @@ import { Post } from '@/models/post';
 import { errors } from '@/services/internal/errors';
 import { deleteOptional, filterRemovedPosts } from '@/services/internal/utils';
 import { guards } from '@/services/internal/middleware/guards';
-import { mapPost, mapPostWithModeration, postSchema } from '@/services/internal/contract/post';
+import { getRelevantPidsFromPost, mapPost, mapPostWithModeration, postSchema } from '@/services/internal/contract/post';
 import { mapPage, pageControlSchema, pageDtoSchema } from '@/services/internal/contract/page';
 import { mapResult, resultSchema } from '@/services/internal/contract/result';
 import { empathyActionSchema, empathySchema, mapEmpathy } from '@/services/internal/contract/empathy';
@@ -20,7 +20,6 @@ import { assertCanAccessUser, canAccessUser } from '@/services/internal/utils/us
 import { createNewEmpathyNotification, createNewReplyNotification } from '@/services/internal/utils/notifications';
 import type { FilterQuery } from 'mongoose';
 import type { IPost } from '@/types/mongoose/post';
-import type { User } from '@/prisma/client';
 
 export const postsRouter = createInternalApiRouter();
 
@@ -86,23 +85,21 @@ postsRouter.get({
 		const communityIds = posts.map(v => v.community_id);
 		const communities = await Community.find({ olive_community_id: { $in: communityIds } });
 
-		const userIds = posts.flatMap(v => v.removed_by).filter((v): v is number => !!v);
 		const users = await db.user.findMany({
 			where: {
 				pid: {
-					in: userIds
+					in: getRelevantPidsFromPost(posts)
 				}
 			}
 		});
 
 		const mappedPosts = posts.map((p) => {
 			const comm = communities.find(v => v.olive_community_id === p.community_id) ?? null;
-			const remover = p.removed_by ? users.find(v => v.pid === p.removed_by) ?? null : null;
 
 			if (auth?.moderator) {
-				return mapPostWithModeration(p, comm, remover);
+				return mapPostWithModeration(p, comm, users);
 			}
-			return mapPost(p, comm);
+			return mapPost(p, comm, users);
 		});
 		return mapPage(total, mappedPosts);
 	}
@@ -128,14 +125,13 @@ postsRouter.get({
 		}
 		const community = await Community.findOne({ olive_community_id: post.community_id });
 
-		let remover: User | null = null;
-		if (post.removed_by) {
-			remover = await db.user.findUnique({
-				where: {
-					pid: post.removed_by
+		const users = await db.user.findMany({
+			where: {
+				pid: {
+					in: getRelevantPidsFromPost([post])
 				}
-			});
-		}
+			}
+		});
 
 		const poster = await db.user.findUnique({
 			where: {
@@ -152,9 +148,9 @@ postsRouter.get({
 		assertCanAccessUser(auth, poster);
 
 		if (auth?.moderator) {
-			return mapPostWithModeration(post, community, remover);
+			return mapPostWithModeration(post, community, users);
 		}
-		return mapPost(post, community);
+		return mapPost(post, community, users);
 	}
 });
 
@@ -271,7 +267,7 @@ postsRouter.post({
 				settings: true
 			}
 		});
-		if (targetUser?.settings?.notifyEmpathy) {
+		if (targetUser && pid !== targetUser.pid && targetUser.settings?.notifyEmpathy) {
 			await createNewEmpathyNotification(db, { currentUser: pid, postAuthor: post.pid, postId: post.id });
 		}
 
@@ -371,6 +367,7 @@ postsRouter.post({
 	},
 	async handler({ body, params, auth, db }) {
 		const account = auth!;
+		const pid = account.pnid.pid;
 
 		const parentPost = await Post.findOne({
 			id: params.post_id,
@@ -379,6 +376,9 @@ postsRouter.post({
 		});
 		if (!parentPost) {
 			throw errors.for('not_found');
+		}
+		if (parentPost.parent) {
+			throw errors.for('bad_request');
 		}
 
 		const community = await Community.findOne({ olive_community_id: parentPost.community_id });
@@ -396,7 +396,7 @@ postsRouter.post({
 		}
 		const newPost = await createNewPost({
 			author: {
-				pid: account.pnid.pid,
+				pid,
 				miiData: account.pnid.mii?.data ?? '',
 				screenName: account.user?.displayName ?? '',
 				verified: self.permissions.moderator
@@ -404,6 +404,13 @@ postsRouter.post({
 			body,
 			community,
 			parentPost
+		});
+		const users = await db.user.findMany({
+			where: {
+				pid: {
+					in: getRelevantPidsFromPost([newPost])
+				}
+			}
 		});
 
 		const targetUser = await db.user.findUnique({
@@ -414,10 +421,10 @@ postsRouter.post({
 				settings: true
 			}
 		});
-		if (targetUser?.settings?.notifyReply) {
+		if (targetUser && pid !== targetUser.pid && targetUser.settings?.notifyReply) {
 			await createNewReplyNotification(db, { reply: newPost, replyToUser: targetUser.pid });
 		}
 
-		return mapPost(newPost, community);
+		return mapPost(newPost, community, users);
 	}
 });

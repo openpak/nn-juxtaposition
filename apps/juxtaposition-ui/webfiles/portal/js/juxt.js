@@ -1,12 +1,13 @@
-import './polyfills';
+import '@/js/polyfills';
 import Pjax from 'pjax';
-import { GET, POST } from './xhr';
-import { empathyPostById } from './api';
-import { initPostPageView } from './post';
-import { initNavTabs } from './components/ui/PortalNavTabs';
-import { initSearchForm } from './components/ui/PortalSearchForm';
-import { initNavBar } from './components/PortalNavBar';
-import { back, exit } from './nav';
+import { GET, POST } from '@/js/xhr';
+import { empathyPostById } from '@/js/api';
+import { initPostPageView, initSpoilers } from '@/js/post';
+import { initNavTabs } from '@/js/components/ui/PortalNavTabs';
+import { initSearchForm } from '@/js/components/ui/PortalSearchForm';
+import { initNavBar } from '@/js/components/PortalNavBar';
+import { back, exit } from '@/js/nav';
+import { initBoss } from '@/js/boss';
 
 export var pjax;
 setInterval(checkForUpdates, 30000);
@@ -63,11 +64,16 @@ export function initPosts() {
 	}
 	for (var i = 0; i < els.length; i++) {
 		els[i].addEventListener('click', function (e) {
+			// Prevent click event from happening if click target was in a link
+			if (e.target.closest('a[data-pjax]')) {
+				return;
+			}
+
 			pjax.loadUrl(e.currentTarget.getAttribute('data-href'));
 		});
 	}
 	initYeah();
-	initSpoilers();
+	initSpoilers(document);
 }
 export function initMorePosts() {
 	var els = document.querySelectorAll('.load-more[data-href]');
@@ -132,15 +138,25 @@ function initPostModules() {
 	}
 }
 function initPostEmotion() {
-	var els = document.querySelectorAll('input[data-mii-face-url]');
-
-	for (var i = 0; i < els.length; i++) {
-		els[i].addEventListener('click', function (e) {
-			var el = e.currentTarget;
-			document.getElementById('mii-face').src = el.getAttribute('data-mii-face-url');
-			wiiuSound.playSoundByName(el.getAttribute('data-sound'), 3);
-		});
+	var feeling_selector = document.querySelector('[data-mii-feeling-selector]');
+	if (!feeling_selector) {
+		return;
 	}
+
+	feeling_selector.addEventListener('change', (e) => {
+		var feeling = e.target.value;
+		var icons = document.querySelectorAll('[data-mii-feeling]');
+
+		icons.forEach((icon) => {
+			var icon_feeling = icon.getAttribute('data-mii-feeling');
+
+			if (icon_feeling == feeling) {
+				icon.classList.remove('hide');
+			} else {
+				icon.classList.add('hide');
+			}
+		});
+	});
 }
 function playSound(e) {
 	wiiuSound.playSoundByName(e.currentTarget.getAttribute('data-sound'), 3);
@@ -167,19 +183,6 @@ function initScreenShots() {
 function initNewPost() {
 	initPostEmotion();
 	initScreenShots();
-}
-function initSpoilers() {
-	var els = document.querySelectorAll('button[data-post-id]');
-	if (!els) {
-		return;
-	}
-	for (var i = 0; i < els.length; i++) {
-		els[i].addEventListener('click', function (e) {
-			var el = e.currentTarget;
-			document.getElementById('post-' + el.getAttribute('data-post-id')).classList.remove('spoiler');
-			el.outerHTML = '';
-		});
-	}
 }
 
 function initAll() {
@@ -234,6 +237,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		switches: { '#nav-menu': Pjax.switches.replaceNode, '.tab-body': Pjax.switches.replaceNode }
 	});
 	console.debug('Pjax initialized.', pjax);
+	initBoss();
 	initAll();
 	stopLoading();
 });
