@@ -3,7 +3,7 @@ import { T } from '@/services/juxt-web/views/common/components/T';
 import type { ReactNode } from 'react';
 
 export function WebAboutView(): ReactNode {
-	const extraHead = <title>{T.str('about.title') + ' · OpenVerse'}</title>;
+	const extraHead = <title>{T.str('shell.about') + ' · OpenVerse'}</title>;
 
 	return (
 		<WebLoginRoot head={extraHead}>
