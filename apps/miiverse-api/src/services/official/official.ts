@@ -23,6 +23,7 @@ import { generateCommunityId } from '@/services/internal/utils/communities';
 import { defaultUserData, OFFICIAL_NAME, OFFICIAL_PID } from '@/services/web-identity/web-identity';
 import { hexColor, iconLetter, renderBanner, renderIcon, renderPakkaAvatar } from '@/services/communities/seed-images';
 import { composeBody, escapeRegex, keyMatches, postIdFor, postUrl, titleIdForms } from '@/services/official/helpers';
+import { deletePostMedia } from '@/services/cdn/media';
 import type { HydratedCommunityDocument } from '@/types/mongoose/community';
 
 const FACES = ['normal_face', 'smile_open_mouth', 'wink_left', 'surprise_open_mouth', 'frustrated', 'sorrow'];
@@ -263,10 +264,13 @@ officialRouter.post('/posts', async (req, res, next) => {
 // Removes one of Pakka's own posts (cleanup and rollback). Other people's posts are never touched.
 officialRouter.delete('/posts/:id', async (req, res, next) => {
 	try {
-		const out = await Post.deleteOne({ id: req.params.id, pid: OFFICIAL_PID });
-		if (out.deletedCount === 0) {
+		const post = await Post.findOne({ id: req.params.id, pid: OFFICIAL_PID });
+		if (!post) {
 			return fail(res, 404, 'not_found');
 		}
+		// Media first: an interrupted run then leaves a row to retry from, never loose files.
+		await deletePostMedia(post);
+		await Post.deleteOne({ _id: post._id });
 		res.json({ deleted: true });
 	} catch (e) {
 		next(e);

@@ -23,7 +23,8 @@ cdnProxy.get(/^\/cdn\/(.+)$/, async (req, res) => {
 		}
 		res.status(200);
 		res.setHeader('Content-Type', upstream.headers.get('content-type') ?? 'application/octet-stream');
-		res.setHeader('Cache-Control', 'public, max-age=86400');
+		// Post media can be deleted; it must not be cached without revalidation.
+		res.setHeader('Cache-Control', key.startsWith('screenshots/') || key.startsWith('paintings/') ? 'no-cache' : 'public, max-age=86400');
 		Readable.fromWeb(upstream.body as never).pipe(res);
 	} catch {
 		res.sendStatus(502);

@@ -5,7 +5,8 @@ export default defineConfig({
 	entry: {
 		server: 'src/server.entry.ts',
 		generate: 'src/generate.entry.ts',
-		seed: 'src/seed.entry.ts'
+		seed: 'src/seed.entry.ts',
+		'media-orphans': 'src/media-orphans.entry.ts'
 	},
 	sourcemap: true,
 	platform: 'node',

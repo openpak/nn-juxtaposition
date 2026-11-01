@@ -2,7 +2,7 @@ import express from 'express';
 import { GetObjectCommand } from '@aws-sdk/client-s3';
 import { config } from '@/config';
 import { getS3 } from '@/s3';
-import { contentTypeFor, toCdnKey } from '@/services/cdn/keys';
+import { cacheControlFor, contentTypeFor, toCdnKey } from '@/services/cdn/keys';
 import type { Readable } from 'node:stream';
 
 // Public, read-only media route: drawings, screenshots, community icons and
@@ -26,8 +26,8 @@ router.get(/^\/cdn\/(.+)$/, async (request, response) => {
 		if (object.ContentLength !== undefined) {
 			response.setHeader('Content-Length', String(object.ContentLength));
 		}
-		// Keys include the post id and are never rewritten, so they cache well.
-		response.setHeader('Cache-Control', 'public, max-age=86400');
+		// Post media must stop loading once its post is deleted, so it is not cached blindly.
+		response.setHeader('Cache-Control', cacheControlFor(key));
 		(object.Body as Readable).pipe(response);
 	} catch (error) {
 		const name = (error as { name?: string }).name;

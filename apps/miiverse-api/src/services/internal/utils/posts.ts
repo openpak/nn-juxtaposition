@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { extractMentionPids, parseJuxtMarkdown, renderToPlainText, transformJuxtMarkdown } from '@repo/common';
+import { deletePostMedia } from '@/services/cdn/media';
 import { uploadPainting, uploadScreenshot } from '@/images';
 import { getShotModeForTitleId } from '@/services/api/routes/posts';
 import { evaluateAutomodRules, getInvalidPostRegex, performAutomodAction } from '@/util';
@@ -133,8 +134,22 @@ async function validateAndProcessPostBody(input: string): Promise<{ text: string
  * Warning: Does not check if it should be posted, validation should be done outside of this method
  */
 export async function createNewPost(ops: PostCreateOptions): Promise<HydratedPostDocument> {
-	const body = ops.body;
 	const postId = ops.id ?? await generatePostUID(21);
+	try {
+		return await createNewPostWithId(ops, postId);
+	} catch (e) {
+		// Uploads happen before the checks (duplicate, automod, empty) and the insert; a post
+		// that is refused must not leave its screenshot or drawing in the bucket.
+		// (Never when a post with that id exists: a duplicate id must not wipe the live post's files.)
+		if (!await Post.exists({ id: postId })) {
+			await deletePostMedia({ pid: ops.author.pid, id: postId });
+		}
+		throw e;
+	}
+}
+
+async function createNewPostWithId(ops: PostCreateOptions, postId: string): Promise<HydratedPostDocument> {
+	const body = ops.body;
 
 	let paintings: PaintingUrls | null = null;
 	if (body.painting) {

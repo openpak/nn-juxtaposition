@@ -6,6 +6,14 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.19 — 2026-11-02
+
+- privacy: deleting a post now deletes its screenshot and drawing (full, thumbnail and big renders, PNG and TGA keys) from the `miiverse` bucket, so `/cdn/...` answers 404 at once. Covers a player removing their own post or reply, a moderator removal (`DELETE /posts/:id` and the report action), the console XML API delete, Pakka's official post removal, and the account deletion call from core (`deleteAccountData`, which now also removes the big and thumb renders it used to miss)
+- privacy: moderation removals still keep the post row (who removed it, when, why) but the row's drawing blob and media urls are wiped; the files are never kept for audit
+- privacy: a post refused after its images were uploaded (duplicate, automod, empty, failed insert) no longer leaves them behind
+- privacy: `/cdn` and the web proxy serve screenshots and drawings with `Cache-Control: no-cache`, so a copy cached by a browser or proxy is revalidated and a deleted image stops loading
+- tools: one-off orphan cleaner `node dist/media-orphans.js [--apply]` (`npm run media:orphans`): dry run by default, deletes screenshot/drawing objects with no live post, idempotent. Activity posts carry no uploaded media (OpenPak art by https URL), so nothing to delete there
+
 ## v0.3.18 — 2026-11-02
 
 - activity: a player can remove their own activity post (the x on the post; moderators any), `DELETE /api/v1/activity/:id`; "Show more" only when a full page came back; the Game activity styles were dropped from `openverse.css` by the v0.3.16 welcome change and are back, with settings spacing

@@ -18,7 +18,7 @@ vi.mock('@/services/internal/utils/posts', () => ({ createNewPost: vi.fn() }));
 vi.mock('@/database', () => ({
 	getDb: () => ({ user: { findUnique: async () => ({ pid: 1 }), create: async () => ({}) } })
 }));
-vi.mock('@/util', () => ({ uploadCDNAsset: async () => true }));
+vi.mock('@/util', () => ({ uploadCDNAsset: async () => true, bulkDeleteCDNAsset: async () => true }));
 vi.mock('@/images', () => ({ uploadIcons: vi.fn(), uploadHeaders: vi.fn() }));
 
 const app = express();
@@ -87,11 +87,13 @@ describe('official posts', () => {
 	});
 
 	it('removes only Pakka\'s own posts', async () => {
+		vi.mocked(Post.findOne).mockResolvedValue({ _id: 'oid', id: 'abc', pid: OFFICIAL_PID } as never);
 		vi.mocked(Post.deleteOne).mockResolvedValue({ deletedCount: 1 } as never);
 		const res = await superRequest(app).delete('/internal/v1/official/posts/abc').set('x-internal-key', KEY);
 		expect(res.status).toBe(200);
-		expect(Post.deleteOne).toHaveBeenCalledWith({ id: 'abc', pid: OFFICIAL_PID });
-		vi.mocked(Post.deleteOne).mockResolvedValue({ deletedCount: 0 } as never);
+		expect(Post.findOne).toHaveBeenCalledWith({ id: 'abc', pid: OFFICIAL_PID });
+		expect(Post.deleteOne).toHaveBeenCalledWith({ _id: 'oid' });
+		vi.mocked(Post.findOne).mockResolvedValue(null as never);
 		expect((await superRequest(app).delete('/internal/v1/official/posts/xyz').set('x-internal-key', KEY)).status).toBe(404);
 	});
 });

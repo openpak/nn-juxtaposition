@@ -3,6 +3,7 @@ import moment from 'moment';
 import { Schema, model } from 'mongoose';
 import { getInvalidPostRegex } from '@/util';
 import { config } from '@/config';
+import { deletePostMedia } from '@/services/cdn/media';
 import type { HydratedPostDocument, IPost, IPostMethods, PostModel } from '@/types/mongoose/post';
 import type { HydratedCommunityDocument } from '@/types/mongoose/community';
 import type { PostToJSONOptions } from '@/types/mongoose/post-to-json-options';
@@ -176,6 +177,15 @@ PostSchema.method<HydratedPostDocument>('del', async function del(reason: string
 	this.removed_by = pid;
 	this.removed_reason = reason;
 	this.removed_at = new Date();
+	// The row stays (moderation log, report history) but the content does not: the media files
+	// are deleted from the bucket and the drawing blob is wiped, so nothing stays reachable.
+	await deletePostMedia(this);
+	this.painting = '';
+	this.painting_img = '';
+	this.painting_big = '';
+	this.screenshot = '';
+	this.screenshot_big = '';
+	this.screenshot_thumb = '';
 	await this.save();
 });
 

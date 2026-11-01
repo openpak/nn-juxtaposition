@@ -4,6 +4,7 @@ import { Snowflake } from 'node-snowflake';
 import moment from 'moment';
 import xmlbuilder from 'xmlbuilder';
 import * as z from 'zod';
+import { deletePostMedia } from '@/services/cdn/media';
 import {
 	getUserFriendPIDs,
 	getUserAccountData,
@@ -188,7 +189,8 @@ router.post('/', upload.none(), async function (request: express.Request, respon
 		});
 		if (paintings === null) {
 			// The document we already submitted to the db is invalid, so drop it.
-			post.deleteOne();
+			await deletePostMedia(post);
+			await post.deleteOne();
 			return serverError(response, ApiErrorCode.DATABASE_ERROR);
 		}
 
@@ -205,7 +207,8 @@ router.post('/', upload.none(), async function (request: express.Request, respon
 		});
 		if (screenshotUrls === null) {
 			// The document we already submitted to the db is invalid, so drop it.
-			post.deleteOne();
+			await deletePostMedia(post);
+			await post.deleteOne();
 			return serverError(response, ApiErrorCode.DATABASE_ERROR);
 		}
 

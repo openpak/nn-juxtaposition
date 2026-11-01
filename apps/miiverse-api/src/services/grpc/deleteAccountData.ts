@@ -1,13 +1,10 @@
 import { logger } from '@/logger';
 import { Post } from '@/models/post';
 import { bulkDeleteCDNAsset } from '@/util';
+import { postMediaKeys } from '@/services/cdn/media';
 import type { DeleteAccountDataRequest, DeleteAccountDataResponse } from '@pretendonetwork/grpc/miiverse/v2/delete_account_data_rpc';
 
 const pageLimit = 50;
-
-function cleanCdnKey(key: string): string {
-	return key.startsWith('/') ? key.slice(1) : key;
-}
 
 export async function deleteAccountData(req: DeleteAccountDataRequest): Promise<DeleteAccountDataResponse> {
 	logger.info(`Deleting account ${req.pid}...`);
@@ -19,14 +16,7 @@ export async function deleteAccountData(req: DeleteAccountDataRequest): Promise<
 			pid: req.pid
 		}).limit(pageLimit);
 
-		const cdnKeysOrNull = posts.map((msg) => {
-			return [
-				msg.painting ? `paintings/${msg.pid}/${msg.id}.png` : null,
-				msg.screenshot ? cleanCdnKey(msg.screenshot) : null,
-				msg.screenshot_thumb ? cleanCdnKey(msg.screenshot_thumb) : null
-			];
-		}).flat();
-		const cdnKeys = cdnKeysOrNull.filter((v): v is string => !!v);
+		const cdnKeys = posts.flatMap(msg => postMediaKeys(msg));
 		await bulkDeleteCDNAsset(cdnKeys); // ignore return value, continue on error
 		totalCdnDeletions += cdnKeys.length;
 

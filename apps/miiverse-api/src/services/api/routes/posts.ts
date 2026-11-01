@@ -3,6 +3,7 @@ import multer from 'multer';
 import xmlbuilder from 'xmlbuilder';
 import * as z from 'zod';
 import { extractMentionPids, parseJuxtMarkdown, renderToPlainText, transformJuxtMarkdown } from '@repo/common';
+import { deletePostMedia } from '@/services/cdn/media';
 import {
 	getValueFromQueryString,
 	getInvalidPostRegex,
@@ -474,7 +475,8 @@ async function newPost(request: express.Request, response: express.Response): Pr
 		});
 		if (paintings === null) {
 			// The document we already submitted to the db is invalid, so drop it.
-			post.deleteOne();
+			await deletePostMedia(post);
+			await post.deleteOne();
 			return serverError(response, ApiErrorCode.DATABASE_ERROR);
 		}
 
@@ -491,7 +493,8 @@ async function newPost(request: express.Request, response: express.Response): Pr
 		});
 		if (screenshotUrls === null) {
 			// The document we already submitted to the db is invalid, so drop it.
-			post.deleteOne();
+			await deletePostMedia(post);
+			await post.deleteOne();
 			return serverError(response, ApiErrorCode.DATABASE_ERROR);
 		}
 

@@ -36,3 +36,11 @@ export function contentTypeFor(key: string): string {
 		default: return 'application/octet-stream';
 	}
 }
+
+/**
+ * Post media can be deleted at any time and must then stop loading, so it is never cached
+ * without revalidation. Community icons, headers and Mii faces are static.
+ */
+export function cacheControlFor(key: string): string {
+	return key.startsWith('screenshots/') || key.startsWith('paintings/') ? 'no-cache' : 'public, max-age=86400';
+}
