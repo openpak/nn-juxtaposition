@@ -197,9 +197,12 @@ export function createLiteRouter(deps: LiteDeps = { ...defaultDeps, kv: undefine
 				return result.session;
 			}
 			if (result.kind === 'unavailable') {
-				notice(res, cls, 403, 'Unavailable', result.reason === 'banned'
-					? 'OpenVerse is not available for this account.'
-					: 'This account is not set up yet. Open verse.openpak.org on a computer or phone once, then try again.');
+				const why = {
+					'banned': 'OpenVerse is not available for this account.',
+					'off': 'A parent or guardian has turned OpenVerse off for this account.',
+					'no-profile': 'This account is not set up yet. Open verse.openpak.org on a computer or phone once, then try again.'
+				}[result.reason];
+				notice(res, cls, 403, 'Unavailable', why);
 				return null;
 			}
 			if (token) {

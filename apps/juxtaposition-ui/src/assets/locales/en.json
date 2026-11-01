@@ -347,7 +347,7 @@
   "devices": {
     "title": "Linked devices",
     "heading": "Linked devices",
-    "intro": "Link a PlayStation 3, Wii, Nintendo DSi or Xbox 360 to read and post on OpenVerse without typing a password on the console. Open OpenVerse Lite on the device, then type the code it shows.",
+    "intro": "Link a PlayStation 3, Wii, Nintendo DSi or Xbox 360 to read and post on OpenVerse without typing a password on the console. Open lite.verse.openpak.org in the device's browser, then type the code it shows.",
     "code_label": "Code shown on the device",
     "check": "Continue",
     "confirm_heading": "Link this device?",

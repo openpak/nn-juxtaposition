@@ -6,6 +6,11 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.22 — 2026-11-02
+
+- lite: drawings load on the PS3 and Wii (the API names the drawing URL on verse.openpak.org, not the console CDN host); the Devices page tells people to open lite.verse.openpak.org;
+  a supervised account with OpenVerse turned off by a parent gets a clear message on Lite and `openverse_off` from the Xbox 360 feed
+
 ## v0.3.21 — 2026-11-02
 
 - web: parent-controlled OpenVerse level for supervised accounts (off, read, read + post; default off), read from the parental controls core's `GetProfile.openverse`. Off blocks the whole API (`auth_openverse_off`) and shows `/welcome/off`; read keeps the existing read-only behaviour. A core that cannot be reached means off.

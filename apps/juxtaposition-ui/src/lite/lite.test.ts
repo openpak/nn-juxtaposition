@@ -48,7 +48,7 @@ const mkPost = (id: string, body: string, extra: Record<string, unknown> = {}) =
 });
 
 function fakeApi(opts: { readOnly?: boolean; links: Map<string, { id: string; accountId: string; deviceClass: string }> }) {
-	const posts: Array<ReturnType<typeof mkPost>> = [mkPost('p1', 'Hello <script>alert(1)</script>\nsecond line'), mkPost('p2', 'x'.repeat(400), { painting: { imageUrl: 'https://api.olv.openpak.org/cdn/paintings/1/2.png' } })];
+	const posts: Array<ReturnType<typeof mkPost>> = [mkPost('p1', 'Hello <script>alert(1)</script>\nsecond line'), mkPost('p2', 'x'.repeat(400), { painting: { imageUrl: 'https://verse.openpak.org/cdn/paintings/1/2.png' } })];
 	const calls: string[] = [];
 	const self = {
 		pid: 1800000009, miiName: 'Ann', readOnly: opts.readOnly ?? false, banState: null,
@@ -75,7 +75,7 @@ function fakeApi(opts: { readOnly?: boolean; links: Map<string, { id: string; ac
 				return ok({ status: 'success' });
 			}
 		},
-		self: { get: () => ok(self), getNotifications: () => ok({ unreadNotifications: 4 }) },
+		self: { get: () => (offAccount ? Promise.resolve({ error: { errorCode: 'auth_openverse_off' } }) : ok(self)), getNotifications: () => ok({ unreadNotifications: 4 }) },
 		activityFeed: { getFresh: () => ok({ items: posts }), getPeople: () => ok({ items: [posts[0]] }) },
 		communities: {
 			list: () => ok({ items: [community], total: 1 }),
@@ -111,6 +111,7 @@ const links = new Map<string, { id: string; accountId: string; deviceClass: stri
 const kv = memoryKv();
 let calls: string[] = [];
 let readOnly = false;
+let offAccount = false;
 
 const UA = {
 	ps3: 'Mozilla/5.0 (PLAYSTATION 3 4.91) AppleWebKit/531.22.8 (KHTML, like Gecko)',
@@ -165,6 +166,17 @@ describe('device detection', () => {
 	it('sizes the DSi smaller and without images', () => {
 		expect(PROFILES.dsi.perPage).toBeLessThan(PROFILES.wii.perPage);
 		expect(PROFILES.dsi.images).toBe(false);
+	});
+});
+
+describe('drawing urls', () => {
+	it('accepts the API cdn path on any of our hosts and nothing else', async () => {
+		const { localImage } = await import('@/lite/images');
+		expect(localImage('https://verse.openpak.org/cdn/paintings/1/2.png')).toBe('/img/paintings/1/2.png');
+		expect(localImage('https://api.olv.openpak.org/cdn/paintings/1/2.png')).toBe('/img/paintings/1/2.png');
+		expect(localImage('https://x.test/cdn/mii/1/normal_face.png')).toBeNull();
+		expect(localImage('https://x.test/cdn/paintings/../../etc.png')).toBeNull();
+		expect(localImage(null)).toBeNull();
 	});
 });
 
@@ -304,6 +316,18 @@ describe('Lite pages', () => {
 		const res = await get('/ps3/post', { method: 'POST', form: { community: '100', body: 'hi', k } });
 		expect(res.location).toBe('/ps3/c/100?n=readonly');
 		readOnly = false;
+	});
+
+	it('says so when a parent turned OpenVerse off', async () => {
+		const get = client(UA.wii);
+		const start = await get('/wii/link');
+		await approveCode(kv as never, new URL(start.location!, base).searchParams.get('c')!, 'acc-6');
+		await get(start.location!);
+		offAccount = true;
+		const res = await get('/wii/');
+		offAccount = false;
+		expect(res.status).toBe(403);
+		expect(res.html).toContain('parent or guardian');
 	});
 
 	it('a revoked token is signed out on the next request', async () => {

@@ -185,7 +185,7 @@ export function createX360Router(deps: LiteDeps): Router {
 					return;
 				}
 				if (r.kind === 'unavailable') {
-					send(req, res, 'error', { error: r.reason === 'banned' ? 'account_unavailable' : 'not_set_up' }, 403);
+					send(req, res, 'error', { error: { 'banned': 'account_unavailable', 'off': 'openverse_off', 'no-profile': 'not_set_up' }[r.reason] }, 403);
 					return;
 				}
 				await handler(req, res, r.session);

@@ -69,7 +69,8 @@ Nothing secret is typed or shown on the console.
   until the person removes the device. It cannot sign in anywhere else, reach account settings, openpak.org
   or other services, and it is not sent to verse.openpak.org (host-only cookie). This is the cost of plain HTTP and
   is why Lite carries no more than that. Do not use Lite on a network you do not trust.
-- **Supervised accounts** are read-only. The same server-side check as the web (`readOnly`, parental controls
+- **Supervised accounts** follow the parent-controlled level: off (Lite says a parent or guardian turned OpenVerse off; the feed answers `openverse_off`), read (read-only) or read and post.
+  The same server-side check as the web (`readOnly`, parental controls
   when configured) applies to every Lite write; the forms are hidden and a forced POST is refused. A banned
   account sees "not available". The community rules gate is passed before a link can be created, because
   `/devices` sits behind it.

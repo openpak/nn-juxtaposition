@@ -16,7 +16,7 @@ export const defaultDeps: SessionDeps = { makeApi: createInternalApiClient };
 export type SessionResult =
 	| { kind: 'ok'; session: LiteSession } |
 	{ kind: 'none' } |
-	{ kind: 'unavailable'; reason: 'banned' | 'no-profile' };
+	{ kind: 'unavailable'; reason: 'banned' | 'off' | 'no-profile' };
 
 export async function loadSession(deps: SessionDeps, token: string | null, allowedClasses?: readonly string[]): Promise<SessionResult> {
 	if (!token) {
@@ -31,6 +31,11 @@ export async function loadSession(deps: SessionDeps, token: string | null, allow
 	}
 	const api = deps.makeApi({ trustedPid: resolved.pid });
 	const selfResult = await api.self.get({ throwOnError: false });
+	const errorCode = (selfResult.error as { errorCode?: string } | undefined)?.errorCode;
+	if (errorCode === 'auth_openverse_off') {
+		// A parent or guardian turned OpenVerse off for this supervised account.
+		return { kind: 'unavailable', reason: 'off' };
+	}
 	const self = selfResult.error ? null : selfResult.data ?? null;
 	if (!self) {
 		return { kind: 'unavailable', reason: 'no-profile' };
