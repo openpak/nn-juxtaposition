@@ -6,6 +6,10 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.8 — 2026-11-01
+
+- ui: /feed sends an account that has not finished console onboarding to the first-run page instead of a 500
+
 ## v0.3.7 — 2026-11-01
 
 - ui: the web UI is now selected by the `config.domains.web` host list instead of a subdomain containing "juxt";

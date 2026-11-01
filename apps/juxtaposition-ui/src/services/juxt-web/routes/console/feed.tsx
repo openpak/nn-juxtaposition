@@ -26,6 +26,10 @@ feedRouter.get('/', async function (req, res) {
 	if (!userContent) {
 		return res.redirect('/404');
 	}
+	if (!auth().self.hasDoneOnboarding) {
+		// The API refuses the feed until the console onboarding is done (403 auth_onboarding_incomplete).
+		return res.redirect('/titles/show');
+	}
 
 	const postPage = await req.api.activityFeed.getFollowing({ limit: config.postLimit, offset });
 	const posts = postPage.data.items;
