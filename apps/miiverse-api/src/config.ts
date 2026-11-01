@@ -66,7 +66,10 @@ const schema = z.object({
 	}).default({ chatUrl: '', chatKey: '', nnasUrl: '', nnasKey: '' }),
 	domains: z.object({
 		api: z.hostname().default('api.olv.pretendo.cc'),
-		discovery: z.hostname().default('discovery.olv.pretendo.cc')
+		discovery: z.hostname().default('discovery.olv.pretendo.cc'),
+		// Web front ends, used by the endpoint seed (`npm run db:seed`)
+		portal: z.hostname().default('portal.olv.pretendo.cc'),
+		ctr: z.hostname().default('ctr.olv.pretendo.cc')
 	}).prefault({})
 });
 

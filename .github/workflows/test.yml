@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        project: ["packages/common"]
+        project: ["packages/common", "apps/miiverse-api"]
     steps:
       - name: Checkout
         uses: actions/checkout@v6

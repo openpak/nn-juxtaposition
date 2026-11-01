@@ -4,7 +4,8 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
 	entry: {
 		server: 'src/server.entry.ts',
-		generate: 'src/generate.entry.ts'
+		generate: 'src/generate.entry.ts',
+		seed: 'src/seed.entry.ts'
 	},
 	sourcemap: true,
 	platform: 'node',

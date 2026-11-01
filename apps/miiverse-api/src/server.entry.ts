@@ -7,6 +7,7 @@ import auth from '@/middleware/auth';
 import discovery from '@/services/discovery';
 import api from '@/services/api';
 import { healthzRouter } from '@/services/healthz';
+import { cdnRouter } from '@/services/cdn';
 import { config } from '@/config';
 import { setupGrpc } from '@/services/internal/server';
 import { initImageProcessing } from '@/images';
@@ -29,6 +30,7 @@ logger.info('Setting up Middleware');
 app.use(loggerHttp);
 app.use(express.json());
 app.use(healthzRouter);
+app.use(cdnRouter);
 
 app.use(express.urlencoded({
 	extended: true,

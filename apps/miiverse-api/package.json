@@ -12,7 +12,8 @@
 		"migration:create": "prisma migrate dev --create-only && prisma generate",
 		"migration:deploy": "prisma migrate deploy",
 		"migration:reset": "prisma migrate reset",
-		"db:seed": "tsup && node --enable-source-maps dist/seed.entry.mjs",
+		"db:seed": "tsup && node --enable-source-maps dist/seed.js",
+		"test": "vitest run",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"postinstall": "prisma generate"
@@ -50,6 +51,7 @@
 		"@pretendonetwork/eslint-config": "^0.1.4",
 		"@types/express": "^4.17.17",
 		"@types/multer": "^2.1.0",
+		"vitest": "^5.0.1",
 		"@types/pako": "^2.0.4",
 		"@types/pg": "^8.20.0",
 		"@types/supertest": "^7.2.0",
