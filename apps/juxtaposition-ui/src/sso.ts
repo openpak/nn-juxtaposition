@@ -153,5 +153,5 @@ export function welcomeTarget(redirect: string | undefined): string {
 
 export function isWelcomeExempt(path: string): boolean {
 	// the sign-in steps carry a one-time code: they must run, not be bounced to the welcome page
-	return path === '/welcome' || path === '/welcome/accept' || path === '/logout' || path === '/about' || path === '/login' || path === '/login/callback';
+	return path === '/welcome' || path === '/welcome/off' || path === '/welcome/accept' || path === '/logout' || path === '/about' || path === '/login' || path === '/login/callback';
 }

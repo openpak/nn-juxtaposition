@@ -291,5 +291,11 @@
         "terms": "Vollständige Bedingungen lesen",
         "accept": "Akzeptieren und fortfahren",
         "decline": "Nicht jetzt"
+    },
+    "off": {
+        "title": "OpenVerse ist aus",
+        "heading": "OpenVerse ist für dieses Konto ausgeschaltet",
+        "text": "Ein Elternteil oder Erziehungsberechtigter hat OpenVerse für dieses Konto ausgeschaltet. Das lässt sich auf openpak.org unter Kindersicherung ändern.",
+        "signout": "Abmelden"
     }
 }

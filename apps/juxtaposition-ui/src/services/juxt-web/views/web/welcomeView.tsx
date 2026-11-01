@@ -40,3 +40,21 @@ export function WebWelcomeView(props: WelcomeViewProps): ReactNode {
 		</WebLoginRoot>
 	);
 }
+
+/** A parent turned OpenVerse off for this account. */
+export function WebOffView(): ReactNode {
+	const extraHead = <title>{T.str('off.title') + ' · OpenVerse'}</title>;
+	return (
+		<WebLoginRoot head={extraHead}>
+			<div className="page-narrow">
+				<div className="card welcome-card">
+					<h1><T k="off.heading" /></h1>
+					<p className="lead"><T k="off.text" /></p>
+					<div className="btn-row">
+						<a className="btn" href="/logout"><T k="off.signout" /></a>
+					</div>
+				</div>
+			</div>
+		</WebLoginRoot>
+	);
+}

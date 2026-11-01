@@ -44,14 +44,17 @@ export async function authPopulate(request: express.Request, response: express.R
 		// Only the web UI sends x-trusted-pid; its identity row says who the person is and whether
 		// they have accepted the rules / are supervised.
 		let readOnly = false;
+		let openverseOff = false;
 		let rulesAccepted = true;
 		if (trustedPid) {
 			const identity = await getDb().webIdentity.findFirst({ where: { pid: pnid.pid } });
 			rulesAccepted = identity ? identity.rulesAcceptedAt !== null : true;
-			readOnly = (await getWebAccess(identity?.accountId ?? null)) === 'read_only';
+			const access = await getWebAccess(identity?.accountId ?? null);
+			readOnly = access !== 'full';
+			openverseOff = access === 'none';
 		}
 
-		response.locals.account = { pnid, user, moderator, developer, readOnly, rulesAccepted };
+		response.locals.account = { pnid, user, moderator, developer, readOnly, openverseOff, rulesAccepted };
 	} else {
 		// Guest access
 		response.locals.account = null;

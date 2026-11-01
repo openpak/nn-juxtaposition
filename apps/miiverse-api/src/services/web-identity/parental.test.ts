@@ -1,6 +1,6 @@
 import '@/extend-zod'; // Needs to be the first import
 import { describe, expect, it } from 'vitest';
-import { decodeSupervised, encodeGetProfileRequest, webAccessFor } from '@/services/web-identity/parental';
+import { decodeProfile, decodeSupervised, encodeGetProfileRequest, webAccessFor } from '@/services/web-identity/parental';
 import { mapSelf } from '@/services/internal/contract/self';
 import { isPostingAllowed } from '@/services/internal/utils/communities';
 import { readOnlyGate } from '@/services/internal/middleware/auth-accesscheck';
@@ -16,18 +16,25 @@ describe('supervised accounts', () => {
 		expect(await webAccessFor('acc', async () => ({ supervised: false }))).toBe('full');
 	});
 
-	it('is read only for a supervised account', async () => {
-		expect(await webAccessFor('acc', async () => ({ supervised: true }))).toBe('read_only');
+	it('is off for a supervised account whose parent set nothing', async () => {
+		expect(await webAccessFor('acc', async () => ({ supervised: true }))).toBe('none');
+		expect(await webAccessFor('acc', async () => ({ supervised: true, openverse: 'off' }))).toBe('none');
+		expect(await webAccessFor('acc', async () => ({ supervised: true, openverse: 'bogus' }))).toBe('none');
 	});
 
-	it('fails closed: read only when the core cannot be reached', async () => {
+	it('follows the parent: read is read only, read + post is full', async () => {
+		expect(await webAccessFor('acc', async () => ({ supervised: true, openverse: 'read' }))).toBe('read_only');
+		expect(await webAccessFor('acc', async () => ({ supervised: true, openverse: 'read_post' }))).toBe('full');
+	});
+
+	it('fails closed: off when the core cannot be reached', async () => {
 		expect(await webAccessFor('acc', async () => {
 			throw new Error('unavailable');
-		})).toBe('read_only');
+		})).toBe('none');
 	});
 
 	it('fails closed when checking is on but the account is unknown', async () => {
-		expect(await webAccessFor(null, async () => ({ supervised: false }))).toBe('read_only');
+		expect(await webAccessFor(null, async () => ({ supervised: false }))).toBe('none');
 	});
 });
 
@@ -47,6 +54,13 @@ describe('GetProfile wire format', () => {
 		expect(decodeSupervised(Buffer.from([0x12, 0x02, 0x7b, 0x7d]))).toBe(false);
 		expect(decodeSupervised(Buffer.alloc(0))).toBe(false);
 	});
+
+	it('reads the effective openverse level (field 6)', () => {
+		// supervised=true, openverse="read"
+		const buf = Buffer.from([0x08, 0x01, 0x32, 0x04, 0x72, 0x65, 0x61, 0x64]);
+		expect(decodeProfile(buf)).toEqual({ supervised: true, openverse: 'read' });
+		expect(decodeProfile(Buffer.from([0x08, 0x01])).openverse).toBeUndefined();
+	});
 });
 
 function account(readOnly: boolean, accountStatus = 0): AccountData {
@@ -59,6 +73,7 @@ function account(readOnly: boolean, accountStatus = 0): AccountData {
 		moderator: false,
 		developer: false,
 		readOnly,
+		openverseOff: false,
 		rulesAccepted: true
 	};
 }

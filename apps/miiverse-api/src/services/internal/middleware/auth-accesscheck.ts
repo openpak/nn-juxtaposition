@@ -42,6 +42,18 @@ export async function authAccessCheck(request: express.Request, response: expres
 }
 
 /**
+ * OpenVerse turned off by a parent: the web account may only ask who it is (so the site can say
+ * why) and sign in or out. Everything else, reads included, is refused.
+ */
+export async function openverseOffGate(request: express.Request, response: express.Response, next: express.NextFunction): Promise<void> {
+	const account = response.locals.account;
+	if (account?.openverseOff && request.path !== '/api/v1/self' && !request.path.startsWith('/api/v1/sso/')) {
+		throw errors.for('auth_openverse_off');
+	}
+	return next();
+}
+
+/**
  * A read-only account (supervised, web) may look but not change anything. Only the web UI can be
  * read-only, and accepting the rules stays allowed so the welcome page still works.
  */

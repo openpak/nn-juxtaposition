@@ -58,7 +58,7 @@ activityIngestRouter.post('/internal/v1/activity', async (req, res, next) => {
 		}, {
 			live: liveCategories(config.activity.categories),
 			imageHosts: config.activity.imageHosts,
-			isReadOnly: async accountId => (await getWebAccess(accountId)) === 'read_only'
+			isReadOnly: async accountId => (await getWebAccess(accountId)) !== 'full'
 		});
 		if (result.status === 'rejected') {
 			return res.status(400).json({ event_id: b.event_id, status: result.status, error: result.error });

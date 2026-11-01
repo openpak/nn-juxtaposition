@@ -9,7 +9,7 @@ import { logger } from '@/logger';
 import { InternalAPIError } from '@/services/internal/errors';
 import { loggerHttp } from '@/loggerHttp';
 import { authPopulate } from '@/services/internal/middleware/auth-populate';
-import { authAccessCheck, readOnlyGate } from '@/services/internal/middleware/auth-accesscheck';
+import { authAccessCheck, openverseOffGate, readOnlyGate } from '@/services/internal/middleware/auth-accesscheck';
 import { miiverseDefinition } from '@/services/grpc/server';
 import type { CallContext, ServerMiddlewareCall } from 'nice-grpc';
 
@@ -22,6 +22,7 @@ app.use(express.json({
 app.use(loggerHttp);
 app.use(authPopulate);
 app.use(authAccessCheck);
+app.use(openverseOffGate);
 app.use(readOnlyGate);
 app.use(internalApiRouter);
 

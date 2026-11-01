@@ -6,6 +6,10 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.21 — 2026-11-02
+
+- web: parent-controlled OpenVerse level for supervised accounts (off, read, read + post; default off), read from the parental controls core's `GetProfile.openverse`. Off blocks the whole API (`auth_openverse_off`) and shows `/welcome/off`; read keeps the existing read-only behaviour. A core that cannot be reached means off.
+
 ## v0.3.20 — 2026-11-01
 
 - web: welcome page is one card (heading, intro, rules, action row). Actions are real buttons of the same height: primary "Accept and continue", secondary "Not now" (signs out, lands on /about) and a quiet "Read the full terms" button; they stack full width on phones with the primary on top

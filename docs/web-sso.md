@@ -55,17 +55,17 @@ default avatar (`mii/default/*.png`, written by `npm run db:seed`) for consoles.
 
 ## Supervised accounts
 
-OFF by default is the aim; what ships is read-only. The OpenPak parental controls core (`platforms/core/infra/parental`) has no
-OpenVerse setting, is not deployed on the production box, and the website has no parent screen for account-level supervision
-(its parental page edits a Switch console's setting through nx-pctl). So no new setting was added there. Instead:
+A parent sets "OpenVerse: off / read / read + post" per supervised account on openpak.org (Parental controls); it is the `openverse`
+level of the parental controls core (`platforms/core/infra/parental`). A supervised account that was never given a level is **off**.
 
 - With `PN_MIIVERSE_API_PARENTAL_ADDRESS` (gRPC address) and `PN_MIIVERSE_API_PARENTAL_KEY` (the `wiiu` adapter key) set, the API asks
-  `Parental.GetProfile(account_id)` (cached 60 s) and treats a supervised account as read-only on the web: it can browse, and cannot
-  post, reply, Yeah or follow (`403 auth_read_only`; the post page explains why).
-- If it is configured and the core cannot be reached, the account is read-only (fail closed).
-- If it is not configured (today), there is no check.
-- Follow-up: deploy parental, give it a `wiiu=<key>` adapter key, add an `openverse` level (`off`, `read`, `read_post`) to the profile
-  and a parent screen; apply the check to console traffic by resolving PID to account id.
+  `Parental.GetProfile(account_id)` (cached 60 s) and reads the effective `openverse` level (field 6; an account nobody supervises is `read_post`).
+- `read + post`: full access. `read`: browse only; post, reply, Yeah and follow answer `403 auth_read_only`. `off`: every call except
+  `/api/v1/self` and `/api/v1/sso/*` answers `403 auth_openverse_off`, and the web redirects to `/welcome/off`, which says a parent turned
+  OpenVerse off and offers sign-out.
+- If it is configured and the core cannot be reached, or the account is unknown, the account is **off** (fail closed).
+- If it is not configured, there is no check.
+- Not yet applied to console traffic (it would need PID to account id resolution).
 
 ## Seeded communities
 

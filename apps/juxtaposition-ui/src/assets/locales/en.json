@@ -365,5 +365,11 @@
     "n_bad": "That code was not found. Check it on the device. Codes work for 10 minutes.",
     "n_toomany": "This account has too many linked devices. Remove one first.",
     "n_slow": "Too many tries. Wait a minute and try again."
+  },
+  "off": {
+    "title": "OpenVerse is off",
+    "heading": "OpenVerse is turned off for this account",
+    "text": "A parent or guardian has turned OpenVerse off for this account. They can change this on openpak.org under Parental controls.",
+    "signout": "Sign out"
   }
 }

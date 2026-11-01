@@ -65,6 +65,11 @@ export const webAuth: RequestHandler = async (request, response, next) => {
 		return response.redirect('/titles');
 	}
 
+	// A parent turned OpenVerse off for this account: nothing but the explanation and sign-out.
+	if (request.self.openverseOff && request.path !== '/welcome/off' && request.path !== '/logout' && request.path !== '/login/callback') {
+		return response.redirect('/welcome/off');
+	}
+
 	// First visit: show the community rules once before anything else.
 	if (!request.self.hasAcceptedRules && !isWelcomeExempt(request.path)) {
 		return response.redirect(`/welcome?redirect=${encodeURIComponent(welcomeTarget(request.originalUrl))}`);

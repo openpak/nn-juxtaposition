@@ -2,7 +2,7 @@ import express from 'express';
 import { z } from 'zod';
 import { welcomeTarget } from '@/sso';
 import { parseReq } from '@/services/juxt-web/routes/routeUtils';
-import { WebWelcomeView } from '@/services/juxt-web/views/web/welcomeView';
+import { WebOffView, WebWelcomeView } from '@/services/juxt-web/views/web/welcomeView';
 
 export const welcomeRouter = express.Router();
 
@@ -14,6 +14,13 @@ welcomeRouter.get('/', (req, res) => {
 		return res.redirect(welcomeTarget(query.redirect));
 	}
 	return res.jsx(<WebWelcomeView redirect={welcomeTarget(query.redirect)} />);
+});
+
+welcomeRouter.get('/off', (req, res) => {
+	if (!req.self?.openverseOff) {
+		return res.redirect('/titles');
+	}
+	return res.status(403).jsx(<WebOffView />);
 });
 
 welcomeRouter.post('/accept', async (req, res) => {

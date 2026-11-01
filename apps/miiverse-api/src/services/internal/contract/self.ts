@@ -36,6 +36,8 @@ export const selfSchema = z.object({
 	hasAcceptedRules: z.boolean(),
 	/** Supervised account on the web: may read, may not post, reply, Yeah or follow */
 	readOnly: z.boolean(),
+	/** The parent turned OpenVerse off for this web account: only /self and sign-out work */
+	openverseOff: z.boolean(),
 	miiName: z.string(),
 	accountStatus: z.number(),
 	content: selfContentSchema,
@@ -66,6 +68,7 @@ const baseSelf: SelfDto = {
 	hasDoneOnboarding: false,
 	hasAcceptedRules: true,
 	readOnly: false,
+	openverseOff: false,
 	miiName: '',
 	content: {
 		followed_communities: [],
@@ -110,6 +113,7 @@ export function mapSelf(auth: AccountData): SelfDto {
 		hasDoneOnboarding: true,
 		hasAcceptedRules: auth.rulesAccepted,
 		readOnly: auth.readOnly,
+		openverseOff: auth.openverseOff,
 		content: {
 			followed_communities: auth.user.followedCommunities.map(v => v.communityId),
 			followed_users: auth.user.follows.map(v => v.followingPid)

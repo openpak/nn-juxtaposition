@@ -291,5 +291,11 @@
         "terms": "Lire les conditions complètes",
         "accept": "Accepter et continuer",
         "decline": "Pas maintenant"
+    },
+    "off": {
+        "title": "OpenVerse est désactivé",
+        "heading": "OpenVerse est désactivé pour ce compte",
+        "text": "Un parent ou tuteur a désactivé OpenVerse pour ce compte. Il peut le modifier sur openpak.org, dans Contrôle parental.",
+        "signout": "Se déconnecter"
     }
 }
