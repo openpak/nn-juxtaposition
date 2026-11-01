@@ -6,9 +6,11 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
-## v0.3.12 — 2026-11-01
+## v0.3.13 — 2026-11-01
 
 - api: a post no longer needs author Mii data, so a web-only player can post (the 500 on the first web-only post)
+
+## v0.3.12 — 2026-11-01
 
 - web: pictures (community icons, drawings, Miis) are served from https://verse.openpak.org/cdn (a read-only proxy to the API's /cdn route).
   They used the console-only host api.olv.openpak.org, which a browser cannot resolve, so every image on the web was broken. Consoles keep the old host
