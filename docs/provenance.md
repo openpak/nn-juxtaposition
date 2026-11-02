@@ -1,3 +1,9 @@
+# Provenance
+
+Based on [Pretendo `juxtaposition`](https://github.com/PretendoNetwork/juxtaposition) (AGPL-3.0). License as upstream; see LICENSE. The upstream README follows verbatim.
+
+---
+
 # Upstream README: nn-juxtaposition
 
 # Juxtaposition

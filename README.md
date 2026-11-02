@@ -36,11 +36,12 @@ is in [docs/development.md](docs/development.md); settings and images are in
 
 - [Protocol](docs/protocol.md)
 - [Deploy](docs/deploy.md)
-- [Notes](docs/notes.md)
-- [Upstream README](docs/upstream.md)
 - [Development setup](docs/development.md)
 - [Extra topics](docs/extra-topics.md)
+- [Provenance](docs/provenance.md)
 
 ## Licence
 
 AGPL-3.0-only. See [LICENSE](LICENSE).
+
+PRDs: openpak/prds (private)
