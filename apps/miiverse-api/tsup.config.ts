@@ -7,6 +7,7 @@ export default defineConfig({
 		generate: 'src/generate.entry.ts',
 		seed: 'src/seed.entry.ts',
 		'game-communities': 'src/game-communities.entry.ts',
+		families: 'src/families.entry.ts',
 		'media-orphans': 'src/media-orphans.entry.ts'
 	},
 	sourcemap: true,

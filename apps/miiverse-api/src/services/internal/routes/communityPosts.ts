@@ -8,7 +8,7 @@ import { createInternalApiRouter } from '@/services/internal/builder/router';
 import { Community } from '@/models/community';
 import { createNewPost, isValidPost, postCreateSchema } from '@/services/internal/utils/posts';
 import { errors } from '@/services/internal/errors';
-import { isPostingAllowed } from '@/services/internal/utils/communities';
+import { expandFamily, familyMemberIds, isPostingAllowed } from '@/services/internal/utils/communities';
 import { mapSelf } from '@/services/internal/contract/self';
 import { CONSOLE_SHARE_ROOM, switchTitleIdForms } from '@/services/console-share/console-share';
 
@@ -26,9 +26,10 @@ communityPostsRouter.get({
 		response: feedPageDtoSchema(postSchema)
 	},
 	async handler({ params, query, auth, db }) {
+		const ids = await expandFamily(params.id);
 		const posts = await Post
 			.find(deleteOptional({
-				community_id: params.id,
+				community_id: ids.length === 1 ? ids[0] : { $in: ids },
 				parent: null,
 				message_to_pid: null, // messages aren't really posts
 				...filterRemovedPosts(auth)
@@ -72,9 +73,10 @@ communityPostsRouter.get({
 		response: feedPageDtoSchema(postSchema)
 	},
 	async handler({ params, query, auth, db }) {
+		const ids = await expandFamily(params.id);
 		const posts = await Post
 			.find(deleteOptional({
-				community_id: params.id,
+				community_id: ids.length === 1 ? ids[0] : { $in: ids },
 				parent: null,
 				...filterRemovedPosts(auth)
 			}))
@@ -125,8 +127,8 @@ communityPostsRouter.post({
 		}
 
 		const self = mapSelf(account);
-		if (!isPostingAllowed(community, self, null)) {
-			throw errors.for('forbidden');
+		if (!isPostingAllowed(community, self, null) || (await familyMemberIds(community.olive_community_id)).length > 0) {
+			throw errors.for('forbidden'); // a family page has no posts of its own: posts go to one of its games
 		}
 
 		if (!isValidPost(body)) {

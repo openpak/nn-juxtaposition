@@ -7,6 +7,7 @@ import { Community } from '@/models/community';
 import { deleteOptional } from '@/services/internal/utils';
 import { COMMUNITY_TYPE } from '@/types/mongoose/community';
 import { categoryToCommunityTypes, communityCategory, communitySchema, communityStatsSchema, mapCommunity, mapCommunityStats } from '@/services/internal/contract/community';
+import { expandFamily } from '@/services/internal/utils/communities';
 import { errors } from '@/services/internal/errors';
 import { Post } from '@/models/post';
 import { listDtoSchema, mapList } from '@/services/internal/contract/list';
@@ -89,8 +90,7 @@ communitiesRouter.get({
 			{
 				$match: {
 					type: { $in: [COMMUNITY_TYPE.Main, COMMUNITY_TYPE.Announcement] },
-					olive_community_id: { $in: popularCommunityIds },
-					parent: null
+					olive_community_id: { $in: popularCommunityIds }
 				}
 			},
 			{
@@ -147,7 +147,7 @@ communitiesRouter.get({
 		}
 
 		const totalPosts = await Post.find({
-			community_id: community.olive_community_id,
+			community_id: { $in: await expandFamily(community.olive_community_id) },
 			parent: null,
 			removed: false
 		}).countDocuments();

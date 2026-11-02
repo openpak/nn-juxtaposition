@@ -1,0 +1,539 @@
+{
+ "families": [
+  {
+   "slug": "animal-crossing",
+   "name": "Animal Crossing",
+   "games": [
+    "Animal Crossing: New Horizons",
+    "Animal Crossing: New Leaf",
+    "Animal Crossing: City Folk",
+    "Animal Crossing: Wild World"
+   ]
+  },
+  {
+   "slug": "bayonetta",
+   "name": "Bayonetta",
+   "games": [
+    "Bayonetta 3",
+    "Bayonetta 2"
+   ]
+  },
+  {
+   "slug": "bleach",
+   "name": "Bleach",
+   "games": [
+    "Bleach: Versus Crusade",
+    "Bleach: The Blade of Fate"
+   ]
+  },
+  {
+   "slug": "bomberman",
+   "name": "Bomberman",
+   "games": [
+    "Bomberman 2",
+    "Bomberman Blast"
+   ]
+  },
+  {
+   "slug": "castlevania",
+   "name": "Castlevania",
+   "games": [
+    "Castlevania: Judgment",
+    "Castlevania: Portrait of Ruin"
+   ]
+  },
+  {
+   "slug": "clubhouse-games",
+   "name": "Clubhouse Games",
+   "games": [
+    "Clubhouse Games: 51 Worldwide Classics",
+    "Clubhouse Games"
+   ]
+  },
+  {
+   "slug": "conduit",
+   "name": "The Conduit",
+   "games": [
+    "Conduit 2",
+    "The Conduit"
+   ]
+  },
+  {
+   "slug": "crystal-defenders",
+   "name": "Crystal Defenders",
+   "games": [
+    "Crystal Defenders R2",
+    "Crystal Defenders R1"
+   ]
+  },
+  {
+   "slug": "deca-sports",
+   "name": "Deca Sports",
+   "games": [
+    "Deca Sports 3",
+    "Deca Sports 2"
+   ]
+  },
+  {
+   "slug": "diablo",
+   "name": "Diablo",
+   "games": [
+    "Diablo II: Resurrected",
+    "Diablo III: Eternal Collection"
+   ]
+  },
+  {
+   "slug": "dr-mario",
+   "name": "Dr. Mario",
+   "games": [
+    "Dr. Luigi",
+    "Dr. Mario: Miracle Cure",
+    "Dr. Mario Online Rx"
+   ]
+  },
+  {
+   "slug": "endless-ocean",
+   "name": "Endless Ocean",
+   "games": [
+    "Endless Ocean 2: Adventures of the Deep",
+    "Endless Ocean"
+   ]
+  },
+  {
+   "slug": "excite",
+   "name": "Excite",
+   "games": [
+    "Excitebike: World Rally",
+    "Excitebots: Trick Racing"
+   ]
+  },
+  {
+   "slug": "final-fantasy",
+   "name": "Final Fantasy",
+   "games": [
+    "Final Fantasy Crystal Chronicles: Echoes of Time",
+    "Final Fantasy Crystal Chronicles: Ring of Fates",
+    "Final Fantasy Fables: Chocobo's Dungeon"
+   ]
+  },
+  {
+   "slug": "guitar-hero",
+   "name": "Guitar Hero",
+   "games": [
+    "Guitar Hero: Van Halen",
+    "Guitar Hero: Smash Hits",
+    "Guitar Hero: Metallica",
+    "Guitar Hero World Tour",
+    "Guitar Hero III: Legends of Rock"
+   ]
+  },
+  {
+   "slug": "hooked",
+   "name": "Hooked!",
+   "games": [
+    "Hooked! Again: Real Motion Fishing",
+    "Hooked! Real Motion Fishing"
+   ]
+  },
+  {
+   "slug": "kirby",
+   "name": "Kirby",
+   "games": [
+    "Kirby's Dream Buffet",
+    "Team Kirby Clash Deluxe"
+   ]
+  },
+  {
+   "slug": "legend-of-zelda",
+   "name": "The Legend of Zelda",
+   "games": [
+    "The Legend of Zelda: Tri Force Heroes",
+    "The Legend of Zelda: Phantom Hourglass"
+   ]
+  },
+  {
+   "slug": "luigis-mansion",
+   "name": "Luigi's Mansion",
+   "games": [
+    "Luigi's Mansion 3",
+    "Luigi's Mansion: Dark Moon"
+   ]
+  },
+  {
+   "slug": "mario-and-sonic",
+   "name": "Mario & Sonic",
+   "games": [
+    "Mario & Sonic at the London 2012 Olympic Games",
+    "Mario & Sonic at the Olympic Winter Games",
+    "Mario & Sonic at the Olympic Games"
+   ]
+  },
+  {
+   "slug": "mario-kart",
+   "name": "Mario Kart",
+   "games": [
+    "Mario Kart 8 Deluxe",
+    "Mario Kart 8",
+    "Mario Kart 7",
+    "Mario Kart Wii",
+    "Mario Kart DS"
+   ]
+  },
+  {
+   "slug": "mario-maker",
+   "name": "Mario Maker",
+   "games": [
+    "Super Mario Maker 2",
+    "Super Mario Maker"
+   ]
+  },
+  {
+   "slug": "mario-party",
+   "name": "Mario Party",
+   "games": [
+    "Super Mario Party Jamboree",
+    "Mario Party Superstars"
+   ]
+  },
+  {
+   "slug": "mario-sports",
+   "name": "Mario Sports",
+   "games": [
+    "Mario Golf: Super Rush",
+    "Mario Strikers: Battle League",
+    "Mario Tennis Aces",
+    "Mario Sports Mix",
+    "Mario Strikers Charged"
+   ]
+  },
+  {
+   "slug": "mega-man",
+   "name": "Mega Man",
+   "games": [
+    "Mega Man 10",
+    "Mega Man 9",
+    "Mega Man Star Force 3"
+   ]
+  },
+  {
+   "slug": "metroid",
+   "name": "Metroid",
+   "games": [
+    "Metroid Prime: Federation Force",
+    "Metroid Prime Hunters"
+   ]
+  },
+  {
+   "slug": "minecraft",
+   "name": "Minecraft",
+   "games": [
+    "Minecraft Legends",
+    "Minecraft Dungeons",
+    "Minecraft: Nintendo Switch Edition",
+    "Minecraft",
+    "Minecraft: Wii U Edition"
+   ]
+  },
+  {
+   "slug": "momotaro-dentetsu",
+   "name": "Momotaro Dentetsu",
+   "games": [
+    "Momotaro Dentetsu 2010: Sengoku Ishin no Hero Daishuugou! no Maki",
+    "Momotarou Dentetsu 16: Hokkaidou Daiidou no Maki!"
+   ]
+  },
+  {
+   "slug": "monster-hunter",
+   "name": "Monster Hunter",
+   "games": [
+    "Monster Hunter Generations Ultimate",
+    "Monster Hunter XX",
+    "Monster Hunter Stories",
+    "Monster Hunter Generations",
+    "Monster Hunter 4 Ultimate",
+    "Monster Hunter 4",
+    "Monster Hunter 3 Ultimate"
+   ]
+  },
+  {
+   "slug": "mysims",
+   "name": "MySims",
+   "games": [
+    "MySims SkyHeroes",
+    "MySims Sports",
+    "MySims Party"
+   ]
+  },
+  {
+   "slug": "naruto-shippuden",
+   "name": "Naruto Shippuden",
+   "games": [
+    "NARUTO SHIPPUDEN GEKITOU NINJATAISEN ! EX4",
+    "Naruto Shippuden: Clash of Ninja Revolution 3"
+   ]
+  },
+  {
+   "slug": "nba-2k",
+   "name": "NBA 2K",
+   "games": [
+    "NBA 2K11",
+    "NBA 2K10"
+   ]
+  },
+  {
+   "slug": "neverwinter-nights",
+   "name": "Neverwinter Nights",
+   "games": [
+    "Neverwinter Nights 2",
+    "Neverwinter Nights: Enhanced Edition"
+   ]
+  },
+  {
+   "slug": "nhl-2k",
+   "name": "NHL 2K",
+   "games": [
+    "NHL 2K11",
+    "NHL 2K10"
+   ]
+  },
+  {
+   "slug": "pokemon",
+   "name": "Pokémon",
+   "games": [
+    "Pokemon Scarlet / Violet",
+    "Pokemon Legends: Arceus",
+    "Pokemon Omega Ruby / Alpha Sapphire",
+    "Pokemon X / Y",
+    "Pokken Tournament",
+    "Pokemon Rumble World",
+    "Pokemon Black 2 / White 2",
+    "Pokemon Black / White",
+    "Pokemon Dungeon",
+    "Pokemon Battle Revolution",
+    "Pokemon Platinum",
+    "Pokemon HeartGold / SoulSilver",
+    "Pokemon Diamond / Pearl"
+   ]
+  },
+  {
+   "slug": "pro-evolution-soccer",
+   "name": "Pro Evolution Soccer and Winning Eleven",
+   "games": [
+    "Winning Eleven Play Maker 2012",
+    "Pro Evolution Soccer 2011",
+    "Winning Eleven Play Maker 2010",
+    "World Soccer Winning Eleven Play Maker 2010",
+    "Winning Eleven PLAY MAKER 2009",
+    "Pro Evolution Soccer 2008",
+    "World Soccer Winning Eleven Wii"
+   ]
+  },
+  {
+   "slug": "puyo-puyo",
+   "name": "Puyo Puyo",
+   "games": [
+    "Puyo Puyo Tetris",
+    "Puyo Puyo 7",
+    "Puyo Puyo!! 20th Anniversary",
+    "Puyo Puyo Tsu",
+    "Puyo Puyo"
+   ]
+  },
+  {
+   "slug": "reload",
+   "name": "Reload",
+   "games": [
+    "Reload: Target Down",
+    "Reload"
+   ]
+  },
+  {
+   "slug": "remington-super-slam-hunting",
+   "name": "Remington Super Slam Hunting",
+   "games": [
+    "Remington Super Slam Hunting - Alaska",
+    "Remington Super Slam Hunting - Africa"
+   ]
+  },
+  {
+   "slug": "resident-evil",
+   "name": "Resident Evil",
+   "games": [
+    "Resident Evil: The Mercenaries 3D",
+    "Resident Evil: The Darkside Chronicles"
+   ]
+  },
+  {
+   "slug": "risk-of-rain",
+   "name": "Risk of Rain",
+   "games": [
+    "Risk of Rain Returns",
+    "Risk of Rain 2",
+    "Risk of Rain"
+   ]
+  },
+  {
+   "slug": "rtl-winter-sports",
+   "name": "RTL Winter Sports",
+   "games": [
+    "RTL Winter Sports 2011",
+    "RTL Winter Sports 2010: The Great Tournament",
+    "Winter Sports 3: The Great Tournament"
+   ]
+  },
+  {
+   "slug": "samurai-warriors",
+   "name": "Samurai Warriors",
+   "games": [
+    "Samurai Warriors 3",
+    "Sengoku Musou 3: Moushouden"
+   ]
+  },
+  {
+   "slug": "simple-series",
+   "name": "Simple Series",
+   "games": [
+    "SIMPLE Wii Series Vol.6 THE Minna de Waiwai Combat",
+    "@Simple Series Vol. 5: The Judo",
+    "SIMPLE Wii Series Vol.4 THE Shooting Action",
+    "Simple Series Vol. 3: The Mahjong",
+    "Simple: The Number - Puzzle",
+    "SIMPLE THE Block Kuzushi",
+    "THE Block Kuzushi - With the Stage Creation feature"
+   ]
+  },
+  {
+   "slug": "sonic",
+   "name": "Sonic",
+   "games": [
+    "Sonic Colors",
+    "Sonic Rush Adventure",
+    "Sonic & All-Stars Racing Transformed",
+    "Sonic & Sega All-Stars Racing",
+    "Sonic and the Black Knight",
+    "Sonic Riders: Zero Gravity",
+    "Sonic DL"
+   ]
+  },
+  {
+   "slug": "space-invaders",
+   "name": "Space Invaders",
+   "games": [
+    "Space Invaders Get Even",
+    "Space Invaders Extreme 2"
+   ]
+  },
+  {
+   "slug": "splatoon",
+   "name": "Splatoon",
+   "games": [
+    "Splatoon 3",
+    "Splatoon 2",
+    "Splatoon"
+   ]
+  },
+  {
+   "slug": "street-fighter",
+   "name": "Street Fighter",
+   "games": [
+    "Super Street Fighter IV 3D Edition",
+    "Super Street Fighter II: The New Challengers"
+   ]
+  },
+  {
+   "slug": "super-mario",
+   "name": "Super Mario",
+   "games": [
+    "Super Mario Bros. Wonder",
+    "Super Mario Bros. 35",
+    "Super Mario 3D World + Bowser's Fury",
+    "Super Mario Odyssey",
+    "Super Mario 3D World"
+   ]
+  },
+  {
+   "slug": "super-smash-bros",
+   "name": "Super Smash Bros.",
+   "games": [
+    "Super Smash Bros. Ultimate",
+    "Super Smash Bros. for Wii U",
+    "Super Smash Bros. for Nintendo 3DS",
+    "Super Smash Bros. Brawl"
+   ]
+  },
+  {
+   "slug": "table-game-stadium",
+   "name": "Table Game Stadium",
+   "games": [
+    "Table Game Stadium",
+    "Table Game Stadium (D3-Yuki)"
+   ]
+  },
+  {
+   "slug": "teenage-mutant-ninja-turtles",
+   "name": "Teenage Mutant Ninja Turtles",
+   "games": [
+    "Teenage Mutant Ninja Turtles: Shredder's Revenge",
+    "Teenage Mutant Ninja Turtles: Smash-Up"
+   ]
+  },
+  {
+   "slug": "tetris",
+   "name": "Tetris",
+   "games": [
+    "Tetris++",
+    "Tetris Party Deluxe",
+    "Tetris Party",
+    "Tetris DS"
+   ]
+  },
+  {
+   "slug": "torchlight",
+   "name": "Torchlight",
+   "games": [
+    "Torchlight III",
+    "Torchlight II"
+   ]
+  },
+  {
+   "slug": "trackmania",
+   "name": "Trackmania",
+   "games": [
+    "Trackmania Wii",
+    "Trackmania"
+   ]
+  },
+  {
+   "slug": "virtua-tennis",
+   "name": "Virtua Tennis",
+   "games": [
+    "Virtua Tennis 4",
+    "Virtua Tennis 2009"
+   ]
+  },
+  {
+   "slug": "wargroove",
+   "name": "Wargroove",
+   "games": [
+    "Wargroove 2",
+    "Wargroove"
+   ]
+  },
+  {
+   "slug": "worms",
+   "name": "Worms",
+   "games": [
+    "Worms: Open Warfare 2",
+    "Worms"
+   ]
+  },
+  {
+   "slug": "yo-kai-watch",
+   "name": "Yo-kai Watch",
+   "games": [
+    "Yo-kai Watch Blasters",
+    "Yo-kai Watch 2"
+   ]
+  }
+ ]
+}

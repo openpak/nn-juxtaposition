@@ -91,3 +91,18 @@ console it comes from. Wii and DS games have no title ID to give and are web-onl
   (`communityIdForKey`). openpak.org computes the same id (`verseCommunityID`) to put an "OpenVerse community" button on each game's
   details, so only live and beta games link. Super Mario Maker predates the sync and keeps its old id (an override on the website).
 - Pakka's News mirror already looks a channel's games up by title ID, so game news lands in these communities with no change there.
+
+## Franchise families
+
+OpenVerse (common/openverse) shows one page per franchise ("Mario Kart") with each game kept as its own community underneath. The
+mapping is hand-checked in `apps/miiverse-api/tools/game-communities/families.json` (`make_families.py` writes it from a table and
+fails when a name matches no community). A game that is in no family stands alone.
+
+- A family is a Sub community (so no console list, `listed` or popular, ever shows it) whose id is `communityIdForKey("family:" + slug)`.
+  Its games keep their ids, title IDs, posts and everything the consoles read; the only change on a game is `parent` = the family id.
+  The family document carries `family: true` (a bookmark outside the model, like `art_sha`) and the art of its newest game.
+- Apply: `node dist/families.js <families.json> [--dry-run]` (`npm run db:sync-families`). Idempotent. A mapping that names a game no
+  community has, or a game in two families, is refused before anything is written.
+- Reverse: `node dist/families.js --undo [--dry-run]` unsets every game's `parent` and deletes the family documents.
+- API: the feed routes, `/stats` and the following feed read a family id as the posts of its games; any other id is untouched, so a
+  console never sees a difference. Posting to a family id is refused: posts always belong to a game.

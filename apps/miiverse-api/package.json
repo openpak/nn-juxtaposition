@@ -14,6 +14,7 @@
 		"migration:reset": "prisma migrate reset",
 		"db:seed": "tsup && node --enable-source-maps dist/seed.js",
 		"db:sync-games": "tsup && node --enable-source-maps dist/game-communities.js",
+		"db:sync-families": "tsup && node --enable-source-maps dist/families.js tools/game-communities/families.json",
 		"media:orphans": "tsup && node --enable-source-maps dist/media-orphans.js",
 		"test": "vitest run",
 		"lint": "eslint .",

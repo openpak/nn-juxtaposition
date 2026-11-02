@@ -6,6 +6,7 @@ import { getRelevantPidsFromPost, mapPost, mapPostWithModeration, postSchema } f
 import { feedPageDtoSchema, mapFeedPage, pageControlSchema } from '@/services/internal/contract/page';
 import { createInternalApiRouter } from '@/services/internal/builder/router';
 import { Community } from '@/models/community';
+import { expandFollowed } from '@/services/internal/utils/communities';
 import type { FilterQuery } from 'mongoose';
 import type { IPost } from '@/types/mongoose/post';
 
@@ -136,7 +137,7 @@ activityFeedsRouter.get({
 			}
 		});
 		anyOfQueries.push({ pid: followedUsers.map(v => v.followingPid) }); // Add following users posts
-		anyOfQueries.push({ community_id: followedComms.map(v => v.communityId) }); // Add following communities posts
+		anyOfQueries.push({ community_id: await expandFollowed(followedComms.map(v => v.communityId)) }); // Add following communities posts
 
 		const posts = await Post
 			.find(deleteOptional({

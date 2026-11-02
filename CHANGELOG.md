@@ -6,6 +6,10 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.28 — 2026-11-02
+
+- miiverse-api: franchise families for OpenVerse. A family is a Sub community (never listed to consoles) that its games name as `parent`; the feed, `/stats` and the following feed read a family id as its games' posts, and posting to a family is refused. Games keep their ids and console behaviour. `families.json` (59 families over 181 games), `npm run db:sync-families` (idempotent, `--dry-run`, `--undo`), and the popular list no longer filters on `parent`.
+
 ## v0.3.27 — 2026-11-02
 
 - A parental core that stays unreachable for two minutes logs an error line every minute ("PARENTAL CORE UNREACHABLE: every OpenVerse web account is locked out"), since failing closed locks everyone out.

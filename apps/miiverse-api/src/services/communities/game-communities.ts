@@ -90,3 +90,53 @@ export function planUpdate(existing: Existing, game: GameEntry, sha: string): Up
 	}
 	return update;
 }
+
+/* ---- families -------------------------------------------------------------------------------
+ * OpenVerse shows one page per franchise ("Mario Kart") with each game as a sub-community under it.
+ * The mapping is tools/game-communities/families.json, written and checked by hand. A family is a
+ * Sub community (so no console list ever shows it) that the member games name as their `parent`;
+ * the games keep their ids, posts and console behaviour. Applied by families.entry.ts. */
+
+export type FamilyEntry = {
+	/** Stable id part, e.g. "mario-kart" */
+	slug: string;
+	name: string;
+	/** Game names exactly as their communities are named, newest game first (its art becomes the family's) */
+	games: string[];
+};
+
+/** The community id of a family: fixed by the slug, so it never changes when the games do. */
+export function familyIdForSlug(slug: string): string {
+	return communityIdForKey(`family:${slug}`);
+}
+
+export function describeFamily(name: string): string {
+	return `Every ${name} game in one place. Pick a game to see its posts, or read them all together.`.slice(0, 280);
+}
+
+/** What is wrong with a mapping, as sentences: empty when it can be applied. */
+export function checkFamilies(families: FamilyEntry[]): string[] {
+	const problems: string[] = [];
+	const slugs = new Set<string>();
+	const owner = new Map<string, string>();
+	for (const f of families) {
+		if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(f.slug)) {
+			problems.push(`${f.slug}: slug must be lowercase words joined by dashes`);
+		}
+		if (slugs.has(f.slug)) {
+			problems.push(`${f.slug}: listed twice`);
+		}
+		slugs.add(f.slug);
+		if (f.games.length < 2) {
+			problems.push(`${f.slug}: a family needs at least two games (a single game stays on its own)`);
+		}
+		for (const g of f.games) {
+			const key = g.toLowerCase();
+			if (owner.has(key)) {
+				problems.push(`${g}: in both ${owner.get(key)} and ${f.slug}`);
+			}
+			owner.set(key, f.slug);
+		}
+	}
+	return problems;
+}

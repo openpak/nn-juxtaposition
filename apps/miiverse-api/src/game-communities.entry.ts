@@ -70,7 +70,7 @@ async function find(game: GameEntry): Promise<HydratedCommunityDocument | null> 
 		}
 	}
 	const escaped = game.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	return Community.findOne({ name: { $regex: `^${escaped}$`, $options: 'i' } });
+	return Community.findOne({ name: { $regex: `^${escaped}$`, $options: 'i' }, type: { $ne: 1 } }); // 1 = a family page, never a game
 }
 
 const counts = { created: 0, updated: 0, current: 0 };

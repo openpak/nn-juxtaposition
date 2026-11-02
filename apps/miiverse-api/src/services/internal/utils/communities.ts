@@ -10,6 +10,36 @@ export async function generateCommunityId(length?: number | undefined): Promise<
 	return id;
 }
 
+/**
+ * A family community is the web-only page that gathers a franchise's games (OpenVerse "Mario Kart"
+ * over Mario Kart 7, 8, Wii...). It is a Sub community whose Main/Announcement communities carry its
+ * id as their parent; it has no posts of its own. Miiverse's own sub-communities (type Sub) are never
+ * members. Returns the member game ids, or [] for any other community, so a game id passes through
+ * untouched and a console never meets a family.
+ */
+export async function familyMemberIds(id: string): Promise<string[]> {
+	const members = await Community.find({ parent: id, type: { $in: [0, 2] } }, { olive_community_id: 1 }).lean();
+	return members.map(m => m.olive_community_id);
+}
+
+/** The community ids to read posts from: a family's games, or the id itself. */
+export async function expandFamily(id: string): Promise<string[]> {
+	const members = await familyMemberIds(id);
+	return members.length > 0 ? members : [id];
+}
+
+/** Followed ids with every followed family replaced by its games (the family stays too). */
+export async function expandFollowed(ids: string[]): Promise<string[]> {
+	const out = new Set(ids);
+	const families = await Community.find({ olive_community_id: { $in: ids }, type: 1, parent: null }, { olive_community_id: 1 }).lean();
+	for (const f of families) {
+		for (const m of await familyMemberIds(f.olive_community_id)) {
+			out.add(m);
+		}
+	}
+	return [...out];
+}
+
 export const accountStatusDisplayMap: Record<number, string> = {
 	0: 'Normal',
 	1: 'Limited from Posting',
