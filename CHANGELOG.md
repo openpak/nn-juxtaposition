@@ -6,7 +6,7 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
-## v0.3.25 — 2026-11-02
+## v0.3.26 — 2026-11-02
 
 - miiverse-api: key-protected web bridge (`/internal/v1/web`, `PN_MIIVERSE_API_WEB_KEY`) so the OpenVerse web app (common/openverse) can call the internal API over private HTTP; 404 without a key or through the public proxy, never `/api/v1/admin/`
 - one OpenVerse community per game OpenPak serves: `tools/game-communities/build.py` builds a bundle from the website titles and their tiles, `npm run db:sync-games` creates and updates the communities (idempotent, never deletes). Wii U, 3DS and Switch title IDs go on the community so in-game posting lands in it
