@@ -46,6 +46,19 @@ const CACHE_MS = 60_000;
 const cache = new Map<string, { at: number; access: WebAccess }>();
 let lookup: SupervisionLookup | null | undefined;
 
+/* Failing closed means a parental outage locks every web account out of OpenVerse, so say so
+ * loudly once it lasts: an error line (at most one a minute) after two minutes of failures. */
+let downSince: number | null = null;
+let lastAlert = 0;
+export function noteParentalDown(e: unknown, now: number): void {
+	downSince ??= now;
+	logger.warn(e, 'Parental controls lookup failed, treating OpenVerse as off for the account');
+	if (now - downSince >= 120_000 && now - lastAlert >= 60_000) {
+		lastAlert = now;
+		logger.error({ downForSeconds: Math.round((now - downSince) / 1000) }, 'PARENTAL CORE UNREACHABLE: every OpenVerse web account is locked out (fail closed) until it is back');
+	}
+}
+
 export async function getWebAccess(accountId: string | null, now = Date.now()): Promise<WebAccess> {
 	if (lookup === undefined) {
 		lookup = createConfiguredLookup();
@@ -58,7 +71,14 @@ export async function getWebAccess(accountId: string | null, now = Date.now()): 
 	if (hit && now - hit.at < CACHE_MS) {
 		return hit.access;
 	}
-	const access = await webAccessFor(accountId, lookup, e => logger.warn(e, 'Parental controls lookup failed, treating OpenVerse as off for the account'));
+	let failed = false;
+	const access = await webAccessFor(accountId, lookup, e => {
+		failed = true;
+		noteParentalDown(e, now);
+	});
+	if (!failed && accountId) {
+		downSince = null;
+	}
 	if (cache.size > 5000) {
 		cache.clear();
 	}

@@ -6,6 +6,10 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.27 — 2026-11-02
+
+- A parental core that stays unreachable for two minutes logs an error line every minute ("PARENTAL CORE UNREACHABLE: every OpenVerse web account is locked out"), since failing closed locks everyone out.
+
 ## v0.3.26 — 2026-11-02
 
 - miiverse-api: key-protected web bridge (`/internal/v1/web`, `PN_MIIVERSE_API_WEB_KEY`) so the OpenVerse web app (common/openverse) can call the internal API over private HTTP; 404 without a key or through the public proxy, never `/api/v1/admin/`
