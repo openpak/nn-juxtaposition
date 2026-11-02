@@ -61,6 +61,14 @@ export function encodeGetProfileRequest(memberId: string): Uint8Array {
 	return Buffer.concat([Buffer.from([0x0a]), Buffer.from(len), id]);
 }
 
+export function decodeMemberId(buf: Uint8Array): string {
+	if (buf.length < 2 || buf[0] !== 0x0a) {
+		return '';
+	}
+	const [len, at] = readVarint(buf, 1);
+	return Buffer.from(buf.subarray(at, at + len)).toString('utf8');
+}
+
 function readVarint(buf: Uint8Array, at: number): [number, number] {
 	let result = 0;
 	let shift = 0;

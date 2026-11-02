@@ -11,6 +11,10 @@ OpenPak work starts at the port/fork commit.
 - miiverse-api: key-protected web bridge (`/internal/v1/web`, `PN_MIIVERSE_API_WEB_KEY`) so the OpenVerse web app (common/openverse) can call the internal API over private HTTP; 404 without a key or through the public proxy, never `/api/v1/admin/`
 - one OpenVerse community per game OpenPak serves: `tools/game-communities/build.py` builds a bundle from the website titles and their tiles, `npm run db:sync-games` creates and updates the communities (idempotent, never deletes). Wii U, 3DS and Switch title IDs go on the community so in-game posting lands in it
 
+## v0.3.25 — 2026-11-02
+
+- fix: the parental lookup passed a bare string to nice-grpc, which throws a TypeError, so every web account failed closed to OpenVerse off (adults nobody supervises included). The request is now an object; a test drives the real gRPC path against a stand-in parental core (unsupervised adult is full access, supervised follows its level).
+
 ## v0.3.24 — 2026-11-02
 
 - activity: nothing is posted for an account below full access (parental level read, or OpenVerse off), matching the new parental access levels
