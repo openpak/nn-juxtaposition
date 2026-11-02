@@ -23,11 +23,11 @@ Follow [this guide](./development.md) on how to get set up for local development
 
 If you'd like to help localize Pretendo Network, you can contribute to the translations on our project on [Weblate](https://hosted.weblate.org/engage/pretendonetwork/).
 
-# Upstream vs OpenPak (2026-11-01)
+# Upstream vs OpenPak
 
 Upstream: `PretendoNetwork/juxtaposition`. This repo's history was rewritten at the fork
 (v0.1.0), so its hashes differ from upstream's; the trees matched exactly at upstream
-`6d2718eb` (PR #585). On 2026-11-01 upstream `dev` (`b4963d0e`, PR #631) was brought in with
+`6d2718eb` (PR #585). Upstream `dev` (`b4963d0e`, PR #631) was brought in with
 one graft merge commit (parents: our `dev` and `upstream/dev`), so from here on
 `git fetch upstream && git merge upstream/dev` works normally. Remote: `upstream`.
 
@@ -58,4 +58,3 @@ test workflow.
 - `/cdn/<key>` media route on the API (MinIO read-through) and the working `db:seed` for
   discovery endpoints (`services/cdn`, `seed.entry.ts`, `services/discovery/endpoints.ts`).
 - vitest setup in `apps/miiverse-api`, CI test matrix extended.
-- Docs: `roadmap.md` (the thirteen-item plan and status).

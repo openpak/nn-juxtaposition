@@ -16,3 +16,4 @@ apps/juxtaposition-ui/src/api/generated
 apps/miiverse-api/internal.openapi.json
 apps/miiverse-api/src/prisma
 next-session.md
+NEXT-SESSION.md

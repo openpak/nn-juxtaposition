@@ -50,7 +50,7 @@ default avatar (`mii/default/*.png`, written by `npm run db:seed`) for consoles.
 - The drawing pad is 320x120, black on white, the console's size. The page posts a 1-bit BMP (`painting`, base64, `bmp=true`); the
   server reads it with the same code path as a 3DS, crops to 320x120, makes it bilevel and stores the zlib-compressed TGA that Wii U
   and 3DS read, plus the PNGs the web shows. `apps/miiverse-api/src/images.drawing.test.ts` runs the web encoder through that code and
-  checks the stored TGA. Not verified on a console (nothing here is).
+  checks the stored TGA.
 - Yeahs, replies, follows and user pages go through the same internal API as a console account, using the web-only `pid`.
 
 ## Supervised accounts

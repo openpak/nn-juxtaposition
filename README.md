@@ -35,7 +35,6 @@ is in [docs/development.md](docs/development.md); settings and images are in
 ## Docs
 
 - [Protocol](docs/protocol.md)
-- [Evidence](docs/evidence.md)
 - [Deploy](docs/deploy.md)
 - [Notes](docs/notes.md)
 - [Upstream README](docs/upstream.md)

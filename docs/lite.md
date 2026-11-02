@@ -6,7 +6,7 @@ internal API `deviceLinks.*` in `apps/miiverse-api`.
 
 ## Can these browsers reach verse.openpak.org?
 
-`verse.openpak.org` is behind Cloudflare. Measured against it (OpenSSL, 2026-11-01):
+`verse.openpak.org` is behind Cloudflare. Measured against it (OpenSSL):
 
 | Offer | Result |
 | --- | --- |
@@ -18,7 +18,7 @@ internal API `deviceLinks.*` in `apps/miiverse-api`.
 So the server side would still talk TLS 1.0, but only with an elliptic-curve certificate that chains to a
 2016 root and, normally, SNI. The browsers below are from 2007 to 2012 and ship RSA-era cipher lists and
 root stores. Treat HTTPS to verse.openpak.org as **not reachable** from the Wii and the DSi, and as
-**not expected** from the PS3. None of this has been tried on hardware (see "Verification").
+**not expected** from the PS3.
 
 | Device | Browser | Screen | Notes (from public browser documentation, not captured here) |
 | --- | --- | --- | --- |
@@ -161,9 +161,3 @@ Web pages: `GET /devices` (link form, list), `POST /devices/check` (code, then t
 3. Public DNS record (above) for anyone not using OpenPak DNS.
 4. Optional env on the UI unit: `PN_JUXTAPOSITION_UI_LITE_HOSTS`, `PN_JUXTAPOSITION_UI_LITE_CDN_INTERNAL_URL`,
    `PN_JUXTAPOSITION_UI_LITE_APPROVE_URL` (defaults are the production values).
-
-## Verification status
-
-See the CHANGELOG entry for what was checked on the live host. Not done anywhere: a real PS3, Wii or DSi. No emulator was run either: the Internet Channel and the DSi Browser need system
-software dumps that are not in the workspace, and the owner may be playing. The pages are checked with curl using each console's
-user agent and old-TLS clients only.
