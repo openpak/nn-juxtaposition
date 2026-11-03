@@ -6,6 +6,12 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.3.30 — 2026-11-03
+
+- UI and API request log lines carry no headers at all unless `log.sensitive` is on: no decoded
+  `X-Nintendo-ParamPack` (device identifiers), no user-agent, referer or cookies. What remains is
+  method, path without the query, id, status, duration and client address. Tests added.
+
 ## v0.3.29 — 2026-11-03
 
 - UI and API per-request log lines no longer carry the query string (URL, `query`, Referer) unless
