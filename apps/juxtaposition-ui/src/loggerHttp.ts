@@ -20,6 +20,11 @@ function redactHeaders(headers: Record<string, string>, allowlist: string[]): Re
 	}
 }
 
+// A URL or Referer carries query strings (tokens, search terms): keep the path only.
+function pathOnly(url: string): string {
+	return url.split('?')[0].split('#')[0];
+}
+
 export const loggerHttp = pinoHttp({
 	logger: logger,
 	serializers: {
@@ -29,6 +34,13 @@ export const loggerHttp = pinoHttp({
 			// Only log non-sensitive headers
 			const allowlist = ['host', 'accept', 'accept-encoding', 'accept-language', 'cache-control', 'user-agent', 'referer', 'cf-ipcountry'];
 			req.headers = redactHeaders(req.headers, allowlist);
+			if (!config.log.sensitive) {
+				req.url = pathOnly(req.url);
+				(req as { query?: unknown }).query = undefined;
+				if (typeof req.headers.referer === 'string') {
+					req.headers.referer = pathOnly(req.headers.referer);
+				}
+			}
 
 			// Decode param pack if we have it
 			const paramPack = raw.headers['x-nintendo-parampack'];
