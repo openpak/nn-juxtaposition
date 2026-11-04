@@ -11,6 +11,7 @@ import { cdnRouter } from '@/services/cdn';
 import { activityIngestRouter } from '@/services/activity/http';
 import { officialRouter } from '@/services/official/official';
 import { webBridgeRouter } from '@/services/web-bridge/bridge';
+import { eraseRouter } from '@/services/erase/http';
 import { config } from '@/config';
 import { setupGrpc } from '@/services/internal/server';
 import { initImageProcessing } from '@/images';
@@ -34,6 +35,7 @@ app.use(loggerHttp);
 // Pakka's key-protected routes bring their own (larger) JSON parser, so they come first
 app.use('/internal/v1/official', officialRouter);
 app.use('/internal/v1/web', webBridgeRouter);
+app.use(eraseRouter());
 app.use(express.json());
 app.use(healthzRouter);
 app.use(cdnRouter);

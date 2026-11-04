@@ -6,6 +6,21 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.4.0 — 2026-11-04
+
+- Account erasure (card openpak/prds#120). `DELETE /internal/accounts/{account_id}/data` on the API's HTTP port
+  (20090), `Authorization: Bearer <ACCOUNT_ERASE_KEY>`; 503 without the env var, 404 through the public proxy
+  (anything carrying `X-Forwarded-For`). The account's pids are its web identity pid plus the console pid
+  nn-account resolves. Erased: its posts, comments and private messages (media files too; messages to or from it
+  go on both sides, like chat), conversations it is in, its empathy on other posts (counts corrected), its
+  community favourites, reports it filed or that were filed about it, automod log rows about it, the user row with
+  settings and follows in both directions and community follows, notifications to it, its name in other people's
+  grouped follow/empathy notices (a notice left empty is deleted), web identity, device links, activity
+  settings and activity posts. Moderation audit rows keep the action but lose the pid and context.
+- Kept: other people's replies under a deleted post (their own content) and staff-made communities (only the
+  owner/admin entry is dropped). Idempotent; logs `account erased account=<uuid> rows=<n> service=nn-juxtaposition`.
+- No event consumer here; the endpoint is the path.
+
 ## v0.3.30 — 2026-11-03
 
 - UI and API request log lines carry no headers at all unless `log.sensitive` is on: no decoded
