@@ -1,0 +1,6 @@
+# Identity-looking columns this adapter is allowed to keep. Checked in CI by openpak/.github scripts/dedup-lint.py.
+# One entry per line: table.column  # reason. Every entry needs a reason. Caches are also watched nightly by
+# openpak-dedup-check (md5 compare against the account core, board card openpak/prds#131).
+users.display_name  # Miiverse display name; cache of the core display name (card #131 phase 5), watched by openpak-dedup-check
+users.pnid  # Miiverse PNID link; equals the core handle, watched by openpak-dedup-check
+users.pnid_normalized  # lowercase index copy of users.pnid for lookup, same value
