@@ -6,6 +6,14 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.5.1 — 2026-11-05
+
+- Follow-up to v0.5.0. nn-account only hands out the ten character console projection of the core account name, so the
+  sync no longer treats a full core name (written at web sign-in) as stale when it projects to the same text, and
+  `/self` no longer overwrites it with the short form. The Wii U XML API (`services/api`: post screen name, mention
+  text) shows the same ten characters as before; the web and the internal API show the full core name.
+- The v0.5.0 image was published but its release job did not finish; v0.5.1 is the tag to deploy.
+
 ## v0.5.0 — 2026-11-05
 
 - The display name and handle belong to the account core (card openpak/prds#131, phase 5). `users.display_name`

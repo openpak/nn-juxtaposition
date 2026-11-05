@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { syncAll, syncProfile } from '@/services/profile-sync/profile-sync';
+import { consoleName, syncAll, syncProfile } from '@/services/profile-sync/profile-sync';
 import type { ProfileSyncDb } from '@/services/profile-sync/profile-sync';
 
 type Row = { pid: number; displayName: string; pnid: string | null; lastSeen: Date };
@@ -21,7 +21,13 @@ function fakeDb(rows: Row[]): { db: ProfileSyncDb; rows: Row[]; updates: number 
 			}
 		}
 	};
-	return { db, rows, get updates() { return state.updates; } };
+	return {
+		db,
+		rows,
+		get updates() {
+			return state.updates;
+		}
+	};
 }
 
 const now = new Date();
@@ -65,11 +71,26 @@ describe('syncAll', () => {
 			if (pid === 1_000_000_002) {
 				throw new Error('account server down');
 			}
-			return { username: `h${pid}`, mii: { name: `core ${pid}` } as never };
+			return { username: `h${pid}`, mii: { name: `c${pid % 1000}` } as never };
 		};
 		expect(await syncAll(db, source)).toEqual({ checked: 3, changed: 2, failed: 1 });
 		expect(rows[1]).toMatchObject({ displayName: 'B', pnid: 'b' });
 		expect(rows[3]).toMatchObject({ displayName: 'Web' });
 		expect(await syncAll(db, source, new Date(Date.now() - 30 * 86_400_000))).toEqual({ checked: 2, changed: 0, failed: 1 });
+	});
+});
+
+describe('consoleName', () => {
+	it('cuts to ten characters, by character', () => {
+		expect(consoleName('Short')).toBe('Short');
+		expect(consoleName('A very long account name')).toBe('A very lon');
+		expect(consoleName('\u{1F600}'.repeat(12))).toBe('\u{1F600}'.repeat(10));
+	});
+
+	it('does not downgrade a full core name whose projection the console already shows', async () => {
+		const { db, rows } = fakeDb([{ pid: 1_000_000_001, displayName: 'A very long account name', pnid: 'h', lastSeen: now }]);
+		expect(await syncProfile(db, 1_000_000_001, core('A very lon', 'h'))).toBe(false);
+		expect(rows[0].displayName).toBe('A very long account name');
+		expect(await syncProfile(db, 1_000_000_001, core('Renamed', 'h'))).toBe(true);
 	});
 });

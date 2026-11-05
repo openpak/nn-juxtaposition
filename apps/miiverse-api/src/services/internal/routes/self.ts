@@ -4,6 +4,7 @@ import { createInternalApiRouter } from '@/services/internal/builder/router';
 import { errors } from '@/services/internal/errors';
 import { mapBannedSelf, mapSelf, mapSelfFriendRequest, mapSelfNotificationCount, selfFriendRequestSchema, selfNotificationCountSchema, selfSchema } from '@/services/internal/contract/self';
 import { getDb } from '@/database';
+import { consoleName } from '@/services/profile-sync/profile-sync';
 import { getUserFriendRequestsIncoming } from '@/util';
 import { Post } from '@/models/post';
 import type { SelfFriendRequestDto } from '@/services/internal/contract/self';
@@ -43,7 +44,7 @@ selfRouter.get({
 
 			// Record activity & update metadata
 			data.lastSeen = new Date();
-			if (auth.pnid.mii) {
+			if (auth.pnid.mii && auth.pnid.mii.name !== consoleName(user.displayName)) {
 				data.displayName = auth.pnid.mii.name;
 			}
 			if (auth.pnid.username && auth.pnid.username !== user.pnid) {

@@ -26,6 +26,7 @@ import { ApiErrorCode, badRequest, serverError } from '@/errors';
 import { uploadPainting, uploadScreenshot } from '@/images';
 import { cleanedBase64 } from '@/zodUtils';
 import { AutomodRule } from '@/models/automodRules';
+import { consoleName } from '@/services/profile-sync/profile-sync';
 import type { GetUserDataResponse } from '@pretendonetwork/grpc/account/v2/get_user_data_rpc';
 import type { PostRepliesResult } from '@/types/miiverse/post';
 import type { HydratedPostDocument, IPostInput } from '@/types/mongoose/post';
@@ -395,7 +396,7 @@ async function newPost(request: express.Request, response: express.Response): Pr
 					}
 				}
 			});
-			const plainText = renderToPlainText(ast, mentionedUsers.map(v => ({ pid: v.pid, username: v.pnid ?? v.displayName ?? v.pid.toString() })));
+			const plainText = renderToPlainText(ast, mentionedUsers.map(v => ({ pid: v.pid, username: v.pnid ?? consoleName(v.displayName) ?? v.pid.toString() })));
 			parsedBody = {
 				markdown: transformed,
 				text: plainText
@@ -416,7 +417,7 @@ async function newPost(request: express.Request, response: express.Response): Pr
 		id: '', // * This gets changed when saving the document for the first time
 		title_id: request.paramPack.title_id,
 		community_id: community.olive_community_id,
-		screen_name: dbUser.displayName,
+		screen_name: consoleName(dbUser.displayName),
 		body: parsedBody ? parsedBody.text : undefined,
 		body_markdown: parsedBody ? parsedBody.markdown : undefined,
 		app_data: appData,

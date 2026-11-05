@@ -7,6 +7,11 @@
 import { isConsolePid } from '@/services/web-identity/web-identity';
 import type { GetUserDataResponse } from '@pretendonetwork/grpc/account/v2/get_user_data_rpc';
 
+/** The console shows ten characters of the account name (nn-account store.ProfileName). */
+export function consoleName(name: string): string {
+	return Array.from(name).slice(0, 10).join('');
+}
+
 type CachedUser = { pid: number; displayName: string; pnid: string | null };
 
 export type ProfileSyncDb = {
@@ -31,7 +36,9 @@ export async function syncProfile(db: ProfileSyncDb, pid: number, source: Profil
 	const core = await source(pid);
 	const data: { displayName?: string; pnid?: string; pnidNormalized?: string } = {};
 	const name = core.mii?.name;
-	if (name && name !== user.displayName) {
+	// nn-account hands out the ten character console projection of the core name; a full name already
+	// cached here (web sign-in) that projects to the same text is up to date.
+	if (name && name !== consoleName(user.displayName)) {
 		data.displayName = name;
 	}
 	if (core.username && core.username !== user.pnid) {
