@@ -6,6 +6,19 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.5.0 — 2026-11-05
+
+- The display name and handle belong to the account core (card openpak/prds#131, phase 5). `users.display_name`
+  and `users.pnid` stay as a cache and are never written first here: every web sign-in now refreshes the name from
+  the core (linked console players included; core wins), and a new profile sync copies the core's account name and
+  handle (read through nn-account `GetUserData`, which is push-fresh from the core's `profile_updated` event) into
+  the user rows of console players. It runs once at startup for everyone (this repairs rows that had drifted from
+  the core) and then every minute for players seen in the last 30 days; a failing read keeps the old copy. Web-only
+  players have no nn-account record and are refreshed at sign-in.
+- Stays Miiverse's own: pid, account status and bans, last seen, profile comment, game skill, privacy and
+  notification settings, posts, follows, notifications, web identities. Erasure for all of them was shipped in
+  v0.4.0 (the account erasure endpoint covers every table keyed by pid or account).
+
 ## v0.4.0 — 2026-11-04
 
 - Account erasure (card openpak/prds#120). `DELETE /internal/accounts/{account_id}/data` on the API's HTTP port

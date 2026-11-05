@@ -116,12 +116,12 @@ describe('first sign-in (no first-run page)', () => {
 		expect(isWebOnlyPid(out.pid)).toBe(true);
 	});
 
-	it('keeps a console player who already ran the applet (user row exists, name untouched)', async () => {
+	it('keeps the row of a console player who already ran the applet and refreshes its name from the core', async () => {
 		const { db, created, users } = fakeDb({ users: [{ pid: 1_111_111_111, displayName: 'Mii name' }] });
 		const out = await resolveWebIdentity(db, { accountId: 'c', displayName: 'Web name', wiiuPid: 1_111_111_111 });
 		expect(out.pid).toBe(1_111_111_111);
 		expect(created).toHaveLength(0);
-		expect(users[0].displayName).toBe('Mii name');
+		expect(users[0].displayName).toBe('Web name');
 	});
 
 	it('is idempotent and follows a web-only name change', async () => {

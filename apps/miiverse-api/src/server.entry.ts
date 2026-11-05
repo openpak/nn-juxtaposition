@@ -1,6 +1,6 @@
 import '@/extend-zod'; // Needs to be the first import
 import express from 'express';
-import { connect as connectDatabase, setupPrisma } from '@/database';
+import { connect as connectDatabase, getDb, setupPrisma } from '@/database';
 import { logger } from '@/logger';
 import { loggerHttp } from '@/loggerHttp';
 import auth from '@/middleware/auth';
@@ -17,6 +17,8 @@ import { setupGrpc } from '@/services/internal/server';
 import { initImageProcessing } from '@/images';
 import { ApiErrorCode, badRequest, serverError } from '@/errors';
 import { connectGrpc } from '@/grpc';
+import { startProfileSync } from '@/services/profile-sync/profile-sync';
+import { getUserAccountData } from '@/util';
 import { setupS3 } from '@/s3';
 import { listenMetrics, registerMetrics } from '@/metrics';
 
@@ -83,6 +85,11 @@ async function main(): Promise<void> {
 		logger.info(`Server started on port ${config.http.port}`);
 	});
 	listenMetrics(metricsApp);
+	startProfileSync(getDb(), getUserAccountData, (stats, startup) => {
+		if (startup || stats.changed > 0 || stats.failed !== 0) {
+			logger.info(stats, `Profile sync (${startup ? 'startup reconcile' : 'sweep'})`);
+		}
+	});
 
 	await setupGrpc();
 }

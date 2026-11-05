@@ -156,8 +156,9 @@ export async function resolveWebIdentity(db: IdentityDb, input: SsoIdentityInput
 				throw e;
 			}
 		}
-	} else if (!identity.linked && !input.keepName && user.displayName !== name) {
-		// A web-only player's name follows their OpenPak account. A console player's name is their Mii's.
+	} else if (!input.keepName && user.displayName !== name) {
+		// users.display_name is a cache of the account core's name (card #131): every sign-in refreshes it,
+		// linked console players included. Core wins.
 		await db.user.update({ where: { pid: identity.pid }, data: { displayName: name } });
 	}
 
