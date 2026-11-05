@@ -12,7 +12,7 @@ OpenPak work starts at the port/fork commit.
   sync no longer treats a full core name (written at web sign-in) as stale when it projects to the same text, and
   `/self` no longer overwrites it with the short form. The Wii U XML API (`services/api`: post screen name, mention
   text) shows the same ten characters as before; the web and the internal API show the full core name.
-- The v0.5.0 image was published but its release job did not finish; v0.5.1 is the tag to deploy.
+- The first API image build of each of v0.5.0 and v0.5.1 hung on the runner; a cancel and re-run produced the images.
 
 ## v0.5.0 — 2026-11-05
 
