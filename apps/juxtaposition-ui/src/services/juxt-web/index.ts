@@ -9,11 +9,11 @@ import { restrictHostnames } from '@/middleware/hostLimit';
 import { config } from '@/config';
 import { createLiteRouter, defaultFetchImage } from '@/lite/router';
 import { defaultDeps } from '@/lite/session';
-import { redisKv } from '@/services/juxt-web/routes/web/devices';
+import { pgKv } from '@/db';
 import { internalApiMiddleware } from '@/middleware/internalApi';
 
 export const router = express.Router();
-const liteRouter = createLiteRouter({ ...defaultDeps, kv: redisKv, fetchImage: defaultFetchImage });
+const liteRouter = createLiteRouter({ ...defaultDeps, kv: pgKv, fetchImage: defaultFetchImage });
 const consoleRouter = express.Router();
 const webRouter = express.Router();
 

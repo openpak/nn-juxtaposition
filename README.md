@@ -16,7 +16,7 @@ OpenPak's Wii U/3DS Miiverse Server.
 | Component | What |
 | --- | --- |
 | `miiverse-api` | The Miiverse API, backed by Postgres and S3 |
-| `juxtaposition-ui` | The frontend for all platforms, backed by Redis and the API's gRPC |
+| `juxtaposition-ui` | The frontend for all platforms, backed by Postgres (sessions, link codes) and the API's gRPC |
 
 ## Run
 

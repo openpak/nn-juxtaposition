@@ -6,6 +6,14 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.7.0 — 2026-11-06
+
+- The UI no longer uses Redis (card openpak/prds#20). Web sessions (`ui_sessions`) and the 10-minute device link
+  codes (`ui_kv`) are Postgres rows with an `expires_at` column; reads ignore expired rows and a sweep deletes them
+  every 10 minutes. Tables are created at start-up. `PN_JUXTAPOSITION_UI_DB_URL` replaces
+  `PN_JUXTAPOSITION_UI_REDIS_HOST/PORT`; `redis` and `connect-redis` are removed. Everyone is signed out once at the
+  switch. Rollback: pin the UI image to v0.6.0 and keep Redis running.
+
 ## v0.6.0 — 2026-11-06
 
 - The API no longer uses MongoDB (card openpak/prds#20). Posts, communities, discovery endpoints, conversations,

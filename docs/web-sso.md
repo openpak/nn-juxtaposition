@@ -10,9 +10,9 @@ The web UI has no sign-in form. `GET /login` on the canonical host (`PN_JUXTAPOS
 - Right after the code exchange the UI calls the internal `sso.resolve` (`POST /sso/resolve`), which finds or creates the
   OpenVerse user for the account (see "Identity" below). There is no first-run page on the web and no "link a console" gate:
   every OpenPak account can sign in, with or without a Wii U or 3DS.
-- The session (Redis, regenerated after sign-in) keeps `{accountId, displayName, wiiuPid, pid}`; `pid` is the number OpenVerse knows the person by.
-  Sessions have no cookie lifetime, so connect-redis expires each key after its default 86400 s (one day) and logout destroys it
-  sooner; nothing else lives in that Redis except 10-minute link codes. Account erasure (`DELETE /internal/accounts/{id}/data` on the
+- The session (Postgres `ui_sessions`, regenerated after sign-in) keeps `{accountId, displayName, wiiuPid, pid}`; `pid` is the number OpenVerse knows the person by.
+  Sessions have no cookie lifetime, so each row expires after 86400 s (swept every 10 minutes) (one day) and logout destroys it
+  sooner; nothing else lives there except 10-minute link codes. Account erasure (`DELETE /internal/accounts/{id}/data` on the
   miiverse-api, which has no Redis connection) therefore leaves sessions to expire within a day; an erased account's pid no longer
   resolves to a user, so a leftover session grants nothing.
 - First visit: until the account has accepted the community rules, every page redirects to `/welcome` (rules, one Accept button).

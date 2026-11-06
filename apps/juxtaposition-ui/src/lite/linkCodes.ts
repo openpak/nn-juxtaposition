@@ -3,7 +3,7 @@
  * A console asks for a code and shows it. The person types it at verse.openpak.org/devices while
  * signed in through openpak.org (HTTPS), and confirms. The console keeps polling with a secret that
  * only it holds; the first poll after approval receives a token, once. The code itself is not a
- * credential: without the poll secret it grants nothing. Codes live ten minutes in Redis. */
+ * credential: without the poll secret it grants nothing. Codes live ten minutes in Postgres (ui_kv). */
 
 import { createHash, randomBytes, randomInt } from 'node:crypto';
 import type { DeviceClass } from '@/lite/types';
@@ -13,7 +13,7 @@ const ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
 export const CODE_LENGTH = 6;
 export const CODE_TTL_SECONDS = 600;
 
-/** The three Redis calls used, so tests can pass a Map. */
+/** The three key-value calls used, so tests can pass a Map. */
 export type KV = {
 	get(key: string): Promise<string | null>;
 	set(key: string, value: string, options: { EX: number }): Promise<unknown>;

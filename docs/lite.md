@@ -58,7 +58,7 @@ Nothing secret is typed or shown on the console.
   "A PlayStation 3 asked to be linked" and confirms. Every form on that page carries a per-session token.
 - **The code is not a credential.** The console polls with a secret only it holds (`s=` in the link page URL),
   from the same IP address that asked for the code. The first poll after approval receives the token, once
-  (Redis GETDEL); codes live 10 minutes. Approving, checking and polling are rate limited.
+  (Postgres, delete-returning); codes live 10 minutes. Approving, checking and polling are rate limited.
 - **The device token** (`ovd1.` + 32 random bytes) is stored as SHA-256 only. The console keeps it in a
   host-only cookie `ovl` (`HttpOnly`, `SameSite=Lax`, one year; it cannot be `Secure` on HTTP). The same
   token is accepted as `Authorization: Bearer` by the Xbox 360 feed, only for devices linked as `x360`.
@@ -147,7 +147,7 @@ All are `POST` with a JSON body. Device classes: `ps3`, `wii`, `dsi`, `x360`, `l
 | `deviceLinks.list` | `/device-links/list` | `{accountId}` | `{items: [{id, deviceClass, label, createdAt, lastUsedAt}]}`, active links only |
 | `deviceLinks.revoke` | `/device-links/revoke` | `{accountId, id}` | `{status: "success"}`; `404` if it is not that account's active link |
 
-Code approval (the step before `create`) lives in Redis, `apps/juxtaposition-ui/src/lite/linkCodes.ts`: `verse-lite:code:<CODE>` holds
+Code approval (the step before `create`) lives in Postgres (`ui_kv`), `apps/juxtaposition-ui/src/lite/linkCodes.ts`: `verse-lite:code:<CODE>` holds
 `{deviceClass, secretHash, ip, createdAt, accountId|null}` for 10 minutes. The device side `startLink` writes it; the web side `peekCode` shows what is
 asking and `approveCode(code, accountId)` sets `accountId`; the device's `pollCode(code, secret, ip)` consumes it once (GETDEL) and then calls `deviceLinks.create`.
 A Go service can reimplement those four calls against the same key shape; the token table behind the four routes is what must be shared.

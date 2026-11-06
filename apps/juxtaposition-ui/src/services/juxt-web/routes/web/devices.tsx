@@ -1,12 +1,11 @@
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 import express from 'express';
 import { rateLimit } from 'express-rate-limit';
-import { redisClient } from '@/redis';
+import { pgKv } from '@/db';
 import { wrapApi } from '@/api/errors';
 import { WebDevicesView } from '@/services/juxt-web/views/web/devicesView';
 import { approveCode, normalizeCode, peekCode } from '@/lite/linkCodes';
 import type { Request, Response } from 'express';
-import type { KV } from '@/lite/linkCodes';
 import type { DevicesViewProps } from '@/services/juxt-web/views/web/devicesView';
 
 /* Approving a link code: the person is signed in through openpak.org (HTTPS), types the code a
@@ -14,12 +13,6 @@ import type { DevicesViewProps } from '@/services/juxt-web/views/web/devicesView
  * Every form carries a per-session token so another site cannot approve a code for them. */
 
 export const devicesRouter = express.Router();
-
-export const redisKv: KV = {
-	get: async key => (await redisClient.get(key)) as string | null,
-	set: (key, value, options) => redisClient.set(key, value, options),
-	getDel: async key => (await redisClient.getDel(key)) as string | null
-};
 
 const LABELS: Record<string, string> = { ps3: 'PlayStation 3', wii: 'Wii', dsi: 'Nintendo DSi', x360: 'Xbox 360', lite: 'browser' };
 const MAX_ACTIVE = 12;
@@ -86,7 +79,7 @@ devicesRouter.post('/check', express.urlencoded({ extended: false }), tryLimit, 
 		return res.redirect(303, '/devices?n=bad');
 	}
 	const code = normalizeCode(req.body?.code);
-	const entry = code ? await peekCode(redisKv, code) : null;
+	const entry = code ? await peekCode(pgKv, code) : null;
 	if (!code || !entry || entry.accountId) {
 		return res.redirect(303, '/devices?n=bad');
 	}
@@ -106,7 +99,7 @@ devicesRouter.post('/approve', express.urlencoded({ extended: false }), tryLimit
 	if ((await list(req)).length >= MAX_ACTIVE) {
 		return res.redirect(303, '/devices?n=toomany');
 	}
-	const ok = await approveCode(redisKv, code, req.session.sso!.accountId);
+	const ok = await approveCode(pgKv, code, req.session.sso!.accountId);
 	return res.redirect(303, ok ? '/devices?n=approved' : '/devices?n=bad');
 });
 

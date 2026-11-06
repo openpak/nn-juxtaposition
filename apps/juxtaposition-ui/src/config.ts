@@ -54,9 +54,9 @@ const schema = z.object({
 		yeahs: z.stringbool().default(true),
 		posts: z.stringbool().default(true)
 	}).prefault({}),
-	redis: z.object({
-		host: z.string(),
-		port: z.coerce.number().default(6379)
+	/** Postgres for web sessions and device link codes (they used to live in Redis). */
+	db: z.object({
+		url: z.string()
 	}),
 	/** openpak.org single sign-on (web sign-in only; consoles keep their own login). */
 	sso: z.object({
@@ -108,8 +108,8 @@ export const presets = {
 				apiKey: '12345678123456781234567812345678'
 			}
 		},
-		redis: {
-			host: 'localhost'
+		db: {
+			url: 'postgres://localhost:5432/juxtaposition_ui'
 		}
 	}
 };

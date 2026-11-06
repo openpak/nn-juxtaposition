@@ -2,7 +2,7 @@
 
 From v0.6.0 the API (`apps/miiverse-api`, image `nn-juxtaposition-api`) keeps everything in Postgres. Users, follows,
 notifications, web identities, device links and activity posts were already there (Prisma); this port moves the
-eight Mongo collections that were left and removes mongoose. The UI app is untouched (it only uses Redis).
+eight Mongo collections that were left and removes mongoose. The UI moved from Redis to Postgres in v0.7.0.
 
 ## Inventory (what Mongo held, live counts on 2026-11-06)
 

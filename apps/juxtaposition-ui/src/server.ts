@@ -1,11 +1,10 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-import { RedisStore } from 'connect-redis';
 import methodOverride from 'method-override';
 import { logger } from '@/logger';
 import { loggerHttp } from '@/loggerHttp';
-import { redisClient } from '@/redis';
+import { connectDb, PgSessionStore } from '@/db';
 import { router } from '@/services/juxt-web';
 import { healthzRouter } from '@/services/healthz';
 import { config } from '@/config';
@@ -55,7 +54,7 @@ app.use(cookieParser());
 app.use(methodOverride('X-HTTP-Method-Override'));
 
 app.use(session({
-	store: new RedisStore({ client: redisClient }),
+	store: new PgSessionStore(),
 	secret: config.aesKey,
 	resave: false,
 	saveUninitialized: false
@@ -104,7 +103,7 @@ async function main(): Promise<void> {
 	// Starts the server
 	logger.info('Starting server');
 
-	await redisClient.connect();
+	await connectDb();
 
 	app.listen(port, '0.0.0.0', () => {
 		logger.success(`Server started on port ${port}`);
