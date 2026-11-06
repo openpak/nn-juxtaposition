@@ -1,74 +1,75 @@
-import { Schema, model } from 'mongoose';
-import { Snowflake as snowflake } from 'node-snowflake';
-import type { HydratedDocument, Types } from 'mongoose';
+import { getDb } from '@/database';
+import type { Conversation as ConversationRow, ConversationUser } from '@/prisma/client';
 
-export type ConversationUser = {
-	pid: number;
-	official: boolean;
-	read: boolean;
-} & Document;
+/* Console private-message conversations: the tables `conversations` and `conversation_users`
+ * (the Mongo `conversations` collection, whose `users` array became conversation_users rows). */
 
-export type Conversation = {
+export type { ConversationUser };
+
+export type ConversationWithUsers = ConversationRow & { users: ConversationUser[] };
+
+export class ConversationDocument {
 	id: string;
 	created_at: Date;
 	last_updated: Date;
 	message_preview: string;
-	users: Types.Array<ConversationUser>;
+	users: ConversationUser[];
 
-	newMessage(message: string, senderPid: number): Promise<void>;
-	markAsRead(receiverPid: number): Promise<void>;
-} & Document;
-
-export type HydratedConversationDocument = HydratedDocument<Conversation>;
-
-const user = new Schema<ConversationUser>({
-	pid: Number,
-	official: {
-		type: Boolean,
-		default: false
-	},
-	read: {
-		type: Boolean,
-		default: true
+	constructor(row: ConversationWithUsers) {
+		this.id = row.id;
+		this.created_at = row.created_at;
+		this.last_updated = row.last_updated;
+		this.message_preview = row.message_preview;
+		this.users = row.users;
 	}
-});
 
-export const ConversationSchema = new Schema<Conversation>({
-	id: {
-		type: String,
-		default: snowflake.nextId()
-	},
-	created_at: {
-		type: Date,
-		default: (): Date => new Date()
-	},
-	last_updated: {
-		type: Date,
-		default: (): Date => new Date()
-	},
-	message_preview: {
-		type: String,
-		default: ''
-	},
-	users: [user]
-});
-
-ConversationSchema.method<HydratedConversationDocument>('newMessage', async function (message, senderPID) {
-	this.last_updated = new Date();
-	this.message_preview = message;
-	const sender = this.users.find(user => user.pid === senderPID);
-	if (sender) {
-		sender.read = false;
+	/** A new message: the preview changes and `pid` (the recipient) has something unread */
+	async newMessage(message: string, pid: number): Promise<void> {
+		this.last_updated = new Date();
+		this.message_preview = message;
+		await getDb().$transaction([
+			getDb().conversation.update({ where: { id: this.id }, data: { last_updated: this.last_updated, message_preview: message } }),
+			getDb().conversationUser.updateMany({ where: { conversation_id: this.id, pid }, data: { read: false } })
+		]);
+		for (const user of this.users) {
+			if (user.pid === pid) {
+				user.read = false;
+			}
+		}
 	}
-	await this.save();
-});
 
-ConversationSchema.method<HydratedConversationDocument>('markAsRead', async function (receiverPID) {
-	const receiver = this.users.find(user => user.pid === receiverPID);
-	if (receiver) {
-		receiver.read = true;
+	async markAsRead(pid: number): Promise<void> {
+		await getDb().conversationUser.updateMany({ where: { conversation_id: this.id, pid }, data: { read: true } });
+		for (const user of this.users) {
+			if (user.pid === pid) {
+				user.read = true;
+			}
+		}
 	}
-	await this.save();
-});
+}
 
-export const Conversation = model('Conversation', ConversationSchema);
+export type HydratedConversationDocument = ConversationDocument;
+
+export const Conversation = {
+	/** The conversation both players are in */
+	async findByUsers(a: number, b: number): Promise<ConversationDocument | null> {
+		const row = await getDb().conversation.findFirst({
+			where: { AND: [{ users: { some: { pid: a } } }, { users: { some: { pid: b } } }] },
+			include: { users: true }
+		});
+		return row ? new ConversationDocument(row) : null;
+	},
+
+	async create(input: { id: string; users: { pid: number; official: boolean; read: boolean }[] }): Promise<ConversationDocument> {
+		const row = await getDb().conversation.create({
+			data: { id: input.id, users: { create: input.users } },
+			include: { users: true }
+		});
+		return new ConversationDocument(row);
+	},
+
+	/** Deletes every conversation one of these players is in (account erasure) */
+	async deleteWithUsers(pids: number[]): Promise<number> {
+		return (await getDb().conversation.deleteMany({ where: { users: { some: { pid: { in: pids } } } } })).count;
+	}
+};

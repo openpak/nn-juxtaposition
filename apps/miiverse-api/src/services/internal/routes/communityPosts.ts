@@ -27,19 +27,15 @@ communityPostsRouter.get({
 	},
 	async handler({ params, query, auth, db }) {
 		const ids = await expandFamily(params.id);
-		const posts = await Post
-			.find(deleteOptional({
-				community_id: ids.length === 1 ? ids[0] : { $in: ids },
-				parent: null,
-				message_to_pid: null, // messages aren't really posts
-				...filterRemovedPosts(auth)
-			}))
-			.sort({ created_at: -1 })
-			.skip(query.offset)
-			.limit(query.limit);
+		const posts = await Post.find(deleteOptional({
+			community_id: ids.length === 1 ? ids[0] : { in: ids },
+			parent: null,
+			message_to_pid: null, // messages aren't really posts
+			...filterRemovedPosts(auth)
+		}), { orderBy: { created_at: 'desc' }, skip: query.offset, take: query.limit });
 
 		const communityIds = posts.map(v => v.community_id);
-		const communities = await Community.find({ olive_community_id: { $in: communityIds } });
+		const communities = await Community.find({ olive_community_id: { in: communityIds } });
 
 		const users = await db.user.findMany({
 			where: {
@@ -74,18 +70,14 @@ communityPostsRouter.get({
 	},
 	async handler({ params, query, auth, db }) {
 		const ids = await expandFamily(params.id);
-		const posts = await Post
-			.find(deleteOptional({
-				community_id: ids.length === 1 ? ids[0] : { $in: ids },
-				parent: null,
-				...filterRemovedPosts(auth)
-			}))
-			.sort({ empathy_count: -1 })
-			.skip(query.offset)
-			.limit(query.limit);
+		const posts = await Post.find(deleteOptional({
+			community_id: ids.length === 1 ? ids[0] : { in: ids },
+			parent: null,
+			...filterRemovedPosts(auth)
+		}), { orderBy: { empathy_count: 'desc' }, skip: query.offset, take: query.limit });
 
 		const communityIds = posts.map(v => v.community_id);
-		const communities = await Community.find({ olive_community_id: { $in: communityIds } });
+		const communities = await Community.find({ olive_community_id: { in: communityIds } });
 
 		const users = await db.user.findMany({
 			where: {
@@ -137,8 +129,6 @@ communityPostsRouter.post({
 		const newPost = await createNewPost({
 			author: {
 				pid: account.pnid.pid,
-				miiData: account.pnid.mii?.data ?? '',
-				screenName: account.user?.displayName ?? '',
 				verified: self.permissions.moderator
 			},
 			body,
@@ -181,7 +171,7 @@ communityPostsRouter.post({
 	async handler({ body, auth, db }) {
 		const account = auth!;
 		const forms = switchTitleIdForms(body.titleId);
-		let community = forms.length > 0 ? await Community.findOne({ title_id: { $in: forms } }) : null;
+		let community = forms.length > 0 ? await Community.findOne({ title_id: { hasSome: forms } }) : null;
 		if (!community) {
 			community = await Community.findOne({ name: CONSOLE_SHARE_ROOM });
 		}
@@ -197,8 +187,6 @@ communityPostsRouter.post({
 		const newPost = await createNewPost({
 			author: {
 				pid: account.pnid.pid,
-				miiData: account.pnid.mii?.data ?? '',
-				screenName: account.user?.displayName ?? '',
 				verified: self.permissions.moderator
 			},
 			body: {

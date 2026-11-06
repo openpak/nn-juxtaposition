@@ -3,11 +3,12 @@
  * The website's erasure finaliser calls DELETE /internal/accounts/:id/data (http.ts) once an account's
  * grace period is over. Everything this service holds about the account goes:
  *
- *   Mongo:    the account's posts and comments (media files too), private messages sent to or from it
+ *   Content:  the account's posts and comments (media files too), private messages sent to or from it
  *             (both sides, like chat), conversations it is in, its empathy ("yeah") on other people's
  *             posts, its favourites, reports it filed or that were filed about it, automod log rows
  *             about it. Moderation audit rows keep the action but lose the pid / context.
- *   Postgres: the user row (settings, follows both ways and community follows cascade), notifications
+ *             (These were in Mongo until card openpak/prds#20; they are Postgres tables now too.)
+ *   Account:  the user row (settings, follows both ways and community follows cascade), notifications
  *             to it and notifications that name it (it is taken out of grouped "X and 2 others"
  *             notices), its web identity, device links and activity settings / posts.
  *
@@ -23,9 +24,6 @@ import { getDb } from '@/database';
 import { Post } from '@/models/post';
 import { Conversation } from '@/models/conversation';
 import { Community } from '@/models/community';
-import { Report } from '@/models/report';
-import { AutomodLog } from '@/models/automodLog';
-import { Logs } from '@/models/logs';
 import { bulkDeleteCDNAsset } from '@/util';
 import { postMediaKeys } from '@/services/cdn/media';
 
@@ -34,17 +32,17 @@ export const SERVICE = 'nn-juxtaposition';
 export type EraseStore = {
 	/** Every pid the account has here. Throws when it cannot find out (a retry, not "nothing"). */
 	pidsOf(accountId: string): Promise<number[]>;
-	/** Mongo side, by pid. Returns rows touched. */
-	eraseMongo(pids: number[]): Promise<number>;
-	/** Postgres side, by pid and account id (runs last: it removes the web identity the pids came from). */
+	/** Posts, messages, conversations, favourites, reports and moderation rows, by pid. Returns rows touched. */
+	eraseContent(pids: number[]): Promise<number>;
+	/** The account rows, by pid and account id (runs last: it removes the web identity the pids came from). */
 	erasePostgres(accountId: string, pids: number[]): Promise<number>;
 };
 
 export async function eraseAccount(accountId: string, store: EraseStore = realStore): Promise<number> {
 	const pids = await store.pidsOf(accountId);
-	const mongo = pids.length > 0 ? await store.eraseMongo(pids) : 0;
+	const content = pids.length > 0 ? await store.eraseContent(pids) : 0;
 	const pg = await store.erasePostgres(accountId, pids);
-	const rows = mongo + pg;
+	const rows = content + pg;
 	logger.info(`account erased account=${accountId} rows=${rows} service=${SERVICE}`);
 	return rows;
 }
@@ -78,14 +76,14 @@ export const realStore: EraseStore = {
 		return [...pids];
 	},
 
-	async eraseMongo(pids) {
+	async eraseContent(pids) {
 		let rows = 0;
 		const strPids = pids.map(String);
-		const mine = { $or: [{ pid: { $in: pids } }, { message_to_pid: { $in: strPids } }] };
+		const mine = { OR: [{ pid: { in: pids } }, { message_to_pid: { in: strPids } }] };
 
 		// Posts, comments and messages, media first. Each page is gone before the next is read.
 		for (;;) {
-			const posts = await Post.find(mine).limit(pageLimit);
+			const posts = await Post.findRows(mine, { take: pageLimit });
 			if (posts.length === 0) {
 				break;
 			}
@@ -96,26 +94,24 @@ export const realStore: EraseStore = {
 					parents.set(p.parent, (parents.get(p.parent) ?? 0) + 1);
 				}
 			}
-			await Post.deleteMany({ _id: { $in: posts.map(p => p._id) } });
-			if (parents.size > 0) {
-				await Post.bulkWrite([...parents].map(([id, n]) => ({ updateOne: { filter: { id }, update: { $inc: { reply_count: -n } } } })));
+			await Post.deleteMany({ id: { in: posts.map(p => p.id) } });
+			for (const [id, n] of parents) {
+				await Post.incrementReplies(id, -n);
 			}
 			rows += posts.length;
 		}
 
+		const db = getDb();
 		for (const pid of pids) {
-			const yeah = await Post.updateMany({ yeahs: pid }, { $pull: { yeahs: pid }, $inc: { empathy_count: -1 } });
-			rows += yeah.modifiedCount;
+			rows += await Post.removeEmpathiesBy(pid);
 		}
-		rows += (await Post.updateMany({ removed_by: { $in: pids } }, { removed_by: 0 })).modifiedCount;
-		rows += (await Conversation.deleteMany({ 'users.pid': { $in: pids } })).deletedCount;
-		rows += (await Community.updateMany({ user_favorites: { $in: pids } }, { $pull: { user_favorites: { $in: pids } } })).modifiedCount;
-		rows += (await Community.updateMany({ admins: { $in: pids } }, { $pull: { admins: { $in: pids } } })).modifiedCount;
-		rows += (await Community.updateMany({ owner: { $in: pids } }, { $unset: { owner: 1 } })).modifiedCount;
-		rows += (await Report.deleteMany({ $or: [{ pid: { $in: pids } }, { reported_by: { $in: pids } }] })).deletedCount;
-		rows += (await AutomodLog.deleteMany({ author: { $in: pids } })).deletedCount;
-		rows += (await Logs.updateMany({ actor: { $in: pids } }, { actor: 0 })).modifiedCount;
-		rows += (await Logs.updateMany({ target: { $in: strPids } }, { target: '0', context: '' })).modifiedCount;
+		rows += await Post.updateMany({ removed_by: { in: pids } }, { removed_by: 0 });
+		rows += await Conversation.deleteWithUsers(pids);
+		rows += await Community.forgetPids(pids);
+		rows += (await db.report.deleteMany({ where: { OR: [{ pid: { in: pids } }, { reported_by: { in: pids } }] } })).count;
+		rows += (await db.automodLog.deleteMany({ where: { author: { in: pids } } })).count;
+		rows += (await db.auditLog.updateMany({ where: { actor: { in: pids } }, data: { actor: 0 } })).count;
+		rows += (await db.auditLog.updateMany({ where: { target: { in: strPids } }, data: { target: '0', context: '' } })).count;
 		return rows;
 	},
 

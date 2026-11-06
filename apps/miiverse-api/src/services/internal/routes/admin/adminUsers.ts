@@ -89,12 +89,12 @@ adminUsersRouter.get({
 				followingPid: user.pid
 			}
 		});
-		const totalPosts = await Post.find({
+		const totalPosts = await Post.count({
 			pid: params.id,
 			parent: null,
 			message_to_pid: null,
 			removed: false
-		}).countDocuments();
+		});
 
 		return mapAdminUserProfile(user, pnid, followers, totalPosts);
 	}

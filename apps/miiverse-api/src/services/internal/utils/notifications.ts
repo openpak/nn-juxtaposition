@@ -1,7 +1,7 @@
 import { genId } from '@/util';
 import { errors } from '@/services/internal/errors';
 import type { PrismaClient } from '@/prisma/client';
-import type { IPost } from '@/types/mongoose/post';
+import type { IPost } from '@/types/models/post';
 
 export type FollowNotificationOptions = {
 	userToFollow: number;

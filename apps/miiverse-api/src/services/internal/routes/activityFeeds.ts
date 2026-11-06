@@ -7,8 +7,7 @@ import { feedPageDtoSchema, mapFeedPage, pageControlSchema } from '@/services/in
 import { createInternalApiRouter } from '@/services/internal/builder/router';
 import { Community } from '@/models/community';
 import { expandFollowed } from '@/services/internal/utils/communities';
-import type { FilterQuery } from 'mongoose';
-import type { IPost } from '@/types/mongoose/post';
+import type { Prisma } from '@/prisma/client';
 
 export const activityFeedsRouter = createInternalApiRouter();
 
@@ -22,18 +21,14 @@ activityFeedsRouter.get({
 		response: feedPageDtoSchema(postSchema)
 	},
 	async handler({ query, auth, db }) {
-		const posts = await Post
-			.find(deleteOptional({
-				parent: null,
-				message_to_pid: null,
-				...filterRemovedPosts(auth)
-			}))
-			.sort({ created_at: -1 })
-			.skip(query.offset)
-			.limit(query.limit);
+		const posts = await Post.find(deleteOptional({
+			parent: null,
+			message_to_pid: null,
+			...filterRemovedPosts(auth)
+		}), { orderBy: { created_at: 'desc' }, skip: query.offset, take: query.limit });
 
 		const communityIds = posts.map(v => v.community_id);
-		const communities = await Community.find({ olive_community_id: { $in: communityIds } });
+		const communities = await Community.find({ olive_community_id: { in: communityIds } });
 
 		const users = await db.user.findMany({
 			where: {
@@ -67,7 +62,7 @@ activityFeedsRouter.get({
 	async handler({ query, auth, db }) {
 		const { pnid } = auth!; // Auth guard protects it
 
-		const anyOfQueries: FilterQuery<IPost>[] = [
+		const anyOfQueries: Prisma.PostWhereInput[] = [
 			{ pid: pnid.pid } // Add own posts
 		];
 		const followedUsers = await db.userFollow.findMany({
@@ -75,21 +70,17 @@ activityFeedsRouter.get({
 				pid: pnid.pid
 			}
 		});
-		anyOfQueries.push({ pid: followedUsers.map(v => v.followingPid) }); // Add following users posts
+		anyOfQueries.push({ pid: { in: followedUsers.map(v => v.followingPid) } }); // Add following users posts
 
-		const posts = await Post
-			.find(deleteOptional({
-				$or: anyOfQueries,
-				parent: null,
-				message_to_pid: null,
-				...filterRemovedPosts(auth)
-			}))
-			.sort({ created_at: -1 })
-			.skip(query.offset)
-			.limit(query.limit);
+		const posts = await Post.find(deleteOptional({
+			OR: anyOfQueries,
+			parent: null,
+			message_to_pid: null,
+			...filterRemovedPosts(auth)
+		}), { orderBy: { created_at: 'desc' }, skip: query.offset, take: query.limit });
 
 		const communityIds = posts.map(v => v.community_id);
-		const communities = await Community.find({ olive_community_id: { $in: communityIds } });
+		const communities = await Community.find({ olive_community_id: { in: communityIds } });
 
 		const users = await db.user.findMany({
 			where: {
@@ -123,7 +114,7 @@ activityFeedsRouter.get({
 	async handler({ query, auth, db }) {
 		const { pnid } = auth!; // Auth guard protects it
 
-		const anyOfQueries: FilterQuery<IPost>[] = [
+		const anyOfQueries: Prisma.PostWhereInput[] = [
 			{ pid: pnid.pid } // Add own posts
 		];
 		const followedUsers = await db.userFollow.findMany({
@@ -136,22 +127,18 @@ activityFeedsRouter.get({
 				pid: pnid.pid
 			}
 		});
-		anyOfQueries.push({ pid: followedUsers.map(v => v.followingPid) }); // Add following users posts
-		anyOfQueries.push({ community_id: await expandFollowed(followedComms.map(v => v.communityId)) }); // Add following communities posts
+		anyOfQueries.push({ pid: { in: followedUsers.map(v => v.followingPid) } }); // Add following users posts
+		anyOfQueries.push({ community_id: { in: await expandFollowed(followedComms.map(v => v.communityId)) } }); // Add following communities posts
 
-		const posts = await Post
-			.find(deleteOptional({
-				$or: anyOfQueries,
-				parent: null,
-				message_to_pid: null,
-				...filterRemovedPosts(auth)
-			}))
-			.sort({ created_at: -1 })
-			.skip(query.offset)
-			.limit(query.limit);
+		const posts = await Post.find(deleteOptional({
+			OR: anyOfQueries,
+			parent: null,
+			message_to_pid: null,
+			...filterRemovedPosts(auth)
+		}), { orderBy: { created_at: 'desc' }, skip: query.offset, take: query.limit });
 
 		const communityIds = posts.map(v => v.community_id);
-		const communities = await Community.find({ olive_community_id: { $in: communityIds } });
+		const communities = await Community.find({ olive_community_id: { in: communityIds } });
 
 		const users = await db.user.findMany({
 			where: {

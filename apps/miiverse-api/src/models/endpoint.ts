@@ -1,34 +1,23 @@
-import { Schema, model } from 'mongoose';
-import type { HydratedDocument } from 'mongoose';
+import { getDb } from '@/database';
+import type { Endpoint as EndpointRow } from '@/prisma/client';
 
-export type Endpoint = {
-	status: number;
-	server_access_level: string;
-	topics: boolean;
-	guest_access: boolean;
-	new_users: boolean;
-	host: string;
-	api_host: string;
-	portal_host: string;
-	n3ds_host: string;
-} & Document;
+/* Discovery data, the table `endpoints` (the Mongo `endpoints` collection), one row per server
+ * access level. */
 
-export type HydratedEndpointDocument = HydratedDocument<Endpoint>;
+export type Endpoint = EndpointRow;
+export type HydratedEndpointDocument = EndpointRow;
+export type EndpointInput = Omit<EndpointRow, 'id' | 'legacy_mongo_id'>;
 
-export const endpointSchema = new Schema<Endpoint>({
-	status: Number,
-	server_access_level: String,
-	topics: Boolean,
-	guest_access: Boolean,
-	new_users: {
-		type: Boolean,
-		default: true
+export const Endpoint = {
+	async findAll(): Promise<EndpointRow[]> {
+		return getDb().endpoint.findMany({ orderBy: { id: 'asc' } });
 	},
-	host: String,
-	api_host: String,
-	portal_host: String,
-	n3ds_host: String
-});
 
-export const Endpoint = model('Endpoint', endpointSchema);
-export const ENDPOINT = Endpoint;
+	async findByAccessLevel(serverAccessLevel: string): Promise<EndpointRow | null> {
+		return getDb().endpoint.findUnique({ where: { server_access_level: serverAccessLevel } });
+	},
+
+	async create(input: EndpointInput): Promise<EndpointRow> {
+		return getDb().endpoint.create({ data: input });
+	}
+};

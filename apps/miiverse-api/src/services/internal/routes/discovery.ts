@@ -18,7 +18,7 @@ discoveryRouter.get({
 		response: discoverySchema
 	},
 	async handler({ params }) {
-		const discovery = await Endpoint.findOne({ server_access_level: params.environment });
+		const discovery = await Endpoint.findByAccessLevel(params.environment);
 		return mapDiscovery(discovery);
 	}
 });

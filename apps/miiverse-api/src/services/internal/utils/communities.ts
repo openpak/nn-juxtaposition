@@ -1,11 +1,12 @@
 import { Community } from '@/models/community';
+import { getDb } from '@/database';
 import type { SelfDto } from '@/services/internal/contract/self';
-import type { HydratedCommunityDocument } from '@/types/mongoose/community';
-import type { HydratedPostDocument } from '@/types/mongoose/post';
+import type { HydratedCommunityDocument } from '@/types/models/community';
+import type { HydratedPostDocument } from '@/types/models/post';
 
 export async function generateCommunityId(length?: number | undefined): Promise<string> {
 	let id = crypto.getRandomValues(new Uint32Array(1)).toString().substring(0, length);
-	const inuse = await Community.findOne({ community_id: id });
+	const inuse = await Community.exists({ community_id: id });
 	id = (inuse ? await generateCommunityId(length) : id);
 	return id;
 }
@@ -18,7 +19,7 @@ export async function generateCommunityId(length?: number | undefined): Promise<
  * untouched and a console never meets a family.
  */
 export async function familyMemberIds(id: string): Promise<string[]> {
-	const members = await Community.find({ parent: id, type: { $in: [0, 2] } }, { olive_community_id: 1 }).lean();
+	const members = await getDb().community.findMany({ where: { parent: id, type: { in: [0, 2] } }, select: { olive_community_id: true } });
 	return members.map(m => m.olive_community_id);
 }
 
@@ -31,7 +32,7 @@ export async function expandFamily(id: string): Promise<string[]> {
 /** Followed ids with every followed family replaced by its games (the family stays too). */
 export async function expandFollowed(ids: string[]): Promise<string[]> {
 	const out = new Set(ids);
-	const families = await Community.find({ olive_community_id: { $in: ids }, type: 1, parent: null }, { olive_community_id: 1 }).lean();
+	const families = await getDb().community.findMany({ where: { olive_community_id: { in: ids }, type: 1, parent: null }, select: { olive_community_id: true } });
 	for (const f of families) {
 		for (const m of await familyMemberIds(f.olive_community_id)) {
 			out.add(m);

@@ -1,65 +1,18 @@
-import { Schema, model } from 'mongoose';
-import type { HydratedDocument } from 'mongoose';
+import type { AutomodRule as AutomodRuleRow, AutomodRuleMode, AutomodRuleType } from '@/prisma/client';
 
-export const automodRuleType = ['keyword'] as const;
-export type AutomodRuleType = (typeof automodRuleType)[number];
+/* Automod rules, the table `automod_rules` (the Mongo `automodrules` collection). Queried with
+ * getDb().automodRule. The Mongo documents kept a keyword rule's words in `keyword_settings.keywords`;
+ * the row has them in `keywords`, and automodRuleKeywordSettings() gives the old object back. */
 
-export const automodRuleMode = ['block', 'log'] as const;
-export type AutomodRuleMode = (typeof automodRuleMode)[number];
+export const automodRuleType = ['keyword'] as const satisfies readonly AutomodRuleType[];
+export type { AutomodRuleType, AutomodRuleMode };
 
-export type AutomodKeywordSettings = {
-	keywords: string[];
-} & Document;
+export const automodRuleMode = ['block', 'log'] as const satisfies readonly AutomodRuleMode[];
 
-export type AutomodRule = {
-	enabled: boolean;
-	created_at: Date;
-	title: string;
-	description: string | null;
-	type: AutomodRuleType;
-	mode: AutomodRuleMode;
-	keyword_settings: {
-		keywords: string[];
-	};
-} & Document;
+export type AutomodRule = AutomodRuleRow;
+export type HydratedAutomodRuleDocument = AutomodRuleRow;
 
-export type HydratedAutomodRuleDocument = HydratedDocument<AutomodRule>;
-
-export const automodRuleKeywordSettingsSchema = new Schema<AutomodKeywordSettings>({
-	keywords: {
-		type: [String],
-		required: true
-	}
-});
-
-export const automodRuleSchema = new Schema<AutomodRule>({
-	enabled: {
-		type: Boolean,
-		required: true
-	},
-	title: {
-		type: String,
-		required: true
-	},
-	description: String,
-	type: {
-		type: String,
-		enum: automodRuleType,
-		required: true
-	},
-	mode: {
-		type: String,
-		enum: automodRuleMode,
-		required: true
-	},
-	keyword_settings: {
-		type: automodRuleKeywordSettingsSchema,
-		required: false
-	},
-	created_at: {
-		type: Date,
-		required: true
-	}
-});
-
-export const AutomodRule = model('AutomodRule', automodRuleSchema);
+/** The settings object of a keyword rule, or null for another rule type */
+export function automodRuleKeywordSettings(rule: AutomodRuleRow): { keywords: string[] } | null {
+	return rule.type === 'keyword' ? { keywords: rule.keywords } : null;
+}

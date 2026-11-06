@@ -49,7 +49,7 @@ test workflow.
 
 | Upstream | Why not |
 | --- | --- |
-| Draft PR #620 `feat/bunch-of-stuff-to-pg` (automod, discovery, reports, audit logs to Postgres) | Draft, moves discovery and reports to Postgres with data migrations. Take it when upstream marks it ready; until then our discovery stays on Mongo `endpoints`. |
+| Draft PR #620 `feat/bunch-of-stuff-to-pg` (automod, discovery, reports, audit logs to Postgres) | Draft, moves discovery and reports to Postgres with data migrations. Superseded here: v0.6.0 moved every Mongo collection, discovery and reports included, to Postgres (docs/postgres-port.md). |
 | PR #595 `feat/grpc-api` | Open, new gRPC surface. Not needed by OpenPak yet. |
 | PR #604 `work/pjax-nonsense` | Open, 3DS/portal navigation rewrite. Conflicts with the islands refactor already merged; wait for it to land. |
 | `work/totally-image-processing` (3DS image upload + title-id checks) | Commit message: "not done yet no eta". Based on a pre-TypeScript tree (conflicts in 10+ files). The 3DS post form in `dev` already has text, drawing and screenshot tabs. |

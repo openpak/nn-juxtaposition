@@ -1,4 +1,4 @@
-import { Logs } from '@/models/logs';
+import { getDb } from '@/database';
 import type { LogEntryActions } from '@/models/logs';
 
 export const accountActionDisplayMap: Record<number, LogEntryActions> = {
@@ -17,11 +17,13 @@ export type CreateLogEntryOptions = {
 };
 
 export async function createLogEntry(ops: CreateLogEntryOptions): Promise<void> {
-	await Logs.create({
-		actor: ops.actorId,
-		action: ops.action,
-		target: ops.targetResourceId,
-		context: ops.context,
-		changed_fields: ops.fields ?? []
+	await getDb().auditLog.create({
+		data: {
+			actor: ops.actorId,
+			action: ops.action,
+			target: ops.targetResourceId,
+			context: ops.context,
+			changed_fields: ops.fields ?? []
+		}
 	});
 }

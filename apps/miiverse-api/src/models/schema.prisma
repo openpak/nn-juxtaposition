@@ -179,3 +179,292 @@ model ActivityPost {
   @@index([createdAt])
   @@map("activity_posts")
 }
+
+// ---------------------------------------------------------------------------------------------
+// Moved from MongoDB (card openpak/prds#20). Field names keep the snake_case names the Mongo
+// documents had, so the route code and the console wire format read the same fields as before.
+// `legacy_mongo_id` is the old ObjectId (hex), set only on imported rows; it makes the one-shot
+// import (migrations/11-mongo-to-pg) safe to run again.
+// ---------------------------------------------------------------------------------------------
+
+enum CommunityShotMode {
+  allow
+  block
+  force
+}
+
+/// A community (a game, a sub-community a player made, an announcement room or a family page).
+/// `community_id` is the console-facing id, `olive_community_id` the 64-bit one posts point at.
+model Community {
+  community_id       String  @id
+  olive_community_id String  @unique
+  legacy_mongo_id    String? @unique
+
+  platform_id     Int
+  name            String
+  description     String
+  open            Boolean @default(true)
+  allows_comments Boolean @default(true)
+  /// 0 main, 1 sub (or family page), 2 announcement, 3 private
+  type            Int     @default(0)
+  parent          String?
+  admins          Int[]   @default([])
+  owner           Int?
+  created_at      DateTime @default(now())
+  empathy_count   Int     @default(0)
+  has_shop_page   Int     @default(0)
+  /// TGA icon blob, base64 (console wire format)
+  icon            String
+  ctr_header      String?
+  wup_header      String?
+  /// CDN paths of the rendered icon sizes; all five set or all null
+  icon_path_32    String?
+  icon_path_48    String?
+  icon_path_64    String?
+  icon_path_96    String?
+  icon_path_128   String?
+  title_id        String[] @default([])
+  is_recommended  Int     @default(0)
+  app_data        String  @default("")
+  user_favorites  Int[]   @default([])
+
+  permissions_open                   Boolean @default(true)
+  minimum_new_post_access_level      Int     @default(0)
+  minimum_new_comment_access_level   Int     @default(0)
+  minimum_new_community_access_level Int     @default(3)
+
+  shot_mode           CommunityShotMode @default(allow)
+  shot_extra_title_id String[]          @default([])
+
+  /// A franchise family page made by `npm run db:sync-families` (its games carry its id as parent)
+  family  Boolean @default(false)
+  /// Art bookmark of `npm run db:sync-games`
+  art_sha String?
+
+  @@index([parent, type])
+  @@index([type, created_at])
+  @@index([owner])
+  @@index([title_id], type: Gin)
+  @@index([user_favorites], type: Gin)
+  @@map("communities")
+}
+
+/// A post, a reply (parent set) or a console private message (message_to_pid set, community_id
+/// is then the conversation id). Only the author's pid is kept: the name and Mii the wire format
+/// carries per post are read from the account core when the post is served (services/identity),
+/// and the face image URL follows from pid and feeling_id.
+model Post {
+  id              String  @id
+  legacy_mongo_id String? @unique
+
+  title_id      String?
+  body          String  @default("")
+  body_markdown String?
+  app_data      String?
+
+  painting          String?
+  painting_img      String?
+  painting_big      String?
+  screenshot        String?
+  screenshot_big    String?
+  screenshot_thumb  String?
+  screenshot_length Int?
+  screenshot_aspect String?
+
+  search_key String[] @default([])
+  topic_tag  String?
+
+  community_id String
+  created_at   DateTime
+  feeling_id   Int?
+
+  is_autopost                   Int @default(0)
+  is_community_private_autopost Int @default(0)
+  is_spoiler                    Int @default(0)
+  is_app_jumpable               Int @default(0)
+
+  empathy_count Int @default(0)
+  /// The console's country and the language the post was written in (Olive param pack, per post)
+  country_id    Int @default(49)
+  language_id   Int @default(1)
+
+  pid         Int
+  platform_id Int?
+  region_id   Int?
+  parent      String?
+
+  reply_count Int     @default(0)
+  verified    Boolean @default(false)
+
+  /// The recipient pid of a private message, as text (the Mongo documents stored it so)
+  message_to_pid String?
+
+  removed        Boolean   @default(false)
+  removed_reason String?
+  removed_by     Int?
+  removed_at     DateTime?
+
+  yeahs Int[] @default([])
+
+  @@index([community_id, removed, parent, created_at(sort: Desc)])
+  @@index([parent, removed, created_at(sort: Desc)])
+  @@index([pid, message_to_pid, parent, removed, created_at(sort: Desc)])
+  @@index([topic_tag, message_to_pid, parent, removed, created_at(sort: Desc)])
+  @@index([message_to_pid, created_at])
+  @@index([created_at])
+  @@index([yeahs], type: Gin)
+  @@index([search_key], type: Gin)
+  @@map("posts")
+}
+
+/// A console private-message conversation between two players
+model Conversation {
+  id              String  @id
+  legacy_mongo_id String? @unique
+
+  created_at      DateTime @default(now())
+  last_updated    DateTime @default(now())
+  message_preview String   @default("")
+
+  users ConversationUser[]
+
+  @@map("conversations")
+}
+
+model ConversationUser {
+  conversation_id String
+  pid             Int
+  official        Boolean @default(false)
+  read            Boolean @default(true)
+
+  conversation Conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
+
+  @@id([conversation_id, pid])
+  @@index([pid])
+  @@map("conversation_users")
+}
+
+/// Discovery data, one row per server access level (seeded by `npm run db:seed`)
+model Endpoint {
+  id                  Int     @id @default(autoincrement())
+  legacy_mongo_id     String? @unique
+  status              Int     @default(0)
+  server_access_level String  @unique
+  topics              Boolean @default(false)
+  guest_access        Boolean @default(false)
+  new_users           Boolean @default(true)
+  host                String  @default("")
+  api_host            String  @default("")
+  portal_host         String  @default("")
+  n3ds_host           String  @default("")
+
+  @@map("endpoints")
+}
+
+/// A player's report of a post
+model Report {
+  /// The old ObjectId hex for imported rows, a uuid for new ones
+  id              String  @id @default(uuid())
+  legacy_mongo_id String? @unique
+
+  pid         Int
+  reported_by Int
+  post_id     String
+  reason      Int
+  message     String    @default("")
+  created_at  DateTime  @default(now())
+  resolved    Boolean   @default(false)
+  note        String?
+  resolved_by Int?
+  resolved_at DateTime?
+
+  @@index([post_id, reported_by])
+  @@index([reported_by])
+  @@index([pid])
+  @@index([created_at])
+  @@map("reports")
+}
+
+enum AutomodRuleType {
+  keyword
+}
+
+enum AutomodRuleMode {
+  block
+  log
+}
+
+enum AutomodAction {
+  blocked
+  logged
+}
+
+model AutomodRule {
+  id              String  @id @default(uuid())
+  legacy_mongo_id String? @unique
+
+  enabled     Boolean
+  created_at  DateTime
+  title       String
+  description String?
+  type        AutomodRuleType
+  mode        AutomodRuleMode
+  /// Settings of a `keyword` rule
+  keywords    String[] @default([])
+
+  @@index([enabled])
+  @@map("automod_rules")
+}
+
+model AutomodLog {
+  id              String  @id @default(uuid())
+  legacy_mongo_id String? @unique
+
+  rule_id           String
+  created_at        DateTime
+  author            Int
+  action            AutomodAction
+  post_id           String?
+  parent_post_id    String?
+  community_id      String?
+  /// [{ start, end }] character ranges of the body that matched the rule
+  matches           Json?
+  post_content_body String?
+
+  @@index([author])
+  @@index([action, created_at])
+  @@index([created_at])
+  @@map("automod_logs")
+}
+
+enum AuditLogAction {
+  REMOVE_POST
+  IGNORE_REPORT
+  LIMIT_POSTING
+  TEMP_BAN
+  PERMA_BAN
+  UNBAN
+  UPDATE_USER
+  MAKE_COMMUNITY
+  UPDATE_COMMUNITY
+  DELETE_COMMUNITY
+}
+
+/// Moderation audit log (was the Mongo `logs` collection)
+model AuditLog {
+  id              String  @id @default(uuid())
+  legacy_mongo_id String? @unique
+
+  actor          Int
+  action         AuditLogAction
+  target         String
+  context        String
+  timestamp      DateTime @default(now())
+  changed_fields String[] @default([])
+
+  @@index([target])
+  @@index([action])
+  @@index([actor])
+  @@index([timestamp])
+  @@map("audit_logs")
+}

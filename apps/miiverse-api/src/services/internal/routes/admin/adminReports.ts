@@ -2,7 +2,6 @@ import { z } from 'zod';
 import { createInternalApiRouter } from '@/services/internal/builder/router';
 import { guards } from '@/services/internal/middleware/guards';
 import { mapReport, reportSchema } from '@/services/internal/contract/admin/report';
-import { Report } from '@/models/report';
 import { Post } from '@/models/post';
 import { errors } from '@/services/internal/errors';
 import { mapResult, resultSchema } from '@/services/internal/contract/result';
@@ -34,22 +33,23 @@ adminReportsRouter.get({
 			throw errors.for('bad_request', 'Pagination is not possible when filtering for resolved states');
 		}
 
-		const rawReports = await Report
-			.find(deleteOptional({
+		const rawReports = await db.report.findMany({
+			where: deleteOptional({
 				resolved: query.resolved,
 				pid: query.offenderPid,
 				reported_by: query.reporterPid
-			}))
-			.sort({ created_at: standardSortToDirection(query.sort) })
-			.limit(query.limit)
-			.skip(query.offset);
+			}),
+			orderBy: { created_at: standardSortToDirection(query.sort) },
+			take: query.limit,
+			skip: query.offset
+		});
 		const postIds = rawReports.map(obj => obj.post_id);
 		const posts = await Post.find(
-			{ id: { $in: postIds } }
+			{ id: { in: postIds } }
 		);
 
 		const communityIds = posts.map(v => v.community_id);
-		const communities = await Community.find({ olive_community_id: { $in: communityIds } });
+		const communities = await Community.find({ olive_community_id: { in: communityIds } });
 
 		const relatedUserIds = [
 			...rawReports.flatMap(v => [v.reported_by, v.resolved_by]),
@@ -96,7 +96,7 @@ adminReportsRouter.post({
 	async handler({ db, params, body, auth }) {
 		const account = auth!;
 
-		const report = await Report.findOne({ _id: params.id });
+		const report = await db.report.findUnique({ where: { id: params.id } });
 		if (!report) {
 			throw errors.for('not_found');
 		}
@@ -110,15 +110,12 @@ adminReportsRouter.post({
 		const reason = body.reason ?? 'Removed by moderator';
 		await post.del(reason, account.pnid.pid);
 		if (post.parent) {
-			await Post.findOneAndUpdate({
-				id: post.parent
-			}, {
-				$inc: { reply_count: -1 }
-			});
+			await Post.incrementReplies(post.parent, -1);
 		}
 
-		await Report.findOneAndUpdate({ _id: report.id }, {
-			$set: {
+		await db.report.update({
+			where: { id: report.id },
+			data: {
 				resolved: true,
 				resolved_by: account.pnid.pid,
 				resolved_at: new Date(),
@@ -154,16 +151,17 @@ adminReportsRouter.post({
 		}),
 		response: resultSchema
 	},
-	async handler({ params, body, auth }) {
+	async handler({ params, body, auth, db }) {
 		const account = auth!;
 
-		const report = await Report.findOne({ _id: params.id });
+		const report = await db.report.findUnique({ where: { id: params.id } });
 		if (!report) {
 			throw errors.for('not_found');
 		}
 
-		await Report.findOneAndUpdate({ _id: report.id }, {
-			$set: {
+		await db.report.update({
+			where: { id: report.id },
+			data: {
 				resolved: true,
 				resolved_by: account.pnid.pid,
 				resolved_at: new Date(),

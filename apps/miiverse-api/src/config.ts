@@ -25,9 +25,6 @@ const schema = z.object({
 	}).prefault({}),
 	/** CDN path hosting Mii images. ${cdnUrl}/mii/100000000/normal_face.png */
 	cdnUrl: z.string().url().transform(s => s.replace(/\/$/g, '')),
-	mongoose: z.object({
-		uri: z.string()
-	}),
 	db: z.object({
 		/** Postgres connection string */
 		url: z.string()
@@ -104,9 +101,6 @@ export const presets: Record<string, any> = {
 			trustProxy: 'loopback'
 		},
 		cdnUrl: 'http://cdn.pretendo.cc',
-		mongoose: {
-			uri: 'mongodb://localhost:27017/miiverse?directConnection=true'
-		},
 		db: {
 			url: 'postgres://postgres:postgres@localhost:5432/miiverse'
 		},

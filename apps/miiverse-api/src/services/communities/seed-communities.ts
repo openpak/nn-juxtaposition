@@ -1,4 +1,4 @@
-import type { ICommunityInput } from '@/types/mongoose/community';
+import type { ICommunityInput } from '@/types/models/community';
 
 /* The communities a fresh OpenVerse starts with (docs/web-sso.md, "Seeded communities").
  *

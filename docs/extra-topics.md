@@ -4,20 +4,11 @@ This file contains some extra topics that are helpful for development.
 
 ## 1. Databases and migrations
 
-Juxtaposition currently uses two databases: postgresql (with prisma) and mongodb (with mongoose).
-Mongodb is being phased out and replaced with postgresql.
+The API uses one database: postgresql (with prisma). MongoDB was retired in v0.6.0 (see
+[postgres-port.md](./postgres-port.md)); the scripts in `/migrations` up to `11-mongo-to-pg` are the history of that move.
 
-Here are some situations which require extra steps to work with the databases, run all steps.
+Before starting the app: deploy the new migrations using `npm run migration:deploy`.
 
-Before starting the app:
-- `mongodb`: No steps required
-- `postgresql`: Deploy the new migrations using `npm run migration:deploy`
+Changing database models: create a migration using `npm run migration:create` and deploy it using `npm run migration:deploy`.
 
-Changing database models:
-- `mongodb`: Automatic, no manual steps needed
-- `postgresql`: Create a migration using `npm run migration:create` and deploy it using `npm run migration:deploy`
-
-Creating a data migration:
-- `mongodb`: Add a mongosh script to `/migrations`
-- `postgresql`: Create a blank migration using `npm run migration:create` and fill it with your SQL script to do a data migration
-- Cross-db data migrations: Create a NodeJS script in `/migrations` and give it a package.json for it's dependencies.
+Creating a data migration: create a blank migration using `npm run migration:create` and fill it with your SQL script.

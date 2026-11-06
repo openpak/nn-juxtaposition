@@ -1,8 +1,7 @@
 import '@/extend-zod'; // Needs to be the first import
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import mongoose from 'mongoose';
-import { config } from '@/config';
+import { getDb, setupPrisma } from '@/database';
 import { Community } from '@/models/community';
 import { artHash, communityIdForKey, describeGame, planUpdate } from '@/services/communities/game-communities';
 import { hexColor, iconLetter, renderBanner, renderIcon } from '@/services/communities/seed-images';
@@ -11,7 +10,7 @@ import { generateCommunityId } from '@/services/internal/utils/communities';
 import { OFFICIAL_PID } from '@/services/web-identity/web-identity';
 import { setupS3 } from '@/s3';
 import type { GameEntry } from '@/services/communities/game-communities';
-import type { HydratedCommunityDocument } from '@/types/mongoose/community';
+import type { HydratedCommunityDocument, IIconPaths } from '@/types/models/community';
 
 /* Creates and updates one community per game from a bundle built by tools/game-communities/build.py.
  *
@@ -28,7 +27,7 @@ if (!dir) {
 }
 const bundle = JSON.parse(readFileSync(path.join(dir, 'games.json'), 'utf8')) as { games: GameEntry[] };
 
-await mongoose.connect(config.mongoose.uri);
+await setupPrisma();
 setupS3();
 await initImageProcessing();
 
@@ -49,7 +48,7 @@ async function drawArt(game: GameEntry, communityId: string, icon: Buffer | null
 	return { icons, headers, sha: artHash(icon, game.color, letter) };
 }
 
-function artFields(art: Art): Record<string, unknown> {
+function artFields(art: Art): { icon: string; ctr_header: string; wup_header: string; icon_paths: IIconPaths } {
 	return {
 		icon: art.icons.tgaBlob,
 		ctr_header: art.headers.ctr,
@@ -64,13 +63,12 @@ async function find(game: GameEntry): Promise<HydratedCommunityDocument | null> 
 		return byId;
 	}
 	if (game.title_ids.length > 0) {
-		const byTitle = await Community.findOne({ title_id: { $in: game.title_ids } });
+		const byTitle = await Community.findOne({ title_id: { hasSome: game.title_ids } });
 		if (byTitle) {
 			return byTitle;
 		}
 	}
-	const escaped = game.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	return Community.findOne({ name: { $regex: `^${escaped}$`, $options: 'i' }, type: { $ne: 1 } }); // 1 = a family page, never a game
+	return Community.findOne({ name: { equals: game.name, mode: 'insensitive' }, type: { not: 1 } }); // 1 = a family page, never a game
 }
 
 const counts = { created: 0, updated: 0, current: 0 };
@@ -100,28 +98,26 @@ for (const game of bundle.games) {
 			olive_community_id: communityIdForKey(game.key),
 			is_recommended: 0,
 			app_data: '',
-			permissions: { open: true, minimum_new_post_access_level: 0, minimum_new_comment_access_level: 0, minimum_new_community_access_level: 3 }
+			permissions: { open: true, minimum_new_post_access_level: 0, minimum_new_comment_access_level: 0, minimum_new_community_access_level: 3 },
+			art_sha: art.sha // the sync's own bookmark
 		});
-		// art_sha is not in the model; it is the sync's own bookmark
-		await Community.collection.updateOne({ olive_community_id: communityIdForKey(game.key) }, { $set: { art_sha: art.sha } });
 		counts.created++;
 		console.log(`community ${game.name}: created`);
 		continue;
 	}
 
-	const raw = await Community.collection.findOne({ olive_community_id: existing.olive_community_id });
 	const update = planUpdate({
 		olive_community_id: existing.olive_community_id,
 		name: existing.name,
 		description: existing.description,
 		title_id: existing.title_id,
-		art_sha: typeof raw?.art_sha === 'string' ? raw.art_sha : undefined
+		art_sha: existing.art_sha ?? undefined
 	}, game, sha);
 	if (!update) {
 		counts.current++;
 		continue;
 	}
-	const set: Record<string, unknown> = {};
+	const set: Parameters<typeof Community.updateOne>[1] = {};
 	if (update.name !== undefined) {
 		set.name = update.name;
 	}
@@ -135,10 +131,10 @@ for (const game of bundle.games) {
 		const art = await drawArt(game, existing.community_id, icon);
 		Object.assign(set, artFields(art), { art_sha: art.sha });
 	}
-	await Community.collection.updateOne({ olive_community_id: existing.olive_community_id }, { $set: set });
+	await Community.updateOne({ olive_community_id: existing.olive_community_id }, set);
 	counts.updated++;
 	console.log(`community ${game.name}: updated (${Object.keys(set).filter(k => k !== 'icon' && k !== 'icon_paths' && k !== 'ctr_header' && k !== 'wup_header').join(', ')})`);
 }
 
 console.log(`game communities: ${counts.created} created, ${counts.updated} updated, ${counts.current} already current, ${bundle.games.length} games`);
-await mongoose.disconnect();
+await getDb().$disconnect();

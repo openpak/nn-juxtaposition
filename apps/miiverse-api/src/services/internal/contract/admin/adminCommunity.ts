@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { communitySchema, mapCommunity } from '@/services/internal/contract/community';
-import type { HydratedCommunityDocument } from '@/types/mongoose/community';
+import type { HydratedCommunityDocument } from '@/types/models/community';
 
 export const adminCommunitySchema = communitySchema.extend({
 	isRecommended: z.boolean(),

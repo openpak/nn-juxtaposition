@@ -1,5 +1,7 @@
-import { Schema, model } from 'mongoose';
-import type { HydratedDocument } from 'mongoose';
+import type { AuditLog as AuditLogRow, AuditLogAction } from '@/prisma/client';
+
+/* Moderation audit log, the table `audit_logs` (the Mongo `logs` collection). Queried with
+ * getDb().auditLog. */
 
 export const logEntryActions = [
 	'REMOVE_POST',
@@ -12,48 +14,8 @@ export const logEntryActions = [
 	'MAKE_COMMUNITY',
 	'UPDATE_COMMUNITY',
 	'DELETE_COMMUNITY'
-] as const;
-export type LogEntryActions = (typeof logEntryActions)[number];
+] as const satisfies readonly AuditLogAction[];
+export type LogEntryActions = AuditLogAction;
 
-export type AuditLog = {
-	actor: number;
-	action: LogEntryActions;
-	target: string;
-	context: string;
-	timestamp: Date;
-	changed_fields: string[];
-} & Document;
-
-export type HydratedAuditLogDocument = HydratedDocument<AuditLog>;
-
-export const auditLogSchema = new Schema<AuditLog>({
-	actor: {
-		type: Number,
-		required: true
-	},
-	action: {
-		type: String,
-		enum: logEntryActions,
-		required: true
-	},
-	target: {
-		type: String,
-		required: true
-	},
-	context: {
-		type: String,
-		required: true
-	},
-	timestamp: {
-		type: Date,
-		default: Date.now,
-		required: true
-	},
-	changed_fields: {
-		type: [String],
-		default: [],
-		required: true
-	}
-});
-
-export const Logs = model('Log', auditLogSchema);
+export type AuditLog = AuditLogRow;
+export type HydratedAuditLogDocument = AuditLogRow;

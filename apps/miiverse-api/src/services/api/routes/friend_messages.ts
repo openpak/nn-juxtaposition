@@ -15,7 +15,7 @@ import { getConversationByUsers, getFriendMessages } from '@/database';
 import { forwardMessageToOpenPakChat } from '@/services/openpak-chat-bridge';
 import { Post } from '@/models/post';
 import { Conversation } from '@/models/conversation';
-import { config } from '@/config';
+import { consoleName } from '@/services/profile-sync/profile-sync';
 import { ApiErrorCode, badRequest, serverError } from '@/errors';
 import { uploadPainting, uploadScreenshot } from '@/images';
 import type { GetUserDataResponse } from '@pretendonetwork/grpc/account/v2/get_user_data_rpc';
@@ -109,25 +109,6 @@ router.post('/', upload.none(), async function (request: express.Request, respon
 		return badRequest(response, ApiErrorCode.NOT_ALLOWED, 403);
 	}
 
-	let miiFace = 'normal_face.png';
-	switch (parseInt(request.body.feeling_id)) {
-		case 1:
-			miiFace = 'smile_open_mouth.png';
-			break;
-		case 2:
-			miiFace = 'wink_left.png';
-			break;
-		case 3:
-			miiFace = 'surprise_open_mouth.png';
-			break;
-		case 4:
-			miiFace = 'frustrated.png';
-			break;
-		case 5:
-			miiFace = 'sorrow.png';
-			break;
-	}
-
 	if (messageBody && getInvalidPostRegex().test(messageBody)) {
 		request.log.warn('Message body failed regex');
 		return badRequest(response, ApiErrorCode.BAD_PARAMS);
@@ -145,10 +126,15 @@ router.post('/', upload.none(), async function (request: express.Request, respon
 		return;
 	}
 
+	// Mongoose cast these strings to the schema types; Postgres needs the real types
+	const num = (v: unknown, fallback?: number): number | undefined => {
+		const n = parseInt(String(v));
+		return isNaN(n) ? fallback : n;
+	};
+	const searchKey: unknown = request.body.search_key;
 	const post = await Post.create({
 		title_id: request.paramPack.title_id,
 		community_id: conversation.id,
-		screen_name: sender.mii.name,
 		body: messageBody,
 		app_data: appData,
 		painting: '',
@@ -159,22 +145,20 @@ router.post('/', upload.none(), async function (request: express.Request, respon
 		screenshot_thumb: '',
 		screenshot_aspect: '',
 		screenshot_length: 0,
-		country_id: request.paramPack.country_id,
+		country_id: num(request.paramPack.country_id),
 		created_at: new Date(),
-		feeling_id: request.body.feeling_id,
-		search_key: request.body.search_key,
-		topic_tag: request.body.topic_tag,
-		is_autopost: request.body.is_autopost,
+		feeling_id: num(bodyCheck.data.feeling_id),
+		search_key: Array.isArray(searchKey) ? searchKey.map(String) : (typeof searchKey === 'string' ? [searchKey] : undefined),
+		topic_tag: typeof request.body.topic_tag === 'string' ? request.body.topic_tag : undefined,
+		is_autopost: num(bodyCheck.data.is_autopost, 0),
 		is_spoiler: (request.body.spoiler) ? 1 : 0,
-		is_app_jumpable: request.body.is_app_jumpable,
-		language_id: request.body.language_id,
-		mii: sender.mii.data,
-		mii_face_url: `${config.cdnUrl}/mii/${sender.pid}/${miiFace}`,
+		is_app_jumpable: num(request.body.is_app_jumpable),
+		language_id: num(request.body.language_id),
 		pid: request.pid,
-		platform_id: request.paramPack.platform_id,
-		region_id: request.paramPack.region_id,
+		platform_id: num(request.paramPack.platform_id),
+		region_id: num(request.paramPack.region_id),
 		verified: (sender.accessLevel === 2 || sender.accessLevel === 3),
-		message_to_pid: request.body.message_to_pid,
+		message_to_pid: String(recipientPID),
 		parent: null,
 		removed: false
 	});
@@ -287,7 +271,7 @@ router.get('/', async function (request: express.Request, response: express.Resp
 				platform_id: message.platform_id || 0,
 				region_id: message.region_id || 0,
 				reply_count: message.reply_count,
-				screen_name: message.screen_name,
+				screen_name: consoleName(message.screen_name),
 				topic_tag: {
 					name: message.topic_tag ?? '',
 					title_id: 0

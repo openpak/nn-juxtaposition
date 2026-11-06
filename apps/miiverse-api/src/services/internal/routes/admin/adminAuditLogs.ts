@@ -4,10 +4,8 @@ import { guards } from '@/services/internal/middleware/guards';
 import { mapPage, pageControlSchema, pageDtoSchema } from '@/services/internal/contract/page';
 import { standardSortSchema, standardSortToDirection } from '@/services/internal/contract/utils';
 import { auditLogActionSchema, auditLogSchema, mapAuditLog } from '@/services/internal/contract/admin/auditLogs';
-import { Logs } from '@/models/logs';
 import { deleteOptional } from '@/services/internal/utils';
-import type { FilterQuery } from 'mongoose';
-import type { AuditLog } from '@/models/logs';
+import type { Prisma } from '@/prisma/client';
 
 export const adminAuditLogs = createInternalApiRouter();
 
@@ -24,16 +22,17 @@ adminAuditLogs.get({
 		response: pageDtoSchema(auditLogSchema)
 	},
 	async handler({ query, db }) {
-		const dbQuery: FilterQuery<AuditLog> = deleteOptional({
+		const dbQuery: Prisma.AuditLogWhereInput = deleteOptional({
 			target: query.targetId,
 			action: query.action
 		});
-		const logs = await Logs
-			.find(dbQuery)
-			.sort({ timestamp: standardSortToDirection(query.sort) })
-			.limit(query.limit)
-			.skip(query.offset);
-		const total = await Logs.countDocuments(dbQuery);
+		const logs = await db.auditLog.findMany({
+			where: dbQuery,
+			orderBy: { timestamp: standardSortToDirection(query.sort) },
+			take: query.limit,
+			skip: query.offset
+		});
+		const total = await db.auditLog.count({ where: dbQuery });
 
 		const users = await db.user.findMany({
 			where: {

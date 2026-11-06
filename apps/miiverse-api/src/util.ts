@@ -7,7 +7,7 @@ import { logger } from '@/logger';
 import { buildWebOnlyAccount, isWebOnlyPid } from '@/services/web-identity/web-identity';
 import { grpcAccount, grpcApi, oldGrpcFriends } from '@/grpc';
 import { getS3 } from '@/s3';
-import { AutomodLog } from '@/models/automodLog';
+import { getDb } from '@/database';
 import type { IncomingHttpHeaders } from 'node:http';
 import type { ObjectCannedACL } from '@aws-sdk/client-s3';
 import type { FriendRequest } from '@pretendonetwork/grpc/friends/friend_request';
@@ -17,7 +17,7 @@ import type { GetPNIDResponse } from '@pretendonetwork/grpc/account/v2/get_pnid_
 import type { Response } from 'express';
 import type { AutomodAction } from '@/models/automodLog';
 import type { ParamPack } from '@/types/common/param-pack';
-import type { IPostInput } from '@/types/mongoose/post';
+import type { IPostInput } from '@/types/models/post';
 import type { HydratedAutomodRuleDocument } from '@/models/automodRules';
 
 // TODO - This doesn't really belong here
@@ -219,7 +219,7 @@ export function evaluateAutomodRules(post: IPostInput, rules: HydratedAutomodRul
 		const matches: AutomodRuleEvaluationMatch[] = [];
 		if (rule.type === 'keyword') {
 			const bodyNormalized = (post.body ?? '').toLowerCase();
-			const keywordsToCheck = rule.keyword_settings?.keywords ?? [];
+			const keywordsToCheck = rule.keywords;
 			keywordsToCheck.forEach((keywordUpper) => {
 				const keyword = keywordUpper.toLowerCase();
 				const index = bodyNormalized.indexOf(keyword);
@@ -254,19 +254,21 @@ export async function performAutomodAction(post: IPostInput, evaluation: Automod
 
 	if (evaluation.action === 'blocked' || evaluation.action === 'logged') {
 		const allowPost = evaluation.action === 'blocked' ? false : true;
-		await AutomodLog.create({
-			action: evaluation.action,
-			author: post.pid,
-			post_id: post.id,
-			post_content_body: post.body ?? '',
-			created_at: new Date(),
-			rule_id: evaluation.violatedRule.id,
-			parent_post_id: post.parent ?? null,
-			community_id: post.community_id,
-			matches: evaluation.matches.map(match => ({
-				start: match.start,
-				end: match.end
-			}))
+		await getDb().automodLog.create({
+			data: {
+				action: evaluation.action,
+				author: post.pid,
+				post_id: post.id,
+				post_content_body: post.body ?? '',
+				created_at: new Date(),
+				rule_id: evaluation.violatedRule.id,
+				parent_post_id: post.parent ?? null,
+				community_id: post.community_id,
+				matches: evaluation.matches.map(match => ({
+					start: match.start,
+					end: match.end
+				}))
+			}
 		});
 		return {
 			allowPost

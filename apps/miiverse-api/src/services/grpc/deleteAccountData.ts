@@ -12,17 +12,17 @@ export async function deleteAccountData(req: DeleteAccountDataRequest): Promise<
 	let totalDeleted = 0;
 	let hasMoreToDelete = true;
 	while (hasMoreToDelete) {
-		const posts = await Post.find({
+		const posts = await Post.findRows({
 			pid: req.pid
-		}).limit(pageLimit);
+		}, { take: pageLimit });
 
 		const cdnKeys = posts.flatMap(msg => postMediaKeys(msg));
 		await bulkDeleteCDNAsset(cdnKeys); // ignore return value, continue on error
 		totalCdnDeletions += cdnKeys.length;
 
 		await Post.deleteMany({
-			_id: {
-				$in: posts.map(v => v._id)
+			id: {
+				in: posts.map(v => v.id)
 			}
 		});
 

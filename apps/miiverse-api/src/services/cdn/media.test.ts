@@ -43,7 +43,7 @@ vi.mock('@/util', async () => {
 });
 vi.mock('@/models/community', () => ({ Community: {} }));
 
-const { Post } = await import('@/models/post');
+const { Post, PostDocument } = await import('@/models/post');
 const { cdnRouter } = await import('@/services/cdn/index');
 const { deleteAccountData } = await import('@/services/grpc/deleteAccountData');
 const { cleanOrphanMedia } = await import('@/services/cdn/orphans');
@@ -75,11 +75,11 @@ describe('a removed post (user, moderator, report, reply)', () => {
 		const reply = label.includes('reply');
 		const keys = [...put(PID, 'p1', 'shot'), ...put(PID, 'p1', 'art')];
 		const other = put(PID, 'keep', 'shot');
-		const post = new Post({
+		const post = new PostDocument({
 			id: 'p1', pid: PID, community_id: 'c', created_at: new Date(), parent: reply ? 'root' : undefined,
 			painting: 'TGAZBLOB', painting_img: `/paintings/${PID}/p1.png`, painting_big: `/paintings/${PID}/p1-big.png`,
 			screenshot: `/screenshots/${PID}/p1.jpg`, screenshot_thumb: `/screenshots/${PID}/p1-thumb.jpg`, screenshot_big: `/screenshots/${PID}/p1-big.jpg`
-		});
+		} as never);
 		const save = vi.spyOn(post, 'save').mockResolvedValue(post as never);
 		await expectAll(keys, 200);
 
@@ -99,14 +99,14 @@ describe('account deletion', () => {
 	it('removes every media object of the account posts', async () => {
 		const keys = [...put(PID, 'a1', 'shot'), ...put(PID, 'a2', 'art')];
 		const posts = [
-			{ _id: 1, pid: PID, id: 'a1', screenshot: `/screenshots/${PID}/a1.jpg` },
-			{ _id: 2, pid: PID, id: 'a2', painting: 'x' }
+			{ pid: PID, id: 'a1', screenshot: `/screenshots/${PID}/a1.jpg` },
+			{ pid: PID, id: 'a2', painting: 'x' }
 		];
-		vi.spyOn(Post, 'find').mockImplementationOnce((() => ({ limit: async () => posts })) as never)
-			.mockImplementation((() => ({ limit: async () => [] })) as never);
-		vi.spyOn(Post, 'deleteMany').mockResolvedValue({} as never);
+		vi.spyOn(Post, 'findRows').mockResolvedValueOnce(posts as never).mockResolvedValue([]);
+		const del = vi.spyOn(Post, 'deleteMany').mockResolvedValue(2);
 		const out = await deleteAccountData({ pid: PID });
 		expect(out.postsDeleted).toBe(2);
+		expect(del).toHaveBeenCalledWith({ id: { in: ['a1', 'a2'] } });
 		await expectAll(keys, 404);
 	});
 });
@@ -116,13 +116,13 @@ describe('official post removal', () => {
 		const { officialRouter } = await import('@/services/official/official');
 		const { OFFICIAL_PID } = await import('@/services/web-identity/web-identity');
 		const keys = put(OFFICIAL_PID, 'pk1', 'shot');
-		vi.spyOn(Post, 'findOne').mockResolvedValue({ _id: 'o', id: 'pk1', pid: OFFICIAL_PID, screenshot: `/${keys[0]}` } as never);
-		const del = vi.spyOn(Post, 'deleteOne').mockResolvedValue({ deletedCount: 1 } as never);
+		vi.spyOn(Post, 'findOne').mockResolvedValue({ id: 'pk1', pid: OFFICIAL_PID, screenshot: `/${keys[0]}` } as never);
+		const del = vi.spyOn(Post, 'deleteOne').mockResolvedValue(1);
 		const a = express();
 		a.use('/internal/v1/official', officialRouter);
 		const res = await superRequest(a).delete('/internal/v1/official/posts/pk1').set('x-internal-key', 'k');
 		expect(res.status).toBe(200);
-		expect(del).toHaveBeenCalled();
+		expect(del).toHaveBeenCalledWith({ id: 'pk1' });
 		await expectAll(keys, 404);
 	});
 });
@@ -133,9 +133,8 @@ describe('orphan cleanup', () => {
 		const gone = put(PID, 'gone', 'shot');
 		const removed = put(PID, 'removed', 'art');
 		bucket.set('icons/1/32.png', Buffer.from('x'));
-		vi.spyOn(Post, 'find').mockImplementation(((q: { id: { $in: string[] } }) => ({
-			lean: async () => q.id.$in.filter(i => i === 'live').map(id => ({ id }))
-		})) as never);
+		vi.spyOn(Post, 'findRows').mockImplementation((async (q: { id: { in: string[] } }) =>
+			q.id.in.filter(i => i === 'live').map(id => ({ id }))) as never);
 
 		const dry = await cleanOrphanMedia({ dryRun: true });
 		expect(dry.orphans.sort()).toEqual([...gone, ...removed].sort());

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { HydratedCommunityDocument } from '@/types/mongoose/community';
+import type { HydratedCommunityDocument } from '@/types/models/community';
 
 export const followActionSchema = z.enum(['follow', 'unfollow']).openapi('FollowActionEnum');
 export type FollowAction = z.infer<typeof followActionSchema>;

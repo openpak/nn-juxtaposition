@@ -12,10 +12,9 @@ import {
 	getFollowedUserPids
 } from '@/database';
 import { ApiErrorCode, badRequest, serverError } from '@/errors';
-import type { HydratedCommunityDocument } from '@/types/mongoose/community';
-import type { SubCommunityQuery } from '@/types/mongoose/subcommunity-query';
-import type { CommunityPostsQuery } from '@/types/mongoose/community-posts-query';
-import type { HydratedPostDocument, IPost } from '@/types/mongoose/post';
+import type { HydratedCommunityDocument } from '@/types/models/community';
+import type { Prisma } from '@/prisma/client';
+import type { HydratedPostDocument } from '@/types/models/post';
 import type { ParamPack } from '@/types/common/param-pack';
 import type { CommunitiesResult, CommunityPostsResult } from '@/types/miiverse/community';
 
@@ -75,17 +74,17 @@ router.get('/', async function (request: express.Request, response: express.Resp
 		limit = 16;
 	}
 
-	const query: SubCommunityQuery = {
+	const query: Prisma.CommunityWhereInput = {
 		parent: parentCommunity.olive_community_id
 	};
 
 	if (type === 'my') {
 		query.owner = request.pid;
 	} else if (type === 'favorite') {
-		query.user_favorites = request.pid;
+		query.user_favorites = { has: request.pid };
 	}
 
-	const communities = await Community.find(query).limit(limit);
+	const communities = await Community.find(query, { take: limit });
 
 	const result: CommunitiesResult = {
 		has_error: 0,
@@ -139,11 +138,11 @@ router.get('/:communityID/posts', async function (request: express.Request, resp
 		return badRequest(response, ApiErrorCode.NOT_FOUND_COMMUNITY, 404);
 	}
 
-	const query: CommunityPostsQuery = {
+	const query: Prisma.PostWhereInput = {
 		community_id: community.olive_community_id,
 		removed: false,
-		app_data: { $ne: null },
-		message_to_pid: { $eq: null }
+		app_data: { not: null },
+		message_to_pid: null
 	};
 
 	const searchKey = getValueFromQueryString(request.query, 'search_key')[0];
@@ -165,7 +164,7 @@ router.get('/:communityID/posts', async function (request: express.Request, resp
 	}
 
 	if (searchKey) {
-		query.search_key = searchKey;
+		query.search_key = { has: searchKey };
 	}
 
 	if (!allowSpoiler) {
@@ -174,12 +173,12 @@ router.get('/:communityID/posts', async function (request: express.Request, resp
 
 	// TODO: There probably is a type for text and screenshots too, will have to investigate
 	if (postType === 'memo') {
-		query.painting = { $nin: [null, ''] };
+		query.painting = { not: null, notIn: [''] };
 	}
 
 	if (queryBy === 'followings') {
 		const followedUsers = await getFollowedUserPids(request.pid);
-		query.pid = followedUsers;
+		query.pid = { in: followedUsers };
 	} else if (queryBy === 'self') {
 		query.pid = request.pid;
 	}
@@ -187,16 +186,9 @@ router.get('/:communityID/posts', async function (request: express.Request, resp
 	let posts: HydratedPostDocument[];
 
 	if (distinctPID && distinctPID === '1') {
-		const unhydratedPosts = await Post.aggregate<IPost>([
-			{ $match: query }, // filter based on input query
-			{ $sort: { created_at: -1 } }, // sort by 'created_at' in descending order
-			{ $group: { _id: '$pid', doc: { $first: '$$ROOT' } } }, // remove any duplicate 'pid' elements
-			{ $replaceRoot: { newRoot: '$doc' } }, // replace the root with the 'doc' field
-			{ $limit: limit } // only return the top 10 results
-		]);
-		posts = unhydratedPosts.map((post: IPost) => Post.hydrate(post));
+		posts = await Post.findNewestPerAuthor(query, limit); // one post per author, the newest
 	} else {
-		posts = await Post.find(query).sort({ created_at: -1 }).limit(limit);
+		posts = await Post.find(query, { orderBy: { created_at: 'desc' }, take: limit });
 	}
 
 	const result: CommunityPostsResult = {
@@ -276,7 +268,7 @@ router.post('/', multer().none(), async function (request: express.Request, resp
 		owner: request.pid
 	};
 
-	const ownedSubcommunityCount = await Community.countDocuments(ownedQuery);
+	const ownedSubcommunityCount = await Community.count(ownedQuery);
 	if (ownedSubcommunityCount >= 4) {
 		return badRequest(response, ApiErrorCode.CREATE_TOO_MANY_COMMUNITIES, 403);
 	}
@@ -284,10 +276,10 @@ router.post('/', multer().none(), async function (request: express.Request, resp
 	// Each user can only have 16 favorite subcommunities per title
 	const favoriteQuery = {
 		parent: parentCommunity.olive_community_id,
-		user_favorites: request.pid
+		user_favorites: { has: request.pid }
 	};
 
-	const ownedFavoriteCount = await Community.countDocuments(favoriteQuery);
+	const ownedFavoriteCount = await Community.count(favoriteQuery);
 	if (ownedFavoriteCount >= 16) {
 		return badRequest(response, ApiErrorCode.CREATE_TOO_MANY_FAVORITES, 403);
 	}
@@ -334,7 +326,7 @@ router.post('/:community_id.delete', multer().none(), async function (request: e
 		return badRequest(response, ApiErrorCode.NOT_ALLOWED, 403);
 	}
 
-	await Community.deleteOne({ _id: community._id });
+	await Community.deleteOne({ community_id: community.community_id });
 
 	response.send(xmlbuilder.create({
 		result: {
@@ -358,10 +350,10 @@ router.post('/:community_id.favorite', multer().none(), async function (request:
 	// Each user can only have 16 favorite subcommunities per title
 	const favoriteQuery = {
 		parent: community.parent,
-		user_favorites: request.pid
+		user_favorites: { has: request.pid }
 	};
 
-	const ownedFavoriteCount = await Community.countDocuments(favoriteQuery);
+	const ownedFavoriteCount = await Community.count(favoriteQuery);
 	if (ownedFavoriteCount >= 16) {
 		return badRequest(response, ApiErrorCode.TOO_MANY_FAVORITES_GAME, 403);
 	}

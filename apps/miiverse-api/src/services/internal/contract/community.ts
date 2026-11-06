@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { COMMUNITY_TYPE } from '@/types/mongoose/community';
+import { COMMUNITY_TYPE } from '@/types/models/community';
 import { asOpenapi } from '@/services/internal/builder/openapi';
-import type { HydratedCommunityDocument } from '@/types/mongoose/community';
+import type { HydratedCommunityDocument } from '@/types/models/community';
 
 export const communityCategory = z.enum([
 	'listed', // All publicly listed communities (announcement/main)

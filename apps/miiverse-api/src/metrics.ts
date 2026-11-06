@@ -84,11 +84,7 @@ export const dailyPostGauge = new Gauge({
 	async collect(): Promise<void> {
 		const dailyRangeMs = 24 * 60 * 60 * 1000;
 		const cutoff = new Date(Date.now() - dailyRangeMs);
-		const [result] = await Post.aggregate<{ n: number } | undefined>([
-			{ $match: { created_at: { $gt: cutoff }, message_to_pid: null } },
-			{ $count: 'n' }
-		]);
-		this.set(result?.n ?? 0);
+		this.set(await Post.count({ created_at: { gt: cutoff }, message_to_pid: null }));
 	}
 });
 
@@ -98,11 +94,7 @@ export const monthlyPostGauge = new Gauge({
 	async collect(): Promise<void> {
 		const monthyRangeMs = 30 * 24 * 60 * 60 * 1000;
 		const cutoff = new Date(Date.now() - monthyRangeMs);
-		const [result] = await Post.aggregate<{ n: number } | undefined>([
-			{ $match: { created_at: { $gt: cutoff }, message_to_pid: null } },
-			{ $count: 'n' }
-		]);
-		this.set(result?.n ?? 0);
+		this.set(await Post.count({ created_at: { gt: cutoff }, message_to_pid: null }));
 	}
 });
 
@@ -112,11 +104,7 @@ export const yearlyPostGauge = new Gauge({
 	async collect(): Promise<void> {
 		const yearlyRangeMs = 365 * 24 * 60 * 60 * 1000;
 		const cutoff = new Date(Date.now() - yearlyRangeMs);
-		const [result] = await Post.aggregate<{ n: number } | undefined>([
-			{ $match: { created_at: { $gt: cutoff }, message_to_pid: null } },
-			{ $count: 'n' }
-		]);
-		this.set(result?.n ?? 0);
+		this.set(await Post.count({ created_at: { gt: cutoff }, message_to_pid: null }));
 	}
 });
 
@@ -124,11 +112,7 @@ export const totalPostsGauge = new Gauge({
 	name: 'juxtaposition_post_count_total',
 	help: 'Total number of posts',
 	async collect(): Promise<void> {
-		const [result] = await Post.aggregate<{ n: number } | undefined>([
-			{ $match: { message_to_pid: null } },
-			{ $count: 'n' }
-		]);
-		this.set(result?.n ?? 0);
+		this.set(await Post.count({ message_to_pid: null }));
 	}
 });
 

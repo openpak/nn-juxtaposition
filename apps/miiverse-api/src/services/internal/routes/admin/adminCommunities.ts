@@ -4,18 +4,18 @@ import { standardSortSchema, standardSortToDirection } from '@/services/internal
 import { guards } from '@/services/internal/middleware/guards';
 import { mapPage, pageControlSchema, pageDtoSchema } from '@/services/internal/contract/page';
 import { Community } from '@/models/community';
-import { CommunityShotModes } from '@/types/mongoose/community';
+import { CommunityShotModes } from '@/types/models/community';
 import { errors } from '@/services/internal/errors';
-import { buildSearchQuery } from '@/services/internal/utils/search';
+import { buildPrismaSearchQuery } from '@/services/internal/utils/search';
 import { adminCommunitySchema, mapAdminCommunity } from '@/services/internal/contract/admin/adminCommunity';
 import { uploadHeaders, uploadIcons } from '@/images';
 import { communityPlatformDisplayMap, communityTypeDisplayMap, generateCommunityId } from '@/services/internal/utils/communities';
 import { createLogEntry } from '@/services/internal/utils/auditLogs';
 import { deleteOptional } from '@/services/internal/utils';
 import { mapResult, resultSchema } from '@/services/internal/contract/result';
-import type { FilterQuery } from 'mongoose';
+import type { Prisma } from '@/prisma/client';
 import type { HeaderUrls, IconUrls } from '@/images';
-import type { ICommunity, IIconPaths } from '@/types/mongoose/community';
+import type { IIconPaths } from '@/types/models/community';
 
 export const adminCommunitiesRouter = createInternalApiRouter();
 
@@ -57,20 +57,20 @@ adminCommunitiesRouter.get({
 		response: pageDtoSchema(adminCommunitySchema)
 	},
 	async handler({ query, db }) {
-		const dbQuery: FilterQuery<ICommunity> = {
-			$and: [
+		const dbQuery: Prisma.CommunityWhereInput = {
+			AND: [
 				{
 					parent: null
 				},
-				query.search ? buildSearchQuery<ICommunity>(['name'], query.search) : {}
+				query.search ? buildPrismaSearchQuery(['name'], query.search) : {}
 			]
 		};
-		const communities = await Community
-			.find(dbQuery)
-			.sort({ created_at: standardSortToDirection(query.sort) })
-			.skip(query.offset)
-			.limit(query.limit);
-		const total = await Community.countDocuments(dbQuery);
+		const communities = await Community.find(dbQuery, {
+			orderBy: { created_at: standardSortToDirection(query.sort) },
+			skip: query.offset,
+			take: query.limit
+		});
+		const total = await Community.count(dbQuery);
 
 		const ids = communities.map(v => v.olive_community_id);
 		const followers = await db.communityFollow.groupBy({
@@ -157,7 +157,6 @@ adminCommunitiesRouter.post({
 			owner: pnid.pid,
 			created_at: new Date(),
 			empathy_count: 0,
-			followers: 0,
 			has_shop_page: body.hasShopPage,
 			icon: icons.tgaBlob,
 			ctr_header: headers.ctr,
@@ -261,25 +260,23 @@ adminCommunitiesRouter.patch({
 					128: icons.icon128
 				}
 			: undefined;
-		const comm = await Community.findOneAndUpdate({ olive_community_id: communityId }, {
-			$set: deleteOptional({
-				type: body.type,
-				has_shop_page: body.hasShopPage,
-				platform_id: Number(body.platform),
-				icon: icons?.tgaBlob ?? oldCommunity.icon,
-				icon_paths: iconPaths,
-				ctr_header: headers?.ctr ?? oldCommunity.ctr_header,
-				wup_header: headers?.wup ?? oldCommunity.wup_header,
-				title_id: body.titleIds,
-				parent: body.parent,
-				app_data: body.appData,
-				is_recommended: body.isRecommended,
-				name: body.name,
-				description: body.description,
-				shot_mode: body.shotMode,
-				shot_extra_title_id: body.shotModeExtraTitleIds
-			})
-		}, { new: true });
+		const comm = await Community.updateOne({ olive_community_id: communityId }, deleteOptional({
+			type: body.type,
+			has_shop_page: body.hasShopPage,
+			platform_id: body.platform !== undefined ? Number(body.platform) : undefined,
+			icon: icons?.tgaBlob ?? oldCommunity.icon,
+			icon_paths: iconPaths,
+			ctr_header: headers?.ctr ?? oldCommunity.ctr_header,
+			wup_header: headers?.wup ?? oldCommunity.wup_header,
+			title_id: body.titleIds,
+			parent: body.parent,
+			app_data: body.appData,
+			is_recommended: body.isRecommended,
+			name: body.name,
+			description: body.description,
+			shot_mode: body.shotMode,
+			shot_extra_title_id: body.shotModeExtraTitleIds
+		}));
 		if (!comm) {
 			throw new Error('Can not find community after update');
 		}
@@ -373,8 +370,8 @@ adminCommunitiesRouter.delete({
 	},
 	async handler({ params, auth }) {
 		const pnid = auth!.pnid;
-		const result = await Community.deleteOne({ olive_community_id: params.id });
-		if (result.deletedCount === 0) {
+		const deleted = await Community.deleteOne({ olive_community_id: params.id });
+		if (deleted === 0) {
 			throw errors.for('not_found');
 		}
 

@@ -12,14 +12,12 @@ import { createInternalApiRouter } from '@/services/internal/builder/router';
 import { standardSortSchema, standardSortToDirection } from '@/services/internal/contract/utils';
 import { createLogEntry } from '@/services/internal/utils/auditLogs';
 import { Community } from '@/models/community';
-import { Report } from '@/models/report';
 import { createNewPost, isValidPost, postCreateSchema } from '@/services/internal/utils/posts';
 import { isPostingAllowed } from '@/services/internal/utils/communities';
 import { mapSelf } from '@/services/internal/contract/self';
 import { assertCanAccessUser, canAccessUser } from '@/services/internal/utils/user';
 import { createNewEmpathyNotification, createNewReplyNotification } from '@/services/internal/utils/notifications';
-import type { FilterQuery } from 'mongoose';
-import type { IPost } from '@/types/mongoose/post';
+import type { Prisma } from '@/prisma/client';
 
 export const postsRouter = createInternalApiRouter();
 
@@ -64,10 +62,10 @@ postsRouter.get({
 			}
 		}
 
-		const dbQuery: FilterQuery<IPost> = deleteOptional({
+		const dbQuery: Prisma.PostWhereInput = deleteOptional({
 			pid: query.posted_by,
 			topic_tag: query.topic_tag,
-			yeahs: query.empathy_by,
+			yeahs: query.empathy_by !== undefined ? { has: query.empathy_by } : undefined,
 			parent: query.parent_id,
 
 			message_to_pid: null, // messages aren't really posts
@@ -75,15 +73,15 @@ postsRouter.get({
 			...filterRemovedPosts(auth)
 		});
 
-		const posts = await Post
-			.find(dbQuery)
-			.sort({ created_at: standardSortToDirection(query.sort) })
-			.skip(query.offset)
-			.limit(query.limit);
-		const total = await Post.countDocuments(dbQuery);
+		const posts = await Post.find(dbQuery, {
+			orderBy: { created_at: standardSortToDirection(query.sort) },
+			skip: query.offset,
+			take: query.limit
+		});
+		const total = await Post.count(dbQuery);
 
 		const communityIds = posts.map(v => v.community_id);
-		const communities = await Community.find({ olive_community_id: { $in: communityIds } });
+		const communities = await Community.find({ olive_community_id: { in: communityIds } });
 
 		const users = await db.user.findMany({
 			where: {
@@ -199,11 +197,7 @@ postsRouter.delete({
 		await post.del(reason, account.pnid.pid);
 
 		if (post.parent) {
-			await Post.findOneAndUpdate({
-				id: post.parent
-			}, {
-				$inc: { reply_count: -1 }
-			});
+			await Post.incrementReplies(post.parent, -1);
 		}
 
 		return mapResult('success');
@@ -236,24 +230,12 @@ postsRouter.post({
 		const account = auth!;
 		const pid = account.pnid.pid;
 
+		/* One conditional UPDATE each way keeps empathy_count and yeahs in step under concurrent
+		 * requests; null (answered as not_found, as before) when the yeah was already there / not there */
 		if (body.action === 'add') {
-		/* We have to re-query here rather than use updateOne to ensure idempotence on empathy_count
-		 * If we ever used yeahs.length we could stop bothering with this */
-			post = await Post.findOneAndUpdate({
-				_id: post._id,
-				yeahs: { $ne: pid }
-			}, {
-				$addToSet: { yeahs: pid },
-				$inc: { empathy_count: 1 }
-			}, { new: true });
+			post = await Post.addEmpathy(post.id, pid);
 		} else {
-			post = await Post.findOneAndUpdate({
-				_id: post._id,
-				yeahs: pid
-			}, {
-				$pull: { yeahs: pid },
-				$inc: { empathy_count: -1 }
-			}, { new: true });
+			post = await Post.removeEmpathy(post.id, pid);
 		}
 		if (!post) {
 			throw errors.for('not_found');
@@ -287,7 +269,7 @@ postsRouter.post({
 		}),
 		response: resultSchema
 	},
-	async handler({ body, params, auth }) {
+	async handler({ body, params, auth, db }) {
 		// guards.user makes this safe
 		const account = auth!;
 		const pid = account.pnid.pid;
@@ -301,20 +283,24 @@ postsRouter.post({
 			throw errors.for('not_found');
 		}
 
-		const duplicateReport = await Report.findOne({
-			reported_by: pid,
-			post_id: post.id
+		const duplicateReport = await db.report.findFirst({
+			where: {
+				reported_by: pid,
+				post_id: post.id
+			}
 		});
 		if (duplicateReport) {
 			return mapResult('success'); // Silently reject duplicate reports
 		}
 
-		await Report.create({
-			pid: post.pid,
-			reported_by: pid,
-			post_id: post.id,
-			reason: body.reasonId,
-			message: body.message
+		await db.report.create({
+			data: {
+				pid: post.pid,
+				reported_by: pid,
+				post_id: post.id,
+				reason: body.reasonId,
+				message: body.message
+			}
 		});
 
 		return mapResult('success');
@@ -343,14 +329,7 @@ postsRouter.post({
 			throw errors.for('not_found');
 		}
 
-		await Post.findOneAndUpdate({
-			_id: post._id
-		}, {
-			$set: {
-				is_spoiler: body.is_spoiler
-			}
-
-		});
+		await Post.updateMany({ id: post.id }, { is_spoiler: body.is_spoiler ? 1 : 0 });
 
 		return mapResult('success');
 	}
@@ -397,8 +376,6 @@ postsRouter.post({
 		const newPost = await createNewPost({
 			author: {
 				pid,
-				miiData: account.pnid.mii?.data ?? '',
-				screenName: account.user?.displayName ?? '',
 				verified: self.permissions.moderator
 			},
 			body,

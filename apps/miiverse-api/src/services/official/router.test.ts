@@ -62,7 +62,7 @@ describe('official posts', () => {
 		const call = vi.mocked(createNewPost).mock.calls[0]![0];
 		expect(call.id).toBe(postIdFor('news:1'));
 		expect(call.official).toBe(true);
-		expect(call.author).toMatchObject({ pid: OFFICIAL_PID, screenName: 'Pakka', verified: true });
+		expect(call.author).toMatchObject({ pid: OFFICIAL_PID, verified: true });
 		expect(call.body.body).toContain(`Discuss: https://verse.openpak.org/posts/${postIdFor('news:1')}`);
 
 		vi.mocked(Post.findOne).mockResolvedValueOnce({ id: postIdFor('news:1'), community_id: '777' } as never);
@@ -87,12 +87,12 @@ describe('official posts', () => {
 	});
 
 	it('removes only Pakka\'s own posts', async () => {
-		vi.mocked(Post.findOne).mockResolvedValue({ _id: 'oid', id: 'abc', pid: OFFICIAL_PID } as never);
-		vi.mocked(Post.deleteOne).mockResolvedValue({ deletedCount: 1 } as never);
+		vi.mocked(Post.findOne).mockResolvedValue({ id: 'abc', pid: OFFICIAL_PID } as never);
+		vi.mocked(Post.deleteOne).mockResolvedValue(1);
 		const res = await superRequest(app).delete('/internal/v1/official/posts/abc').set('x-internal-key', KEY);
 		expect(res.status).toBe(200);
 		expect(Post.findOne).toHaveBeenCalledWith({ id: 'abc', pid: OFFICIAL_PID });
-		expect(Post.deleteOne).toHaveBeenCalledWith({ _id: 'oid' });
+		expect(Post.deleteOne).toHaveBeenCalledWith({ id: 'abc' });
 		vi.mocked(Post.findOne).mockResolvedValue(null as never);
 		expect((await superRequest(app).delete('/internal/v1/official/posts/xyz').set('x-internal-key', KEY)).status).toBe(404);
 	});

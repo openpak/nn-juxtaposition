@@ -4,9 +4,10 @@ import xmlbuilder from 'xmlbuilder';
 import Cache from '@/cache';
 import { Post } from '@/models/post';
 import { Community } from '@/models/community';
+import { getDb } from '@/database';
 import { ApiErrorCode, badRequest } from '@/errors';
-import type { IPost } from '@/types/mongoose/post';
-import type { HydratedCommunityDocument } from '@/types/mongoose/community';
+import type { HydratedPostDocument } from '@/types/models/post';
+import type { HydratedCommunityDocument } from '@/types/models/community';
 import type { WWPResult, WWPTopic } from '@/types/miiverse/wara-wara-plaza';
 
 const router = express.Router();
@@ -81,27 +82,13 @@ async function generateTopicsData(communities: HydratedCommunityDocument[]): Pro
 	for (let i = 0; i < communities.length; i++) {
 		const community = communities[i];
 
-		const empathies = await Post.aggregate<{ _id: null; total: number }>([
-			{
-				$match: {
-					community_id: community.olive_community_id
-				}
-			},
-			{
-				$group: {
-					_id: null,
-					total: {
-						$sum: '$empathy_count'
-					}
-				}
-			},
-			{
-				$limit: 1
-			}
-		]);
+		const empathies = await getDb().post.aggregate({
+			where: { community_id: community.olive_community_id },
+			_sum: { empathy_count: true }
+		});
 
 		const topic: WWPTopic = {
-			empathy_count: empathies[0]?.total || 0,
+			empathy_count: empathies._sum.empathy_count || 0,
 			has_shop_page: community.has_shop_page ? 1 : 0,
 			icon: community.icon,
 			title_ids: [],
@@ -123,7 +110,7 @@ async function generateTopicsData(communities: HydratedCommunityDocument[]): Pro
 		const people = await getCommunityPeople(community, seenPeople);
 
 		for (const person of people) {
-			const post = Post.hydrate(person.post).json({
+			const post = person.post.json({
 				with_mii: true,
 				topic_tag: true
 			});
@@ -157,41 +144,28 @@ async function generateTopicsData(communities: HydratedCommunityDocument[]): Pro
 	};
 }
 
-async function getCommunityPeople(community: HydratedCommunityDocument, seenPeople: number[], hours = 24): Promise<{ _id: number; post: IPost }[]> {
+async function getCommunityPeople(community: HydratedCommunityDocument, seenPeople: number[], hours = 24): Promise<{ _id: number; post: HydratedPostDocument }[]> {
 	const now = new Date();
 	const last24Hours = new Date(now.getTime() - hours * 60 * 60 * 1000);
-	const people = await Post.aggregate<{ _id: number; post: IPost }>([
-		{
-			$match: {
-				title_id: {
-					$in: community.title_id
-				},
-				created_at: {
-					$gte: last24Hours
-				},
-				message_to_pid: null,
-				parent: null,
-				removed: false,
-				pid: {
-					// * Exclude people we have seen in other communities.
-					// * This increases generation time, but ensures the
-					// * max number of slots we can fill end up getting used
-					$nin: seenPeople
-				}
-			}
+	// One post per person (the Mongo $group took whichever came first; this takes their newest)
+	const posts = await Post.findNewestPerAuthor({
+		title_id: {
+			in: community.title_id
 		},
-		{
-			$group: {
-				_id: '$pid',
-				post: {
-					$first: '$$ROOT'
-				}
-			}
+		created_at: {
+			gte: last24Hours
 		},
-		{
-			$limit: 70 // * Arbitrary
+		message_to_pid: null,
+		parent: null,
+		removed: false,
+		pid: {
+			// * Exclude people we have seen in other communities.
+			// * This increases generation time, but ensures the
+			// * max number of slots we can fill end up getting used
+			notIn: seenPeople
 		}
-	]);
+	}, 70); // * Arbitrary
+	const people = posts.map(post => ({ _id: post.pid, post }));
 
 	// TODO - Remove this check once out of beta and have more users
 	// * We only do this because Juxtaposition is not super active
@@ -220,66 +194,41 @@ async function calculateMostPopularCommunities(hours: number, limit: number): Pr
 		throw new Error('Invalid date');
 	}
 
-	const validCommunities = await Community.aggregate<{ _id: null; communities: string[] }>([
-		{
-			$match: {
-				type: 0,
-				parent: null
-			}
-		},
-		{
-			$group: {
-				_id: null,
-				communities: {
-					$push: '$olive_community_id'
-				}
-			}
-		}
-	]);
+	const validCommunities = await getDb().community.findMany({
+		where: { type: 0, parent: null },
+		select: { olive_community_id: true }
+	});
+	const communityIDs = validCommunities.map(c => c.olive_community_id);
 
-	const communityIDs = validCommunities[0].communities;
-
-	if (!communityIDs) {
+	if (communityIDs.length === 0) {
 		throw new Error('No communities found');
 	}
 
-	const popularCommunities = await Post.aggregate<{ _id: null; count: number }>([
-		{
-			$match: {
-				created_at: {
-					$gte: last24Hours
-				},
-				message_to_pid: null,
-				community_id: {
-					$in: communityIDs
-				}
+	const popularCommunities = await getDb().post.groupBy({
+		by: ['community_id'],
+		where: {
+			created_at: {
+				gte: last24Hours
+			},
+			message_to_pid: null,
+			community_id: {
+				in: communityIDs
 			}
 		},
-		{
-			$group: {
-				_id: '$community_id',
-				count: {
-					$sum: 1
-				}
-			}
-		},
-		{
-			$limit: limit
-		},
-		{
-			$sort: {
-				count: -1
-			}
-		}
-	]);
+		_count: { _all: true },
+		orderBy: { _count: { community_id: 'desc' } },
+		take: limit
+	});
 
-	if (popularCommunities.length < limit) {
+	// Widen the window until enough communities had posts; stop once it reaches back before 2020
+	// (the Mongo version kept doubling until the date was invalid)
+	if (popularCommunities.length < limit && last24Hours.getFullYear() >= 2020) {
 		return calculateMostPopularCommunities(hours + hours, limit);
 	}
 
 	return Community.find({
 		olive_community_id: {
-			$in: popularCommunities.map(({ _id }) => _id)
+			in: popularCommunities.map(({ community_id }) => community_id)
 		}
 	});
 }

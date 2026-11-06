@@ -5,15 +5,15 @@ import { guards } from '@/services/internal/middleware/guards';
 import { mapPage, pageControlSchema, pageDtoSchema } from '@/services/internal/contract/page';
 import { Community } from '@/models/community';
 import { deleteOptional } from '@/services/internal/utils';
-import { COMMUNITY_TYPE } from '@/types/mongoose/community';
+import { COMMUNITY_TYPE } from '@/types/models/community';
 import { categoryToCommunityTypes, communityCategory, communitySchema, communityStatsSchema, mapCommunity, mapCommunityStats } from '@/services/internal/contract/community';
 import { expandFamily } from '@/services/internal/utils/communities';
 import { errors } from '@/services/internal/errors';
 import { Post } from '@/models/post';
 import { listDtoSchema, mapList } from '@/services/internal/contract/list';
 import { followSchema, mapFollowCommunity } from '@/services/internal/contract/follow';
-import type { FilterQuery, RootFilterQuery } from 'mongoose';
-import type { ICommunity, HydratedCommunityDocument } from '@/types/mongoose/community';
+import { getDb } from '@/database';
+import type { Prisma } from '@/prisma/client';
 
 const popularRangeMs = 24 * 60 * 60 * 1000; // 24h
 
@@ -32,11 +32,11 @@ communitiesRouter.get({
 		response: pageDtoSchema(communitySchema)
 	},
 	async handler({ query, auth, db }) {
-		const typesToFilter: RootFilterQuery<ICommunity> = auth?.moderator
+		const typesToFilter: Prisma.CommunityWhereInput = auth?.moderator
 			? {}
 			: {
 					type: {
-						$ne: COMMUNITY_TYPE.Private
+						not: COMMUNITY_TYPE.Private
 					}
 				};
 		if (query.category) {
@@ -44,19 +44,19 @@ communitiesRouter.get({
 			if (!auth?.moderator) {
 				typeList = typeList.filter(v => v !== COMMUNITY_TYPE.Private);
 			}
-			typesToFilter.type = typeList;
+			typesToFilter.type = { in: typeList };
 		}
 
-		const dbQuery: FilterQuery<ICommunity> = deleteOptional({
+		const dbQuery: Prisma.CommunityWhereInput = deleteOptional({
 			parent: query.parent_id,
 			...typesToFilter
 		});
-		const communities = await Community
-			.find(dbQuery)
-			.sort({ created_at: standardSortToDirection(query.sort) })
-			.skip(query.offset)
-			.limit(query.limit);
-		const total = await Community.countDocuments(dbQuery);
+		const communities = await Community.find(dbQuery, {
+			orderBy: { created_at: standardSortToDirection(query.sort) },
+			skip: query.offset,
+			take: query.limit
+		});
+		const total = await Community.count(dbQuery);
 
 		const ids = communities.map(v => v.olive_community_id);
 		const followers = await db.communityFollow.groupBy({
@@ -86,22 +86,13 @@ communitiesRouter.get({
 	async handler({ query, db }) {
 		// TODO add caching
 		const popularCommunityIds = await calculateMostPopularCommunities(popularRangeMs);
-		const popularCommunities = await Community.aggregate<HydratedCommunityDocument>([
-			{
-				$match: {
-					type: { $in: [COMMUNITY_TYPE.Main, COMMUNITY_TYPE.Announcement] },
-					olive_community_id: { $in: popularCommunityIds }
-				}
-			},
-			{
-				$addFields: {
-					index: { $indexOfArray: [popularCommunityIds, '$olive_community_id'] }
-				}
-			},
-			{ $sort: { index: 1 } },
-			{ $limit: query.limit },
-			{ $project: { index: 0, _id: 0 } }
-		]);
+		const rank = new Map(popularCommunityIds.map((id, i) => [id, i]));
+		const popularCommunities = (await Community.find({
+			type: { in: [COMMUNITY_TYPE.Main, COMMUNITY_TYPE.Announcement] },
+			olive_community_id: { in: popularCommunityIds }
+		}))
+			.sort((a, b) => rank.get(a.olive_community_id)! - rank.get(b.olive_community_id)!)
+			.slice(0, query.limit);
 
 		const ids = popularCommunities.map(v => v.olive_community_id);
 		const followers = await db.communityFollow.groupBy({
@@ -130,11 +121,11 @@ communitiesRouter.get({
 		response: communityStatsSchema
 	},
 	async handler({ params, auth }) {
-		const typesToFilter: RootFilterQuery<ICommunity> = auth?.moderator
+		const typesToFilter: Prisma.CommunityWhereInput = auth?.moderator
 			? {}
 			: {
 					type: {
-						$ne: COMMUNITY_TYPE.Private
+						not: COMMUNITY_TYPE.Private
 					}
 				};
 
@@ -146,11 +137,11 @@ communitiesRouter.get({
 			throw errors.for('not_found');
 		}
 
-		const totalPosts = await Post.find({
-			community_id: { $in: await expandFamily(community.olive_community_id) },
+		const totalPosts = await Post.count({
+			community_id: { in: await expandFamily(community.olive_community_id) },
 			parent: null,
 			removed: false
-		}).countDocuments();
+		});
 
 		return mapCommunityStats(community, totalPosts);
 	}
@@ -175,17 +166,17 @@ communitiesRouter.get({
 			titleId = params.id.slice(4);
 		}
 
-		const typesToFilter: RootFilterQuery<ICommunity> = auth?.moderator
+		const typesToFilter: Prisma.CommunityWhereInput = auth?.moderator
 			? {}
 			: {
 					type: {
-						$ne: COMMUNITY_TYPE.Private
+						not: COMMUNITY_TYPE.Private
 					}
 				};
 
 		const community = await Community.findOne(deleteOptional({
 			olive_community_id: communityId,
-			title_id: titleId,
+			title_id: titleId !== undefined ? { has: titleId } : undefined,
 			...typesToFilter
 		}));
 		if (!community) {
@@ -216,11 +207,11 @@ communitiesRouter.post({
 		const communityId = params.id;
 		const currentUser = auth!;
 
-		const typesToFilter: RootFilterQuery<ICommunity> = auth?.moderator
+		const typesToFilter: Prisma.CommunityWhereInput = auth?.moderator
 			? {}
 			: {
 					type: {
-						$ne: COMMUNITY_TYPE.Private
+						not: COMMUNITY_TYPE.Private
 					}
 				};
 
@@ -272,11 +263,11 @@ communitiesRouter.delete({
 		const communityId = params.id;
 		const currentUser = auth!;
 
-		const typesToFilter: RootFilterQuery<ICommunity> = auth?.moderator
+		const typesToFilter: Prisma.CommunityWhereInput = auth?.moderator
 			? {}
 			: {
 					type: {
-						$ne: COMMUNITY_TYPE.Private
+						not: COMMUNITY_TYPE.Private
 					}
 				};
 
@@ -319,19 +310,11 @@ async function calculateMostPopularCommunities(rangeMs: number): Promise<string[
 	const now = new Date();
 	const last24Hours = new Date(now.getTime() - rangeMs);
 
-	const posts = await Post.find({ created_at: { $gte: last24Hours }, message_to_pid: null }).lean();
-
-	const communityIds: Record<string, number> = {};
-	for (const post of posts) {
-		const communityId = post.community_id;
-		if (!communityId) {
-			continue;
-		}
-
-		communityIds[communityId] ??= 0;
-		communityIds[communityId] += 1;
-	}
-	return Object.entries(communityIds)
-		.sort((a, b) => b[1] - a[1])
-		.map(entry => entry[0]);
+	const counts = await getDb().post.groupBy({
+		by: ['community_id'],
+		where: { created_at: { gte: last24Hours }, message_to_pid: null, community_id: { not: '' } },
+		_count: { _all: true },
+		orderBy: { _count: { community_id: 'desc' } }
+	});
+	return counts.map(c => c.community_id);
 }

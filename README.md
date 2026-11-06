@@ -6,7 +6,7 @@ OpenPak's Wii U/3DS Miiverse Server.
 | --- | --- |
 | Network | Wii U, 3DS |
 | Role | Miiverse API (`miiverse-api`) and the Juxtaposition UI (`juxtaposition-ui`) that serves the frontend for Wii U, 3DS and web |
-| Depends on | [`nn-account`](https://github.com/openpak/nn-account), [`nn-friends`](https://github.com/openpak/nn-friends), PostgreSQL, MongoDB, S3, Redis |
+| Depends on | [`nn-account`](https://github.com/openpak/nn-account), [`nn-friends`](https://github.com/openpak/nn-friends), PostgreSQL, S3, Redis |
 | Image | `ghcr.io/openpak/nn-juxtaposition-api`, `ghcr.io/openpak/nn-juxtaposition-ui` |
 | Based on | [Pretendo `juxtaposition`](https://github.com/PretendoNetwork/juxtaposition) (AGPL-3.0) |
 | Licence | AGPL-3.0-only |
@@ -15,7 +15,7 @@ OpenPak's Wii U/3DS Miiverse Server.
 
 | Component | What |
 | --- | --- |
-| `miiverse-api` | The Miiverse API, backed by Postgres, MongoDB and S3 |
+| `miiverse-api` | The Miiverse API, backed by Postgres and S3 |
 | `juxtaposition-ui` | The frontend for all platforms, backed by Redis and the API's gRPC |
 
 ## Run

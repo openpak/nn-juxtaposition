@@ -158,7 +158,7 @@ selfRouter.post({
 	},
 	async handler({ auth, db }) {
 		const account = auth!;
-		const rawPosts = await Post.find({ pid: account.pnid.pid });
+		const rawPosts = await Post.findRows({ pid: account.pnid.pid });
 		const user = await db.user.findUnique({
 			where: {
 				pid: account.pnid.pid
@@ -172,7 +172,8 @@ selfRouter.post({
 
 		// Clean non-user data
 		const postsJson = rawPosts.map(post => ({
-			...post.toJSON(),
+			...post,
+			legacy_mongo_id: undefined,
 			removed_by: null
 		}));
 		if (user) {

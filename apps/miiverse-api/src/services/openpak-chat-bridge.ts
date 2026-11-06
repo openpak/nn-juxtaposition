@@ -8,7 +8,7 @@
 // message stays console-local", never to a broken feed.
 import { config } from '@/config';
 import { LOG_ERROR, LOG_WARN } from '@/logger';
-import type { Post } from '@/models/post';
+import type { PostDocument } from '@/models/post';
 
 interface ResolvedPid {
 	found: boolean;
@@ -34,7 +34,7 @@ async function resolvePid(pid: number): Promise<string | null> {
 /// What the neutral store carries for this post: the text, or a named kind
 /// with its payload. The store's own rules cap the size; a too-big payload is
 /// refused there and we log it here.
-function chatPayload(post: InstanceType<typeof Post>): { kind: string; body: string } {
+function chatPayload(post: PostDocument): { kind: string; body: string } {
 	if (post.body) {
 		return { kind: 'text', body: post.body };
 	}
@@ -52,7 +52,7 @@ function chatPayload(post: InstanceType<typeof Post>): { kind: string; body: str
 
 /// Forward one stored message to the chat store. Fire-and-forget by policy:
 /// the caller does not await this on the console's path.
-export async function forwardMessageToOpenPakChat(post: InstanceType<typeof Post>, senderPid: number, recipientPid: number): Promise<void> {
+export async function forwardMessageToOpenPakChat(post: PostDocument, senderPid: number, recipientPid: number): Promise<void> {
 	if (!chatBridgeEnabled()) {
 		return;
 	}

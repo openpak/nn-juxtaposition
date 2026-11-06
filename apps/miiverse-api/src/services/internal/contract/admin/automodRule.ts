@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { automodRuleMode, automodRuleType } from '@/models/automodRules';
+import { automodRuleKeywordSettings, automodRuleMode, automodRuleType } from '@/models/automodRules';
 import { asOpenapi } from '@/services/internal/builder/openapi';
 import type { HydratedAutomodRuleDocument } from '@/models/automodRules';
 
@@ -53,11 +53,7 @@ export function mapAutomodRule(rule: HydratedAutomodRuleDocument): AutomodRuleDt
 		title: rule.title,
 		description: rule.description,
 		settings: {
-			keyword: rule.keyword_settings
-				? {
-						keywords: rule.keyword_settings.keywords
-					}
-				: null
+			keyword: automodRuleKeywordSettings(rule)
 		}
 	};
 }

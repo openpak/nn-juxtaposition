@@ -8,8 +8,8 @@ import { createInternalApiRouter } from '@/services/internal/builder/router';
 import { canAccessUser } from '@/services/internal/utils/user';
 import { getPostTypeFilter, postTypeFilter, standardSortSchema, standardSortToDirection } from '@/services/internal/contract/utils';
 import { Community } from '@/models/community';
-import type { FilterQuery } from 'mongoose';
-import type { IPost } from '@/types/mongoose/post';
+import type { Prisma } from '@/prisma/client';
+import type { IPost } from '@/types/models/post';
 
 export const userPostsRouter = createInternalApiRouter();
 
@@ -44,7 +44,7 @@ userPostsRouter.get({
 			return mapPage(0, []);
 		}
 
-		const dbQuery: FilterQuery<IPost> = deleteOptional({
+		const dbQuery: Prisma.PostWhereInput = deleteOptional({
 			pid,
 			removed: query.removed,
 			message_to_pid: null, // messages aren't really posts
@@ -52,17 +52,19 @@ userPostsRouter.get({
 			...filterRemovedPosts(auth)
 		});
 		const sortKey: keyof IPost = query.sortBy === 'removedAt' ? 'removed_at' : 'created_at';
-		const posts = await Post
-			.find(dbQuery)
-			.sort({
-				[sortKey]: standardSortToDirection(query.sort)
-			})
-			.skip(query.offset)
-			.limit(query.limit);
-		const total = await Post.countDocuments(dbQuery);
+		const direction = standardSortToDirection(query.sort);
+		const posts = await Post.find(dbQuery, {
+			// Mongo put a missing removed_at first going up and last going down; so does this
+			orderBy: sortKey === 'removed_at'
+				? { removed_at: { sort: direction, nulls: direction === 'asc' ? 'first' : 'last' } }
+				: { created_at: direction },
+			skip: query.offset,
+			take: query.limit
+		});
+		const total = await Post.count(dbQuery);
 
 		const communityIds = posts.map(v => v.community_id);
-		const communities = await Community.find({ olive_community_id: { $in: communityIds } });
+		const communities = await Community.find({ olive_community_id: { in: communityIds } });
 
 		const users = await db.user.findMany({
 			where: {

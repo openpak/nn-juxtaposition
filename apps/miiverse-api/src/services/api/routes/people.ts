@@ -6,8 +6,8 @@ import { getValueFromQueryString, getUserFriendPIDs } from '@/util';
 import { Post } from '@/models/post';
 import { ApiErrorCode, badRequest } from '@/errors';
 import { userToOliveUser } from '@/services/internal/utils';
-import type { CommunityPostsQuery } from '@/types/mongoose/community-posts-query';
-import type { HydratedPostDocument, IPost } from '@/types/mongoose/post';
+import type { Prisma } from '@/prisma/client';
+import type { HydratedPostDocument } from '@/types/models/post';
 import type { PeopleFollowingResult, PeoplePostsResult } from '@/types/miiverse/people';
 
 const router = express.Router();
@@ -16,12 +16,12 @@ const router = express.Router();
 router.get('/', async function (request: express.Request, response: express.Response): Promise<void> {
 	response.type('application/xml');
 
-	const query: CommunityPostsQuery = {
+	const query: Prisma.PostWhereInput = {
 		removed: false,
 		is_spoiler: 0,
-		app_data: { $eq: null },
-		parent: { $eq: null },
-		message_to_pid: { $eq: null }
+		app_data: null,
+		parent: null,
+		message_to_pid: null
 	};
 
 	const relation = getValueFromQueryString(request.query, 'relation')[0];
@@ -40,33 +40,25 @@ router.get('/', async function (request: express.Request, response: express.Resp
 	}
 
 	if (relation === 'friend') {
-		query.pid = { $in: await getUserFriendPIDs(request.pid) };
+		query.pid = { in: await getUserFriendPIDs(request.pid) };
 	} else if (relation === 'following') {
 		const followedUsers = await getFollowedUserPids(request.pid);
-		query.pid = { $in: followedUsers };
+		query.pid = { in: followedUsers };
 	} else if (request.query.pid) {
 		const pidInputs = getValueFromQueryString(request.query, 'pid');
 		const pids = pidInputs.map(pid => Number(pid)).filter(pid => !isNaN(pid));
 
-		query.pid = { $in: pids };
+		query.pid = { in: pids };
 	}
 
 	let posts: HydratedPostDocument[];
 
 	if (distinctPID === '1') {
-		const unhydratedPosts = await Post.aggregate<IPost>([
-			{ $match: query }, // filter based on input query
-			{ $sort: { created_at: -1 } }, // sort by 'created_at' in descending order
-			{ $group: { _id: '$pid', doc: { $first: '$$ROOT' } } }, // remove any duplicate 'pid' elements
-			{ $replaceRoot: { newRoot: '$doc' } }, // replace the root with the 'doc' field
-			{ $limit: limit } // only return the top 10 results
-		]);
-
-		posts = unhydratedPosts.map((post: IPost) => Post.hydrate(post));
+		posts = await Post.findNewestPerAuthor(query, limit); // one post per author, the newest
 	} else if (request.query.is_hot === '1') {
-		posts = await Post.find(query).sort({ empathy_count: -1 }).limit(limit);
+		posts = await Post.find(query, { orderBy: { empathy_count: 'desc' }, take: limit });
 	} else {
-		posts = await Post.find(query).sort({ created_at: -1 }).limit(limit);
+		posts = await Post.find(query, { orderBy: { created_at: 'desc' }, take: limit });
 	}
 
 	const result: PeoplePostsResult = {

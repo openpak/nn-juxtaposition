@@ -21,16 +21,14 @@ import {
 } from '@/database';
 import { Post } from '@/models/post';
 import { Community } from '@/models/community';
-import { config } from '@/config';
 import { ApiErrorCode, badRequest, serverError } from '@/errors';
 import { uploadPainting, uploadScreenshot } from '@/images';
 import { cleanedBase64 } from '@/zodUtils';
-import { AutomodRule } from '@/models/automodRules';
 import { consoleName } from '@/services/profile-sync/profile-sync';
 import type { GetUserDataResponse } from '@pretendonetwork/grpc/account/v2/get_user_data_rpc';
 import type { PostRepliesResult } from '@/types/miiverse/post';
-import type { HydratedPostDocument, IPostInput } from '@/types/mongoose/post';
-import type { CommunityShotMode, HydratedCommunityDocument } from '@/types/mongoose/community';
+import type { HydratedPostDocument, IPostInput } from '@/types/models/post';
+import type { CommunityShotMode, HydratedCommunityDocument } from '@/types/models/community';
 import type { ParamPack } from '@/types/common/param-pack';
 import type { UserWithSettings } from '@/services/internal/utils/user';
 
@@ -86,36 +84,10 @@ router.post('/:post_id/empathies', upload.none(), async function (request: expre
 		return badRequest(response, ApiErrorCode.FAIL_NOT_FOUND_POST, 404);
 	}
 
-	if (post.yeahs?.indexOf(request.pid) === -1) {
-		await Post.updateOne({
-			id: post.id,
-			yeahs: {
-				$ne: request.pid
-			}
-		},
-		{
-			$inc: {
-				empathy_count: 1
-			},
-			$push: {
-				yeahs: request.pid
-			}
-		});
-	} else if (post.yeahs?.indexOf(request.pid) !== -1) {
-		await Post.updateOne({
-			id: post.id,
-			yeahs: {
-				$eq: request.pid
-			}
-		},
-		{
-			$inc: {
-				empathy_count: -1
-			},
-			$pull: {
-				yeahs: request.pid
-			}
-		});
+	if (post.yeahs.indexOf(request.pid) === -1) {
+		await Post.addEmpathy(post.id, request.pid);
+	} else {
+		await Post.removeEmpathy(post.id, request.pid);
 	}
 
 	response.sendStatus(200);
@@ -334,25 +306,6 @@ async function newPost(request: express.Request, response: express.Response): Pr
 		return badRequest(response, ApiErrorCode.NOT_ALLOWED, 403);
 	}
 
-	let miiFace = 'normal_face.png';
-	switch (parseInt(request.body.feeling_id)) {
-		case 1:
-			miiFace = 'smile_open_mouth.png';
-			break;
-		case 2:
-			miiFace = 'wink_left.png';
-			break;
-		case 3:
-			miiFace = 'surprise_open_mouth.png';
-			break;
-		case 4:
-			miiFace = 'frustrated.png';
-			break;
-		case 5:
-			miiFace = 'sorrow.png';
-			break;
-	}
-
 	let parsedBody: { text: string; markdown: string } | null = null;
 	if (messageBody) {
 		const cleanedBody = messageBody.trim().replaceAll('\r\n', '\n');
@@ -417,7 +370,6 @@ async function newPost(request: express.Request, response: express.Response): Pr
 		id: '', // * This gets changed when saving the document for the first time
 		title_id: request.paramPack.title_id,
 		community_id: community.olive_community_id,
-		screen_name: consoleName(dbUser.displayName),
 		body: parsedBody ? parsedBody.text : undefined,
 		body_markdown: parsedBody ? parsedBody.markdown : undefined,
 		app_data: appData,
@@ -438,8 +390,6 @@ async function newPost(request: express.Request, response: express.Response): Pr
 		is_spoiler: (spoiler === '1') ? 1 : 0,
 		is_app_jumpable: (jumpable) ? 1 : 0,
 		language_id: languageID,
-		mii: request.user.mii.data,
-		mii_face_url: `${config.cdnUrl}/mii/${request.user.pid}/${miiFace}`,
 		pid: request.pid,
 		platform_id: platformID,
 		region_id: regionID,
@@ -456,7 +406,7 @@ async function newPost(request: express.Request, response: express.Response): Pr
 	}
 
 	// Automod
-	const automodRules = await AutomodRule.find({ enabled: true });
+	const automodRules = await getDb().automodRule.findMany({ where: { enabled: true } });
 	const automodEval = evaluateAutomodRules(document, automodRules);
 	const automodResult = await performAutomodAction(document, automodEval);
 	if (!automodResult.allowPost) {
@@ -511,8 +461,7 @@ async function newPost(request: express.Request, response: express.Response): Pr
 	}
 
 	if (parentPost) {
-		parentPost.reply_count = (parentPost.reply_count || 0) + 1;
-		parentPost.save();
+		await Post.incrementReplies(parentPost.id, 1);
 	}
 
 	response.send(xmlbuilder.create({

@@ -17,8 +17,8 @@ function fakeStore(): EraseStore & { calls: string[] } {
 	return {
 		calls,
 		pidsOf: async () => [1800000005, 1700000001],
-		eraseMongo: async (pids) => {
-			calls.push(`mongo ${pids.join(',')}`);
+		eraseContent: async (pids) => {
+			calls.push(`content ${pids.join(',')}`);
 			return 3;
 		},
 		erasePostgres: async (account, pids) => {
@@ -29,10 +29,10 @@ function fakeStore(): EraseStore & { calls: string[] } {
 }
 
 describe('eraseAccount', () => {
-	it('erases Mongo by pid, then Postgres (which drops the web identity), and sums the rows', async () => {
+	it('erases the content by pid, then the account rows (which drops the web identity), and sums the rows', async () => {
 		const store = fakeStore();
 		expect(await eraseAccount(ACCOUNT, store)).toBe(7);
-		expect(store.calls).toEqual(['mongo 1800000005,1700000001', `pg ${ACCOUNT} 1800000005,1700000001`]);
+		expect(store.calls).toEqual(['content 1800000005,1700000001', `pg ${ACCOUNT} 1800000005,1700000001`]);
 	});
 
 	it('still clears the account-keyed Postgres rows when it has no pid', async () => {

@@ -4,16 +4,13 @@ import { deletePostMedia } from '@/services/cdn/media';
 import { uploadPainting, uploadScreenshot } from '@/images';
 import { getShotModeForTitleId } from '@/services/api/routes/posts';
 import { evaluateAutomodRules, getInvalidPostRegex, performAutomodAction } from '@/util';
-import { config } from '@/config';
-import { isOfficialPid, isWebOnlyPid } from '@/services/web-identity/web-identity';
 import { getDb, getDuplicatePosts } from '@/database';
-import { Post } from '@/models/post';
+import { Post, generatePostUID } from '@/models/post';
 import { asOpenapi } from '@/services/internal/builder/openapi';
-import { AutomodRule } from '@/models/automodRules';
 import { errors } from '@/services/internal/errors';
 import type { PaintingUrls } from '@/images';
-import type { HydratedPostDocument, IPostInput } from '@/types/mongoose/post';
-import type { HydratedCommunityDocument } from '@/types/mongoose/community';
+import type { HydratedPostDocument, IPostInput } from '@/types/models/post';
+import type { HydratedCommunityDocument } from '@/types/models/community';
 
 export const postCreateSchema = asOpenapi('PostCreateBody', z.object({
 	body: z.string().trim().optional(),
@@ -40,8 +37,6 @@ export type PostCreateOptions = {
 	body: PostCreateBody;
 	author: {
 		pid: number;
-		screenName: string;
-		miiData: string;
 		verified: boolean;
 	};
 	parentPost: HydratedPostDocument | null;
@@ -58,16 +53,6 @@ export type PostCreateOptions = {
 		titleId: string;
 		titleName: string;
 	};
-};
-
-const defaultMiiFaceFilename = 'normal_face.png';
-const miiFaceFilenameMap: Record<number, string> = {
-	0: 'normal_face.png',
-	1: 'smile_open_mouth.png',
-	2: 'wink_left.png',
-	3: 'surprise_open_mouth.png',
-	4: 'frustrated.png',
-	5: 'sorrow.png'
 };
 
 export function isValidPost(post: PostCreateBody): boolean {
@@ -180,15 +165,12 @@ async function createNewPostWithId(ops: PostCreateOptions, postId: string): Prom
 		}
 	}
 
-	const miiFace = miiFaceFilenameMap[body.feelingId] ?? defaultMiiFaceFilename;
-
 	const postBody = body.body ? await validateAndProcessPostBody(body.body) : null;
 
 	const document: IPostInput = {
 		title_id: ops.consoleShare?.titleId || ops.community.title_id[0],
 		topic_tag: ops.consoleShare?.titleName || undefined,
 		community_id: ops.community.olive_community_id,
-		screen_name: ops.author.screenName,
 		body: postBody?.text,
 		body_markdown: postBody?.markdown,
 		painting: paintings?.blob ?? '',
@@ -207,9 +189,6 @@ async function createNewPostWithId(ops: PostCreateOptions, postId: string): Prom
 		is_spoiler: body.isSpoiler ? 1 : 0,
 		is_app_jumpable: body.isAppJumpable ? 1 : 0,
 		language_id: body.languageId,
-		mii: ops.author.miiData,
-		// A web-only player has no Mii: consoles get the default avatar (uploaded by the seed)
-		mii_face_url: `${config.cdnUrl}/mii/${isWebOnlyPid(ops.author.pid) && !isOfficialPid(ops.author.pid) ? 'default' : ops.author.pid}/${miiFace}`,
 		pid: ops.author.pid,
 		platform_id: body.platformId ?? 0,
 		region_id: body.regionId ?? 2,
@@ -229,7 +208,7 @@ async function createNewPostWithId(ops: PostCreateOptions, postId: string): Prom
 
 	// Automod
 	if (!ops.official) {
-		const automodRules = await AutomodRule.find({ enabled: true });
+		const automodRules = await getDb().automodRule.findMany({ where: { enabled: true } });
 		const automodEval = evaluateAutomodRules(document, automodRules);
 		const automodResult = await performAutomodAction(document, automodEval);
 		if (!automodResult.allowPost) {
@@ -240,21 +219,8 @@ async function createNewPostWithId(ops: PostCreateOptions, postId: string): Prom
 	const newPost = await Post.create(document);
 
 	if (ops.parentPost) {
-		await Post.findOneAndUpdate({
-			id: ops.parentPost.id
-		}, {
-			$inc: {
-				reply_count: 1
-			}
-		});
+		await Post.incrementReplies(ops.parentPost.id, 1);
 	}
 
 	return newPost;
-}
-
-async function generatePostUID(length: number): Promise<string> {
-	let id = Buffer.from(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(length * 2))), 'binary').toString('base64').replace(/[+/]/g, '').substring(0, length);
-	const inuse = await Post.findOne({ id });
-	id = (inuse ? await generatePostUID(length) : id);
-	return id;
 }

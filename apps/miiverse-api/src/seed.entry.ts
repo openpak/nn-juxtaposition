@@ -1,7 +1,7 @@
 import '@/extend-zod'; // Needs to be the first import
 import crypto from 'node:crypto';
-import mongoose from 'mongoose';
 import { config } from '@/config';
+import { getDb, setupPrisma } from '@/database';
 import { Endpoint } from '@/models/endpoint';
 import { buildEndpointSeeds } from '@/services/discovery/endpoints';
 import { Community } from '@/models/community';
@@ -15,12 +15,12 @@ import type { SeedCommunity } from '@/services/communities/seed-communities';
 
 // Idempotent: creates the missing endpoint documents and communities and leaves existing ones
 // (and any hand edits to them) alone.
-await mongoose.connect(config.mongoose.uri);
+await setupPrisma();
 setupS3();
 await initImageProcessing();
 
 for (const seed of buildEndpointSeeds(config.domains)) {
-	const existing = await Endpoint.findOne({ server_access_level: seed.server_access_level });
+	const existing = await Endpoint.findByAccessLevel(seed.server_access_level);
 	if (existing) {
 		console.log(`endpoint ${seed.server_access_level}: exists, left alone`);
 		continue;
@@ -56,8 +56,9 @@ async function createCommunity(seed: SeedCommunity): Promise<void> {
 	const fields: Partial<SeedCommunity> = { ...seed };
 	delete fields.letter;
 	delete fields.color;
+	const base = fields as Omit<SeedCommunity, 'letter' | 'color'>;
 	await Community.create({
-		...fields,
+		...base,
 		created_at: new Date(),
 		empathy_count: 0,
 		has_shop_page: 0,
@@ -79,8 +80,8 @@ async function createCommunity(seed: SeedCommunity): Promise<void> {
 }
 
 const created = await ensureSeedCommunities({
-	existsByName: async name => (await Community.exists({ name })) !== null,
-	existsForTitleId: async id => (await Community.exists({ title_id: id })) !== null,
+	existsByName: async name => Community.exists({ name }),
+	existsForTitleId: async id => Community.exists({ title_id: { has: id } }),
 	create: createCommunity
 }, buildSeedCommunities());
 for (const name of created) {
@@ -90,4 +91,4 @@ if (created.length === 0) {
 	console.log('communities: all present, left alone');
 }
 
-await mongoose.disconnect();
+await getDb().$disconnect();

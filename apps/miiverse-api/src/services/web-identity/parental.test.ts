@@ -1,11 +1,16 @@
 import '@/extend-zod'; // Needs to be the first import
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { decodeProfile, decodeSupervised, encodeGetProfileRequest, webAccessFor } from '@/services/web-identity/parental';
 import { mapSelf } from '@/services/internal/contract/self';
 import { isPostingAllowed } from '@/services/internal/utils/communities';
 import { readOnlyGate } from '@/services/internal/middleware/auth-accesscheck';
 import { buildWebOnlyAccount, WEB_ONLY_PID_MIN } from '@/services/web-identity/web-identity';
 import type { AccountData } from '@/types/common/account-data';
+
+// utils/communities reaches the database module (and its config) through the community model
+vi.hoisted(() => {
+	process.env.SKIP_CONFIG_VALIDATION = 'true';
+});
 
 describe('supervised accounts', () => {
 	it('is full access when no parental controls core is configured', async () => {

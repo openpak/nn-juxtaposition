@@ -25,7 +25,7 @@ export async function cleanOrphanMedia(opts: { dryRun: boolean }): Promise<Orpha
 	const ids = [...owners.keys()];
 	const liveIds = new Set<string>();
 	for (let i = 0; i < ids.length; i += 500) {
-		const rows = await Post.find({ id: { $in: ids.slice(i, i + 500) }, removed: false }, { id: 1 }).lean();
+		const rows = await Post.findRows({ id: { in: ids.slice(i, i + 500) }, removed: false });
 		for (const row of rows) {
 			liveIds.add(row.id);
 		}

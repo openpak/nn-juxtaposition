@@ -22,9 +22,9 @@ import { createNewPost } from '@/services/internal/utils/posts';
 import { generateCommunityId } from '@/services/internal/utils/communities';
 import { defaultUserData, OFFICIAL_NAME, OFFICIAL_PID } from '@/services/web-identity/web-identity';
 import { hexColor, iconLetter, renderBanner, renderIcon, renderPakkaAvatar } from '@/services/communities/seed-images';
-import { composeBody, escapeRegex, keyMatches, postIdFor, postUrl, titleIdForms } from '@/services/official/helpers';
+import { composeBody, keyMatches, postIdFor, postUrl, titleIdForms } from '@/services/official/helpers';
 import { deletePostMedia } from '@/services/cdn/media';
-import type { HydratedCommunityDocument } from '@/types/mongoose/community';
+import type { HydratedCommunityDocument } from '@/types/models/community';
 
 const FACES = ['normal_face', 'smile_open_mouth', 'wink_left', 'surprise_open_mouth', 'frustrated', 'sorrow'];
 const PROFILE_COMMENT = 'The official OpenPak assistant account. I post news, results and community highlights.';
@@ -74,13 +74,13 @@ export async function resolveCommunity(ref: CommunityRef): Promise<HydratedCommu
 		}
 	}
 	if (ref.titleId) {
-		const c = await Community.findOne({ title_id: { $in: titleIdForms(ref.titleId) } });
+		const c = await Community.findOne({ title_id: { hasSome: titleIdForms(ref.titleId) } });
 		if (c) {
 			return c;
 		}
 	}
 	if (ref.name) {
-		return Community.findOne({ name: { $regex: `^${escapeRegex(ref.name.trim())}$`, $options: 'i' } });
+		return Community.findOne({ name: { equals: ref.name.trim(), mode: 'insensitive' } });
 	}
 	return null;
 }
@@ -243,7 +243,7 @@ officialRouter.post('/posts', async (req, res, next) => {
 		const post = await createNewPost({
 			id,
 			official: true,
-			author: { pid: OFFICIAL_PID, screenName: OFFICIAL_NAME, miiData: '', verified: true },
+			author: { pid: OFFICIAL_PID, verified: true },
 			body: {
 				body: composeBody(text, req.body?.discuss === true ? url : null),
 				feelingId: 0,
@@ -270,7 +270,7 @@ officialRouter.delete('/posts/:id', async (req, res, next) => {
 		}
 		// Media first: an interrupted run then leaves a row to retry from, never loose files.
 		await deletePostMedia(post);
-		await Post.deleteOne({ _id: post._id });
+		await Post.deleteOne({ id: post.id });
 		res.json({ deleted: true });
 	} catch (e) {
 		next(e);
@@ -284,10 +284,11 @@ officialRouter.get('/top', async (req, res, next) => {
 		const days = Math.min(Math.max(Number(req.query.days) || 7, 1), 31);
 		const limit = Math.min(Math.max(Number(req.query.limit) || 5, 1), 20);
 		const since = new Date(Date.now() - days * 86_400_000);
-		const posts = await Post.find({ created_at: { $gte: since }, pid: { $ne: OFFICIAL_PID }, removed: false, message_to_pid: null, parent: null, is_spoiler: 0, empathy_count: { $gt: 0 } })
-			.sort({ empathy_count: -1, created_at: -1 })
-			.limit(limit);
-		const communities = await Community.find({ olive_community_id: { $in: posts.map(p => p.community_id) } });
+		const posts = await Post.find(
+			{ created_at: { gte: since }, pid: { not: OFFICIAL_PID }, removed: false, message_to_pid: null, parent: null, is_spoiler: 0, empathy_count: { gt: 0 } },
+			{ orderBy: [{ empathy_count: 'desc' }, { created_at: 'desc' }], take: limit }
+		);
+		const communities = await Community.find({ olive_community_id: { in: posts.map(p => p.community_id) } });
 		res.json({
 			posts: posts.map(p => ({
 				id: p.id,

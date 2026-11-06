@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { mapShallowAutomodRule, shallowAutomodRuleSchema } from '@/services/internal/contract/admin/automodRule';
-import { automodAction } from '@/models/automodLog';
+import { automodAction, automodLogMatches } from '@/models/automodLog';
 import { asOpenapi } from '@/services/internal/builder/openapi';
 import { mapShallowUser, shallowUserSchema } from '@/services/internal/contract/user';
 import type { HydratedAutomodLogDocument } from '@/models/automodLog';
@@ -39,7 +39,7 @@ export function mapAutomodLog(log: HydratedAutomodLogDocument, user: User | null
 		postId: log.action === 'blocked' ? null : log.post_id,
 		parentPostId: log.parent_post_id,
 		communityId: log.community_id,
-		matches: log.matches ?? [],
+		matches: automodLogMatches(log),
 		postContent: {
 			body: log.post_content_body
 		}

@@ -6,6 +6,20 @@ of truth; this file is the readable summary.
 Note: the early history below is the upstream project (Pretendo Juxtaposition);
 OpenPak work starts at the port/fork commit.
 
+## v0.6.0 — 2026-11-06
+
+- The API no longer uses MongoDB (card openpak/prds#20). Posts, communities, discovery endpoints, conversations,
+  reports, automod rules and logs and the moderation audit log are Postgres tables (migration
+  `20261106104729_mongo_collections`, additive; run `npm run migration:deploy`). mongoose and
+  `PN_MIIVERSE_API_MONGOOSE_URI` are gone. Field names, ids and the console and web wire formats stay as they were.
+- Posts keep only the author's pid: the name and Mii a post shows come from the account core (nn-account
+  `GetUserData`) when it is served, batched and cached for a minute; a failed lookup shows the cached display name
+  (or "Player") and no Mii instead of failing the feed. The face image URL follows from pid and feeling.
+- Yeahs, reply counts and favourites change with single SQL statements (no lost updates under concurrent
+  requests); a post or community `save()` writes only the columns it changed.
+- One-shot import of the Mongo data: `migrations/11-mongo-to-pg` (`--check` first: every post author must resolve
+  in the core). Plan, mapping, what was left alone and the rollback: docs/postgres-port.md.
+
 ## v0.5.1 — 2026-11-05
 
 - Follow-up to v0.5.0. nn-account only hands out the ten character console projection of the core account name, so the

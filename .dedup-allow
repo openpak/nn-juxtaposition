@@ -4,3 +4,5 @@
 users.display_name  # Miiverse display name; cache of the core display name (card #131 phase 5), watched by openpak-dedup-check
 users.pnid  # Miiverse PNID link; equals the core handle, watched by openpak-dedup-check
 users.pnid_normalized  # lowercase index copy of users.pnid for lookup, same value
+posts.country_id  # Olive wire field per post: the country code the console's param pack sent with that post (not the player's profile); never read as identity
+posts.language_id  # Olive wire field per post: the language the post was written in (from the console's param pack); consoles filter posts by it

@@ -9,12 +9,11 @@ import { createNewFollowNotification } from '@/services/internal/utils/notificat
 import { getUserAccountData, getUserFriendPIDs } from '@/util';
 import { Post } from '@/models/post';
 import { communitySchema, mapCommunity } from '@/services/internal/contract/community';
-import { COMMUNITY_TYPE } from '@/types/mongoose/community';
+import { COMMUNITY_TYPE } from '@/types/models/community';
 import { Community } from '@/models/community';
 import { followSchema, mapFollowUser } from '@/services/internal/contract/follow';
 import { assertCanAccessUser, canAccessUser } from '@/services/internal/utils/user';
-import type { FilterQuery } from 'mongoose';
-import type { ICommunity } from '@/types/mongoose/community';
+import type { Prisma } from '@/prisma/client';
 import type { UserFollowWhereInput, UserWhereInput } from '@/prisma/models';
 
 export const userProfileRouter = createInternalApiRouter();
@@ -68,12 +67,12 @@ userProfileRouter.get({
 				followingPid: user.pid
 			}
 		});
-		const totalPosts = await Post.find({
+		const totalPosts = await Post.count({
 			pid: params.id,
 			parent: null,
 			message_to_pid: null,
 			removed: false
-		}).countDocuments();
+		});
 
 		return mapUserProfile(user, pnid, followers, totalPosts);
 	}
@@ -209,20 +208,16 @@ userProfileRouter.get({
 			}
 		});
 
-		const dbQuery: FilterQuery<ICommunity> = deleteOptional({
+		const dbQuery: Prisma.CommunityWhereInput = deleteOptional({
 			olive_community_id: {
-				$in: followedComms.map(v => v.communityId)
+				in: followedComms.map(v => v.communityId)
 			},
 			type: {
-				$ne: COMMUNITY_TYPE.Private
+				not: COMMUNITY_TYPE.Private
 			}
 		});
-		const communities = await Community
-			.find(dbQuery)
-			.sort({ created_at: -1 })
-			.skip(query.offset)
-			.limit(query.limit);
-		const total = await Community.countDocuments(dbQuery);
+		const communities = await Community.find(dbQuery, { orderBy: { created_at: 'desc' }, skip: query.offset, take: query.limit });
+		const total = await Community.count(dbQuery);
 
 		const ids = communities.map(v => v.olive_community_id);
 		const followers = await db.communityFollow.groupBy({

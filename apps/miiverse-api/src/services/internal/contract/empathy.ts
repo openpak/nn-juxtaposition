@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { IPost } from '@/types/mongoose/post';
+import type { IPost } from '@/types/models/post';
 
 export const empathyActionSchema = z.enum(['add', 'remove']).openapi('EmpathyActionEnum');
 export type EmpathyAction = z.infer<typeof empathyActionSchema>;

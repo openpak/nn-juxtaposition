@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import { mapPostWithModeration, postSchema } from '@/services/internal/contract/post';
 import { mapShallowUser, shallowUserSchema } from '@/services/internal/contract/user';
-import type { HydratedReportDocument } from '@/types/mongoose/report';
-import type { HydratedPostDocument } from '@/types/mongoose/post';
-import type { HydratedCommunityDocument } from '@/types/mongoose/community';
+import type { HydratedReportDocument } from '@/models/report';
+import type { HydratedPostDocument } from '@/types/models/post';
+import type { HydratedCommunityDocument } from '@/types/models/community';
 import type { User } from '@/prisma/client';
 
 export const reportSchema = z.object({
